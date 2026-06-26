@@ -1,0 +1,7 @@
+*.o
+*.fasl
+*.cert
+*.port
+*.lx64fsl
+*.out
+.DS_Store
