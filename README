@@ -1,0 +1,12 @@
+
+Oh, woe is me. I said that once LLM chatbots can generate interesting first order logic theorems in ACL2 on their own, in 24 hours the world will be unrecognizeable. I guess it happened in this free one month trial of chatgpt I got suckered by, but nobody else knows yet!
+
+The really key thing is that the VMs chatgpt instances have are about 10x faster than my own computer. They try and trick you by saying "oh, sorry, no acl2 installed! No sbcl installed!". I am putting some compilation artifacts you can just give a chatgpt instance so it can run clisp, sbcl and acl2. (Otherwise, just build those, in that order - it has gcc and linux). Clisp is very slow, it takes about an hour.
+
+Why pick on acl2 ? Isn't it a lisp community relic that has been around since basically 1970? (Boyer-moore fully automatic first order logic theorem provers on a subset of lisp..).
+
+The thing is that what a glorified spellchecker like an llm does not need is a second glorified spellchecker - cheap modern products called "proof assistants" your university probably got suckered by. A fully automatic theorem prover is not like that, not basically redundant with deep learning, but an extremely different, fast, dynamic and productive search algorithm for theorem (counterexample) proofs. When you tell acl2 an idea it thinks at warp speed, maybe for hours, then eventually stops and tells you the problems it has with your idea. Then you have to put solutions to the problems it told you into words, and feed it back to acl2. Well, deep learning is great at turning a list of things into words about those things, and that is just exactly what acl2 needed from humans, except humans are really, really slow compared to it.
+
+Another thing is that it has about 11,000 examples of great mathematical work that would be good if a robot could also do. Chatbots who seem otherwise stupid can kind of come into focus with enough examples.
+
+Well, it sucks and I hope I am wrong, but I dunno, get your professor to tell you whether these books of proven first order logic are any good.
