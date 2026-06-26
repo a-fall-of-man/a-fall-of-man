@@ -1,0 +1,37 @@
+name: Import holistic ACL2 repository
+
+on:
+  push:
+    paths:
+      - '.bootstrap/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct and extract repository payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/curated-repo.tar.gz.b64.part* | base64 --decode > /tmp/curated-repo.tar.gz
+          gzip -t /tmp/curated-repo.tar.gz
+          tar -xzf /tmp/curated-repo.tar.gz -C .
+          rm -rf .bootstrap
+      - name: Commit imported tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "acl2-repository-importer"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Import holistic ACL2 books and recovery materials"
+          git push
