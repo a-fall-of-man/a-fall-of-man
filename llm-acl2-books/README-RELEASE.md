@@ -1,65 +1,60 @@
-# llm-acl2-books: 84-book spline and rational-bisection checkpoint
+# llm-acl2-books: 90-book generated rational WFTA checkpoint
 
 Release date: 2026-06-29
 
-This archive is a source release of 84 ordinary ACL2 books.  It retains the
-82-book universal generated Rader/Toom--Cook WFTA closure, adds a small
-arbitrary-dimensional rational not-a-knot spline certificate kernel, and
-promotes a repaired rational polynomial sign-bisection engine for the next
-WFTA twiddle-seed construction.
+This archive is a source release of 90 ordinary ACL2 books. It retains the
+84-book recovery, universal Rader/Toom--Cook compiler, rational Runge--Kutta
+enclosure kernel, rational not-a-knot spline kernel, and repaired polynomial
+sign bisection. It adds six tightly connected books that construct and certify
+rational stereographic twiddle tables and compose them with the generated
+WFTA compiler.
 
-The release was built with ACL2 8.7 under the recovered SBCL image and the
-verified basic community-books cache.  It contains no ACL2(r) books,
-nonstandard analysis, real-number semantics, or Lisp complex-number
-assumptions.  Complex quantities are represented as pairs of ACL2 rationals.
+No ACL2(r), nonstandard analysis, real-number completion, or Lisp complex
+number representation is used. Complex quantities are pairs of ACL2
+rationals, and every new constructor and bound is finite and executable.
+
+## New advanced chain
+
+- `zci-stereographic-power-polynomials.lisp` generates exact coefficient
+  recurrences for powers of `(1-t^2)+2ti` and proves evaluation equals repeated
+  rational-pair multiplication.
+- `zcj-generated-stereographic-certificate.lisp` computes the proper-power
+  table and proves that half its exact minimum L1 distance from one is a strict
+  orbit-separation certificate.
+- `zck-stereographic-polynomial-closure.lisp` proves that normalization by
+  `(1+t^2)^n` is the actual rational unit orbit and reduces closure to two
+  rational polynomial residuals.
+- `zcl-rational-polynomial-secant-bound.lisp` proves an executable
+  coefficient/Horner bound on polynomial variation across a rational bracket.
+- `zcm-bisected-stereographic-twiddle.lisp` converts a certified rational sign
+  bracket and a finite bisection depth into a rational twiddle-system
+  certificate with explicit closure and separation bounds.
+- `zcn-bisected-generated-rational-wfta.lisp` composes that twiddle constructor
+  with the universal primitive-root Rader/Toom--Cook compiler and proves the
+  generated rational WFTA equals the direct rational DFT over the generated
+  table.
 
 ## Fresh certification
 
-The exact 84 `.lisp` files in this archive were copied to an empty workspace
-and certified serially with:
+The exact 90 `.lisp` files were copied into an empty workspace and certified
+serially under ACL2 8.7 and SBCL 2.6.5. A second pass rebuilt zero books.
+Complete `.cert.out` transcripts and all source/certificate hashes are under
+`release-metadata/`. Implementation-specific `.cert`, `.fasl`, and `.port`
+products are represented by hashes rather than included.
+
+To re-certify after extraction:
 
 ```sh
-export ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
-export ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
-export ACL2_CUSTOMIZATION=NONE
-/mnt/data/acl2-8.7-recovery/books/build/cert.pl -j1 *.lisp
+export ACL2=/path/to/saved_acl2
+export ACL2_SYSTEM_BOOKS=/path/to/acl2/books
+/path/to/acl2/books/build/cert.pl -j1 *.lisp
 ```
 
-The cold-run and idempotence logs, source/certificate hashes, source identity
-audit, and trust audit are under `release-metadata/`.  Complete `.cert.out`
-transcripts are retained.  Implementation-specific `.cert`, `.fasl`, and
-`.port` products are represented by hashes rather than vendored.
+`-j1` is recommended on memory-constrained machines.
 
-## New books
+## Remaining frontier
 
-`zcg-rational-not-a-knot-spline-kernel.lisp` checks finite rational scalar and
-coordinate-major vector cubic spline certificates with approximate endpoint
-interpolation, exact C2 joins, and both endpoint not-a-knot conditions.
-Evaluation is proved to produce an ACL2-rational vector of the certified
-arbitrary dimension.
-
-`zch-rational-polynomial-sign-bisection.lisp` certifies exact rational
-midpoint refinement of polynomial sign brackets, including sign preservation,
-interval containment, exact dyadic width, and an executable positive-rational
-epsilon selector.
-
-See `release-metadata/SPLINE-AND-BISECTION-CHECKPOINT-2026-06-29.md` for the
-mathematical and recovery details.
-
-## WFTA status
-
-The universal generated Rader/Toom--Cook compiler remains closed by
-`zcf-rader-index-implies-compact.lisp`.  The next substantial seam is the
-finite rational construction of stereographic twiddle parameters.  The new
-`zch` book supplies its certified sign-refinement kernel.
-
-## Verification
-
-From the extracted `llm-acl2-books` directory:
-
-```sh
-sha256sum -c SHA256SUMS
-```
-
-Then run the serial certification command above.  `-j1` is recommended on
-memory-constrained machines.
+The end-to-end theorem consumes a finite bisection certificate. The next main
+problem is to generate an initial rational sign bracket uniformly, preferably
+through a certified finite root-isolation or signed-grid search layer, and to
+integrate finite primitive-root search so fewer witnesses remain external.
