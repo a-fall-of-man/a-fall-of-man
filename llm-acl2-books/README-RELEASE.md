@@ -1,20 +1,22 @@
-# llm-acl2-books: recovered 80-book progress checkpoint
+# llm-acl2-books: 82-book universal WFTA checkpoint
 
 Release date: 2026-06-29
 
-This archive is a source release of 80 ACL2 books: the recovered and freshly
-re-certified 78-book line, plus one small purely rational Runge--Kutta kernel
-and one universal Rader/Toom--Cook composition book.
+This archive is a source release of 82 ordinary ACL2 books.  It contains the
+freshly recovered and extended 80-book line, a finite-residue permutation
+prelude, and the universal theorem that derives the complete compact Rader
+bank from the Rader index certificate and closes the generated
+Rader/Toom--Cook WFTA compiler.
 
-It was built with ACL2 8.7 under the recovered SBCL image and the verified
-basic community-books cache.  The release remains ordinary ACL2 throughout.
-It contains no ACL2(r) books, real-number semantics, nonstandard analysis, or
-complex Lisp-number dependency.
+The release was built with ACL2 8.7 under the recovered SBCL image and the
+verified basic community-books cache.  It contains no ACL2(r) books,
+nonstandard analysis, real-number semantics, or Lisp complex-number
+assumptions.  Complex quantities are rational pairs.
 
 ## Fresh certification result
 
-The exact 80 `.lisp` files in this archive were copied to an empty
-certification workspace and certified serially with:
+The exact 82 `.lisp` files in this archive were copied to an empty workspace
+and certified serially with:
 
 ```sh
 export ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
@@ -23,83 +25,58 @@ export ACL2_CUSTOMIZATION=NONE
 /mnt/data/acl2-8.7-recovery/books/build/cert.pl -j1 *.lisp
 ```
 
-Results:
+The complete cold-run and idempotence logs, source/certificate hashes, source
+diff, and trust audit are under `release-metadata/`.  Complete `.cert.out`
+transcripts are retained.  Implementation-specific `.cert`, `.fasl`, and
+`.port` products are represented by hashes rather than vendored.
 
-- 80 source books;
-- 80 fresh `.cert` files and 80 fresh `.cert.out` transcripts;
-- cold serial certification exit status 0;
-- second identical pass exit status 0 and rebuilt zero books;
-- zero source differences between this release and the certified workspace;
-- no `skip-proofs`, `defaxiom`, trust-tag, or raw-Lisp admission forms;
-- three older `:mode :program` I/O declarations, listed in
-  `release-metadata/TRUST-AUDIT.txt`, not used to admit logical theorems.
+## New certified WFTA closure
 
-All 80 fresh certification transcripts are retained under
-`release-metadata/fresh-certification-logs/`.  Generated `.cert`, `.fasl`, and
-`.port` products are not vendored because they are toolchain/install products;
-their fresh certificate hashes are recorded in
-`release-metadata/FRESH-CERTIFICATE-SHA256SUMS`.
+### `zcf0-finite-residue-permutation.lisp`
 
-## New certified progress
+This small prelude proves the finite-list combinatorics needed before the
+large Toom--Cook rewrite theory is imported: full positive-residue membership,
+cardinality, duplicate-free position/nth inverses, and residue bounds for
+permutations.
 
-### `zcd-rational-runge-kutta-kernel.lisp`
+### `zcf-rader-index-implies-compact.lisp`
 
-This deliberately small book defines exact rational weighted stage sums and a
-rational Runge--Kutta update.  Its principal theorem proves a convex enclosure:
-nonnegative rational weights summing to one, together with rational stage
-slopes between `lo` and `hi`, force the nonnegative-step update between
-`y + h*lo` and `y + h*hi`.
+This book proves the missing semantic bridge:
 
-The theorem is finite, executable, and wholly rational.  It assumes no ODE
-solution, derivative, integral, limit, completion of the rationals, or ACL2(r)
-object.  Later books may attach algebraic or recurrence-generated stage
-certificates without changing this kernel's trust boundary.
+```lisp
+(implies (rgi-index-certificatep p inputs kernels outputs)
+         (rgi-compact-bankp p outputs inputs kernels))
+```
 
-### `zce-universal-rader-toom-cook-composition.lisp`
+The proof first derives every compact Fourier matrix entry from the Rader
+relation certificate, folds those pointwise equalities through the executable
+row/output checkers, and then walks the output suffix to certify the whole
+bank.
 
-This book composes the generated compact Toom--Cook convolution certificate
-with finite Rader index and compact-bank certificates.  It proves:
+Consequently, a primitive-root orbit satisfying the already-certified finite
+field order hypotheses automatically supplies both the generated Rader index
+certificate and compact bank.  Composed with the universal generated
+Toom--Cook certificate, ACL2 proves an end-to-end
+`rwd-compiled-certifiesp` theorem and executable equality with the direct
+rational DFT outputs for arbitrary prime order covered by those hypotheses.
+No prime-specific relation table or separately supplied compact-bank
+certificate remains in the theorem.
 
-- a reusable joint compact certificate;
-- a general `rwd-compiled-certifiesp` theorem;
-- executable equality between the compiled WFTA and direct rational DFT
-  outputs; and
-- a symbolic complex-product-count formula for generated Toom--Cook terms.
+## Earlier checkpoint additions
 
-The next universal keystone is now exact rather than atmospheric: construct
-the compact Rader bank from the generated primitive-root orbit and prove it
-satisfies `rgi-compact-bankp`.  The new composition theorem will then remove
-the final supplied compact-bank hypothesis from the arbitrary-prime compiler.
+`zcd-rational-runge-kutta-kernel.lisp` remains the small purely rational RK
+enclosure hinge.  `zce-universal-rader-toom-cook-composition.lisp` remains the
+generic composition theorem now discharged automatically by `zcf`.
 
-## Crash recovery result
+## Next mathematical seam
 
-The reset report said that `zam-qcx-adp-linear.lisp` and
-`zaw-rational-cauchy-interest.lisp` had been lost, and that the reconstructed
-`zax-rational-winograd-interface` had stopped before certification.  The
-attached baseline contained later sources for all three.  ACL2 freshly
-certified them and every dependent rational DFT, Winograd, ADP, Toom--Cook, and
-Rader book.
-
-The older failed reconstructed `zax` draft and the surviving Cauchy precursor
-are preserved, explicitly as historical WIP, in the companion `llm-WIP`
-archive.
-
-## Mathematical content
-
-The release includes generic algebraic dynamic programming, ranked shortest
-paths, rational-pair DFT stability, arbitrary-length rational Fourier kernels,
-proof-carrying bilinear convolution plans, shared-product Winograd banks,
-general Rader/Winograd compilation, direct-equivalence and rational-only
-interfaces, rational twiddle infrastructure, universal generated Toom--Cook
-certificates, universal Rader-index certificates, the new universal
-composition theorem, the rational RK enclosure kernel, and the independent
-generic proof-engineering books from the original release.
-
-The universal Toom--Cook books prove generated compact cyclic-convolution
-certification for every positive size.  The universal Rader books derive the
-generated orbit/relation certificate from finite-field order hypotheses, so
-the prime-67 result is a theorem instance rather than a hardcoded relation
-table.
+The combinatorial WFTA compiler is now closed.  The next substantial target is
+an executable, epsilon-driven rational generator for the twiddle seed
+certificate used by `zbb-rational-cyclic-twiddle-system.lisp`: construct a
+rational stereographic parameter whose power orbit closes within a requested
+rational epsilon while its proper prefix remains rationally separated from
+one.  This is a finite rational algebra and root-isolation problem, not an
+appeal to real limits.
 
 ## Verification
 
