@@ -1,0 +1,467 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "ziw-minimal-obligation-basis" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: ziw-minimal-obligation-basis
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( DEFUN VOB-WEAKERP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VOB-WEAKERP
+
+Summary
+Form:  ( DEFUN VOB-SATISFIEDP ...)
+Rules: ((:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VOB-SATISFIEDP
+
+Summary
+Form:  ( DEFUN VOB-TRIM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VOB-TRIM
+
+Summary
+Form:  ( DEFUN VOB-ADD ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION VOB-TRIM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VOB-ADD
+
+Summary
+Form:  ( DEFUN VOB-BASIS ...)
+Rules: ((:TYPE-PRESCRIPTION VOB-ADD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VOB-BASIS
+
+Summary
+Form:  ( DEFUN VOB-NAIVE-SATISFIEDP ...)
+Rules: ((:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VOB-NAIVE-SATISFIEDP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-WEAKERP-OF-CONS-RIGHT ...)
+Rules: ((:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-WEAKERP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  404
+VOB-WEAKERP-OF-CONS-RIGHT
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM VOB-WEAKERP-REFLEXIVE ...)
+Rules: ((:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION VOB-WEAKERP)
+        (:ELIM CAR-CDR-ELIM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE VOB-WEAKERP-OF-CONS-RIGHT)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  375
+VOB-WEAKERP-REFLEXIVE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM VOB-MEMBER-WHEN-WEAKER ...)
+Rules: ((:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-WEAKERP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  476
+VOB-MEMBER-WHEN-WEAKER
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-WEAKERP-TRANSITIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VOB-WEAKERP)
+        (:INDUCTION LEN)
+        (:REWRITE VOB-MEMBER-WHEN-WEAKER)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  580
+VOB-WEAKERP-TRANSITIVE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-SATISFIEDP-BY-MEMBER ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-SATISFIEDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VOB-SATISFIEDP)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  475
+VOB-SATISFIEDP-BY-MEMBER
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-SATISFIEDP-MONOTONE-QUERY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-SATISFIEDP)
+        (:INDUCTION VOB-SATISFIEDP)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  965
+VOB-SATISFIEDP-MONOTONE-QUERY
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-SATISFIEDP)
+        (:DEFINITION VOB-TRIM)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VOB-TRIM)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VOB-SATISFIEDP-MONOTONE-QUERY)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-TRIM)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1630
+VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-OLD-SATISFACTION-SURVIVES-TRIM-OR-NEW ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-SATISFIEDP)
+        (:DEFINITION VOB-TRIM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VOB-TRIM)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VOB-SATISFIEDP-MONOTONE-QUERY)
+        (:REWRITE VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-TRIM)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1922
+VOB-OLD-SATISFACTION-SURVIVES-TRIM-OR-NEW
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VOB-SATISFIEDP-OF-ADD ...)
+Rules: ((:DEFINITION VOB-ADD)
+        (:DEFINITION VOB-SATISFIEDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VOB-SATISFIEDP-MONOTONE-QUERY)
+        (:REWRITE VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-TRIM)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Hint-events: ((:USE VOB-OLD-SATISFACTION-SURVIVES-TRIM-OR-NEW)
+              (:USE VOB-SATISFIEDP-MONOTONE-QUERY)
+              (:USE VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  4788
+VOB-SATISFIEDP-OF-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/5
+Subgoal *1.1/5'
+Subgoal *1.1/5''
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2.2
+Subgoal *1.1/2.1
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM VOB-BASIS-PRESERVES-ALL-QUERIES ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION TRUE-LISTP)
+        (:DEFINITION VOB-ADD)
+        (:DEFINITION VOB-BASIS)
+        (:DEFINITION VOB-NAIVE-SATISFIEDP)
+        (:DEFINITION VOB-SATISFIEDP)
+        (:DEFINITION VOB-TRIM)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TRUE-LISTP)
+        (:INDUCTION VOB-BASIS)
+        (:INDUCTION VOB-SATISFIEDP)
+        (:INDUCTION VOB-TRIM)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VOB-SATISFIEDP-MONOTONE-QUERY)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-BASIS)
+        (:TYPE-PRESCRIPTION VOB-NAIVE-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-TRIM)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  12013
+VOB-BASIS-PRESERVES-ALL-QUERIES
+
+Summary
+Form:  ( DEFUN VOB-REDUCEDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VOB-REDUCEDP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-TRIM-LEAVES-NEW-UNSATISFIED ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:INDUCTION VOB-TRIM)
+        (:REWRITE VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  799
+VOB-TRIM-LEAVES-NEW-UNSATISFIED
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-REDUCEDP-OF-TRIM ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-REDUCEDP)
+        (:DEFINITION VOB-TRIM)
+        (:EXECUTABLE-COUNTERPART VOB-REDUCEDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VOB-TRIM)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VOB-SATISFIEDP-OF-TRIM-IMPLIES-OLD)
+        (:REWRITE VOB-WEAKERP-REFLEXIVE)
+        (:REWRITE VOB-WEAKERP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VOB-REDUCEDP)
+        (:TYPE-PRESCRIPTION VOB-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-TRIM)
+        (:TYPE-PRESCRIPTION VOB-WEAKERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1987
+VOB-REDUCEDP-OF-TRIM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VOB-BASIS-IS-REDUCED ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VOB-ADD)
+        (:DEFINITION VOB-BASIS)
+        (:DEFINITION VOB-REDUCEDP)
+        (:EXECUTABLE-COUNTERPART VOB-REDUCEDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VOB-BASIS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VOB-BASIS-PRESERVES-ALL-QUERIES)
+        (:REWRITE VOB-REDUCEDP-OF-TRIM)
+        (:REWRITE VOB-TRIM-LEAVES-NEW-UNSATISFIED)
+        (:TYPE-PRESCRIPTION VOB-NAIVE-SATISFIEDP)
+        (:TYPE-PRESCRIPTION VOB-REDUCEDP)
+        (:TYPE-PRESCRIPTION VOB-TRIM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  917
+VOB-BASIS-IS-REDUCED
+
+Summary
+Form:  ( DEFCONST *VOB-DEMO* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VOB-DEMO*
+:PASSED
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "ziw-minimal-obligation-basis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.09, print: 0.00, other: 0.07)
+Prover steps counted:  27331
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 0.16 seconds realtime, 0.15 seconds runtime
+; (26,584,256 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 3554 Jun 29 00:40 ziw-minimal-obligation-basis.cert

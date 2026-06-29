@@ -1,0 +1,726 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zau-adp-winograd3-equivalence.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zav-winograd-direct-equivalence.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zax-rational-winograd-interface" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zax-rational-winograd-interface
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zau-adp-winograd3-equivalence" ...)
+Rules: NIL
+Time:  1.17 seconds (prove: 0.00, print: 0.00, other: 1.17)
+"/mnt/data/new-release/cert-work/zau-adp-winograd3-equivalence.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zav-winograd-direct-equivalence" ...)
+Rules: NIL
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+"/mnt/data/new-release/cert-work/zav-winograd-direct-equivalence.lisp"
+
+Summary
+Form:  ( DEFUN QCX-LIFT-RATIONAL-INPUTS ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-REALIFY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-LIFT-RATIONAL-INPUTS
+
+Summary
+Form:  ( DEFTHM QCX-LIFT-RATIONAL-INPUTS-IS-QCX-REALIFY ...)
+Rules: ((:DEFINITION QCX-LIFT-RATIONAL-INPUTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  7
+QCX-LIFT-RATIONAL-INPUTS-IS-QCX-REALIFY
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-LIFT-RATIONAL-INPUTS ...)
+Rules: ((:DEFINITION NOT)
+        (:REWRITE QCX-LIFT-RATIONAL-INPUTS-IS-QCX-REALIFY)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-VECTORP-OF-REALIFY))
+Time:  0.01 seconds (prove: 0.01, print: 0.01, other: 0.00)
+Prover steps counted:  54
+QCX-VECTORP-OF-LIFT-RATIONAL-INPUTS
+
+Summary
+Form:  ( DEFUN RWD-RATIONAL-INPUT-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-RUN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-RATIONAL-INPUT-RUN
+
+Summary
+Form:  ( DEFUN QWB-RATIONAL-INPUT-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION QWB-RWD-RUN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-RATIONAL-INPUT-RUN
+
+Summary
+Form:  ( DEFTHM RWD-DIRECT-OUTPUT-TABLE-ERROR-BOUND-LIFTED ...)
+Rules: NIL
+Hint-events: ((:USE RWD-DIRECT-OUTPUT-INHERITS-TABLE-ERROR-BOUND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-DIRECT-OUTPUT-TABLE-ERROR-BOUND-LIFTED
+
+Summary
+Form:  ( DEFUN RWD-OUTPUT-LIST-INDUCT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-OUTPUT-LIST-INDUCT
+
+Summary
+Form:  ( DEFUN RWD-DIRECT-OUTPUTS-CLOSEP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-DIRECT-OUTPUTS-CLOSEP
+
+Summary
+Form:  ( DEFTHM RWD-DIRECT-OUTPUTS-CLOSEP-OF-NIL ...)
+Rules: ((:DEFINITION RWD-DIRECT-OUTPUTS-CLOSEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  22
+RWD-DIRECT-OUTPUTS-CLOSEP-OF-NIL
+
+Summary
+Form:  ( DEFTHM RWD-DIRECT-OUTPUTS-CLOSEP-OF-CONS ...)
+Rules: ((:DEFINITION RWD-DIRECT-OUTPUTS-CLOSEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  97
+RWD-DIRECT-OUTPUTS-CLOSEP-OF-CONS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RWD-DIRECT-OUTPUTS-CLOSEP-FROM-ONE-OUTPUT ...)
+Rules: ((:DEFINITION RWD-DIRECT-OUTPUTS-CLOSEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:TYPE-PRESCRIPTION RWD-DIRECT-OUTPUTS-CLOSEP))
+Hint-events: ((:USE RWD-DIRECT-OUTPUT-TABLE-ERROR-BOUND-LIFTED))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  686
+RWD-DIRECT-OUTPUTS-CLOSEP-FROM-ONE-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RWD-DIRECT-OUTPUTS-CLOSEP-IS-DFT-OUTPUT-CLOSEP ...)
+Rules: ((:DEFINITION DFT-OUTPUT-CLOSEP)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-DIRECT-OUTPUTS)
+        (:DEFINITION RWD-DIRECT-OUTPUTS-CLOSEP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-OUTPUT-LIST-INDUCT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:TYPE-PRESCRIPTION RWD-DIRECT-OUTPUTS))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  687
+RWD-DIRECT-OUTPUTS-CLOSEP-IS-DFT-OUTPUT-CLOSEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RWD-DIRECT-OUTPUTS-TABLE-ERROR-BOUND ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE RWD-DIRECT-OUTPUTS-CLOSEP-FROM-ONE-OUTPUT)
+              (:USE RWD-DIRECT-OUTPUTS-CLOSEP-IS-DFT-OUTPUT-CLOSEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  297
+RWD-DIRECT-OUTPUTS-TABLE-ERROR-BOUND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RWD-RATIONAL-INPUT-RUN-CORRECT ...)
+Rules: ((:DEFINITION RWD-RATIONAL-INPUT-RUN))
+Hint-events: ((:USE QCX-VECTORP-OF-REALIFY)
+              (:USE RWD-COMPILED-TRANSFORM-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  113
+RWD-RATIONAL-INPUT-RUN-CORRECT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RWD-RATIONAL-INPUT-RUN-TABLE-STABILITY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE RWD-DIRECT-OUTPUTS-TABLE-ERROR-BOUND)
+              (:USE RWD-RATIONAL-INPUT-RUN-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  648
+RWD-RATIONAL-INPUT-RUN-TABLE-STABILITY
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QWB-RATIONAL-INPUT-RUN-EQUALS-RWD-RATIONAL-INPUT-RUN
+...)
+Rules: ((:DEFINITION QWB-RATIONAL-INPUT-RUN)
+        (:DEFINITION RWD-RATIONAL-INPUT-RUN))
+Hint-events: ((:USE QCX-VECTORP-OF-REALIFY)
+              (:USE QWB-RWD-RUN-EQUALS-RWD-RUN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  137
+QWB-RATIONAL-INPUT-RUN-EQUALS-RWD-RATIONAL-INPUT-RUN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QWB-RATIONAL-INPUT-RUN-CORRECT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QWB-RATIONAL-INPUT-RUN-EQUALS-RWD-RATIONAL-INPUT-RUN)
+              (:USE RWD-RATIONAL-INPUT-RUN-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  378
+QWB-RATIONAL-INPUT-RUN-CORRECT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QWB-RATIONAL-INPUT-RUN-TABLE-STABILITY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE QWB-RATIONAL-INPUT-RUN-EQUALS-RWD-RATIONAL-INPUT-RUN)
+              (:USE RWD-RATIONAL-INPUT-RUN-TABLE-STABILITY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  700
+QWB-RATIONAL-INPUT-RUN-TABLE-STABILITY
+
+Summary
+Form:  ( DEFUN RW-TABLE-EPSILON-FOR-OUTPUT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW-TABLE-EPSILON-FOR-OUTPUT
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION ATOM)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LIST-L1)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LIST-L1)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RATIONAL-LISTP)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LIST-L1)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  518
+RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD
+Goal'
+
+Summary
+Form:  ( DEFTHM ONE-PLUS-RATIONAL-LIST-L1-POSITIVE ...)
+Rules: ((:FAKE-RUNE-FOR-LINEAR NIL))
+Hint-events: ((:USE RATIONAL-LIST-L1-NONNEGATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  12
+ONE-PLUS-RATIONAL-LIST-L1-POSITIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RW-TABLE-EPSILON-FOR-OUTPUT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RW-TABLE-EPSILON-FOR-OUTPUT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Hint-events: ((:USE ONE-PLUS-RATIONAL-LIST-L1-POSITIVE)
+              (:USE RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  58
+RATIONALP-OF-RW-TABLE-EPSILON-FOR-OUTPUT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RECIPROCAL-ONE-PLUS-RATIONAL-LIST-L1-POSITIVE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE ONE-PLUS-RATIONAL-LIST-L1-POSITIVE)
+              (:USE RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  74
+RECIPROCAL-ONE-PLUS-RATIONAL-LIST-L1-POSITIVE
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RW-TABLE-EPSILON-FOR-OUTPUT-NONNEGATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RW-TABLE-EPSILON-FOR-OUTPUT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (* x y) 0)|)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Hint-events: ((:USE RECIPROCAL-ONE-PLUS-RATIONAL-LIST-L1-POSITIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  551
+RW-TABLE-EPSILON-FOR-OUTPUT-NONNEGATIVE
+
+Summary
+Form:  ( DEFTHM NONNEGATIVE-OVER-ONE-PLUS-BOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(<= (* x (/ y)) 1) with (< 0 y)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  124
+NONNEGATIVE-OVER-ONE-PLUS-BOUND
+Goal'
+Goal''
+Goal'''
+Goal'4'
+
+Summary
+Form:  ( DEFTHM RW-TABLE-EPSILON-BUDGET-SUFFICES ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RW-TABLE-EPSILON-FOR-OUTPUT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE NONNEGATIVE-OVER-ONE-PLUS-BOUND)
+        (:REWRITE RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:TYPE-PRESCRIPTION RATIONAL-LIST-L1)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Hint-events: ((:USE NONNEGATIVE-OVER-ONE-PLUS-BOUND)
+              (:USE RATIONAL-LIST-L1-NONNEGATIVE)
+              (:USE RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1647
+RW-TABLE-EPSILON-BUDGET-SUFFICES
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RW-TABLE-EPSILON-TIMES-L1 ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RATIONALP-OF-RATIONAL-LIST-L1-FOR-WINOGRAD)
+              (:USE RATIONALP-OF-RW-TABLE-EPSILON-FOR-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  97
+RATIONALP-OF-RW-TABLE-EPSILON-TIMES-L1
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.20
+Subgoal *1/4.20'
+Subgoal *1/4.19
+Subgoal *1/4.18
+Subgoal *1/4.17
+Subgoal *1/4.16
+Subgoal *1/4.16'
+Subgoal *1/4.16''
+Subgoal *1/4.15
+Subgoal *1/4.14
+Subgoal *1/4.13
+Subgoal *1/4.12
+Subgoal *1/4.11
+Subgoal *1/4.10
+Subgoal *1/4.9
+Subgoal *1/4.8
+Subgoal *1/4.7
+Subgoal *1/4.6
+Subgoal *1/4.5
+Subgoal *1/4.4
+Subgoal *1/4.3
+Subgoal *1/4.2
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.88
+Subgoal *1/3.87
+Subgoal *1/3.86
+Subgoal *1/3.85
+Subgoal *1/3.84
+Subgoal *1/3.83
+Subgoal *1/3.82
+Subgoal *1/3.81
+Subgoal *1/3.80
+Subgoal *1/3.79
+Subgoal *1/3.78
+Subgoal *1/3.77
+Subgoal *1/3.76
+Subgoal *1/3.75
+Subgoal *1/3.74
+Subgoal *1/3.73
+Subgoal *1/3.72
+Subgoal *1/3.71
+Subgoal *1/3.70
+Subgoal *1/3.69
+Subgoal *1/3.68
+Subgoal *1/3.67
+Subgoal *1/3.66
+Subgoal *1/3.65
+Subgoal *1/3.64
+Subgoal *1/3.63
+Subgoal *1/3.62
+Subgoal *1/3.61
+Subgoal *1/3.60
+Subgoal *1/3.59
+Subgoal *1/3.58
+Subgoal *1/3.57
+Subgoal *1/3.56
+Subgoal *1/3.55
+Subgoal *1/3.54
+Subgoal *1/3.53
+Subgoal *1/3.52
+Subgoal *1/3.51
+Subgoal *1/3.50
+Subgoal *1/3.49
+Subgoal *1/3.48
+Subgoal *1/3.47
+Subgoal *1/3.46
+Subgoal *1/3.45
+Subgoal *1/3.44
+Subgoal *1/3.43
+Subgoal *1/3.42
+Subgoal *1/3.41
+Subgoal *1/3.40
+Subgoal *1/3.39
+Subgoal *1/3.38
+Subgoal *1/3.37
+Subgoal *1/3.36
+Subgoal *1/3.35
+Subgoal *1/3.34
+Subgoal *1/3.33
+Subgoal *1/3.32
+Subgoal *1/3.31
+Subgoal *1/3.30
+Subgoal *1/3.29
+Subgoal *1/3.28
+Subgoal *1/3.27
+Subgoal *1/3.26
+Subgoal *1/3.25
+Subgoal *1/3.24
+Subgoal *1/3.23
+Subgoal *1/3.22
+Subgoal *1/3.21
+Subgoal *1/3.20
+Subgoal *1/3.19
+Subgoal *1/3.18
+Subgoal *1/3.17
+Subgoal *1/3.16
+Subgoal *1/3.15
+Subgoal *1/3.14
+Subgoal *1/3.13
+Subgoal *1/3.12
+Subgoal *1/3.11
+Subgoal *1/3.10
+Subgoal *1/3.9
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM DFT-OUTPUT-CLOSEP-MONOTONE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION DFT-OUTPUT-CLOSEP)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION DFT-OUTPUT-CLOSEP)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Time:  0.97 seconds (prove: 0.96, print: 0.01, other: 0.00)
+Prover steps counted:  88295
+DFT-OUTPUT-CLOSEP-MONOTONE
+Goal'
+
+Summary
+Form:  ( DEFTHM RWD-RATIONAL-INPUT-RUN-REQUESTED-OUTPUT-TOLERANCE ...)
+Rules: ((:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE DFT-OUTPUT-CLOSEP-MONOTONE)
+              (:USE RATIONALP-OF-RW-TABLE-EPSILON-FOR-OUTPUT)
+              (:USE RATIONALP-OF-RW-TABLE-EPSILON-TIMES-L1)
+              (:USE RW-TABLE-EPSILON-BUDGET-SUFFICES)
+              (:USE RW-TABLE-EPSILON-FOR-OUTPUT-NONNEGATIVE)
+              (:USE RWD-RATIONAL-INPUT-RUN-TABLE-STABILITY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-RATIONAL-INPUT-RUN-REQUESTED-OUTPUT-TOLERANCE
+Goal'
+
+Summary
+Form:  ( DEFTHM QWB-RATIONAL-INPUT-RUN-REQUESTED-OUTPUT-TOLERANCE ...)
+Rules: ((:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE DFT-OUTPUT-CLOSEP-MONOTONE)
+              (:USE QWB-RATIONAL-INPUT-RUN-TABLE-STABILITY)
+              (:USE RATIONALP-OF-RW-TABLE-EPSILON-FOR-OUTPUT)
+              (:USE RATIONALP-OF-RW-TABLE-EPSILON-TIMES-L1)
+              (:USE RW-TABLE-EPSILON-BUDGET-SUFFICES)
+              (:USE RW-TABLE-EPSILON-FOR-OUTPUT-NONNEGATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-RATIONAL-INPUT-RUN-REQUESTED-OUTPUT-TOLERANCE
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zax-rational-winograd-interface" ...)
+Rules: NIL
+Time:  2.36 seconds (prove: 1.05, print: 0.02, other: 1.29)
+Prover steps counted:  95202
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 2.36 seconds realtime, 2.20 seconds runtime
+; (271,739,952 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 30711 Jun 29 00:37 zax-rational-winograd-interface.cert

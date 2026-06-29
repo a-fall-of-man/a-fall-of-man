@@ -1,0 +1,2363 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zts-structural-rope-patch.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zsh-verified-patch-composition" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zsh-verified-patch-composition
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.04 seconds (prove: 0.00, print: 0.00, other: 0.04)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zts-structural-rope-patch" ...)
+Rules: NIL
+Time:  1.13 seconds (prove: 0.00, print: 0.00, other: 1.13)
+"/mnt/data/new-release/cert-work/zts-structural-rope-patch.lisp"
+(DEFXDOC ZSH-VERIFIED-PATCH-COMPOSITION)
+
+Summary
+Form:  ( DEFUN ZPC-KEEP-ATOM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-KEEP-ATOM
+
+Summary
+Form:  ( DEFUN ZPC-DROP-ATOM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-DROP-ATOM
+
+Summary
+Form:  ( DEFUN ZPC-INSERT-ATOM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-INSERT-ATOM
+
+Summary
+Form:  ( DEFUN ZPC-KEEP-ATOM-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-KEEP-ATOM-P
+
+Summary
+Form:  ( DEFUN ZPC-DROP-ATOM-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-DROP-ATOM-P
+
+Summary
+Form:  ( DEFUN ZPC-INSERT-ATOM-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-INSERT-ATOM-P
+
+Summary
+Form:  ( DEFUN ZPC-INSERT-ATOM-VALUE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-INSERT-ATOM-VALUE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZPC-REPEAT-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+ZPC-REPEAT-ATOM
+
+Summary
+Form:  ( DEFUN ZPC-RUNS-ATOMS ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-RUNS-ATOMS
+
+Summary
+Form:  ( DEFUN ZPC-INSTRUCTION-ATOMS ...)
+Rules: ((:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM)
+        (:TYPE-PRESCRIPTION ZPC-RUNS-ATOMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-INSTRUCTION-ATOMS
+
+Summary
+Form:  ( DEFUN ZPC-PATCH-ATOMS ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-PATCH-ATOMS
+
+Summary
+Form:  ( DEFUN ZPC-ATOMS-TRANSFORM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-ATOMS-TRANSFORM
+
+Summary
+Form:  ( DEFUN ZPC-ATOMS-OKP ...)
+Rules: ((:TYPE-PRESCRIPTION ZPC-KEEP-ATOM-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-ATOMS-OKP
+
+Summary
+Form:  ( DEFUN ZPC-ATOM-P ...)
+Rules: ((:TYPE-PRESCRIPTION ZPC-DROP-ATOM-P)
+        (:TYPE-PRESCRIPTION ZPC-INSERT-ATOM-P)
+        (:TYPE-PRESCRIPTION ZPC-KEEP-ATOM-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-ATOM-P
+Subgoal 9
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 7.2
+Subgoal 7.1
+Subgoal 6
+Subgoal 6.8
+Subgoal 6.7
+Subgoal 6.6
+Subgoal 6.5
+Subgoal 6.4
+Subgoal 6.3
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 2
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFUN ZPC-COMPOSE-ATOMS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOM-P)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-INSERT-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.15 seconds (prove: 0.15, print: 0.00, other: 0.01)
+Prover steps counted:  14802
+ZPC-COMPOSE-ATOMS
+Subgoal 9
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 7.2
+Subgoal 7.1
+Subgoal 6
+Subgoal 6.8
+Subgoal 6.7
+Subgoal 6.6
+Subgoal 6.5
+Subgoal 6.4
+Subgoal 6.3
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 2
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFUN ZPC-COMPOSE-INDUCTION ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOM-P)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-INSERT-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.16 seconds (prove: 0.15, print: 0.00, other: 0.01)
+Prover steps counted:  14802
+ZPC-COMPOSE-INDUCTION
+Subgoal *1/9
+Subgoal *1/9'
+Subgoal *1/8
+Subgoal *1/8'
+Subgoal *1/8.2
+Subgoal *1/8.1
+Subgoal *1/7
+Subgoal *1/7'
+Subgoal *1/7.2
+Subgoal *1/7.1
+Subgoal *1/6
+Subgoal *1/6'
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.2
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+Subgoal *1.1/11
+Subgoal *1.1/11'
+Subgoal *1.1/11.4
+Subgoal *1.1/11.3
+Subgoal *1.1/11.2
+Subgoal *1.1/11.1
+Subgoal *1.1/10
+Subgoal *1.1/10'
+Subgoal *1.1/9
+Subgoal *1.1/9'
+Subgoal *1.1/9''
+Subgoal *1.1/8
+Subgoal *1.1/8'
+Subgoal *1.1/7
+Subgoal *1.1/7'
+Subgoal *1.1/7''
+Subgoal *1.1/6
+Subgoal *1.1/6'
+Subgoal *1.1/5
+Subgoal *1.1/5'
+Subgoal *1.1/5''
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-COMPOSE-ATOMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-ATOM-P)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-COMPOSE-ATOMS)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-INSERT-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-ATOMS-TRANSFORM)
+        (:INDUCTION ZPC-COMPOSE-INDUCTION)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CAR-OF-LIST-FIX)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-TRANSFORM)
+        (:TYPE-PRESCRIPTION ZPC-COMPOSE-ATOMS))
+Time:  0.44 seconds (prove: 0.43, print: 0.00, other: 0.00)
+Prover steps counted:  67776
+ZPC-TRANSFORM-OF-COMPOSE-ATOMS
+Subgoal *1/9
+Subgoal *1/9'
+Subgoal *1/8
+Subgoal *1/8'
+Subgoal *1/8.2
+Subgoal *1/8.1
+Subgoal *1/7
+Subgoal *1/7'
+Subgoal *1/7.2
+Subgoal *1/7.1
+Subgoal *1/6
+Subgoal *1/6'
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.2
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/4''
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/3.2
+Subgoal *1.1/3.1
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2.2
+Subgoal *1.1/2.1
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-COMPOSE-ATOMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-ATOM-P)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-COMPOSE-ATOMS)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-INSERT-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-ATOMS-OKP)
+        (:INDUCTION ZPC-COMPOSE-INDUCTION)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CAR-OF-LIST-FIX)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-TRANSFORM)
+        (:TYPE-PRESCRIPTION ZPC-COMPOSE-ATOMS))
+Time:  0.30 seconds (prove: 0.30, print: 0.00, other: 0.00)
+Prover steps counted:  47150
+ZPC-OKP-OF-COMPOSE-ATOMS
+
+Summary
+Form:  ( DEFUN ZPC-ATOM-INSTRUCTION ...)
+Rules: ((:TYPE-PRESCRIPTION ZYP-DROP)
+        (:TYPE-PRESCRIPTION ZYP-INSERT)
+        (:TYPE-PRESCRIPTION ZYP-KEEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-ATOM-INSTRUCTION
+
+Summary
+Form:  ( DEFUN ZPC-ATOMS-PATCH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-ATOMS-PATCH
+
+Summary
+Form:  ( DEFUN ZPC-PATCH-TRANSFORM ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-OF-ZYP-PATCH-REST))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-PATCH-TRANSFORM
+Subgoal *1/6
+Subgoal *1/6'
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.2
+Subgoal *1/4.2'
+Subgoal *1/4.2''
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-ATOMS-PATCH ...)
+Rules: ((:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-APPEND-1)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:DEFINITION ZPC-ATOM-INSTRUCTION)
+        (:DEFINITION ZPC-ATOMS-PATCH)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZPC-PATCH-TRANSFORM)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-CANONICALIZE)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-DECODE)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOM-INSTRUCTION)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZYP-COUNT)
+        (:EXECUTABLE-COUNTERPART ZYP-DROP-P)
+        (:EXECUTABLE-COUNTERPART ZYP-INSERT-P)
+        (:EXECUTABLE-COUNTERPART ZYP-KEEP)
+        (:EXECUTABLE-COUNTERPART ZYP-KEEP-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-ATOMS-TRANSFORM)
+        (:REWRITE APPEND-ATOM-UNDER-LIST-EQUIV)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE XEF-REPEAT-ONE)
+        (:REWRITE ZRS-TAKE-WHEN-COUNT-COVERS-LIST)
+        (:REWRITE ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP)
+        (:REWRITE ZYP-PATCH-REST-OPEN-WHEN-CONSP)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-PATCH))
+Time:  0.89 seconds (prove: 0.89, print: 0.00, other: 0.00)
+Prover steps counted:  104267
+ZPC-TRANSFORM-OF-ATOMS-PATCH
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.12
+Subgoal *1/4.11
+Subgoal *1/4.10
+Subgoal *1/4.9
+Subgoal *1/4.8
+Subgoal *1/4.7
+Subgoal *1/4.6
+Subgoal *1/4.5
+Subgoal *1/4.4
+Subgoal *1/4.3
+Subgoal *1/4.2
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4'4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-ATOMS-PATCH ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:DEFINITION ZPC-ATOM-INSTRUCTION)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-ATOMS-PATCH)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-SOURCE-DEMAND)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-CANONICALIZE)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOM-INSTRUCTION)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZYP-COUNT)
+        (:EXECUTABLE-COUNTERPART ZYP-DROP-P)
+        (:EXECUTABLE-COUNTERPART ZYP-KEEP)
+        (:EXECUTABLE-COUNTERPART ZYP-KEEP-P)
+        (:EXECUTABLE-COUNTERPART ZYP-SOURCE-DEMAND)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-ATOMS-OKP)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-PATCH)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.22 seconds (prove: 0.21, print: 0.00, other: 0.00)
+Prover steps counted:  26449
+ZPC-OKP-OF-ATOMS-PATCH
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-NIL-ATOMS ...)
+Rules: ((:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  55
+ZPC-TRANSFORM-OF-NIL-ATOMS
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-NIL-ATOMS ...)
+Rules: ((:DEFINITION ZPC-ATOMS-OKP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  10
+ZPC-OKP-OF-NIL-ATOMS
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2''
+Subgoal *1.1/2'''
+Subgoal *1.1/2'4'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+Subgoal *1.1.1/5
+Subgoal *1.1.1/4
+Subgoal *1.1.1/3
+Subgoal *1.1.1/2
+Subgoal *1.1.1/1
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-REPEAT-KEEP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOMS-TRANSFORM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-OF-CONS)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  0.06 seconds (prove: 0.05, print: 0.00, other: 0.01)
+Prover steps counted:  3897
+ZPC-TRANSFORM-OF-REPEAT-KEEP-ATOM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2''
+Subgoal *1.1/2'''
+Subgoal *1.1/2'4'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+Subgoal *1.1.1/5
+Subgoal *1.1.1/4
+Subgoal *1.1.1/3
+Subgoal *1.1.1/2
+Subgoal *1.1.1/1
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-REPEAT-DROP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-ATOMS-TRANSFORM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3444
+ZPC-TRANSFORM-OF-REPEAT-DROP-ATOM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/2
+Subgoal *1.1/1
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-REPEAT-KEEP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZPC-OKP-OF-NIL-ATOMS)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  2479
+ZPC-OKP-OF-REPEAT-KEEP-ATOM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/2
+Subgoal *1.1/1
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-REPEAT-DROP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZPC-OKP-OF-NIL-ATOMS)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  2488
+ZPC-OKP-OF-REPEAT-DROP-ATOM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-REPEAT-INSERT-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-REPEAT)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  756
+ZPC-TRANSFORM-OF-REPEAT-INSERT-ATOM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-APPEND-REPEAT-INSERT-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-REPEAT)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2119
+ZPC-TRANSFORM-OF-APPEND-REPEAT-INSERT-ATOM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-APPEND-REPEAT-INSERT-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1082
+ZPC-OKP-OF-APPEND-REPEAT-INSERT-ATOM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-RUNS-ATOMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-RUNS-ATOMS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-RUNS-ATOMS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS)
+        (:REWRITE ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-APPEND-REPEAT-INSERT-ATOM))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  4943
+ZPC-TRANSFORM-OF-RUNS-ATOMS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-RUNS-ATOMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-RUNS-ATOMS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-RUNS-ATOMS)
+        (:REWRITE ZPC-OKP-OF-NIL-ATOMS)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP))
+Hint-events: ((:USE ZPC-OKP-OF-APPEND-REPEAT-INSERT-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  263
+ZPC-OKP-OF-RUNS-ATOMS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.2
+Subgoal *1/1.1
+Subgoal *1.1/6
+Subgoal *1.1/6'
+Subgoal *1.1/6.4
+Subgoal *1.1/6.4'
+Subgoal *1.1/6.4''
+Subgoal *1.1/6.4'''
+Subgoal *1.1/6.4'4'
+Subgoal *1.1/6.3
+Subgoal *1.1/6.3.2
+Subgoal *1.1/6.3.2'
+Subgoal *1.1/6.3.2''
+Subgoal *1.1/6.3.1
+Subgoal *1.1/6.3.1.3
+Subgoal *1.1/6.3.1.3'
+Subgoal *1.1/6.3.1.2
+Subgoal *1.1/6.3.1.2'
+Subgoal *1.1/6.3.1.1
+Subgoal *1.1/6.3.1.1'
+Subgoal *1.1/6.2
+Subgoal *1.1/6.2.2
+Subgoal *1.1/6.2.2'
+Subgoal *1.1/6.2.2''
+Subgoal *1.1/6.2.1
+Subgoal *1.1/6.2.1.3
+Subgoal *1.1/6.2.1.3'
+Subgoal *1.1/6.2.1.2
+Subgoal *1.1/6.2.1.2'
+Subgoal *1.1/6.2.1.1
+Subgoal *1.1/6.2.1.1'
+Subgoal *1.1/6.1
+Subgoal *1.1/6.1.3
+Subgoal *1.1/6.1.2
+Subgoal *1.1/6.1.1
+Subgoal *1.1/6.1.1'
+Subgoal *1.1/6.1.1''
+Subgoal *1.1/5
+Subgoal *1.1/5'
+Subgoal *1.1/5''
+Subgoal *1.1/5'''
+Subgoal *1.1/5'4'
+Subgoal *1.1/5'5'
+Subgoal *1.1/5'6'
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/4''
+Subgoal *1.1/4'''
+Subgoal *1.1/4'4'
+Subgoal *1.1/4'5'
+Subgoal *1.1/3
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2''
+Subgoal *1.1/2'''
+Subgoal *1.1/2'4'
+Subgoal *1.1/2'5'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+Subgoal *1.1/1''
+Subgoal *1.1.14/2
+Subgoal *1.1.14/2'
+Subgoal *1.1.14/2''
+Subgoal *1.1.14/2'''
+Subgoal *1.1.14/2'4'
+Subgoal *1.1.14/1
+Subgoal *1.1.14.1/5
+Subgoal *1.1.14.1/4
+Subgoal *1.1.14.1/3
+Subgoal *1.1.14.1/2
+Subgoal *1.1.14.1/1
+Subgoal *1.1.14.1/1'
+Subgoal *1.1.13/2
+Subgoal *1.1.13/2'
+Subgoal *1.1.13/2''
+Subgoal *1.1.13/2'''
+Subgoal *1.1.13/2'4'
+Subgoal *1.1.13/1
+Subgoal *1.1.13.1/5
+Subgoal *1.1.13.1/4
+Subgoal *1.1.13.1/3
+Subgoal *1.1.13.1/2
+Subgoal *1.1.13.1/1
+Subgoal *1.1.13.1/1'
+Subgoal *1.1.12/2
+Subgoal *1.1.12/2'
+Subgoal *1.1.12/2''
+Subgoal *1.1.12/2'''
+Subgoal *1.1.12/2'4'
+Subgoal *1.1.12/1
+Subgoal *1.1.12.1/5
+Subgoal *1.1.12.1/4
+Subgoal *1.1.12.1/3
+Subgoal *1.1.12.1/2
+Subgoal *1.1.12.1/1
+Subgoal *1.1.12.1/1'
+Subgoal *1.1.11/2
+Subgoal *1.1.11/2'
+Subgoal *1.1.11/2''
+Subgoal *1.1.11/2'''
+Subgoal *1.1.11/2'4'
+Subgoal *1.1.11/1
+Subgoal *1.1.11.1/5
+Subgoal *1.1.11.1/4
+Subgoal *1.1.11.1/3
+Subgoal *1.1.11.1/2
+Subgoal *1.1.11.1/1
+Subgoal *1.1.11.1/1'
+Subgoal *1.1.10/2
+Subgoal *1.1.10/2'
+Subgoal *1.1.10/2''
+Subgoal *1.1.10/2'''
+Subgoal *1.1.10/2'4'
+Subgoal *1.1.10/1
+Subgoal *1.1.10.1/5
+Subgoal *1.1.10.1/4
+Subgoal *1.1.10.1/3
+Subgoal *1.1.10.1/2
+Subgoal *1.1.10.1/1
+Subgoal *1.1.10.1/1'
+Subgoal *1.1.9/2
+Subgoal *1.1.9/2'
+Subgoal *1.1.9/2''
+Subgoal *1.1.9/2'''
+Subgoal *1.1.9/2'4'
+Subgoal *1.1.9/1
+Subgoal *1.1.9.1/5
+Subgoal *1.1.9.1/4
+Subgoal *1.1.9.1/3
+Subgoal *1.1.9.1/2
+Subgoal *1.1.9.1/1
+Subgoal *1.1.9.1/1'
+Subgoal *1.1.8/2
+Subgoal *1.1.8/2'
+Subgoal *1.1.8/2''
+Subgoal *1.1.8/2'''
+Subgoal *1.1.8/2'4'
+Subgoal *1.1.8/1
+Subgoal *1.1.8.1/5
+Subgoal *1.1.8.1/4
+Subgoal *1.1.8.1/3
+Subgoal *1.1.8.1/2
+Subgoal *1.1.8.1/1
+Subgoal *1.1.8.1/1'
+Subgoal *1.1.7/2
+Subgoal *1.1.7/2'
+Subgoal *1.1.7/2''
+Subgoal *1.1.7/2'''
+Subgoal *1.1.7/2'4'
+Subgoal *1.1.7/1
+Subgoal *1.1.7.1/5
+Subgoal *1.1.7.1/4
+Subgoal *1.1.7.1/3
+Subgoal *1.1.7.1/2
+Subgoal *1.1.7.1/1
+Subgoal *1.1.7.1/1'
+Subgoal *1.1.5/2
+Subgoal *1.1.5/2'
+Subgoal *1.1.5/2''
+Subgoal *1.1.5/2'''
+Subgoal *1.1.5/2'4'
+Subgoal *1.1.5/1
+Subgoal *1.1.5.1/5
+Subgoal *1.1.5.1/4
+Subgoal *1.1.5.1/3
+Subgoal *1.1.5.1/2
+Subgoal *1.1.5.1/1
+Subgoal *1.1.5.1/1'
+Subgoal *1.1.4/2
+Subgoal *1.1.4/2'
+Subgoal *1.1.4/2''
+Subgoal *1.1.4/2'''
+Subgoal *1.1.4/2'4'
+Subgoal *1.1.4/1
+Subgoal *1.1.4.1/5
+Subgoal *1.1.4.1/4
+Subgoal *1.1.4.1/3
+Subgoal *1.1.4.1/2
+Subgoal *1.1.4.1/1
+Subgoal *1.1.4.1/1'
+Subgoal *1.1.3/2
+Subgoal *1.1.3/2'
+Subgoal *1.1.3/2''
+Subgoal *1.1.3/2'''
+Subgoal *1.1.3/2'4'
+Subgoal *1.1.3/1
+Subgoal *1.1.3.1/5
+Subgoal *1.1.3.1/4
+Subgoal *1.1.3.1/3
+Subgoal *1.1.3.1/2
+Subgoal *1.1.3.1/1
+Subgoal *1.1.3.1/1'
+Subgoal *1.1.1/2
+Subgoal *1.1.1/2'
+Subgoal *1.1.1/2''
+Subgoal *1.1.1/2'''
+Subgoal *1.1.1/2'4'
+Subgoal *1.1.1/1
+Subgoal *1.1.1.1/5
+Subgoal *1.1.1.1/4
+Subgoal *1.1.1.1/3
+Subgoal *1.1.1.1/2
+Subgoal *1.1.1.1/1
+Subgoal *1.1.1.1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-APPEND-REPEAT-KEEP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-APPEND-1)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-TAKE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-ATOMS-TRANSFORM)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-TAKE)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZRS-TAKE-WHEN-COUNT-COVERS-LIST)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  2.37 seconds (prove: 2.35, print: 0.02, other: 0.00)
+Prover steps counted:  225557
+ZPC-TRANSFORM-OF-APPEND-REPEAT-KEEP-ATOM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/6
+Subgoal *1.1/6'
+Subgoal *1.1/6.4
+Subgoal *1.1/6.4'
+Subgoal *1.1/6.4''
+Subgoal *1.1/6.4'''
+Subgoal *1.1/6.4'4'
+Subgoal *1.1/6.3
+Subgoal *1.1/6.3.2
+Subgoal *1.1/6.3.2'
+Subgoal *1.1/6.3.2''
+Subgoal *1.1/6.3.1
+Subgoal *1.1/6.3.1.3
+Subgoal *1.1/6.3.1.3'
+Subgoal *1.1/6.3.1.2
+Subgoal *1.1/6.3.1.2'
+Subgoal *1.1/6.3.1.1
+Subgoal *1.1/6.3.1.1'
+Subgoal *1.1/6.2
+Subgoal *1.1/6.2.2
+Subgoal *1.1/6.2.2'
+Subgoal *1.1/6.2.2''
+Subgoal *1.1/6.2.1
+Subgoal *1.1/6.2.1.3
+Subgoal *1.1/6.2.1.3'
+Subgoal *1.1/6.2.1.2
+Subgoal *1.1/6.2.1.2'
+Subgoal *1.1/6.2.1.1
+Subgoal *1.1/6.2.1.1'
+Subgoal *1.1/6.1
+Subgoal *1.1/6.1.3
+Subgoal *1.1/6.1.2
+Subgoal *1.1/6.1.1
+Subgoal *1.1/6.1.1'
+Subgoal *1.1/6.1.1''
+Subgoal *1.1/5
+Subgoal *1.1/5'
+Subgoal *1.1/5''
+Subgoal *1.1/5'''
+Subgoal *1.1/5'4'
+Subgoal *1.1/5'5'
+Subgoal *1.1/5'6'
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/4''
+Subgoal *1.1/4'''
+Subgoal *1.1/4'4'
+Subgoal *1.1/4'5'
+Subgoal *1.1/3
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2''
+Subgoal *1.1/2'''
+Subgoal *1.1/2'4'
+Subgoal *1.1/2'5'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+Subgoal *1.1/1''
+Subgoal *1.1.14/2
+Subgoal *1.1.14/2'
+Subgoal *1.1.14/2''
+Subgoal *1.1.14/2'''
+Subgoal *1.1.14/2'4'
+Subgoal *1.1.14/1
+Subgoal *1.1.14.1/5
+Subgoal *1.1.14.1/4
+Subgoal *1.1.14.1/3
+Subgoal *1.1.14.1/2
+Subgoal *1.1.14.1/1
+Subgoal *1.1.14.1/1'
+Subgoal *1.1.13/2
+Subgoal *1.1.13/2'
+Subgoal *1.1.13/2''
+Subgoal *1.1.13/2'''
+Subgoal *1.1.13/2'4'
+Subgoal *1.1.13/1
+Subgoal *1.1.13.1/5
+Subgoal *1.1.13.1/4
+Subgoal *1.1.13.1/3
+Subgoal *1.1.13.1/2
+Subgoal *1.1.13.1/1
+Subgoal *1.1.13.1/1'
+Subgoal *1.1.12/2
+Subgoal *1.1.12/2'
+Subgoal *1.1.12/2''
+Subgoal *1.1.12/2'''
+Subgoal *1.1.12/2'4'
+Subgoal *1.1.12/1
+Subgoal *1.1.12.1/5
+Subgoal *1.1.12.1/4
+Subgoal *1.1.12.1/3
+Subgoal *1.1.12.1/2
+Subgoal *1.1.12.1/1
+Subgoal *1.1.12.1/1'
+Subgoal *1.1.11/2
+Subgoal *1.1.11/2'
+Subgoal *1.1.11/2''
+Subgoal *1.1.11/2'''
+Subgoal *1.1.11/2'4'
+Subgoal *1.1.11/1
+Subgoal *1.1.11.1/5
+Subgoal *1.1.11.1/4
+Subgoal *1.1.11.1/3
+Subgoal *1.1.11.1/2
+Subgoal *1.1.11.1/1
+Subgoal *1.1.11.1/1'
+Subgoal *1.1.10/2
+Subgoal *1.1.10/2'
+Subgoal *1.1.10/2''
+Subgoal *1.1.10/2'''
+Subgoal *1.1.10/2'4'
+Subgoal *1.1.10/1
+Subgoal *1.1.10.1/5
+Subgoal *1.1.10.1/4
+Subgoal *1.1.10.1/3
+Subgoal *1.1.10.1/2
+Subgoal *1.1.10.1/1
+Subgoal *1.1.10.1/1'
+Subgoal *1.1.9/2
+Subgoal *1.1.9/2'
+Subgoal *1.1.9/2''
+Subgoal *1.1.9/2'''
+Subgoal *1.1.9/2'4'
+Subgoal *1.1.9/1
+Subgoal *1.1.9.1/5
+Subgoal *1.1.9.1/4
+Subgoal *1.1.9.1/3
+Subgoal *1.1.9.1/2
+Subgoal *1.1.9.1/1
+Subgoal *1.1.9.1/1'
+Subgoal *1.1.8/2
+Subgoal *1.1.8/2'
+Subgoal *1.1.8/2''
+Subgoal *1.1.8/2'''
+Subgoal *1.1.8/2'4'
+Subgoal *1.1.8/1
+Subgoal *1.1.8.1/5
+Subgoal *1.1.8.1/4
+Subgoal *1.1.8.1/3
+Subgoal *1.1.8.1/2
+Subgoal *1.1.8.1/1
+Subgoal *1.1.8.1/1'
+Subgoal *1.1.7/2
+Subgoal *1.1.7/2'
+Subgoal *1.1.7/2''
+Subgoal *1.1.7/2'''
+Subgoal *1.1.7/2'4'
+Subgoal *1.1.7/1
+Subgoal *1.1.7.1/5
+Subgoal *1.1.7.1/4
+Subgoal *1.1.7.1/3
+Subgoal *1.1.7.1/2
+Subgoal *1.1.7.1/1
+Subgoal *1.1.7.1/1'
+Subgoal *1.1.5/2
+Subgoal *1.1.5/2'
+Subgoal *1.1.5/2''
+Subgoal *1.1.5/2'''
+Subgoal *1.1.5/2'4'
+Subgoal *1.1.5/1
+Subgoal *1.1.5.1/5
+Subgoal *1.1.5.1/4
+Subgoal *1.1.5.1/3
+Subgoal *1.1.5.1/2
+Subgoal *1.1.5.1/1
+Subgoal *1.1.5.1/1'
+Subgoal *1.1.4/2
+Subgoal *1.1.4/2'
+Subgoal *1.1.4/2''
+Subgoal *1.1.4/2'''
+Subgoal *1.1.4/2'4'
+Subgoal *1.1.4/1
+Subgoal *1.1.4.1/5
+Subgoal *1.1.4.1/4
+Subgoal *1.1.4.1/3
+Subgoal *1.1.4.1/2
+Subgoal *1.1.4.1/1
+Subgoal *1.1.4.1/1'
+Subgoal *1.1.3/2
+Subgoal *1.1.3/2'
+Subgoal *1.1.3/2''
+Subgoal *1.1.3/2'''
+Subgoal *1.1.3/2'4'
+Subgoal *1.1.3/1
+Subgoal *1.1.3.1/5
+Subgoal *1.1.3.1/4
+Subgoal *1.1.3.1/3
+Subgoal *1.1.3.1/2
+Subgoal *1.1.3.1/1
+Subgoal *1.1.3.1/1'
+Subgoal *1.1.1/2
+Subgoal *1.1.1/2'
+Subgoal *1.1.1/2''
+Subgoal *1.1.1/2'''
+Subgoal *1.1.1/2'4'
+Subgoal *1.1.1/1
+Subgoal *1.1.1.1/5
+Subgoal *1.1.1.1/4
+Subgoal *1.1.1.1/3
+Subgoal *1.1.1.1/2
+Subgoal *1.1.1.1/1
+Subgoal *1.1.1.1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-APPEND-REPEAT-DROP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-TRANSFORM)
+        (:DEFINITION ZPC-DROP-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-P)
+        (:DEFINITION ZPC-INSERT-ATOM-VALUE)
+        (:DEFINITION ZPC-KEEP-ATOM-P)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-ATOMS-TRANSFORM)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  1.94 seconds (prove: 1.92, print: 0.02, other: 0.00)
+Prover steps counted:  224666
+ZPC-TRANSFORM-OF-APPEND-REPEAT-DROP-ATOM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/2
+Subgoal *1.1/1
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-APPEND-REPEAT-KEEP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  7968
+ZPC-OKP-OF-APPEND-REPEAT-KEEP-ATOM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/2
+Subgoal *1.1/1
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-APPEND-REPEAT-DROP-ATOM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-ATOMS-OKP)
+        (:DEFINITION ZPC-REPEAT-ATOM)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM-P)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-REPEAT-ATOM)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZPC-REPEAT-ATOM))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  7980
+ZPC-OKP-OF-APPEND-REPEAT-DROP-ATOM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-APPEND-RUNS-ATOMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-RUNS-ATOMS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-RUNS-ATOMS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-APPEND-REPEAT-INSERT-ATOM))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  5310
+ZPC-TRANSFORM-OF-APPEND-RUNS-ATOMS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-APPEND-RUNS-ATOMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-INSERT-ATOM)
+        (:DEFINITION ZPC-RUNS-ATOMS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZPC-RUNS-ATOMS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND))
+Hint-events: ((:USE ZPC-OKP-OF-APPEND-REPEAT-INSERT-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  577
+ZPC-OKP-OF-APPEND-RUNS-ATOMS
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-APPEND-INSTRUCTION-ATOMS ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-APPEND-REPEAT-DROP-ATOM)
+              (:USE ZPC-TRANSFORM-OF-APPEND-REPEAT-KEEP-ATOM)
+              (:USE ZPC-TRANSFORM-OF-APPEND-RUNS-ATOMS))
+Time:  0.10 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  13516
+ZPC-TRANSFORM-OF-APPEND-INSTRUCTION-ATOMS
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-APPEND-INSTRUCTION-ATOMS ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ZPC-OKP-OF-APPEND-REPEAT-DROP-ATOM)
+              (:USE ZPC-OKP-OF-APPEND-REPEAT-KEEP-ATOM)
+              (:USE ZPC-OKP-OF-APPEND-RUNS-ATOMS))
+Time:  0.07 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  9889
+ZPC-OKP-OF-APPEND-INSTRUCTION-ATOMS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-EXPANDED-KEEP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-REPEAT-KEEP-ATOM)
+              (:USE ZYP-APPEND-TAKE-AND-DROP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1388
+ZPC-TRANSFORM-OF-EXPANDED-KEEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-EXPANDED-DROP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-REPEAT-DROP-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  923
+ZPC-TRANSFORM-OF-EXPANDED-DROP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-EXPANDED-INSERT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-RUNS-ATOMS))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2313
+ZPC-TRANSFORM-OF-EXPANDED-INSERT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-EXPANDED-MALFORMED ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-NIL-ATOMS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1974
+ZPC-TRANSFORM-OF-EXPANDED-MALFORMED
+Goal'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-EXPANDED-INSTRUCTION ...)
+Rules: NIL
+Hint-events: ((:USE ZPC-TRANSFORM-OF-EXPANDED-DROP)
+              (:USE ZPC-TRANSFORM-OF-EXPANDED-INSERT)
+              (:USE ZPC-TRANSFORM-OF-EXPANDED-KEEP)
+              (:USE ZPC-TRANSFORM-OF-EXPANDED-MALFORMED))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-TRANSFORM-OF-EXPANDED-INSTRUCTION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-TRANSFORM-OF-EXPANDED-PATCH ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-PATCH-ATOMS)
+        (:DEFINITION ZPC-PATCH-TRANSFORM)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OUTPUT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE EQUAL-WHEN-APPEND-SAME)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZPC-TRANSFORM-OF-APPEND-INSTRUCTION-ATOMS)
+        (:REWRITE ZPC-TRANSFORM-OF-NIL-ATOMS)
+        (:REWRITE ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP)
+        (:REWRITE ZYP-PATCH-REST-OPEN-WHEN-CONSP))
+Time:  0.82 seconds (prove: 0.82, print: 0.00, other: 0.00)
+Prover steps counted:  96314
+ZPC-TRANSFORM-OF-EXPANDED-PATCH
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-EXPANDED-KEEP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZPC-KEEP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE ZPC-OKP-OF-NIL-ATOMS)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP))
+Hint-events: ((:USE ZPC-OKP-OF-REPEAT-KEEP-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  720
+ZPC-OKP-OF-EXPANDED-KEEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-EXPANDED-DROP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZPC-DROP-ATOM)
+        (:EXECUTABLE-COUNTERPART ZPC-REPEAT-ATOM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE ZPC-OKP-OF-NIL-ATOMS)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP))
+Hint-events: ((:USE ZPC-OKP-OF-REPEAT-DROP-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  816
+ZPC-OKP-OF-EXPANDED-DROP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-EXPANDED-INSERT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP))
+Hint-events: ((:USE ZPC-OKP-OF-RUNS-ATOMS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  236
+ZPC-OKP-OF-EXPANDED-INSERT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-EXPANDED-MALFORMED ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZPC-INSTRUCTION-ATOMS)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP))
+Hint-events: ((:USE ZPC-OKP-OF-NIL-ATOMS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1318
+ZPC-OKP-OF-EXPANDED-MALFORMED
+Goal'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-EXPANDED-INSTRUCTION ...)
+Rules: NIL
+Hint-events: ((:USE ZPC-OKP-OF-EXPANDED-DROP)
+              (:USE ZPC-OKP-OF-EXPANDED-INSERT)
+              (:USE ZPC-OKP-OF-EXPANDED-KEEP)
+              (:USE ZPC-OKP-OF-EXPANDED-MALFORMED))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-OKP-OF-EXPANDED-INSTRUCTION
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.4
+Subgoal *1/3.4'
+Subgoal *1/3.4''
+Subgoal *1/3.4'''
+Subgoal *1/3.3
+Subgoal *1/3.3'
+Subgoal *1/3.3''
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.2'''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZPC-OKP-OF-EXPANDED-PATCH ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-PATCH-ATOMS)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-SOURCE-DEMAND)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OKP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZPC-OKP-OF-APPEND-INSTRUCTION-ATOMS)
+        (:REWRITE ZPC-OKP-OF-NIL-ATOMS)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:REWRITE ZYP-LEN-OF-DROP-WHEN-ENOUGH)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.18 seconds (prove: 0.17, print: 0.00, other: 0.00)
+Prover steps counted:  22109
+ZPC-OKP-OF-EXPANDED-PATCH
+
+Summary
+Form:  ( DEFUN ZPC-COMPOSE ...)
+Rules: ((:TYPE-PRESCRIPTION ZYP-NORMALIZE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZPC-COMPOSE
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZPC-COMPOSE-TRANSFORM-CORRECT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-COMPOSE)
+        (:DEFINITION ZPC-PATCH-TRANSFORM)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZPC-OKP-OF-EXPANDED-PATCH)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-REST-OF-NORMALIZE)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Hint-events: ((:USE ZPC-TRANSFORM-OF-ATOMS-PATCH)
+              (:USE ZPC-TRANSFORM-OF-COMPOSE-ATOMS)
+              (:USE ZPC-TRANSFORM-OF-EXPANDED-PATCH))
+Time:  0.88 seconds (prove: 0.88, print: 0.00, other: 0.00)
+Prover steps counted:  108071
+ZPC-COMPOSE-TRANSFORM-CORRECT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-COMPOSE-OKP-CORRECT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZPC-COMPOSE)
+        (:DEFINITION ZPC-PATCH-TRANSFORM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZPC-TRANSFORM-OF-EXPANDED-PATCH)
+        (:REWRITE ZYP-PATCH-OKP-OF-NORMALIZE)
+        (:TYPE-PRESCRIPTION ZPC-ATOMS-OKP)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP))
+Hint-events: ((:USE ZPC-OKP-OF-ATOMS-PATCH)
+              (:USE ZPC-OKP-OF-COMPOSE-ATOMS)
+              (:USE ZPC-OKP-OF-EXPANDED-PATCH))
+Time:  0.33 seconds (prove: 0.33, print: 0.00, other: 0.00)
+Prover steps counted:  36579
+ZPC-COMPOSE-OKP-CORRECT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZPC-COMPOSE-TRANSACTIONAL-CORRECT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZPC-COMPOSE)
+        (:DEFINITION ZPC-PATCH-TRANSFORM)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:DEFINITION ZYP-OUTPUT-LENGTH)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE ZPC-OKP-OF-ATOMS-PATCH)
+        (:REWRITE ZPC-OKP-OF-COMPOSE-ATOMS)
+        (:REWRITE ZPC-OKP-OF-EXPANDED-PATCH)
+        (:REWRITE ZPC-TRANSFORM-OF-EXPANDED-PATCH)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:REWRITE ZVR-PATCH-WORD-OF-NORMALIZE)
+        (:REWRITE ZYP-LEN-OF-PATCH-OUTPUT-WHEN-OKP)
+        (:REWRITE ZYP-LEN-OF-PATCH-REST-WHEN-OKP)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-REST-OF-NORMALIZE)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZYP-INSERTED-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-KEPT-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Hint-events: ((:USE ZPC-COMPOSE-OKP-CORRECT)
+              (:USE ZPC-COMPOSE-TRANSFORM-CORRECT))
+Time:  1.05 seconds (prove: 1.05, print: 0.00, other: 0.00)
+Prover steps counted:  102726
+ZPC-COMPOSE-TRANSACTIONAL-CORRECT
+
+Summary
+Form:  ( DEFTHM ZPC-COMPOSE-IS-CANONICAL ...)
+Rules: ((:DEFINITION ZPC-COMPOSE)
+        (:REWRITE ZYP-CANONICAL-P-OF-NORMALIZE)
+        (:TYPE-PRESCRIPTION ZYP-CANONICAL-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  12
+ZPC-COMPOSE-IS-CANONICAL
+
+Summary
+Form:  ( DEFCONST *ZPC-FIRST* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZPC-FIRST*
+
+Summary
+Form:  ( DEFCONST *ZPC-SECOND* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZPC-SECOND*
+:PASSED
+(DEFXDOC ZPC-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zsh-verified-patch-composition" ...)
+Rules: NIL
+Time:  11.85 seconds (prove: 10.41, print: 0.08, other: 1.36)
+Prover steps counted:  1167874
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 11.85 seconds realtime, 11.03 seconds runtime
+; (1,387,138,032 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 33421 Jun 29 00:41 zsh-verified-patch-composition.cert

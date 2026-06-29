@@ -1,0 +1,2561 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zze-exotic-fertile-kernel.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zyl-verified-patch-calculus" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zyl-verified-patch-calculus
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.12 seconds (prove: 0.00, print: 0.00, other: 0.12)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.18 seconds (prove: 0.00, print: 0.00, other: 0.18)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.07 seconds (prove: 0.00, print: 0.00, other: 0.07)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.04 seconds (prove: 0.00, print: 0.00, other: 0.04)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zze-exotic-fertile-kernel" ...)
+Rules: NIL
+Time:  1.07 seconds (prove: 0.00, print: 0.00, other: 1.06)
+"/mnt/data/new-release/cert-work/zze-exotic-fertile-kernel.lisp"
+(DEFXDOC ZYL-VERIFIED-PATCH-CALCULUS)
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZYP-TAKE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  148
+ZYP-TAKE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZYP-DROP-PREFIX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  151
+ZYP-DROP-PREFIX
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZYP-ENOUGHP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  152
+ZYP-ENOUGHP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZYP-APPEND-TAKE-AND-DROP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-TAKE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-TAKE)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-OF-CONS)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1075
+ZYP-APPEND-TAKE-AND-DROP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-LEN-OF-TAKE-WHEN-ENOUGH ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE LEN-OF-CONS))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  557
+ZYP-LEN-OF-TAKE-WHEN-ENOUGH
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-LEN-OF-DROP-WHEN-ENOUGH ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  963
+ZYP-LEN-OF-DROP-WHEN-ENOUGH
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM ZYP-DROP-PREFIX-OF-SUM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE DEFAULT-LESS-THAN-1))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  880
+ZYP-DROP-PREFIX-OF-SUM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM ZYP-TAKE-OF-SUM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-TAKE)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION ZYP-TAKE))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1646
+ZYP-TAKE-OF-SUM
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM ZYP-ENOUGHP-OF-SUM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1157
+ZYP-ENOUGHP-OF-SUM
+
+Summary
+Form:  ( DEFUN ZYP-KEEP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-KEEP
+
+Summary
+Form:  ( DEFUN ZYP-DROP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-DROP
+
+Summary
+Form:  ( DEFUN ZYP-INSERT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-INSERT
+
+Summary
+Form:  ( DEFUN ZYP-KEEP-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-KEEP-P
+
+Summary
+Form:  ( DEFUN ZYP-DROP-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-DROP-P
+
+Summary
+Form:  ( DEFUN ZYP-INSERT-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-INSERT-P
+
+Summary
+Form:  ( DEFUN ZYP-COUNT ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-COUNT
+
+Summary
+Form:  ( DEFUN ZYP-INSERT-RUNS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-INSERT-RUNS
+
+Summary
+Form:  ( DEFUN ZYP-STEP-REST ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-STEP-REST
+
+Summary
+Form:  ( DEFUN ZYP-STEP-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-RLE-DECODE)
+        (:TYPE-PRESCRIPTION ZYP-TAKE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-STEP-OUTPUT
+
+Summary
+Form:  ( DEFUN ZYP-STEP-OKP ...)
+Rules: ((:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-STEP-OKP
+
+Summary
+Form:  ( DEFUN ZYP-PATCH-REST ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-PATCH-REST
+
+Summary
+Form:  ( DEFUN ZYP-PATCH-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-PATCH-OUTPUT
+
+Summary
+Form:  ( DEFUN ZYP-PATCH-OKP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-PATCH-OKP
+
+Summary
+Form:  ( DEFUN ZYP-RESULT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-RESULT
+
+Summary
+Form:  ( DEFUN ZYP-RESULT-OKP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-RESULT-OKP
+
+Summary
+Form:  ( DEFUN ZYP-RESULT-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-RESULT-OUTPUT
+
+Summary
+Form:  ( DEFUN ZYP-RESULT-REST ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-RESULT-REST
+
+Summary
+Form:  ( DEFUN ZYP-APPLY ...)
+Rules: ((:TYPE-PRESCRIPTION ZYP-RESULT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-APPLY
+
+Summary
+Form:  ( DEFUN ZYP-RESULT-SEQ ...)
+Rules: ((:TYPE-PRESCRIPTION ZYP-RESULT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-RESULT-SEQ
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZYP-TAKE-OF-TRUE-LIST-FIX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:INDUCTION ZYP-TAKE)
+        (:REWRITE CAR-OF-LIST-FIX)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  394
+ZYP-TAKE-OF-TRUE-LIST-FIX
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZYP-ENOUGHP-OF-TRUE-LIST-FIX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  375
+ZYP-ENOUGHP-OF-TRUE-LIST-FIX
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZYP-DROP-PREFIX-OF-TRUE-LIST-FIX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  613
+ZYP-DROP-PREFIX-OF-TRUE-LIST-FIX
+
+Summary
+Form:  ( DEFTHM ZYP-STEP-REST-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-REST)
+        (:REWRITE ZYP-DROP-PREFIX-OF-TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  620
+ZYP-STEP-REST-OF-TRUE-LIST-FIX
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-REST-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-REST)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZYP-STEP-REST-OF-TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.10 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  10697
+ZYP-PATCH-REST-OF-TRUE-LIST-FIX
+
+Summary
+Form:  ( DEFTHM ZYP-STEP-OUTPUT-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZYP-TAKE-OF-TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  472
+ZYP-STEP-OUTPUT-OF-TRUE-LIST-FIX
+
+Summary
+Form:  ( DEFTHM ZYP-STEP-OKP-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZYP-ENOUGHP-OF-TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  451
+ZYP-STEP-OKP-OF-TRUE-LIST-FIX
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OUTPUT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE ZYP-STEP-OUTPUT-OF-TRUE-LIST-FIX)
+        (:REWRITE ZYP-STEP-REST-OF-TRUE-LIST-FIX))
+Time:  0.18 seconds (prove: 0.18, print: 0.00, other: 0.00)
+Prover steps counted:  19772
+ZYP-PATCH-OUTPUT-OF-TRUE-LIST-FIX
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OKP-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OKP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE ZYP-STEP-OKP-OF-TRUE-LIST-FIX)
+        (:REWRITE ZYP-STEP-REST-OF-TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.20 seconds (prove: 0.19, print: 0.00, other: 0.01)
+Prover steps counted:  22680
+ZYP-PATCH-OKP-OF-TRUE-LIST-FIX
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM TRUE-LISTP-OF-ZYP-PATCH-REST ...)
+Rules: ((:INDUCTION ZYP-PATCH-REST)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-REST))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+TRUE-LISTP-OF-ZYP-PATCH-REST
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-REST-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-REST)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE ZYP-PATCH-REST-OF-TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  425
+ZYP-PATCH-REST-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OUTPUT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-TRUE-LIST-FIX))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  692
+ZYP-PATCH-OUTPUT-OF-APPEND
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OKP-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OKP)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE ZYP-PATCH-OKP-OF-TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP)
+        (:TYPE-PRESCRIPTION ZYP-STEP-OKP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  804
+ZYP-PATCH-OKP-OF-APPEND
+Goal'
+Subgoal 3
+Subgoal 3'
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZYP-APPLY-OF-APPEND ...)
+Rules: ((:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-APPEND-1)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-APPLY)
+        (:DEFINITION ZYP-RESULT)
+        (:DEFINITION ZYP-RESULT-OKP)
+        (:DEFINITION ZYP-RESULT-OUTPUT)
+        (:DEFINITION ZYP-RESULT-REST)
+        (:DEFINITION ZYP-RESULT-SEQ)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-OF-APPEND)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZYP-PATCH-OKP-OF-APPEND)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-APPEND)
+        (:REWRITE ZYP-PATCH-REST-OF-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-OF-ZYP-PATCH-REST)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OUTPUT))
+Time:  0.26 seconds (prove: 0.26, print: 0.00, other: 0.00)
+Prover steps counted:  31942
+ZYP-APPLY-OF-APPEND
+
+Summary
+Form:  ( DEFUN ZYP-SOURCE-DEMAND ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ZYP-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ZYP-SOURCE-DEMAND
+
+Summary
+Form:  ( DEFUN ZYP-KEPT-LENGTH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ZYP-COUNT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-KEPT-LENGTH
+
+Summary
+Form:  ( DEFUN ZYP-INSERTED-LENGTH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION XEF-RLE-SYMBOL-COUNT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-INSERTED-LENGTH
+
+Summary
+Form:  ( DEFUN ZYP-OUTPUT-LENGTH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ZYP-INSERTED-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-KEPT-LENGTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-OUTPUT-LENGTH
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-SOURCE-DEMAND-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-SOURCE-DEMAND)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-SOURCE-DEMAND)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  4602
+ZYP-SOURCE-DEMAND-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-KEPT-LENGTH-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-KEPT-LENGTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-KEPT-LENGTH)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ZYP-KEPT-LENGTH))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2211
+ZYP-KEPT-LENGTH-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-INSERTED-LENGTH-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-INSERTED-LENGTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-INSERTED-LENGTH)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ZYP-INSERTED-LENGTH))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2161
+ZYP-INSERTED-LENGTH-OF-APPEND
+
+Summary
+Form:  ( DEFTHM ZYP-OUTPUT-LENGTH-OF-APPEND ...)
+Rules: ((:DEFINITION ZYP-OUTPUT-LENGTH)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ZYP-INSERTED-LENGTH-OF-APPEND)
+        (:REWRITE ZYP-KEPT-LENGTH-OF-APPEND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  830
+ZYP-OUTPUT-LENGTH-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-LEN-OF-PATCH-OUTPUT-WHEN-OKP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-INSERTED-LENGTH)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-KEPT-LENGTH)
+        (:DEFINITION ZYP-OUTPUT-LENGTH)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OUTPUT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:REWRITE XEF-LEN-OF-RLE-DECODE)
+        (:REWRITE ZYP-LEN-OF-TAKE-WHEN-ENOUGH)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION XEF-RLE-SYMBOL-COUNT)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP)
+        (:TYPE-PRESCRIPTION ZYP-INSERTED-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-KEPT-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP))
+Time:  0.22 seconds (prove: 0.22, print: 0.00, other: 0.00)
+Prover steps counted:  29219
+ZYP-LEN-OF-PATCH-OUTPUT-WHEN-OKP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-LEN-OF-PATCH-REST-WHEN-OKP ...)
+Rules: ((:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-LEN-1)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-SOURCE-DEMAND)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-REST)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZYP-LEN-OF-DROP-WHEN-ENOUGH)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.22 seconds (prove: 0.21, print: 0.00, other: 0.00)
+Prover steps counted:  28491
+ZYP-LEN-OF-PATCH-REST-WHEN-OKP
+
+Summary
+Form:  ( DEFUN ZYP-EMIT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ZYP-EMIT
+
+Summary
+Form:  ( DEFUN ZYP-CANONICAL-P ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ZYP-CANONICAL-P
+
+Summary
+Form:  ( DEFUN ZYP-NORMALIZE ...)
+Rules: ((:TYPE-PRESCRIPTION ZYP-EMIT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-NORMALIZE
+Goal'
+
+Summary
+Form:  ( DEFTHM ZYP-RLE-CANONICALIZE-CONSP-WHEN-FIRST-COUNT-POSITIVE
+...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CONS-CAR-CDR)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  502
+ZYP-RLE-CANONICALIZE-CONSP-WHEN-FIRST-COUNT-POSITIVE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZYP-RLE-CANONICALIZE-CONSP-WHEN-CANONICAL ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION XEF-RLE-CANONICAL-P)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Hint-events: ((:USE ZYP-RLE-CANONICALIZE-CONSP-WHEN-FIRST-COUNT-POSITIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  324
+ZYP-RLE-CANONICALIZE-CONSP-WHEN-CANONICAL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZYP-RLE-CANONICALIZE-OF-APPEND-CONSP ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION XEF-RLE-CANONICAL-P)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Hint-events: ((:USE ZYP-RLE-CANONICALIZE-CONSP-WHEN-FIRST-COUNT-POSITIVE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  399
+ZYP-RLE-CANONICALIZE-OF-APPEND-CONSP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZYP-RLE-DOUBLE-CANONICALIZE-OF-APPEND-CONSP ...)
+Rules: ((:DEFINITION NOT)
+        (:REWRITE XEF-RLE-CANONICAL-P-OF-CANONICALIZE))
+Hint-events: ((:USE ZYP-RLE-CANONICALIZE-CONSP-WHEN-CANONICAL)
+              (:USE ZYP-RLE-CANONICALIZE-OF-APPEND-CONSP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  88
+ZYP-RLE-DOUBLE-CANONICALIZE-OF-APPEND-CONSP
+Goal'
+Goal''
+Subgoal 18
+Subgoal 18'
+Subgoal 17
+Subgoal 17'
+Subgoal 17.8
+Subgoal 17.7
+Subgoal 17.6
+Subgoal 17.5
+Subgoal 17.4
+Subgoal 17.3
+Subgoal 17.2
+Subgoal 17.1
+Subgoal 16
+Subgoal 16'
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 14'
+Subgoal 14.8
+Subgoal 14.7
+Subgoal 14.6
+Subgoal 14.5
+Subgoal 14.4
+Subgoal 14.3
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 12'
+Subgoal 11
+Subgoal 11'
+Subgoal 11.8
+Subgoal 11.7
+Subgoal 11.6
+Subgoal 11.5
+Subgoal 11.4
+Subgoal 11.3
+Subgoal 11.2
+Subgoal 11.1
+Subgoal 10
+Subgoal 10'
+Subgoal 9
+Subgoal 9'
+Subgoal 8
+Subgoal 8'
+Subgoal 8.8
+Subgoal 8.7
+Subgoal 8.6
+Subgoal 8.5
+Subgoal 8.4
+Subgoal 8.3
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZYP-CANONICAL-P-OF-EMIT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:DEFINITION ZYP-CANONICAL-P)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-EMIT)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART POSP)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-CANONICALIZE)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE XEF-RLE-CANONICAL-P-OF-CANONICALIZE)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZYP-RLE-CANONICALIZE-CONSP-WHEN-CANONICAL)
+        (:REWRITE ZYP-RLE-DOUBLE-CANONICALIZE-OF-APPEND-CONSP)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE)
+        (:TYPE-PRESCRIPTION ZYP-CANONICAL-P))
+Hint-events: ((:USE ZYP-RLE-DOUBLE-CANONICALIZE-OF-APPEND-CONSP))
+Time:  0.35 seconds (prove: 0.35, print: 0.00, other: 0.00)
+Prover steps counted:  49317
+ZYP-CANONICAL-P-OF-EMIT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-CANONICAL-P-OF-NORMALIZE ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:DEFINITION ZYP-CANONICAL-P)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-EMIT)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-NORMALIZE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART POSP)
+        (:EXECUTABLE-COUNTERPART ZYP-CANONICAL-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-NORMALIZE)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE XEF-RLE-CANONICAL-P-OF-CANONICALIZE)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZYP-RLE-CANONICALIZE-CONSP-WHEN-CANONICAL)
+        (:REWRITE ZYP-RLE-DOUBLE-CANONICALIZE-OF-APPEND-CONSP)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE)
+        (:TYPE-PRESCRIPTION ZYP-CANONICAL-P)
+        (:TYPE-PRESCRIPTION ZYP-NORMALIZE))
+Time:  2.72 seconds (prove: 2.72, print: 0.00, other: 0.00)
+Prover steps counted:  322908
+ZYP-CANONICAL-P-OF-NORMALIZE
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-REST-OPEN-WHEN-CONSP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-STEP-REST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1159
+ZYP-PATCH-REST-OPEN-WHEN-CONSP
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2266
+ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OKP-OPEN-WHEN-CONSP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2186
+ZYP-PATCH-OKP-OPEN-WHEN-CONSP
+Goal'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-REST-OF-FUSED-CONSUMPTION ...)
+Rules: ((:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE ZYP-DROP-PREFIX-OF-SUM))
+Hint-events: ((:USE ZYP-DROP-PREFIX-OF-SUM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  43
+ZYP-PATCH-REST-OF-FUSED-CONSUMPTION
+Goal'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OF-FUSED-CONSUMPTION ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|))
+Hint-events: ((:USE ZYP-DROP-PREFIX-OF-SUM))
+Time:  0.07 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  8909
+ZYP-PATCH-OUTPUT-OF-FUSED-CONSUMPTION
+Goal'
+Goal''
+Goal'''
+Goal'4'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OF-FUSED-KEEPS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION HIDE)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE ZYP-DROP-PREFIX-OF-SUM))
+Hint-events: ((:USE ZYP-DROP-PREFIX-OF-SUM)
+              (:USE ZYP-TAKE-OF-SUM))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  12527
+ZYP-PATCH-OUTPUT-OF-FUSED-KEEPS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OKP-OF-FUSED-CONSUMPTION ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ZYP-DROP-PREFIX-OF-SUM)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Hint-events: ((:USE ZYP-DROP-PREFIX-OF-SUM)
+              (:USE ZYP-ENOUGHP-OF-SUM))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  13309
+ZYP-PATCH-OKP-OF-FUSED-CONSUMPTION
+Goal'
+Goal''
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 48'
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 41'
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 27'
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 20'
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-REST-OF-EMIT ...)
+Rules: ((:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-EMIT)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZYP-PATCH-REST-OPEN-WHEN-CONSP))
+Hint-events: ((:USE ZYP-PATCH-REST-OF-FUSED-CONSUMPTION))
+Time:  0.21 seconds (prove: 0.20, print: 0.00, other: 0.00)
+Prover steps counted:  33977
+ZYP-PATCH-REST-OF-EMIT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-DECODE)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Hint-events: ((:USE XEF-RLE-DECODE-OF-CANONICALIZE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  318
+ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP
+Goal'
+Goal''
+Subgoal 103
+Subgoal 103.12
+Subgoal 103.11
+Subgoal 103.10
+Subgoal 103.9
+Subgoal 103.8
+Subgoal 103.7
+Subgoal 103.6
+Subgoal 103.5
+Subgoal 103.4
+Subgoal 103.3
+Subgoal 103.2
+Subgoal 103.1
+Subgoal 102
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 77'
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 70'
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 57'
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 50'
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 30'
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OF-EMIT ...)
+Rules: ((:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-APPEND-1)
+        (:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-EMIT)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-CANONICALIZE)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-ATOM-UNDER-LIST-EQUIV)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE XEF-RLE-DECODE-OF-APPEND)
+        (:REWRITE XEF-RLE-DECODE-OF-CANONICALIZE)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP)
+        (:REWRITE ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Hint-events: ((:USE XEF-RLE-DECODE-OF-JOIN)
+              (:USE ZYP-PATCH-OUTPUT-OF-FUSED-CONSUMPTION)
+              (:USE ZYP-PATCH-OUTPUT-OF-FUSED-KEEPS)
+              (:USE ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP))
+Time:  0.72 seconds (prove: 0.72, print: 0.01, other: 0.00)
+Prover steps counted:  109278
+ZYP-PATCH-OUTPUT-OF-EMIT
+Goal'
+Goal''
+Subgoal 122
+Subgoal 122.6
+Subgoal 122.5
+Subgoal 122.4
+Subgoal 122.3
+Subgoal 122.2
+Subgoal 122.1
+Subgoal 121
+Subgoal 120
+Subgoal 120.14
+Subgoal 120.14'
+Subgoal 120.13
+Subgoal 120.12
+Subgoal 120.11
+Subgoal 120.10
+Subgoal 120.9
+Subgoal 120.8
+Subgoal 120.7
+Subgoal 120.7'
+Subgoal 120.6
+Subgoal 120.5
+Subgoal 120.4
+Subgoal 120.3
+Subgoal 120.2
+Subgoal 120.1
+Subgoal 119
+Subgoal 119.14
+Subgoal 119.14'
+Subgoal 119.13
+Subgoal 119.12
+Subgoal 119.11
+Subgoal 119.10
+Subgoal 119.9
+Subgoal 119.8
+Subgoal 119.7
+Subgoal 119.7'
+Subgoal 119.6
+Subgoal 119.5
+Subgoal 119.4
+Subgoal 119.3
+Subgoal 119.2
+Subgoal 119.1
+Subgoal 118
+Subgoal 118.28
+Subgoal 118.28'
+Subgoal 118.27
+Subgoal 118.27'
+Subgoal 118.26
+Subgoal 118.25
+Subgoal 118.24
+Subgoal 118.23
+Subgoal 118.22
+Subgoal 118.21
+Subgoal 118.20
+Subgoal 118.19
+Subgoal 118.18
+Subgoal 118.17
+Subgoal 118.16
+Subgoal 118.15
+Subgoal 118.14
+Subgoal 118.14'
+Subgoal 118.13
+Subgoal 118.13'
+Subgoal 118.12
+Subgoal 118.11
+Subgoal 118.10
+Subgoal 118.9
+Subgoal 118.8
+Subgoal 118.7
+Subgoal 118.6
+Subgoal 118.5
+Subgoal 118.4
+Subgoal 118.3
+Subgoal 118.2
+Subgoal 118.1
+Subgoal 117
+Subgoal 117'
+Subgoal 116
+Subgoal 116'
+Subgoal 116.28
+Subgoal 116.28'
+Subgoal 116.27
+Subgoal 116.27'
+Subgoal 116.26
+Subgoal 116.25
+Subgoal 116.24
+Subgoal 116.23
+Subgoal 116.22
+Subgoal 116.21
+Subgoal 116.20
+Subgoal 116.19
+Subgoal 116.18
+Subgoal 116.17
+Subgoal 116.16
+Subgoal 116.15
+Subgoal 116.14
+Subgoal 116.14'
+Subgoal 116.13
+Subgoal 116.13'
+Subgoal 116.12
+Subgoal 116.11
+Subgoal 116.10
+Subgoal 116.9
+Subgoal 116.8
+Subgoal 116.7
+Subgoal 116.6
+Subgoal 116.5
+Subgoal 116.4
+Subgoal 116.3
+Subgoal 116.2
+Subgoal 116.1
+Subgoal 115
+Subgoal 115.28
+Subgoal 115.28'
+Subgoal 115.27
+Subgoal 115.27'
+Subgoal 115.26
+Subgoal 115.25
+Subgoal 115.24
+Subgoal 115.23
+Subgoal 115.22
+Subgoal 115.21
+Subgoal 115.20
+Subgoal 115.19
+Subgoal 115.18
+Subgoal 115.17
+Subgoal 115.16
+Subgoal 115.15
+Subgoal 115.14
+Subgoal 115.14'
+Subgoal 115.13
+Subgoal 115.13'
+Subgoal 115.12
+Subgoal 115.11
+Subgoal 115.10
+Subgoal 115.9
+Subgoal 115.8
+Subgoal 115.7
+Subgoal 115.6
+Subgoal 115.5
+Subgoal 115.4
+Subgoal 115.3
+Subgoal 115.2
+Subgoal 115.1
+Subgoal 114
+Subgoal 114'
+Subgoal 114.28
+Subgoal 114.28'
+Subgoal 114.27
+Subgoal 114.27'
+Subgoal 114.26
+Subgoal 114.25
+Subgoal 114.24
+Subgoal 114.23
+Subgoal 114.22
+Subgoal 114.21
+Subgoal 114.20
+Subgoal 114.19
+Subgoal 114.18
+Subgoal 114.17
+Subgoal 114.16
+Subgoal 114.15
+Subgoal 114.14
+Subgoal 114.14'
+Subgoal 114.13
+Subgoal 114.13'
+Subgoal 114.12
+Subgoal 114.11
+Subgoal 114.10
+Subgoal 114.9
+Subgoal 114.8
+Subgoal 114.7
+Subgoal 114.6
+Subgoal 114.5
+Subgoal 114.4
+Subgoal 114.3
+Subgoal 114.2
+Subgoal 114.1
+Subgoal 113
+Subgoal 113.6
+Subgoal 113.5
+Subgoal 113.4
+Subgoal 113.3
+Subgoal 113.2
+Subgoal 113.1
+Subgoal 112
+Subgoal 112'
+Subgoal 111
+Subgoal 111.6
+Subgoal 111.5
+Subgoal 111.4
+Subgoal 111.3
+Subgoal 111.2
+Subgoal 111.1
+Subgoal 110
+Subgoal 110'
+Subgoal 110.6
+Subgoal 110.5
+Subgoal 110.4
+Subgoal 110.3
+Subgoal 110.2
+Subgoal 110.1
+Subgoal 109
+Subgoal 109'
+Subgoal 109.6
+Subgoal 109.5
+Subgoal 109.4
+Subgoal 109.3
+Subgoal 109.2
+Subgoal 109.1
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 105'
+Subgoal 104
+Subgoal 103
+Subgoal 103'
+Subgoal 102
+Subgoal 102'
+Subgoal 101
+Subgoal 100
+Subgoal 100'
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 97'
+Subgoal 96
+Subgoal 96.14
+Subgoal 96.14'
+Subgoal 96.13
+Subgoal 96.12
+Subgoal 96.11
+Subgoal 96.10
+Subgoal 96.9
+Subgoal 96.8
+Subgoal 96.7
+Subgoal 96.7'
+Subgoal 96.6
+Subgoal 96.5
+Subgoal 96.4
+Subgoal 96.3
+Subgoal 96.2
+Subgoal 96.1
+Subgoal 95
+Subgoal 95'
+Subgoal 94
+Subgoal 94'
+Subgoal 93
+Subgoal 93'
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 80'
+Subgoal 79
+Subgoal 79'
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 66'
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 57'
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 48'
+Subgoal 48''
+Subgoal 47
+Subgoal 47'
+Subgoal 46
+Subgoal 46'
+Subgoal 45
+Subgoal 45'
+Subgoal 44
+Subgoal 44'
+Subgoal 43
+Subgoal 43'
+Subgoal 42
+Subgoal 42'
+Subgoal 41
+Subgoal 41'
+Subgoal 40
+Subgoal 40'
+Subgoal 39
+Subgoal 39'
+Subgoal 39''
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 36'
+Subgoal 35
+Subgoal 35'
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 32'
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 24'
+Subgoal 23
+Subgoal 23'
+Subgoal 22
+Subgoal 22'
+Subgoal 21
+Subgoal 21'
+Subgoal 20
+Subgoal 20'
+Subgoal 19
+Subgoal 19'
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OKP-OF-EMIT ...)
+Rules: ((:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-EMIT)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:DEFINITION ZYP-INSERT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZYP-PATCH-OKP-OPEN-WHEN-CONSP)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Hint-events: ((:USE ZYP-PATCH-OKP-OF-FUSED-CONSUMPTION))
+Time:  0.84 seconds (prove: 0.82, print: 0.02, other: 0.00)
+Prover steps counted:  139679
+ZYP-PATCH-OKP-OF-EMIT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-REST-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-NORMALIZE)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-REST)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE ZYP-PATCH-REST-OF-EMIT))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  10707
+ZYP-PATCH-REST-OF-NORMALIZE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OUTPUT-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-NORMALIZE)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OUTPUT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-EMIT))
+Time:  0.25 seconds (prove: 0.24, print: 0.00, other: 0.00)
+Prover steps counted:  32358
+ZYP-PATCH-OUTPUT-OF-NORMALIZE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.5'
+Subgoal *1/3.5''
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-OKP-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-NORMALIZE)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OKP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZYP-PATCH-OKP-OF-EMIT)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.19 seconds (prove: 0.19, print: 0.00, other: 0.00)
+Prover steps counted:  27118
+ZYP-PATCH-OKP-OF-NORMALIZE
+
+Summary
+Form:  ( DEFTHM ZYP-APPLY-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ZYP-APPLY)
+        (:DEFINITION ZYP-RESULT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZYP-PATCH-OKP-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-REST-OF-NORMALIZE)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-OF-ZYP-PATCH-REST)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OUTPUT))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4661
+ZYP-APPLY-OF-NORMALIZE
+
+Summary
+Form:  ( DEFUN ZYP-STEP-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-ID)
+        (:TYPE-PRESCRIPTION XEF-RLE-SUMMARY)
+        (:TYPE-PRESCRIPTION XEF-WORD-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-STEP-SUMMARY
+
+Summary
+Form:  ( DEFUN ZYP-PATCH-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-COMPOSE)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-ID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-PATCH-SUMMARY
+
+Summary
+Form:  ( DEFUN ZYP-PATCH-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-EVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZYP-PATCH-RUN
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZYP-STEP-SUMMARY-REFINES-OUTPUT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-SUMMARY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3338
+ZYP-STEP-SUMMARY-REFINES-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-COCYCLE-FIX-OF-PATCH-SUMMARY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-SUMMARY)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-SUMMARY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-ID)
+        (:REWRITE ZYP-STEP-SUMMARY-REFINES-OUTPUT))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1482
+ZYP-COCYCLE-FIX-OF-PATCH-SUMMARY
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-SUMMARY-REFINES-OUTPUT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-PATCH-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-SUMMARY)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL)
+        (:REWRITE ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP)
+        (:REWRITE ZYP-STEP-SUMMARY-REFINES-OUTPUT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  293
+ZYP-PATCH-SUMMARY-REFINES-OUTPUT
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-RUN-REFINES-OUTPUT ...)
+Rules: ((:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION ZYP-PATCH-RUN)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION)
+        (:REWRITE ZYP-PATCH-SUMMARY-REFINES-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  98
+ZYP-PATCH-RUN-REFINES-OUTPUT
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-SUMMARY-OF-NORMALIZE ...)
+Rules: ((:REWRITE ZYP-PATCH-OUTPUT-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-SUMMARY-REFINES-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  23
+ZYP-PATCH-SUMMARY-OF-NORMALIZE
+
+Summary
+Form:  ( DEFTHM ZYP-PATCH-RUN-OF-NORMALIZE ...)
+Rules: ((:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-RUN-REFINES-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  107
+ZYP-PATCH-RUN-OF-NORMALIZE
+
+Summary
+Form:  ( DEFCONST *ZYP-DEMO-SOURCE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZYP-DEMO-SOURCE*
+
+Summary
+Form:  ( DEFCONST *ZYP-DEMO-PATCH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZYP-DEMO-PATCH*
+:PASSED
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *ZYP-UNTIDY-PATCH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZYP-UNTIDY-PATCH*
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *ZYP-WALK-TABLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZYP-WALK-TABLE*
+
+Summary
+Form:  ( DEFCONST *ZYP-WALK-PATCH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZYP-WALK-PATCH*
+:PASSED
+:PASSED
+(DEFXDOC ZYP-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zyl-verified-patch-calculus" ...)
+Rules: NIL
+Time:  8.59 seconds (prove: 7.20, print: 0.05, other: 1.34)
+Prover steps counted:  941554
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 8.59 seconds realtime, 8.02 seconds runtime
+; (1,006,588,880 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 37994 Jun 29 00:41 zyl-verified-patch-calculus.cert

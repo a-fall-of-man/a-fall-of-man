@@ -1,0 +1,630 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbk-rader-bank-certificate.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zcc-universal-generated-rader-certificate.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "workshops/2022/gamboa-primitive-roots/order-constructions.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbl-generated-rader67" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbl-generated-rader67
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/number-theory/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...) is
+redundant.  See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...) is
+redundant.  See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbk-rader-bank-certificate" ...)
+Rules: NIL
+Time:  1.50 seconds (prove: 0.00, print: 0.00, other: 1.50)
+"/mnt/data/new-release/cert-work/zbk-rader-bank-certificate.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zcc-universal-generated-rader-certificate" ...)
+Rules: NIL
+Time:  0.47 seconds (prove: 0.00, print: 0.00, other: 0.47)
+"/mnt/data/new-release/cert-work/zcc-universal-generated-rader-certificate.lisp"
+
+The event ( INCLUDE-BOOK 
+"workshops/2022/gamboa-primitive-roots/order-constructions" ...) is
+redundant.  See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK 
+"workshops/2022/gamboa-primitive-roots/order-constructions" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+Summary
+Form:  ( DEFUN GR67-COMPACT-JOIN-INDUCT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-COMPACT-JOIN-INDUCT
+
+Summary
+Form:  ( DEFTHM GR67-TC-COMPACT-BANK-OPEN ...)
+Rules: ((:DEFINITION TC-COMPACT-BANK-CERTIFIES-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  127
+GR67-TC-COMPACT-BANK-OPEN
+
+Summary
+Form:  ( DEFTHM GR67-NOT-ZP-ONE-PLUS-LEN ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-NOT-ZP-ONE-PLUS-LEN
+
+Summary
+Form:  ( DEFTHM GR67-ONE-MINUS-ONE-PLUS-LEN ...)
+Rules: ((:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  9
+GR67-ONE-MINUS-ONE-PLUS-LEN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-TC-COMPACT-BANK-SUCC-LEN ...)
+Rules: ((:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE GR67-NOT-ZP-ONE-PLUS-LEN)
+        (:REWRITE GR67-ONE-MINUS-ONE-PLUS-LEN))
+Hint-events: ((:USE GR67-TC-COMPACT-BANK-OPEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  79
+GR67-TC-COMPACT-BANK-SUCC-LEN
+
+Summary
+Form:  ( DEFTHM GR67-TC-COMPACT-BANK-ZERO ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION TC-COMPACT-BANK-CERTIFIES-AUX)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  69
+GR67-TC-COMPACT-BANK-ZERO
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM GR67-COMPACT-CERTIFICATES-JOIN-AUX ...)
+Rules: ((:DEFINITION LEN)
+        (:DEFINITION RBK-COMPACT-BANKP)
+        (:DEFINITION RGI-COMPACT-BANKP-AUX)
+        (:INDUCTION GR67-COMPACT-JOIN-INDUCT)
+        (:REWRITE GR67-TC-COMPACT-BANK-SUCC-LEN)
+        (:REWRITE GR67-TC-COMPACT-BANK-ZERO)
+        (:TYPE-PRESCRIPTION RBK-COMPACT-BANKP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  603
+GR67-COMPACT-CERTIFICATES-JOIN-AUX
+
+Summary
+Form:  ( DEFTHM GR67-TC-GENERATED-COMPACT-OPEN ...)
+Rules: ((:DEFINITION TC-GENERATED-COMPACT-CERTIFIESP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  24
+GR67-TC-GENERATED-COMPACT-OPEN
+
+Summary
+Form:  ( DEFTHM GR67-RGI-COMPACT-BANK-OPEN ...)
+Rules: ((:DEFINITION RGI-COMPACT-BANKP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  57
+GR67-RGI-COMPACT-BANK-OPEN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-COMPACT-CERTIFICATES-JOIN ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE GR67-RGI-COMPACT-BANK-OPEN)
+        (:REWRITE GR67-TC-GENERATED-COMPACT-OPEN)
+        (:TYPE-PRESCRIPTION RBK-COMPACT-BANKP))
+Hint-events: ((:USE GR67-COMPACT-CERTIFICATES-JOIN-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  232
+GR67-COMPACT-CERTIFICATES-JOIN
+
+Summary
+Form:  ( DEFUN GR67-GENERATOR ...)
+Rules: ((:TYPE-PRESCRIPTION PFIELD::PRIMITIVE-ROOT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-GENERATOR
+
+Summary
+Form:  ( DEFUN GR67-INPUT-INDICES ...)
+Rules: ((:TYPE-PRESCRIPTION RGI-GENERATED-INPUTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-INPUT-INDICES
+
+Summary
+Form:  ( DEFUN GR67-KERNEL-INDICES ...)
+Rules: ((:TYPE-PRESCRIPTION RGI-GENERATED-KERNELS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-KERNEL-INDICES
+
+Summary
+Form:  ( DEFUN GR67-OUTPUT-INDICES ...)
+Rules: ((:TYPE-PRESCRIPTION RGI-GENERATED-OUTPUTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-OUTPUT-INDICES
+
+Summary
+Form:  ( DEFUN GR67-SMALL-TERMS ...)
+Rules: ((:TYPE-PRESCRIPTION TC-PLAN-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-SMALL-TERMS
+
+Summary
+Form:  ( DEFUN GR67-SMALL-POSTS ...)
+Rules: ((:TYPE-PRESCRIPTION TC-PLAN-POSTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-SMALL-POSTS
+
+Summary
+Form:  ( DEFTHM GR67-CONVOLUTION-LENGTH ...)
+Rules: ((:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  6
+GR67-CONVOLUTION-LENGTH
+
+Summary
+Form:  ( DEFTHM GR67-SMALL-TERMS-OPEN ...)
+Rules: ((:DEFINITION GR67-SMALL-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  6
+GR67-SMALL-TERMS-OPEN
+
+Summary
+Form:  ( DEFTHM GR67-SMALL-POSTS-OPEN ...)
+Rules: ((:DEFINITION GR67-SMALL-POSTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  6
+GR67-SMALL-POSTS-OPEN
+
+Summary
+Form:  ( DEFTHM GR67-PRIME ...)
+Rules: ((:DEFINITION DM::PRIMEP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART DM::LEAST-DIVISOR)
+        (:TYPE-PRESCRIPTION DM::PRIMEP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  13
+GR67-PRIME
+Goal'
+
+Summary
+Form:  ( DEFTHM GR67-GENERATOR-HAS-ORDER-66 ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART GR67-GENERATOR)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART IMPLIES)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART PFIELD::ORDER)
+        (:EXECUTABLE-COUNTERPART PFIELD::PRIMITIVE-ROOT)
+        (:REWRITE GR67-PRIME))
+Hint-events: ((:USE GR67-PRIME)
+              (:USE PFIELD::PRIMES-HAVE-PRIMITIVE-ROOTS))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  24
+GR67-GENERATOR-HAS-ORDER-66
+Goal'
+
+Summary
+Form:  ( DEFTHM GR67-GENERATOR-FEP ...)
+Rules: ((:EXECUTABLE-COUNTERPART PFIELD::FEP)
+        (:EXECUTABLE-COUNTERPART GR67-GENERATOR)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART IMPLIES)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART POSP)
+        (:EXECUTABLE-COUNTERPART PFIELD::PRIMITIVE-ROOT-AUX)
+        (:TYPE-PRESCRIPTION PFIELD::FEP))
+Hint-events: ((:USE PFIELD::FEP-PRIMITIVE-ROOT-AUX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  24
+GR67-GENERATOR-FEP
+Goal'
+
+Summary
+Form:  ( DEFTHM GR67-GENERATOR-NONZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART =)
+        (:EXECUTABLE-COUNTERPART DM::DIVIDES)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART GR67-GENERATOR)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART IMPLIES)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART PFIELD::PRIMITIVE-ROOT-AUX)
+        (:REWRITE GR67-PRIME))
+Hint-events: ((:USE PFIELD::FEP-PRIMITE-ROOT-NON-ZERO)
+              (:USE GR67-PRIME))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  32
+GR67-GENERATOR-NONZERO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-GENERATED-INDEX-CERTIFICATE ...)
+Rules: ((:DEFINITION GR67-INPUT-INDICES)
+        (:DEFINITION GR67-KERNEL-INDICES)
+        (:DEFINITION GR67-OUTPUT-INDICES)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-GENERATED-INDEX-CERTIFICATEP)
+        (:DEFINITION RGI-GENERATED-INPUTS)
+        (:DEFINITION RGI-GENERATED-KERNELS)
+        (:DEFINITION RGI-GENERATED-OUTPUTS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:TYPE-PRESCRIPTION RGI-INDEX-CERTIFICATEP))
+Hint-events: ((:USE GR67-GENERATOR-FEP)
+              (:USE GR67-GENERATOR-HAS-ORDER-66)
+              (:USE GR67-GENERATOR-NONZERO)
+              (:USE GR67-PRIME)
+              (:USE RGI-GENERATED-INDEX-CERTIFICATEP-UNIVERSAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  271
+GR67-GENERATED-INDEX-CERTIFICATE
+
+Summary
+Form:  ( DEFTHM GR67-GENERATED-RADER-COMPACT-CERTIFICATE ...)
+Rules: ((:EXECUTABLE-COUNTERPART GR67-INPUT-INDICES)
+        (:EXECUTABLE-COUNTERPART GR67-KERNEL-INDICES)
+        (:EXECUTABLE-COUNTERPART GR67-OUTPUT-INDICES)
+        (:EXECUTABLE-COUNTERPART RGI-COMPACT-BANKP)
+        (:TYPE-PRESCRIPTION RGI-COMPACT-BANKP))
+Time:  0.81 seconds (prove: 0.80, print: 0.00, other: 0.00)
+Prover steps counted:  5
+GR67-GENERATED-RADER-COMPACT-CERTIFICATE
+Goal'
+
+Summary
+Form:  ( DEFTHM GR67-NONZERO-OUTPUT-PERMUTATION ...)
+Rules: ((:TYPE-PRESCRIPTION RGI-PERMUTATIONP))
+Hint-events: ((:USE GR67-GENERATED-INDEX-CERTIFICATE)
+              (:USE RGI-INDEX-CERTIFICATE-IMPLIES-OUTPUT-PERMUTATION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-NONZERO-OUTPUT-PERMUTATION
+
+Summary
+Form:  ( DEFTHM GR67-OUTPUT-INDICES-NATURAL ...)
+Rules: ((:EXECUTABLE-COUNTERPART GR67-OUTPUT-INDICES)
+        (:EXECUTABLE-COUNTERPART RBK-NAT-LISTP)
+        (:TYPE-PRESCRIPTION RBK-NAT-LISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2
+GR67-OUTPUT-INDICES-NATURAL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-JOINT-COMPACT-CERTIFICATE ...)
+Rules: ((:REWRITE GR67-CONVOLUTION-LENGTH)
+        (:REWRITE GR67-SMALL-POSTS-OPEN)
+        (:TYPE-PRESCRIPTION RBK-COMPACT-BANKP))
+Hint-events: ((:USE GR67-COMPACT-CERTIFICATES-JOIN)
+              (:USE GR67-GENERATED-RADER-COMPACT-CERTIFICATE)
+              (:USE TC66-GENERATED-COMPACT-CERTIFICATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  51
+GR67-JOINT-COMPACT-CERTIFICATE
+
+Summary
+Form:  ( DEFTHM GR67-POSITIVE-LENGTHS ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-POSITIVE-LENGTHS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-GENERATED-BANK-CERTIFICATE ...)
+Rules: ((:REWRITE GR67-CONVOLUTION-LENGTH)
+        (:REWRITE GR67-SMALL-POSTS-OPEN)
+        (:TYPE-PRESCRIPTION RWD-BANK-CERTIFIESP))
+Hint-events: ((:USE GR67-JOINT-COMPACT-CERTIFICATE)
+              (:USE GR67-OUTPUT-INDICES-NATURAL)
+              (:USE GR67-POSITIVE-LENGTHS)
+              (:USE RBK-COMPACT-BANK-IMPLIES-FULL-CERTIFICATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  94
+GR67-GENERATED-BANK-CERTIFICATE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-GENERATED-WFTA-CERTIFICATE ...)
+Rules: ((:DEFINITION RWD-COMPILE-OUTPUTS)
+        (:DEFINITION RWD-COMPILE-POSTS)
+        (:DEFINITION RWD-COMPILE-TERMS)
+        (:REWRITE GR67-SMALL-POSTS-OPEN)
+        (:REWRITE GR67-SMALL-TERMS-OPEN)
+        (:TYPE-PRESCRIPTION RWD-COMPILED-CERTIFIESP))
+Hint-events: ((:USE GR67-GENERATED-BANK-CERTIFICATE)
+              (:USE RWD-COMPILED-CERTIFIESP-IS-BANK-CERTIFIESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  74
+GR67-GENERATED-WFTA-CERTIFICATE
+Goal'
+
+Summary
+Form:  ( DEFTHM GR67-COMPLEX-PRODUCT-COUNT-IS-133 ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART GR67-SMALL-TERMS)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RWD-COMPLEX-PRODUCT-COUNT)
+        (:EXECUTABLE-COUNTERPART TC-PLAN-TERMS)
+        (:EXECUTABLE-COUNTERPART WBC-BANK-RANK))
+Hint-events: ((:USE TC66-GENERATED-RANK-IS-131))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  12
+GR67-COMPLEX-PRODUCT-COUNT-IS-133
+Goal'
+
+Summary
+Form:  ( DEFTHM GR67-GENERATED-WFTA-IS-COMPILED-DFT ...)
+Rules: NIL
+Hint-events: ((:USE GR67-GENERATED-WFTA-CERTIFICATE)
+              (:USE RWD-COMPILED-TRANSFORM-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+GR67-GENERATED-WFTA-IS-COMPILED-DFT
+
+Summary
+Form:  ( DEFTHM GR67-COMPILED-OUTPUT-ORDER ...)
+Rules: ((:DEFINITION RWD-COMPILE-OUTPUTS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  7
+GR67-COMPILED-OUTPUT-ORDER
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM GR67-GENERATED-WFTA-IS-LENGTH-67-DFT ...)
+Rules: ((:REWRITE GR67-COMPILED-OUTPUT-ORDER))
+Hint-events: ((:USE GR67-GENERATED-WFTA-IS-COMPILED-DFT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  57
+GR67-GENERATED-WFTA-IS-LENGTH-67-DFT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbl-generated-rader67" ...)
+Rules: NIL
+Time:  2.99 seconds (prove: 0.90, print: 0.00, other: 2.09)
+Prover steps counted:  1884
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 2.99 seconds realtime, 2.78 seconds runtime
+; (191,676,336 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 48262 Jun 29 00:40 zbl-generated-rader67.cert

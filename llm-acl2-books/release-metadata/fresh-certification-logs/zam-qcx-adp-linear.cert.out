@@ -1,0 +1,2214 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zaa-algebraic-dynamic-programming.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zak-rational-dft-core.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zam-qcx-adp-linear" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zam-qcx-adp-linear
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zaa-algebraic-dynamic-programming" ...)
+Rules: NIL
+Time:  1.04 seconds (prove: 0.00, print: 0.00, other: 1.04)
+"/mnt/data/new-release/cert-work/zaa-algebraic-dynamic-programming.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zak-rational-dft-core" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/new-release/cert-work/zak-rational-dft-core.lisp"
+
+Summary
+Form:  ( DEFUN QAP-VALUEP ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-VALUEP
+
+Summary
+Form:  ( DEFUN QAP-ZERO ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-ZERO
+
+Summary
+Form:  ( DEFUN QAP-ONE ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-ONE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-ONE
+
+Summary
+Form:  ( DEFUN QAP-PLUS ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-ADD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-PLUS
+
+Summary
+Form:  ( DEFUN QAP-TIMES ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-MUL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-TIMES
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-ZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+QCX-RATIONALP-OF-ZERO
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-ONE ...)
+Rules: ((:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+QCX-RATIONALP-OF-ONE
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-MUL ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  221
+QCX-RATIONALP-OF-MUL
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-ADD-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE CONS-CAR-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  110
+QCX-ADD-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-ADD-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE QCX-ADD-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  113
+QCX-ADD-RIGHT-IDENTITY
+
+Summary
+Form:  ( DEFTHM QCX-MUL-COMMUTATIVE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1018
+QCX-MUL-COMMUTATIVE
+Subgoal 100
+Subgoal 99
+Subgoal 99'
+Subgoal 98
+Subgoal 98'
+Subgoal 97
+Subgoal 97'
+Subgoal 96
+Subgoal 96'
+Subgoal 95
+Subgoal 95'
+Subgoal 94
+Subgoal 94'
+Subgoal 93
+Subgoal 93'
+Subgoal 92
+Subgoal 92'
+Subgoal 91
+Subgoal 91'
+Subgoal 90
+Subgoal 90'
+Subgoal 89
+Subgoal 89'
+Subgoal 88
+Subgoal 88'
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 42'
+Subgoal 41
+Subgoal 41'
+Subgoal 40
+Subgoal 40'
+Subgoal 39
+Subgoal 39'
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 36'
+Subgoal 35
+Subgoal 35'
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 32'
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 14'
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-MUL-ASSOCIATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.18 seconds (prove: 0.18, print: 0.01, other: 0.00)
+Prover steps counted:  32379
+QCX-MUL-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-MUL-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CONS-CAR-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  143
+QCX-MUL-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-MUL-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  146
+QCX-MUL-RIGHT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-MUL-ZERO-LEFT ...)
+Rules: ((:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE DEFAULT-TIMES-2))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  103
+QCX-MUL-ZERO-LEFT
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-MUL-ZERO-RIGHT ...)
+Rules: ((:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  106
+QCX-MUL-ZERO-RIGHT
+Goal'
+Subgoal 122
+Subgoal 122'
+Subgoal 121
+Subgoal 120
+Subgoal 119
+Subgoal 118
+Subgoal 118'
+Subgoal 117
+Subgoal 117'
+Subgoal 116
+Subgoal 116'
+Subgoal 115
+Subgoal 115'
+Subgoal 114
+Subgoal 114'
+Subgoal 113
+Subgoal 113'
+Subgoal 112
+Subgoal 112'
+Subgoal 111
+Subgoal 111'
+Subgoal 110
+Subgoal 110'
+Subgoal 109
+Subgoal 109'
+Subgoal 108
+Subgoal 108'
+Subgoal 107
+Subgoal 107'
+Subgoal 106
+Subgoal 106'
+Subgoal 105
+Subgoal 105'
+Subgoal 104
+Subgoal 104'
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 101'
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 98'
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 92'
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 86'
+Subgoal 85
+Subgoal 85'
+Subgoal 84
+Subgoal 83
+Subgoal 83'
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 80'
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 71'
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 67'
+Subgoal 66
+Subgoal 66'
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 60'
+Subgoal 59
+Subgoal 59'
+Subgoal 58
+Subgoal 58'
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 54'
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 44'
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 25'
+Subgoal 24
+Subgoal 24'
+Subgoal 23
+Subgoal 23'
+Subgoal 22
+Subgoal 22'
+Subgoal 21
+Subgoal 21'
+Subgoal 20
+Subgoal 20'
+Subgoal 19
+Subgoal 19'
+Subgoal 18
+Subgoal 18'
+Subgoal 17
+Subgoal 17'
+Subgoal 16
+Subgoal 16'
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 14'
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 12'
+Subgoal 11
+Subgoal 11'
+Subgoal 10
+Subgoal 10'
+Subgoal 9
+Subgoal 9'
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 5''
+Subgoal 4
+Subgoal 4'
+Subgoal 4''
+Subgoal 4'''
+Subgoal 3
+Subgoal 3'
+Subgoal 3''
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+
+Summary
+Form:  ( DEFTHM QCX-ADD-DISTRIBUTES-OVER-MUL-RIGHT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Hint-events: ((:USE QCX-MUL-COMMUTATIVE)
+              (:USE QCX-MUL-DISTRIBUTES-OVER-ADD))
+Time:  0.63 seconds (prove: 0.62, print: 0.01, other: 0.00)
+Prover steps counted:  168227
+QCX-ADD-DISTRIBUTES-OVER-MUL-RIGHT
+
+Summary
+Form:  ( DEFTHM QAP-VALUEP-OF-ZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART QAP-VALUEP)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:TYPE-PRESCRIPTION QAP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+QAP-VALUEP-OF-ZERO
+
+Summary
+Form:  ( DEFTHM QAP-VALUEP-OF-ONE ...)
+Rules: ((:EXECUTABLE-COUNTERPART QAP-ONE)
+        (:EXECUTABLE-COUNTERPART QAP-VALUEP)
+        (:TYPE-PRESCRIPTION QAP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+QAP-VALUEP-OF-ONE
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-VALUEP-OF-PLUS ...)
+Rules: ((:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QAP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  194
+QAP-VALUEP-OF-PLUS
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-VALUEP-OF-TIMES ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QAP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  230
+QAP-VALUEP-OF-TIMES
+
+Summary
+Form:  ( DEFTHM QAP-PLUS-ASSOCIATIVE ...)
+Rules: ((:DEFINITION QAP-PLUS)
+        (:REWRITE QCX-ADD-ASSOCIATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  28
+QAP-PLUS-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-PLUS-COMMUTATIVE ...)
+Rules: ((:DEFINITION QAP-PLUS)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  238
+QAP-PLUS-COMMUTATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-PLUS-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE CONS-CAR-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  115
+QAP-PLUS-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-PLUS-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE QCX-ADD-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  118
+QAP-PLUS-RIGHT-IDENTITY
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-ASSOCIATIVE ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:REWRITE QCX-MUL-ASSOCIATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  28
+QAP-TIMES-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-COMMUTATIVE ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  660
+QAP-TIMES-COMMUTATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QAP-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CONS-CAR-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  148
+QAP-TIMES-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:EXECUTABLE-COUNTERPART QAP-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  151
+QAP-TIMES-RIGHT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-ZERO-LEFT ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE DEFAULT-TIMES-2))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  106
+QAP-TIMES-ZERO-LEFT
+Goal'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-ZERO-RIGHT ...)
+Rules: ((:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  109
+QAP-TIMES-ZERO-RIGHT
+Goal'
+Subgoal 121
+Subgoal 121'
+Subgoal 120
+Subgoal 120'
+Subgoal 119
+Subgoal 119'
+Subgoal 118
+Subgoal 118'
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 111'
+Subgoal 110
+Subgoal 110'
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 104'
+Subgoal 103
+Subgoal 102
+Subgoal 102'
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 93'
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 90'
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 84'
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 75'
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 71'
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 64'
+Subgoal 63
+Subgoal 62
+Subgoal 62'
+Subgoal 61
+Subgoal 60
+Subgoal 60'
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 57'
+Subgoal 56
+Subgoal 55
+Subgoal 55'
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 51'
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 48'
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 44'
+Subgoal 43
+Subgoal 43'
+Subgoal 42
+Subgoal 42'
+Subgoal 41
+Subgoal 41'
+Subgoal 40
+Subgoal 40'
+Subgoal 39
+Subgoal 39'
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 36'
+Subgoal 35
+Subgoal 35'
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 32'
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 30'
+Subgoal 29
+Subgoal 29'
+Subgoal 28
+Subgoal 28'
+Subgoal 27
+Subgoal 27'
+Subgoal 26
+Subgoal 26'
+Subgoal 25
+Subgoal 25'
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 21'
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 12'
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.18 seconds (prove: 0.17, print: 0.01, other: 0.00)
+Prover steps counted:  35043
+QAP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT
+Goal'
+Subgoal 122
+Subgoal 122'
+Subgoal 121
+Subgoal 120
+Subgoal 119
+Subgoal 118
+Subgoal 118'
+Subgoal 117
+Subgoal 117'
+Subgoal 116
+Subgoal 116'
+Subgoal 115
+Subgoal 115'
+Subgoal 114
+Subgoal 114'
+Subgoal 113
+Subgoal 113'
+Subgoal 112
+Subgoal 112'
+Subgoal 111
+Subgoal 111'
+Subgoal 110
+Subgoal 110'
+Subgoal 109
+Subgoal 109'
+Subgoal 108
+Subgoal 108'
+Subgoal 107
+Subgoal 107'
+Subgoal 106
+Subgoal 106'
+Subgoal 105
+Subgoal 105'
+Subgoal 104
+Subgoal 104'
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 101'
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 98'
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 92'
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 86'
+Subgoal 85
+Subgoal 85'
+Subgoal 84
+Subgoal 83
+Subgoal 83'
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 80'
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 71'
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 67'
+Subgoal 66
+Subgoal 66'
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 60'
+Subgoal 59
+Subgoal 59'
+Subgoal 58
+Subgoal 58'
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 54'
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 44'
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 25'
+Subgoal 24
+Subgoal 24'
+Subgoal 23
+Subgoal 23'
+Subgoal 22
+Subgoal 22'
+Subgoal 21
+Subgoal 21'
+Subgoal 20
+Subgoal 20'
+Subgoal 19
+Subgoal 19'
+Subgoal 18
+Subgoal 18'
+Subgoal 17
+Subgoal 17'
+Subgoal 16
+Subgoal 16'
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 14'
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 12'
+Subgoal 11
+Subgoal 11'
+Subgoal 10
+Subgoal 10'
+Subgoal 9
+Subgoal 9'
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QAP-TIMES-DISTRIBUTES-OVER-PLUS-RIGHT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.19 seconds (prove: 0.18, print: 0.01, other: 0.00)
+Prover steps counted:  36258
+QAP-TIMES-DISTRIBUTES-OVER-PLUS-RIGHT
+
+Summary
+Form:  ( DEFUN QAP-FAST-CHART-REF ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-CHART-REF
+
+Summary
+Form:  ( DEFUN QAP-FAST-EVAL-PREMISES ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-ONE)
+        (:TYPE-PRESCRIPTION QAP-TIMES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-EVAL-PREMISES
+
+Summary
+Form:  ( DEFUN QAP-FAST-EVAL-RULE ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-TIMES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-EVAL-RULE
+
+Summary
+Form:  ( DEFUN QAP-FAST-EVAL-RULES ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-PLUS)
+        (:TYPE-PRESCRIPTION QAP-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-EVAL-RULES
+
+Summary
+Form:  ( DEFUN QAP-FAST-EVAL-ITEM ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-PLUS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-EVAL-ITEM
+
+Summary
+Form:  ( DEFUN QAP-FAST-RUN-AUX ...)
+Rules: ((:TYPE-PRESCRIPTION HONS-ACONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-RUN-AUX
+
+Summary
+Form:  ( DEFUN QAP-FAST-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-FAST-RUN-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-RUN
+
+Summary
+Form:  ( DEFUN QAP-FAST-VALUE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-FAST-VALUE
+
+Summary
+Form:  ( DEFUN QAP-RULE-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-RULE-VALIDP
+
+Summary
+Form:  ( DEFUN QAP-RULES-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-RULES-VALIDP
+
+Summary
+Form:  ( DEFUN QAP-ITEM-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-RULES-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-ITEM-VALIDP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN QAP-PREFIX-VALIDP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION QAP-ITEM-VALIDP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+QAP-PREFIX-VALIDP
+
+Summary
+Form:  ( DEFUN QAP-PROGRAM-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION QAP-PREFIX-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QAP-PROGRAM-VALIDP
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.2'
+Subgoal 6.1
+Subgoal 5
+Subgoal 5.2
+Subgoal 5.2'
+Subgoal 5.1
+Subgoal 4
+Subgoal 4.2
+Subgoal 4.2'
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.2
+Subgoal 3.2'
+Subgoal 3.1
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( MUTUAL-RECURSION ( DEFUN QAP-DENOTE-ITEM ...) ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION INTEGER-ABS)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE O-P-OF-TWO-NATS-MEASURE)
+        (:REWRITE O<-OF-TWO-NATS-MEASURE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QAP-ONE)
+        (:TYPE-PRESCRIPTION QAP-PLUS)
+        (:TYPE-PRESCRIPTION QAP-TIMES)
+        (:TYPE-PRESCRIPTION QAP-ZERO))
+Time:  0.07 seconds (prove: 0.06, print: 0.00, other: 0.01)
+Prover steps counted:  5980
+(QAP-DENOTE-ITEM QAP-DENOTE-RULES
+                 QAP-DENOTE-RULE QAP-DENOTE-PREMISES)
+Goal'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QAP-DENOTE-ITEM-WHEN-NOT-CONSP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION QAP-DENOTE-ITEM)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION NTH)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NTH-WHEN-TOO-LARGE-CHEAP)
+        (:REWRITE NTH-WHEN-ZP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1845
+QAP-DENOTE-ITEM-WHEN-NOT-CONSP
+Subgoal 33
+Subgoal 33.2
+Subgoal 33.2'
+Subgoal 33.2.3
+Subgoal 33.2.3.20
+Subgoal 33.2.3.19
+Subgoal 33.2.3.18
+Subgoal 33.2.3.17
+Subgoal 33.2.3.16
+Subgoal 33.2.3.15
+Subgoal 33.2.3.14
+Subgoal 33.2.3.13
+Subgoal 33.2.3.12
+Subgoal 33.2.3.11
+Subgoal 33.2.3.10
+Subgoal 33.2.3.9
+Subgoal 33.2.3.8
+Subgoal 33.2.3.7
+Subgoal 33.2.3.6
+Subgoal 33.2.3.5
+Subgoal 33.2.3.4
+Subgoal 33.2.3.3
+Subgoal 33.2.3.2
+Subgoal 33.2.3.1
+Subgoal 33.2.2
+Subgoal 33.2.1
+Subgoal 33.2.1.20
+Subgoal 33.2.1.19
+Subgoal 33.2.1.18
+Subgoal 33.2.1.17
+Subgoal 33.2.1.16
+Subgoal 33.2.1.15
+Subgoal 33.2.1.14
+Subgoal 33.2.1.13
+Subgoal 33.2.1.12
+Subgoal 33.2.1.11
+Subgoal 33.2.1.10
+Subgoal 33.2.1.9
+Subgoal 33.2.1.8
+Subgoal 33.2.1.7
+Subgoal 33.2.1.6
+Subgoal 33.2.1.5
+Subgoal 33.2.1.4
+Subgoal 33.2.1.3
+Subgoal 33.2.1.2
+Subgoal 33.2.1.1
+Subgoal 33.1
+Subgoal 33.1'
+Subgoal 32
+Subgoal 32'
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 30'
+Subgoal 29
+Subgoal 29'
+Subgoal 28
+Subgoal 28'
+Subgoal 27
+Subgoal 27'
+Subgoal 26
+Subgoal 26'
+Subgoal 25
+Subgoal 24
+Subgoal 24'
+Subgoal 23
+Subgoal 23'
+Subgoal 22
+Subgoal 22'
+Subgoal 21
+Subgoal 20
+Subgoal 20'
+Subgoal 19
+Subgoal 19'
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 16.2
+Subgoal 16.2'
+Subgoal 16.1
+Subgoal 16.1'
+Subgoal 15
+Subgoal 15.2
+Subgoal 15.2'
+Subgoal 15.1
+Subgoal 15.1'
+Subgoal 14
+Subgoal 14.4
+Subgoal 14.4'
+Subgoal 14.3
+Subgoal 14.3'
+Subgoal 14.2
+Subgoal 14.2'
+Subgoal 14.1
+Subgoal 14.1'
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 11.2
+Subgoal 11.2'
+Subgoal 11.1
+Subgoal 11.1'
+Subgoal 11.1.60
+Subgoal 11.1.60'
+Subgoal 11.1.59
+Subgoal 11.1.59'
+Subgoal 11.1.58
+Subgoal 11.1.58'
+Subgoal 11.1.57
+Subgoal 11.1.56
+Subgoal 11.1.56'
+Subgoal 11.1.55
+Subgoal 11.1.55'
+Subgoal 11.1.54
+Subgoal 11.1.54'
+Subgoal 11.1.53
+Subgoal 11.1.52
+Subgoal 11.1.52'
+Subgoal 11.1.51
+Subgoal 11.1.50
+Subgoal 11.1.49
+Subgoal 11.1.49'
+Subgoal 11.1.48
+Subgoal 11.1.48'
+Subgoal 11.1.47
+Subgoal 11.1.46
+Subgoal 11.1.46'
+Subgoal 11.1.45
+Subgoal 11.1.44
+Subgoal 11.1.44'
+Subgoal 11.1.43
+Subgoal 11.1.43'
+Subgoal 11.1.42
+Subgoal 11.1.42'
+Subgoal 11.1.41
+Subgoal 11.1.40
+Subgoal 11.1.39
+Subgoal 11.1.39'
+Subgoal 11.1.38
+Subgoal 11.1.38'
+Subgoal 11.1.37
+Subgoal 11.1.36
+Subgoal 11.1.35
+Subgoal 11.1.35'
+Subgoal 11.1.34
+Subgoal 11.1.34'
+Subgoal 11.1.33
+Subgoal 11.1.33'
+Subgoal 11.1.32
+Subgoal 11.1.32'
+Subgoal 11.1.31
+Subgoal 11.1.31'
+Subgoal 11.1.30
+Subgoal 11.1.30'
+Subgoal 11.1.29
+Subgoal 11.1.28
+Subgoal 11.1.28'
+Subgoal 11.1.27
+Subgoal 11.1.26
+Subgoal 11.1.26'
+Subgoal 11.1.25
+Subgoal 11.1.24
+Subgoal 11.1.23
+Subgoal 11.1.23'
+Subgoal 11.1.22
+Subgoal 11.1.22.3
+Subgoal 11.1.22.2
+Subgoal 11.1.22.1
+Subgoal 11.1.21
+Subgoal 11.1.21.3
+Subgoal 11.1.21.2
+Subgoal 11.1.21.1
+Subgoal 11.1.20
+Subgoal 11.1.20'
+Subgoal 11.1.19
+Subgoal 11.1.19'
+Subgoal 11.1.18
+Subgoal 11.1.17
+Subgoal 11.1.17'
+Subgoal 11.1.16
+Subgoal 11.1.15
+Subgoal 11.1.14
+Subgoal 11.1.13
+Subgoal 11.1.13'
+Subgoal 11.1.12
+Subgoal 11.1.11
+Subgoal 11.1.11'
+Subgoal 11.1.10
+Subgoal 11.1.10'
+Subgoal 11.1.9
+Subgoal 11.1.9'
+Subgoal 11.1.8
+Subgoal 11.1.8'
+Subgoal 11.1.7
+Subgoal 11.1.6
+Subgoal 11.1.6'
+Subgoal 11.1.5
+Subgoal 11.1.5'
+Subgoal 11.1.4
+Subgoal 11.1.4'
+Subgoal 11.1.3
+Subgoal 11.1.2
+Subgoal 11.1.2'
+Subgoal 11.1.1
+Subgoal 11.1.1'
+Subgoal 11.1.1.3
+Subgoal 11.1.1.2
+Subgoal 11.1.1.1
+Subgoal 10
+Subgoal 10'
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.2'
+Subgoal 9.1
+Subgoal 9.1'
+Subgoal 9.1.60
+Subgoal 9.1.59
+Subgoal 9.1.58
+Subgoal 9.1.57
+Subgoal 9.1.56
+Subgoal 9.1.55
+Subgoal 9.1.54
+Subgoal 9.1.53
+Subgoal 9.1.52
+Subgoal 9.1.51
+Subgoal 9.1.50
+Subgoal 9.1.49
+Subgoal 9.1.48
+Subgoal 9.1.47
+Subgoal 9.1.46
+Subgoal 9.1.45
+Subgoal 9.1.44
+Subgoal 9.1.43
+Subgoal 9.1.42
+Subgoal 9.1.41
+Subgoal 9.1.40
+Subgoal 9.1.39
+Subgoal 9.1.38
+Subgoal 9.1.37
+Subgoal 9.1.36
+Subgoal 9.1.35
+Subgoal 9.1.34
+Subgoal 9.1.33
+Subgoal 9.1.32
+Subgoal 9.1.31
+Subgoal 9.1.30
+Subgoal 9.1.29
+Subgoal 9.1.28
+Subgoal 9.1.27
+Subgoal 9.1.26
+Subgoal 9.1.25
+Subgoal 9.1.24
+Subgoal 9.1.23
+Subgoal 9.1.22
+Subgoal 9.1.21
+Subgoal 9.1.20
+Subgoal 9.1.19
+Subgoal 9.1.18
+Subgoal 9.1.17
+Subgoal 9.1.16
+Subgoal 9.1.15
+Subgoal 9.1.14
+Subgoal 9.1.13
+Subgoal 9.1.12
+Subgoal 9.1.11
+Subgoal 9.1.10
+Subgoal 9.1.9
+Subgoal 9.1.8
+Subgoal 9.1.7
+Subgoal 9.1.6
+Subgoal 9.1.5
+Subgoal 9.1.4
+Subgoal 9.1.3
+Subgoal 9.1.2
+Subgoal 9.1.1
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 7.2
+Subgoal 7.2'
+Subgoal 7.1
+Subgoal 7.1'
+Subgoal 7.1.60
+Subgoal 7.1.59
+Subgoal 7.1.58
+Subgoal 7.1.57
+Subgoal 7.1.56
+Subgoal 7.1.55
+Subgoal 7.1.54
+Subgoal 7.1.53
+Subgoal 7.1.52
+Subgoal 7.1.51
+Subgoal 7.1.50
+Subgoal 7.1.49
+Subgoal 7.1.48
+Subgoal 7.1.47
+Subgoal 7.1.46
+Subgoal 7.1.46.2
+Subgoal 7.1.46.1
+Subgoal 7.1.45
+Subgoal 7.1.45.2
+Subgoal 7.1.45.1
+Subgoal 7.1.44
+Subgoal 7.1.44.2
+Subgoal 7.1.44.1
+Subgoal 7.1.43
+Subgoal 7.1.43.2
+Subgoal 7.1.43.1
+Subgoal 7.1.42
+Subgoal 7.1.42.2
+Subgoal 7.1.42.1
+Subgoal 7.1.41
+Subgoal 7.1.41.2
+Subgoal 7.1.41.1
+Subgoal 7.1.40
+Subgoal 7.1.40.2
+Subgoal 7.1.40.1
+Subgoal 7.1.39
+Subgoal 7.1.39.2
+Subgoal 7.1.39.1
+Subgoal 7.1.38
+Subgoal 7.1.38.2
+Subgoal 7.1.38.1
+Subgoal 7.1.37
+Subgoal 7.1.37.2
+Subgoal 7.1.37.1
+Subgoal 7.1.36
+Subgoal 7.1.35
+Subgoal 7.1.34
+Subgoal 7.1.33
+Subgoal 7.1.32
+Subgoal 7.1.31
+Subgoal 7.1.30
+Subgoal 7.1.29
+Subgoal 7.1.28
+Subgoal 7.1.27
+Subgoal 7.1.26
+Subgoal 7.1.25
+Subgoal 7.1.24
+Subgoal 7.1.23
+Subgoal 7.1.22
+Subgoal 7.1.22.2
+Subgoal 7.1.22.1
+Subgoal 7.1.21
+Subgoal 7.1.21.2
+Subgoal 7.1.21.1
+Subgoal 7.1.20
+Subgoal 7.1.19
+Subgoal 7.1.18
+Subgoal 7.1.17
+Subgoal 7.1.16
+Subgoal 7.1.15
+Subgoal 7.1.14
+Subgoal 7.1.13
+Subgoal 7.1.12
+Subgoal 7.1.11
+Subgoal 7.1.10
+Subgoal 7.1.9
+Subgoal 7.1.8
+Subgoal 7.1.7
+Subgoal 7.1.6
+Subgoal 7.1.6.2
+Subgoal 7.1.6.1
+Subgoal 7.1.5
+Subgoal 7.1.5.2
+Subgoal 7.1.5.1
+Subgoal 7.1.4
+Subgoal 7.1.4.2
+Subgoal 7.1.4.1
+Subgoal 7.1.3
+Subgoal 7.1.3.2
+Subgoal 7.1.3.1
+Subgoal 7.1.2
+Subgoal 7.1.2.2
+Subgoal 7.1.2.1
+Subgoal 7.1.1
+Subgoal 7.1.1.2
+Subgoal 7.1.1.1
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.2'
+Subgoal 6.1
+Subgoal 5
+Subgoal 4
+Subgoal 4.3
+Subgoal 4.2
+Subgoal 4.2'
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.3
+Subgoal 3.3'
+Subgoal 3.2
+Subgoal 3.2'
+Subgoal 3.1
+Subgoal 3.1'
+Subgoal 3.1''
+Subgoal 2
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 1
+Subgoal 1.3
+Subgoal 1.3'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFTHM QAP-FAST-VALUE-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION HONS-GET)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QAP-DENOTE-ITEM)
+        (:DEFINITION QAP-DENOTE-PREMISES)
+        (:DEFINITION QAP-DENOTE-RULE)
+        (:DEFINITION QAP-DENOTE-RULES)
+        (:DEFINITION QAP-FAST-CHART-REF)
+        (:DEFINITION QAP-FAST-EVAL-ITEM)
+        (:DEFINITION QAP-FAST-EVAL-PREMISES)
+        (:DEFINITION QAP-FAST-EVAL-RULE)
+        (:DEFINITION QAP-FAST-EVAL-RULES)
+        (:DEFINITION QAP-FAST-RUN)
+        (:DEFINITION QAP-FAST-RUN-AUX)
+        (:DEFINITION QAP-FAST-VALUE)
+        (:DEFINITION QAP-ITEM-VALIDP)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-PREFIX-VALIDP)
+        (:DEFINITION QAP-PROGRAM-VALIDP)
+        (:DEFINITION QAP-RULE-VALIDP)
+        (:DEFINITION QAP-RULES-VALIDP)
+        (:DEFINITION QAP-TIMES)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QAP-ONE)
+        (:EXECUTABLE-COUNTERPART QAP-VALUEP)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE QAP-DENOTE-ITEM-WHEN-NOT-CONSP)
+        (:REWRITE QAP-PLUS-COMMUTATIVE)
+        (:REWRITE QAP-TIMES-COMMUTATIVE)
+        (:REWRITE QCX-ADD-ASSOCIATIVE)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-MUL-ASSOCIATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-ITEM)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-PREMISES)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-RULE)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-RULES)
+        (:TYPE-PRESCRIPTION QAP-FAST-EVAL-PREMISES)
+        (:TYPE-PRESCRIPTION QAP-FAST-EVAL-RULES)
+        (:TYPE-PRESCRIPTION QAP-PREFIX-VALIDP))
+Hint-events: ((:USE ADP-FAST-VALUE-CORRECT))
+Time:  14.15 seconds (prove: 14.11, print: 0.05, other: 0.00)
+Prover steps counted:  1549078
+QAP-FAST-VALUE-CORRECT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zam-qcx-adp-linear" ...)
+Rules: NIL
+Time:  16.65 seconds (prove: 15.39, print: 0.08, other: 1.18)
+Prover steps counted:  1833033
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 16.65 seconds realtime, 15.51 seconds runtime
+; (2,533,904,432 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 28324 Jun 29 00:35 zam-qcx-adp-linear.cert

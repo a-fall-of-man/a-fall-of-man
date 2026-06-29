@@ -1,0 +1,1004 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zfz-certificate-ledger-report" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zfz-certificate-ledger-report
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( DEFUN VLR-RECORDP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VLR-RECORDP
+
+Summary
+Form:  ( DEFUN VLR-LEDGERP ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VLR-LEDGERP
+
+Summary
+Form:  ( DEFUN VLR-ZERO-SUMMARY ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VLR-ZERO-SUMMARY
+
+Summary
+Form:  ( DEFUN VLR-COMBINE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VLR-COMBINE
+
+Summary
+Form:  ( DEFUN VLR-RECORD-SUMMARY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VLR-RECORD-SUMMARY
+
+Summary
+Form:  ( DEFUN VLR-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION VLR-COMBINE)
+        (:TYPE-PRESCRIPTION VLR-ZERO-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VLR-SUMMARY
+Subgoal 8
+Subgoal 7
+Subgoal 7.16
+Subgoal 7.15
+Subgoal 7.14
+Subgoal 7.13
+Subgoal 7.12
+Subgoal 7.11
+Subgoal 7.10
+Subgoal 7.9
+Subgoal 7.8
+Subgoal 7.7
+Subgoal 7.6
+Subgoal 7.5
+Subgoal 7.4
+Subgoal 7.3
+Subgoal 7.2
+Subgoal 7.1
+Subgoal 6
+Subgoal 6.256
+Subgoal 6.255
+Subgoal 6.254
+Subgoal 6.253
+Subgoal 6.252
+Subgoal 6.251
+Subgoal 6.250
+Subgoal 6.249
+Subgoal 6.248
+Subgoal 6.247
+Subgoal 6.246
+Subgoal 6.245
+Subgoal 6.244
+Subgoal 6.243
+Subgoal 6.242
+Subgoal 6.241
+Subgoal 6.240
+Subgoal 6.239
+Subgoal 6.238
+Subgoal 6.237
+Subgoal 6.236
+Subgoal 6.235
+Subgoal 6.234
+Subgoal 6.233
+Subgoal 6.232
+Subgoal 6.231
+Subgoal 6.230
+Subgoal 6.229
+Subgoal 6.228
+Subgoal 6.227
+Subgoal 6.226
+Subgoal 6.225
+Subgoal 6.224
+Subgoal 6.223
+Subgoal 6.222
+Subgoal 6.221
+Subgoal 6.220
+Subgoal 6.219
+Subgoal 6.218
+Subgoal 6.217
+Subgoal 6.216
+Subgoal 6.215
+Subgoal 6.214
+Subgoal 6.213
+Subgoal 6.212
+Subgoal 6.211
+Subgoal 6.210
+Subgoal 6.209
+Subgoal 6.208
+Subgoal 6.207
+Subgoal 6.206
+Subgoal 6.205
+Subgoal 6.204
+Subgoal 6.203
+Subgoal 6.202
+Subgoal 6.201
+Subgoal 6.200
+Subgoal 6.199
+Subgoal 6.198
+Subgoal 6.197
+Subgoal 6.196
+Subgoal 6.195
+Subgoal 6.194
+Subgoal 6.193
+Subgoal 6.192
+Subgoal 6.191
+Subgoal 6.190
+Subgoal 6.189
+Subgoal 6.188
+Subgoal 6.187
+Subgoal 6.186
+Subgoal 6.185
+Subgoal 6.184
+Subgoal 6.183
+Subgoal 6.182
+Subgoal 6.181
+Subgoal 6.180
+Subgoal 6.179
+Subgoal 6.178
+Subgoal 6.177
+Subgoal 6.176
+Subgoal 6.175
+Subgoal 6.174
+Subgoal 6.173
+Subgoal 6.172
+Subgoal 6.171
+Subgoal 6.170
+Subgoal 6.169
+Subgoal 6.168
+Subgoal 6.167
+Subgoal 6.166
+Subgoal 6.165
+Subgoal 6.164
+Subgoal 6.163
+Subgoal 6.162
+Subgoal 6.161
+Subgoal 6.160
+Subgoal 6.159
+Subgoal 6.158
+Subgoal 6.157
+Subgoal 6.156
+Subgoal 6.155
+Subgoal 6.154
+Subgoal 6.153
+Subgoal 6.152
+Subgoal 6.151
+Subgoal 6.150
+Subgoal 6.149
+Subgoal 6.148
+Subgoal 6.147
+Subgoal 6.146
+Subgoal 6.145
+Subgoal 6.144
+Subgoal 6.143
+Subgoal 6.142
+Subgoal 6.141
+Subgoal 6.140
+Subgoal 6.139
+Subgoal 6.138
+Subgoal 6.137
+Subgoal 6.136
+Subgoal 6.135
+Subgoal 6.134
+Subgoal 6.133
+Subgoal 6.132
+Subgoal 6.131
+Subgoal 6.130
+Subgoal 6.129
+Subgoal 6.128
+Subgoal 6.127
+Subgoal 6.126
+Subgoal 6.125
+Subgoal 6.124
+Subgoal 6.123
+Subgoal 6.122
+Subgoal 6.121
+Subgoal 6.120
+Subgoal 6.119
+Subgoal 6.118
+Subgoal 6.117
+Subgoal 6.116
+Subgoal 6.115
+Subgoal 6.114
+Subgoal 6.113
+Subgoal 6.112
+Subgoal 6.111
+Subgoal 6.110
+Subgoal 6.109
+Subgoal 6.108
+Subgoal 6.107
+Subgoal 6.106
+Subgoal 6.105
+Subgoal 6.104
+Subgoal 6.103
+Subgoal 6.102
+Subgoal 6.101
+Subgoal 6.100
+Subgoal 6.99
+Subgoal 6.98
+Subgoal 6.97
+Subgoal 6.96
+Subgoal 6.95
+Subgoal 6.94
+Subgoal 6.93
+Subgoal 6.92
+Subgoal 6.91
+Subgoal 6.90
+Subgoal 6.89
+Subgoal 6.88
+Subgoal 6.87
+Subgoal 6.86
+Subgoal 6.85
+Subgoal 6.84
+Subgoal 6.83
+Subgoal 6.82
+Subgoal 6.81
+Subgoal 6.80
+Subgoal 6.79
+Subgoal 6.78
+Subgoal 6.77
+Subgoal 6.76
+Subgoal 6.75
+Subgoal 6.74
+Subgoal 6.73
+Subgoal 6.72
+Subgoal 6.71
+Subgoal 6.70
+Subgoal 6.69
+Subgoal 6.68
+Subgoal 6.67
+Subgoal 6.66
+Subgoal 6.65
+Subgoal 6.64
+Subgoal 6.63
+Subgoal 6.62
+Subgoal 6.61
+Subgoal 6.60
+Subgoal 6.59
+Subgoal 6.58
+Subgoal 6.57
+Subgoal 6.56
+Subgoal 6.55
+Subgoal 6.54
+Subgoal 6.53
+Subgoal 6.52
+Subgoal 6.51
+Subgoal 6.50
+Subgoal 6.49
+Subgoal 6.48
+Subgoal 6.47
+Subgoal 6.46
+Subgoal 6.45
+Subgoal 6.44
+Subgoal 6.43
+Subgoal 6.42
+Subgoal 6.41
+Subgoal 6.40
+Subgoal 6.39
+Subgoal 6.38
+Subgoal 6.37
+Subgoal 6.36
+Subgoal 6.35
+Subgoal 6.34
+Subgoal 6.33
+Subgoal 6.32
+Subgoal 6.31
+Subgoal 6.30
+Subgoal 6.29
+Subgoal 6.28
+Subgoal 6.27
+Subgoal 6.26
+Subgoal 6.25
+Subgoal 6.24
+Subgoal 6.23
+Subgoal 6.22
+Subgoal 6.21
+Subgoal 6.20
+Subgoal 6.19
+Subgoal 6.18
+Subgoal 6.17
+Subgoal 6.16
+Subgoal 6.15
+Subgoal 6.14
+Subgoal 6.13
+Subgoal 6.12
+Subgoal 6.11
+Subgoal 6.10
+Subgoal 6.9
+Subgoal 6.8
+Subgoal 6.7
+Subgoal 6.6
+Subgoal 6.5
+Subgoal 6.4
+Subgoal 6.3
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5'
+Subgoal 5.16
+Subgoal 5.15
+Subgoal 5.14
+Subgoal 5.13
+Subgoal 5.12
+Subgoal 5.11
+Subgoal 5.10
+Subgoal 5.9
+Subgoal 5.8
+Subgoal 5.7
+Subgoal 5.6
+Subgoal 5.5
+Subgoal 5.4
+Subgoal 5.3
+Subgoal 5.2
+Subgoal 5.1
+Subgoal 4
+Subgoal 4.16
+Subgoal 4.15
+Subgoal 4.14
+Subgoal 4.13
+Subgoal 4.12
+Subgoal 4.11
+Subgoal 4.10
+Subgoal 4.9
+Subgoal 4.8
+Subgoal 4.7
+Subgoal 4.6
+Subgoal 4.5
+Subgoal 4.4
+Subgoal 4.3
+Subgoal 4.2
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.16
+Subgoal 3.15
+Subgoal 3.14
+Subgoal 3.13
+Subgoal 3.12
+Subgoal 3.11
+Subgoal 3.10
+Subgoal 3.9
+Subgoal 3.8
+Subgoal 3.7
+Subgoal 3.6
+Subgoal 3.5
+Subgoal 3.4
+Subgoal 3.3
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 2'
+Subgoal 2.16
+Subgoal 2.15
+Subgoal 2.14
+Subgoal 2.13
+Subgoal 2.12
+Subgoal 2.11
+Subgoal 2.10
+Subgoal 2.9
+Subgoal 2.8
+Subgoal 2.7
+Subgoal 2.6
+Subgoal 2.5
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM VLR-COMBINE-ASSOCIATIVE ...)
+Rules: ((:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION VLR-COMBINE)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FIX)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE COMMUTATIVITY-2-OF-+)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE DEFAULT-+-1)
+        (:REWRITE DEFAULT-+-2)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE NTH-ADD1)
+        (:REWRITE UNICITY-OF-0))
+Time:  0.43 seconds (prove: 0.41, print: 0.02, other: 0.00)
+Prover steps counted:  171087
+VLR-COMBINE-ASSOCIATIVE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VLR-SUMMARY-SHAPE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION VLR-COMBINE)
+        (:DEFINITION VLR-RECORD-SUMMARY)
+        (:DEFINITION VLR-SUMMARY)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART VLR-ZERO-SUMMARY)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VLR-SUMMARY)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE NTH-ADD1)
+        (:TYPE-PRESCRIPTION VLR-SUMMARY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1619
+VLR-SUMMARY-SHAPE
+Goal'
+Goal''
+Subgoal 16
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.116
+Subgoal *1/2.116.6
+Subgoal *1/2.116.6'
+Subgoal *1/2.116.5
+Subgoal *1/2.116.5'
+Subgoal *1/2.116.4
+Subgoal *1/2.116.4'
+Subgoal *1/2.116.3
+Subgoal *1/2.116.3'
+Subgoal *1/2.116.2
+Subgoal *1/2.116.2'
+Subgoal *1/2.116.1
+Subgoal *1/2.116.1'
+Subgoal *1/2.115
+Subgoal *1/2.114
+Subgoal *1/2.114.12
+Subgoal *1/2.114.12'
+Subgoal *1/2.114.11
+Subgoal *1/2.114.10
+Subgoal *1/2.114.10'
+Subgoal *1/2.114.9
+Subgoal *1/2.114.8
+Subgoal *1/2.114.8'
+Subgoal *1/2.114.7
+Subgoal *1/2.114.7'
+Subgoal *1/2.114.6
+Subgoal *1/2.114.6'
+Subgoal *1/2.114.5
+Subgoal *1/2.114.5'
+Subgoal *1/2.114.4
+Subgoal *1/2.114.4'
+Subgoal *1/2.114.3
+Subgoal *1/2.114.2
+Subgoal *1/2.114.2'
+Subgoal *1/2.114.1
+Subgoal *1/2.113
+Subgoal *1/2.112
+Subgoal *1/2.112.12
+Subgoal *1/2.112.12'
+Subgoal *1/2.112.11
+Subgoal *1/2.112.10
+Subgoal *1/2.112.10'
+Subgoal *1/2.112.9
+Subgoal *1/2.112.8
+Subgoal *1/2.112.8'
+Subgoal *1/2.112.7
+Subgoal *1/2.112.7'
+Subgoal *1/2.112.6
+Subgoal *1/2.112.6'
+Subgoal *1/2.112.5
+Subgoal *1/2.112.5'
+Subgoal *1/2.112.4
+Subgoal *1/2.112.4'
+Subgoal *1/2.112.3
+Subgoal *1/2.112.2
+Subgoal *1/2.112.2'
+Subgoal *1/2.112.1
+Subgoal *1/2.111
+Subgoal *1/2.110
+Subgoal *1/2.110.24
+Subgoal *1/2.110.24'
+Subgoal *1/2.110.23
+Subgoal *1/2.110.22
+Subgoal *1/2.110.21
+Subgoal *1/2.110.20
+Subgoal *1/2.110.20'
+Subgoal *1/2.110.19
+Subgoal *1/2.110.18
+Subgoal *1/2.110.17
+Subgoal *1/2.110.16
+Subgoal *1/2.110.16'
+Subgoal *1/2.110.15
+Subgoal *1/2.110.15'
+Subgoal *1/2.110.14
+Subgoal *1/2.110.14'
+Subgoal *1/2.110.13
+Subgoal *1/2.110.13'
+Subgoal *1/2.110.12
+Subgoal *1/2.110.12'
+Subgoal *1/2.110.11
+Subgoal *1/2.110.11'
+Subgoal *1/2.110.10
+Subgoal *1/2.110.10'
+Subgoal *1/2.110.9
+Subgoal *1/2.110.9'
+Subgoal *1/2.110.8
+Subgoal *1/2.110.8'
+Subgoal *1/2.110.7
+Subgoal *1/2.110.6
+Subgoal *1/2.110.5
+Subgoal *1/2.110.4
+Subgoal *1/2.110.4'
+Subgoal *1/2.110.3
+Subgoal *1/2.110.2
+Subgoal *1/2.110.1
+Subgoal *1/2.109
+Subgoal *1/2.108
+Subgoal *1/2.108.12
+Subgoal *1/2.108.12'
+Subgoal *1/2.108.11
+Subgoal *1/2.108.10
+Subgoal *1/2.108.10'
+Subgoal *1/2.108.9
+Subgoal *1/2.108.8
+Subgoal *1/2.108.8'
+Subgoal *1/2.108.7
+Subgoal *1/2.108.7'
+Subgoal *1/2.108.6
+Subgoal *1/2.108.6'
+Subgoal *1/2.108.5
+Subgoal *1/2.108.5'
+Subgoal *1/2.108.4
+Subgoal *1/2.108.4'
+Subgoal *1/2.108.3
+Subgoal *1/2.108.2
+Subgoal *1/2.108.2'
+Subgoal *1/2.108.1
+Subgoal *1/2.107
+Subgoal *1/2.106
+Subgoal *1/2.106.24
+Subgoal *1/2.106.24'
+Subgoal *1/2.106.23
+Subgoal *1/2.106.22
+Subgoal *1/2.106.21
+Subgoal *1/2.106.20
+Subgoal *1/2.106.20'
+Subgoal *1/2.106.19
+Subgoal *1/2.106.18
+Subgoal *1/2.106.17
+Subgoal *1/2.106.16
+Subgoal *1/2.106.16'
+Subgoal *1/2.106.15
+Subgoal *1/2.106.15'
+Subgoal *1/2.106.14
+Subgoal *1/2.106.14'
+Subgoal *1/2.106.13
+Subgoal *1/2.106.13'
+Subgoal *1/2.106.12
+Subgoal *1/2.106.12'
+Subgoal *1/2.106.11
+Subgoal *1/2.106.11'
+Subgoal *1/2.106.10
+Subgoal *1/2.106.10'
+Subgoal *1/2.106.9
+Subgoal *1/2.106.9'
+Subgoal *1/2.106.8
+Subgoal *1/2.106.8'
+Subgoal *1/2.106.7
+Subgoal *1/2.106.6
+Subgoal *1/2.106.5
+Subgoal *1/2.106.4
+Subgoal *1/2.106.4'
+Subgoal *1/2.106.3
+Subgoal *1/2.106.2
+Subgoal *1/2.106.1
+Subgoal *1/2.105
+Subgoal *1/2.104
+Subgoal *1/2.104'
+Subgoal *1/2.103
+Subgoal *1/2.102
+Subgoal *1/2.101
+Subgoal *1/2.100
+Subgoal *1/2.100'
+Subgoal *1/2.99
+Subgoal *1/2.98
+Subgoal *1/2.97
+Subgoal *1/2.96
+Subgoal *1/2.96'
+Subgoal *1/2.95
+Subgoal *1/2.95'
+Subgoal *1/2.94
+Subgoal *1/2.94'
+Subgoal *1/2.93
+Subgoal *1/2.93'
+Subgoal *1/2.92
+Subgoal *1/2.92'
+Subgoal *1/2.91
+Subgoal *1/2.91'
+Subgoal *1/2.90
+Subgoal *1/2.90'
+Subgoal *1/2.89
+Subgoal *1/2.89'
+Subgoal *1/2.88
+Subgoal *1/2.88'
+Subgoal *1/2.87
+Subgoal *1/2.86
+Subgoal *1/2.85
+Subgoal *1/2.84
+Subgoal *1/2.84'
+Subgoal *1/2.83
+Subgoal *1/2.82
+Subgoal *1/2.81
+Subgoal *1/2.80
+Subgoal *1/2.80'
+Subgoal *1/2.79
+Subgoal *1/2.78
+Subgoal *1/2.77
+Subgoal *1/2.76
+Subgoal *1/2.76'
+Subgoal *1/2.75
+Subgoal *1/2.74
+Subgoal *1/2.73
+Subgoal *1/2.72
+Subgoal *1/2.71
+Subgoal *1/2.70
+Subgoal *1/2.69
+Subgoal *1/2.68
+Subgoal *1/2.68'
+Subgoal *1/2.67
+Subgoal *1/2.67'
+Subgoal *1/2.66
+Subgoal *1/2.66'
+Subgoal *1/2.65
+Subgoal *1/2.65'
+Subgoal *1/2.64
+Subgoal *1/2.63
+Subgoal *1/2.62
+Subgoal *1/2.61
+Subgoal *1/2.60
+Subgoal *1/2.60'
+Subgoal *1/2.59
+Subgoal *1/2.59'
+Subgoal *1/2.58
+Subgoal *1/2.58'
+Subgoal *1/2.57
+Subgoal *1/2.57'
+Subgoal *1/2.56
+Subgoal *1/2.56'
+Subgoal *1/2.55
+Subgoal *1/2.54
+Subgoal *1/2.53
+Subgoal *1/2.52
+Subgoal *1/2.52'
+Subgoal *1/2.51
+Subgoal *1/2.50
+Subgoal *1/2.49
+Subgoal *1/2.48
+Subgoal *1/2.48'
+Subgoal *1/2.47
+Subgoal *1/2.46
+Subgoal *1/2.45
+Subgoal *1/2.44
+Subgoal *1/2.43
+Subgoal *1/2.42
+Subgoal *1/2.41
+Subgoal *1/2.40
+Subgoal *1/2.40'
+Subgoal *1/2.39
+Subgoal *1/2.38
+Subgoal *1/2.37
+Subgoal *1/2.36
+Subgoal *1/2.35
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.32'
+Subgoal *1/2.31
+Subgoal *1/2.31'
+Subgoal *1/2.30
+Subgoal *1/2.30'
+Subgoal *1/2.29
+Subgoal *1/2.29'
+Subgoal *1/2.28
+Subgoal *1/2.28'
+Subgoal *1/2.27
+Subgoal *1/2.27'
+Subgoal *1/2.26
+Subgoal *1/2.26'
+Subgoal *1/2.25
+Subgoal *1/2.25'
+Subgoal *1/2.24
+Subgoal *1/2.24'
+Subgoal *1/2.23
+Subgoal *1/2.23'
+Subgoal *1/2.22
+Subgoal *1/2.22'
+Subgoal *1/2.21
+Subgoal *1/2.21'
+Subgoal *1/2.20
+Subgoal *1/2.20'
+Subgoal *1/2.19
+Subgoal *1/2.19'
+Subgoal *1/2.18
+Subgoal *1/2.18'
+Subgoal *1/2.17
+Subgoal *1/2.17'
+Subgoal *1/2.16
+Subgoal *1/2.16'
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VLR-COMBINE-ZERO-SUMMARY-LEFT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:DEFINITION VLR-COMBINE)
+        (:DEFINITION VLR-RECORD-SUMMARY)
+        (:DEFINITION VLR-SUMMARY)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART VLR-COMBINE)
+        (:EXECUTABLE-COUNTERPART VLR-ZERO-SUMMARY)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VLR-SUMMARY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE DEFAULT-+-2)
+        (:REWRITE FOLD-CONSTS-IN-+)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE NTH-ADD1)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION VLR-SUMMARY))
+Time:  0.71 seconds (prove: 0.70, print: 0.01, other: 0.00)
+Prover steps counted:  327509
+VLR-COMBINE-ZERO-SUMMARY-LEFT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM VLR-SUMMARY-OF-APPEND ...)
+Rules: ((:DEFINITION BINARY-APPEND)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION VLR-RECORD-SUMMARY)
+        (:DEFINITION VLR-SUMMARY)
+        (:EXECUTABLE-COUNTERPART VLR-ZERO-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VLR-COMBINE-ASSOCIATIVE))
+Hint-events: ((:USE VLR-COMBINE-ZERO-SUMMARY-LEFT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1184
+VLR-SUMMARY-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VLR-TOTAL-IS-PASS-PLUS-FAIL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION LEN)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:DEFINITION TRUE-LISTP)
+        (:DEFINITION VLR-COMBINE)
+        (:DEFINITION VLR-LEDGERP)
+        (:DEFINITION VLR-RECORD-SUMMARY)
+        (:DEFINITION VLR-RECORDP)
+        (:DEFINITION VLR-SUMMARY)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART VLR-ZERO-SUMMARY)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VLR-SUMMARY)
+        (:REWRITE ASSOCIATIVITY-OF-+)
+        (:REWRITE COMMUTATIVITY-2-OF-+)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE DEFAULT-+-1)
+        (:REWRITE DEFAULT-+-2)
+        (:REWRITE FOLD-CONSTS-IN-+)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE NTH-ADD1)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION VLR-SUMMARY))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  6288
+VLR-TOTAL-IS-PASS-PLUS-FAIL
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VLR-SUMMARY-COUNTS-RECORDS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION LEN)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION VLR-COMBINE)
+        (:DEFINITION VLR-LEDGERP)
+        (:DEFINITION VLR-RECORD-SUMMARY)
+        (:DEFINITION VLR-RECORDP)
+        (:DEFINITION VLR-SUMMARY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART VLR-ZERO-SUMMARY)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VLR-SUMMARY)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE NTH-ADD1)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION VLR-SUMMARY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1183
+VLR-SUMMARY-COUNTS-RECORDS
+
+Summary
+Form:  ( DEFUN VLR-WRITE-ROWS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VLR-WRITE-ROWS
+
+Summary
+Form:  ( DEFUN VLR-WRITE-REPORT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VLR-WRITE-REPORT
+
+Summary
+Form:  ( DEFCONST *VLR-DEMO* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VLR-DEMO*
+:PASSED
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zfz-certificate-ledger-report" ...)
+Rules: NIL
+Time:  1.27 seconds (prove: 1.15, print: 0.03, other: 0.09)
+Prover steps counted:  508870
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.27 seconds realtime, 1.17 seconds runtime
+; (148,264,384 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 5062 Jun 29 00:40 zfz-certificate-ledger-report.cert

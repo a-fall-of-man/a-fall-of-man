@@ -1,0 +1,1028 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbp-rational-lagrange-reconstruction.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbq-universal-toom-cook-certificate" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbq-universal-toom-cook-certificate
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.04 seconds (prove: 0.00, print: 0.00, other: 0.04)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbp-rational-lagrange-reconstruction" ...)
+Rules: NIL
+Time:  1.29 seconds (prove: 0.00, print: 0.00, other: 1.29)
+"/mnt/data/new-release/cert-work/zbp-rational-lagrange-reconstruction.lisp"
+
+The event ( INCLUDE-BOOK "arithmetic-5/top" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-NTH-SCALE-INDUCT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  566
+TC-NTH-SCALE-INDUCT
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-NIL-TOTAL ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION TC-NTH0)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:INDUCTION TC-NTH0)
+        (:REWRITE TC-NTH0-OF-NIL))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  185
+TC-NTH0-OF-NIL-TOTAL
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-POLY-SCALE-WHEN-ENDP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION TC-POLY-SCALE)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  37
+TC-POLY-SCALE-WHEN-ENDP
+
+Summary
+Form:  ( DEFTHM TC-POLY-SCALE-OPEN ...)
+Rules: ((:DEFINITION TC-POLY-SCALE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  70
+TC-POLY-SCALE-OPEN
+
+Summary
+Form:  ( DEFTHM TC-NTH0-WHEN-ZP ...)
+Rules: ((:DEFINITION TC-NTH0)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  58
+TC-NTH0-WHEN-ZP
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OPEN-POSITIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-NTH0)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  58
+TC-NTH0-OPEN-POSITIVE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-WHEN-NOT-CONSP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:INDUCTION TC-NTH0)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE TC-NTH0-OPEN-POSITIVE)
+        (:REWRITE TC-NTH0-WHEN-ZP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  262
+TC-NTH0-WHEN-NOT-CONSP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.4
+Subgoal *1/1.3
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-TC-POLY-SCALE-TOTAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-NTH-SCALE-INDUCT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE TC-NTH0-OPEN-POSITIVE)
+        (:REWRITE TC-NTH0-WHEN-NOT-CONSP)
+        (:REWRITE TC-NTH0-WHEN-ZP)
+        (:REWRITE TC-POLY-SCALE-OPEN)
+        (:REWRITE TC-POLY-SCALE-WHEN-ENDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  658
+TC-NTH0-OF-TC-POLY-SCALE-TOTAL
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-NTH-ADD-INDUCT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1031
+TC-NTH-ADD-INDUCT
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-POLY-ADD-WHEN-LEFT-ENDP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION TC-POLY-ADD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  37
+TC-POLY-ADD-WHEN-LEFT-ENDP
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-POLY-ADD-WHEN-RIGHT-ENDP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION TC-POLY-ADD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  56
+TC-POLY-ADD-WHEN-RIGHT-ENDP
+
+Summary
+Form:  ( DEFTHM TC-POLY-ADD-OPEN ...)
+Rules: ((:DEFINITION TC-POLY-ADD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  97
+TC-POLY-ADD-OPEN
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-TC-NTH0-BASIC ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-NTH-SCALE-INDUCT)
+        (:REWRITE TC-NTH0-OPEN-POSITIVE)
+        (:REWRITE TC-NTH0-WHEN-NOT-CONSP)
+        (:REWRITE TC-NTH0-WHEN-ZP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  365
+TC-RATIONALP-OF-TC-NTH0-BASIC
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.7
+Subgoal *1/1.6
+Subgoal *1/1.5
+Subgoal *1/1.5'
+Subgoal *1/1.4
+Subgoal *1/1.3
+Subgoal *1/1.3'
+Subgoal *1/1.2
+Subgoal *1/1.1
+[1]Subgoal 6
+[1]Subgoal 5
+[1]Subgoal 4
+[1]Subgoal 3
+[1]Subgoal 3'
+[1]Subgoal 2
+[1]Subgoal 2'
+[1]Subgoal 1
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-TC-POLY-ADD-TOTAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-NTH-ADD-INDUCT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RATIONALP-IMPLIES-ACL2-NUMBERP)
+        (:REWRITE TC-NTH0-OF-NIL-TOTAL)
+        (:REWRITE TC-NTH0-OPEN-POSITIVE)
+        (:REWRITE TC-NTH0-WHEN-NOT-CONSP)
+        (:REWRITE TC-NTH0-WHEN-ZP)
+        (:REWRITE TC-POLY-ADD-OPEN)
+        (:REWRITE TC-POLY-ADD-WHEN-LEFT-ENDP)
+        (:REWRITE TC-POLY-ADD-WHEN-RIGHT-ENDP)
+        (:REWRITE TC-RATIONALP-OF-TC-NTH0-BASIC))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  3521
+TC-NTH0-OF-TC-POLY-ADD-TOTAL
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-LAGRANGE-COEFF-SUM-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  548
+TC-LAGRANGE-COEFF-SUM-AUX
+
+Summary
+Form:  ( DEFTHM TC-LAGRANGE-COEFF-SUM-AUX-WHEN-ZP ...)
+Rules: ((:DEFINITION TC-LAGRANGE-COEFF-SUM-AUX)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  47
+TC-LAGRANGE-COEFF-SUM-AUX-WHEN-ZP
+
+Summary
+Form:  ( DEFTHM TC-LAGRANGE-COEFF-SUM-AUX-OPEN ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-LAGRANGE-COEFF-SUM-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  135
+TC-LAGRANGE-COEFF-SUM-AUX-OPEN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-LAGRANGE-RECONSTRUCT-STEP ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE TC-CURRENT-POINT-BELOW-BOUND)
+        (:REWRITE TC-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE TC-NATP-OF-ONE-PLUS)
+        (:REWRITE TC-RATIONALP-WHEN-NATP)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-BOUND))
+Hint-events: ((:USE RATIONAL-LISTP-OF-TC-LAGRANGE-RECONSTRUCT-AUX)
+              (:USE RATIONAL-LISTP-OF-TC-LAGRANGE-ROW)
+              (:USE RATIONAL-LISTP-OF-TC-POLY-SCALE)
+              (:USE RATIONALP-OF-TC-POLY-EVAL)
+              (:USE TC-NTH0-OF-TC-POLY-ADD-TOTAL)
+              (:USE TC-NTH0-OF-TC-POLY-SCALE-TOTAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1109
+TC-NTH0-OF-LAGRANGE-RECONSTRUCT-STEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-LAGRANGE-RECONSTRUCT-AUX ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-LAGRANGE-RECONSTRUCT-AUX)
+        (:REWRITE TC-LAGRANGE-COEFF-SUM-AUX-OPEN)
+        (:REWRITE TC-LAGRANGE-COEFF-SUM-AUX-WHEN-ZP)
+        (:REWRITE TC-LAGRANGE-RECONSTRUCT-AUX-OPEN)
+        (:REWRITE TC-LAGRANGE-RECONSTRUCT-AUX-WHEN-ZP)
+        (:REWRITE TC-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE TC-NATP-OF-ONE-PLUS)
+        (:REWRITE TC-NFIX-WHEN-NATP)
+        (:REWRITE TC-NTH0-OF-LAGRANGE-RECONSTRUCT-STEP)
+        (:REWRITE TC-NTH0-OF-NIL-TOTAL)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-BOUND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  999
+TC-NTH0-OF-LAGRANGE-RECONSTRUCT-AUX
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-ZERO-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  548
+TC-ZERO-COEFFS
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-MONOMIAL-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP)
+        (:TYPE-PRESCRIPTION TC-ZERO-COEFFS))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  1902
+TC-MONOMIAL-COEFFS
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM LEN-OF-TC-ZERO-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION TC-ZERO-COEFFS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-ZERO-COEFFS)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE TC-NFIX-WHEN-NATP)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-END))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  2400
+LEN-OF-TC-ZERO-COEFFS
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-TC-ZERO-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION TC-ZERO-COEFFS)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-ZERO-COEFFS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION TC-ZERO-COEFFS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RATIONAL-LISTP-OF-TC-ZERO-COEFFS
+
+Summary
+Form:  ( DEFTHM TC-ZERO-COEFFS-WHEN-ZP ...)
+Rules: ((:DEFINITION TC-ZERO-COEFFS)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  35
+TC-ZERO-COEFFS-WHEN-ZP
+
+Summary
+Form:  ( DEFTHM TC-ZERO-COEFFS-OPEN ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-ZERO-COEFFS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  55
+TC-ZERO-COEFFS-OPEN
+
+Summary
+Form:  ( DEFTHM TC-POLY-EVAL-OF-CONS-BASIC ...)
+Rules: ((:DEFINITION TC-POLY-EVAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  40
+TC-POLY-EVAL-OF-CONS-BASIC
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM TC-POLY-EVAL-OF-TC-ZERO-COEFFS ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-ZERO-COEFFS)
+        (:REWRITE TC-POLY-EVAL-OF-CONS-BASIC)
+        (:REWRITE TC-POLY-EVAL-OF-NIL)
+        (:REWRITE TC-ZERO-COEFFS-OPEN)
+        (:REWRITE TC-ZERO-COEFFS-WHEN-ZP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  81
+TC-POLY-EVAL-OF-TC-ZERO-COEFFS
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM LEN-OF-TC-MONOMIAL-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION TC-MONOMIAL-COEFFS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-MONOMIAL-COEFFS)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-TC-ZERO-COEFFS)
+        (:REWRITE TC-NFIX-WHEN-NATP)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-END))
+Time:  2.98 seconds (prove: 2.97, print: 0.00, other: 0.00)
+Prover steps counted:  82865
+LEN-OF-TC-MONOMIAL-COEFFS
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-TC-MONOMIAL-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION TC-MONOMIAL-COEFFS)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-MONOMIAL-COEFFS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RATIONAL-LISTP-OF-TC-ZERO-COEFFS)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION TC-MONOMIAL-COEFFS)
+        (:TYPE-PRESCRIPTION TC-ZERO-COEFFS))
+Time:  0.13 seconds (prove: 0.13, print: 0.00, other: 0.00)
+Prover steps counted:  6392
+RATIONAL-LISTP-OF-TC-MONOMIAL-COEFFS
+
+Summary
+Form:  ( DEFTHM TC-MONOMIAL-COEFFS-WHEN-COUNT-ZP ...)
+Rules: ((:DEFINITION TC-MONOMIAL-COEFFS)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  38
+TC-MONOMIAL-COEFFS-WHEN-COUNT-ZP
+
+Summary
+Form:  ( DEFTHM TC-MONOMIAL-COEFFS-WHEN-DEGREE-ZP ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-MONOMIAL-COEFFS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  77
+TC-MONOMIAL-COEFFS-WHEN-DEGREE-ZP
+
+Summary
+Form:  ( DEFTHM TC-MONOMIAL-COEFFS-OPEN-POSITIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-MONOMIAL-COEFFS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  89
+TC-MONOMIAL-COEFFS-OPEN-POSITIVE
+
+Summary
+Form:  ( DEFTHM TC-PREDECESSORS-PRESERVE-STRICT-ORDER ...)
+Rules: ((:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  53
+TC-PREDECESSORS-PRESERVE-STRICT-ORDER
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-EXPT-OPEN-POSITIVE-NATURAL ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZIP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION EXPT)
+        (:DEFINITION FIX)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (expt x n))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE DEFAULT-EXPT-1)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE TC-CURRENT-POINT-BELOW-BOUND)
+        (:REWRITE TC-NATP-IS-AT-LEAST-ZERO)
+        (:REWRITE TC-ONE-LESS-OF-ONE-PLUS)
+        (:REWRITE ZIP-OPEN))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  674
+TC-EXPT-OPEN-POSITIVE-NATURAL
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-NATURAL-LESS-THAN-ZP-IMPOSSIBLE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE TC-ZP-NATURAL-IS-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-NATURAL-LESS-THAN-ZP-IMPOSSIBLE
+
+Summary
+Form:  ( DEFTHM TC-ONE-PLUS-TIMES-ZERO ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-ONE-PLUS-TIMES-ZERO
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM TC-EXPT-OF-ZP-NATURAL ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IMPLIES)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:REWRITE |(expt x 0)|))
+Hint-events: ((:USE TC-ZP-NATURAL-IS-ZERO))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  3090
+TC-EXPT-OF-ZP-NATURAL
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-POLY-EVAL-OF-TC-MONOMIAL-COEFFS ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-MONOMIAL-COEFFS)
+        (:REWRITE TC-EXPT-OF-ZP-NATURAL)
+        (:REWRITE TC-EXPT-OPEN-POSITIVE-NATURAL)
+        (:REWRITE TC-MONOMIAL-COEFFS-OPEN-POSITIVE)
+        (:REWRITE TC-MONOMIAL-COEFFS-WHEN-DEGREE-ZP)
+        (:REWRITE TC-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE TC-NATURAL-LESS-THAN-ZP-IMPOSSIBLE)
+        (:REWRITE TC-ONE-PLUS-TIMES-ZERO)
+        (:REWRITE TC-POLY-EVAL-OF-CONS-BASIC)
+        (:REWRITE TC-POLY-EVAL-OF-TC-ZERO-COEFFS)
+        (:REWRITE TC-PREDECESSORS-PRESERVE-STRICT-ORDER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  720
+TC-POLY-EVAL-OF-TC-MONOMIAL-COEFFS
+
+Summary
+Form:  ( DEFUN TC-ZERO-LISTP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-ZERO-LISTP
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM TC-ZERO-LISTP-OF-TC-ZERO-COEFFS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION TC-ZERO-LISTP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-ZERO-COEFFS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE TC-ZERO-COEFFS-OPEN)
+        (:TYPE-PRESCRIPTION TC-ZERO-COEFFS)
+        (:TYPE-PRESCRIPTION TC-ZERO-LISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  124
+TC-ZERO-LISTP-OF-TC-ZERO-COEFFS
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-ZERO-LISTP-WHEN-ENDP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION TC-ZERO-LISTP)
+        (:TYPE-PRESCRIPTION TC-ZERO-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  28
+TC-ZERO-LISTP-WHEN-ENDP
+
+Summary
+Form:  ( DEFTHM TC-ZERO-LISTP-OPEN ...)
+Rules: ((:DEFINITION TC-ZERO-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  67
+TC-ZERO-LISTP-OPEN
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM TC-ZERO-LISTP-OF-CDR ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE TC-ZERO-LISTP-OPEN)
+        (:REWRITE TC-ZERO-LISTP-WHEN-ENDP)
+        (:TYPE-PRESCRIPTION TC-ZERO-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  105
+TC-ZERO-LISTP-OF-CDR
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-TC-ZERO-LISTP ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:INDUCTION TC-NTH0)
+        (:REWRITE TC-NTH0-OPEN-POSITIVE)
+        (:REWRITE TC-NTH0-WHEN-NOT-CONSP)
+        (:REWRITE TC-NTH0-WHEN-ZP)
+        (:REWRITE TC-ZERO-LISTP-OF-CDR)
+        (:REWRITE TC-ZERO-LISTP-OPEN)
+        (:REWRITE TC-ZERO-LISTP-WHEN-ENDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  303
+TC-NTH0-OF-TC-ZERO-LISTP
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-TC-ZERO-COEFFS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE TC-NTH0-OF-TC-ZERO-LISTP)
+              (:USE TC-ZERO-LISTP-OF-TC-ZERO-COEFFS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-NTH0-OF-TC-ZERO-COEFFS
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-MONOMIAL-NTH-INDUCT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP))
+Time:  0.21 seconds (prove: 0.21, print: 0.00, other: 0.00)
+Prover steps counted:  5962
+TC-MONOMIAL-NTH-INDUCT
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-ZP-NATURALS-EQUAL ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE TC-ZP-NATURAL-IS-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-ZP-NATURALS-EQUAL
+
+Summary
+Form:  ( DEFTHM TC-ZP-NATURAL-DISTINCT-FROM-POSITIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-ZP-NATURAL-DISTINCT-FROM-POSITIVE
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM TC-POSITIVE-NATURAL-EQUALITY-BY-PREDECESSORS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE TC-NATURAL-LESS-THAN-ZP-IMPOSSIBLE)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-END))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  2277
+TC-POSITIVE-NATURAL-EQUALITY-BY-PREDECESSORS
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-DEGREE-ZP-DISTINCT-IMPLIES-K-POSITIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT))
+Hint-events: ((:USE TC-ZP-NATURALS-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-DEGREE-ZP-DISTINCT-IMPLIES-K-POSITIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-K-ZP-DISTINCT-IMPLIES-DEGREE-POSITIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT))
+Hint-events: ((:USE TC-ZP-NATURALS-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-K-ZP-DISTINCT-IMPLIES-DEGREE-POSITIVE
+
+Summary
+Form:  ( DEFTHM TC-NOT-ZP-COUNT-WHEN-NATURAL-BELOW ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-NOT-ZP-COUNT-WHEN-NATURAL-BELOW
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.5
+Subgoal *1/1.4
+Subgoal *1/1.3
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-TC-MONOMIAL-COEFFS ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-MONOMIAL-NTH-INDUCT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE TC-K-ZP-DISTINCT-IMPLIES-DEGREE-POSITIVE)
+        (:REWRITE TC-MONOMIAL-COEFFS-OPEN-POSITIVE)
+        (:REWRITE TC-MONOMIAL-COEFFS-WHEN-DEGREE-ZP)
+        (:REWRITE TC-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE TC-NOT-ZP-COUNT-WHEN-NATURAL-BELOW)
+        (:REWRITE TC-NTH0-OF-TC-ZERO-COEFFS)
+        (:REWRITE TC-NTH0-OPEN-POSITIVE)
+        (:REWRITE TC-NTH0-WHEN-ZP)
+        (:REWRITE TC-POSITIVE-NATURAL-EQUALITY-BY-PREDECESSORS)
+        (:REWRITE TC-PREDECESSORS-PRESERVE-STRICT-ORDER))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2194
+TC-NTH0-OF-TC-MONOMIAL-COEFFS
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbq-universal-toom-cook-certificate" ...)
+Rules: NIL
+Time:  5.06 seconds (prove: 3.64, print: 0.01, other: 1.41)
+Prover steps counted:  120088
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 5.06 seconds realtime, 4.71 seconds runtime
+; (457,003,040 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 31380 Jun 29 00:38 zbq-universal-toom-cook-certificate.cert

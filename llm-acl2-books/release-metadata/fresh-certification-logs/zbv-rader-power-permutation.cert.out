@@ -1,0 +1,289 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbu-rader-power-orbit.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbv-rader-power-permutation" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbv-rader-power-permutation
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/number-theory/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbu-rader-power-orbit" ...)
+Rules: NIL
+Time:  1.41 seconds (prove: 0.00, print: 0.00, other: 1.41)
+"/mnt/data/new-release/cert-work/zbu-rader-power-orbit.lisp"
+
+Summary
+Form:  ( DEFTHM RGI-ZERO-PLUS-NATURAL ...)
+Rules: ((:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  22
+RGI-ZERO-PLUS-NATURAL
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RGI-POWER-ORBIT-NTH-INDUCT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  143
+RGI-POWER-ORBIT-NTH-INDUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM NTH-OF-RGI-POWER-ORBIT-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-POWER-ORBIT-NTH-INDUCT)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-POWER-ORBIT-AUX-OPEN)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION RGI-POWER-ORBIT-AUX))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  2230
+NTH-OF-RGI-POWER-ORBIT-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM NTH-OF-RGI-ORBIT ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RGI-NATP-OF-ONE-LESS-POSITIVE-INTEGER)
+        (:REWRITE RGI-NATP-OF-ZERO)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL))
+Hint-events: ((:USE NTH-OF-RGI-POWER-ORBIT-AUX)
+              (:USE RGI-ORBIT-AS-POWER-ORBIT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  415
+NTH-OF-RGI-ORBIT
+
+Summary
+Form:  ( DEFTHM RGI-POSP-OF-NONZERO-FEP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:FORWARD-CHAINING PFIELD::FEP-FW-TO-NATP)
+        (:TYPE-PRESCRIPTION PFIELD::FEP)
+        (:TYPE-PRESCRIPTION POSP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+RGI-POSP-OF-NONZERO-FEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-POWERS-DISTINCT-BEFORE-FULL-ORDER ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING PFIELD::FEP-FW-TO-BOUND)
+        (:FORWARD-CHAINING PFIELD::FEP-FW-TO-NATP)
+        (:FORWARD-CHAINING DM::PRIMEP-GT-1)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE PFIELD::MUL-COMMUTATIVE)
+        (:REWRITE PFIELD::POW-<-ORDER)
+        (:REWRITE PFIELD::POW-OF-+)
+        (:REWRITE PFIELD::POW-OF-1-ARG2)
+        (:REWRITE RGI-NATP-OF-POSITIVE-INTEGER)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:TYPE-PRESCRIPTION PFIELD::FEP)
+        (:TYPE-PRESCRIPTION PFIELD::ORDER)
+        (:TYPE-PRESCRIPTION PFIELD::POSP-ORDER)
+        (:TYPE-PRESCRIPTION DM::PRIMEP))
+Hint-events: ((:USE PFIELD::EQUAL-POWERS-MEANS-SOME-POWER-IS-1)
+              (:USE PFIELD::POW-<-ORDER)
+              (:USE PFIELD::POW-OF-+)
+              (:USE PFIELD::POW-OF-1-ARG2))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1357
+RGI-POWERS-DISTINCT-BEFORE-FULL-ORDER
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbv-rader-power-permutation" ...)
+Rules: NIL
+Time:  1.53 seconds (prove: 0.07, print: 0.00, other: 1.46)
+Prover steps counted:  4167
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.53 seconds realtime, 1.43 seconds runtime
+; (163,803,568 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 37796 Jun 29 00:39 zbv-rader-power-permutation.cert

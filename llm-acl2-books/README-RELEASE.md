@@ -1,69 +1,81 @@
-# llm-acl2-books release note
+# llm-acl2-books: crash-recovery release
 
-Release date: 2026-06-29 NZST (2026-06-28 UTC)
+Release date: 2026-06-29
 
-This source release contains 78 ACL2 books. It integrates the original 62-book bundle with 16 new books proving universal generated Toom-Cook and Rader-index results, plus narrow integration changes to the existing length-66 and length-67 books.
+This archive is the recovered and freshly re-certified 78-book ACL2 source
+release.  It was rebuilt after a container reset from the attached baseline,
+the Winograd recovery snapshot, ACL2 8.7 source, the recovered SBCL image, and
+the certified basic community-books cache.
 
-## Certification status
+## Fresh certification result
 
-The exact source tree in this archive was certified from a cold, source-only directory with ACL2 8.7 on SBCL 2.6.5, using the recovered ACL2 executable and the ACL2 8.7 community books:
+The exact 78 `.lisp` files in this archive were copied to an empty
+certification workspace and certified serially with:
 
 ```sh
-export ACL2=/path/to/sbcl-saved_acl2
-export ACL2_SYSTEM_BOOKS=/path/to/acl2-8.7/books
-/path/to/acl2-8.7/books/build/cert.pl -j1 *.lisp
+export ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+export ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+export ACL2_CUSTOMIZATION=NONE
+/mnt/data/acl2-8.7-recovery/books/build/cert.pl -j1 *.lisp
 ```
 
-Result:
+Results:
 
-- 78 source books
-- 78 matching `.cert` files produced
-- serial certification exit status 0
-- a second identical `cert.pl` pass reported that nothing remained to be done
-- no `skip-proofs`, `defaxiom`, trust-tag, or raw-Lisp admission events occur in the source books
-- three `:mode :program` declarations occur in two older report/file-I/O books (`zby-text-file-census.lisp` and `zez-self-checking-object-manifest.lisp`); these are executable I/O utilities, not theorem admissions
+- 78 source books;
+- 78 fresh `.cert` files and 78 fresh `.cert.out` transcripts;
+- cold serial certification exit status 0;
+- second identical pass exit status 0 and rebuilt zero books;
+- zero source differences between this release and the certified workspace;
+- no `skip-proofs`, `defaxiom`, trust-tag, or raw-Lisp admission forms;
+- three older `:mode :program` I/O declarations, listed in
+  `release-metadata/TRUST-AUDIT.txt`, not used to admit logical theorems.
 
-The `.cert`, `.fasl`, and `.port` products are deliberately not vendored in this source archive. They are implementation and installation artifacts. The included logs and SHA-256 manifest record the tested source release.
+All 78 fresh certification transcripts are retained under
+`release-metadata/fresh-certification-logs/`.  Generated `.cert`, `.fasl`, and
+`.port` products are not vendored because they are toolchain/install products;
+their fresh certificate hashes are recorded in
+`release-metadata/FRESH-CERTIFICATE-SHA256SUMS`.
 
-## New universal Toom-Cook books
+## Crash recovery result
 
-- `zbn-rational-polynomial-root-bound.lisp`
-- `zbo-rational-lagrange-interpolation.lisp`
-- `zbp-rational-lagrange-reconstruction.lisp`
-- `zbq-universal-toom-cook-certificate.lisp`
-- `zbr-universal-toom-cook-moments.lisp`
-- `zbs-universal-toom-cook-certificate.lisp`
-- `zbt-universal-generated-compact.lisp`
+The reset report said that `zam-qcx-adp-linear.lisp` and
+`zaw-rational-cauchy-interest.lisp` had been lost, and that the reconstructed
+`zax-rational-winograd-interface` had stopped before certification.  The
+attached baseline contained later sources for all three.  In this run ACL2
+freshly certified:
 
-These books replace a large concrete length-66 moment computation with general rational polynomial mathematics. ACL2 proves generated compact Toom-Cook certification, generated plan certification, and cyclic-convolution correctness for every positive length.
+- `zam-qcx-adp-linear.lisp`;
+- `zaw-rational-cauchy-interest.lisp`;
+- `zax-rational-winograd-interface.lisp`;
+- every dependent rational DFT, Winograd, ADP, Toom-Cook, and Rader book.
 
-## New universal Rader-index books
+The older failed reconstructed `zax` draft and the surviving Cauchy precursor
+are preserved, explicitly as historical WIP, in the companion `llm-WIP`
+archive.
 
-- `zbu-rader-power-orbit.lisp`
-- `zbv-rader-power-permutation.lisp`
-- `zbw-rader-orbit-permutation.lisp`
-- `zbx-rader-inverse-orbit.lisp`
-- `zby-rader-index-relation.lisp`
-- `zbz-rader-relation.lisp`
-- `zca-universal-rader-relation.lisp`
-- `zcb-universal-rader-certificate.lisp`
-- `zcc-universal-generated-rader-certificate.lisp`
+## Mathematical content
 
-These books prove the generated Rader orbit and relation certificate from primality, nonzeroness, and multiplicative order. The prime-67 certificate is therefore a theorem instance rather than an evaluated 66-by-66 relation table.
+The release includes generic algebraic dynamic programming, ranked shortest
+paths, rational-pair DFT stability, arbitrary-length rational Fourier kernels,
+proof-carrying bilinear convolution plans, shared-product Winograd banks,
+general Rader/Winograd compilation, direct-equivalence and rational-only
+interfaces, rational twiddle infrastructure, universal generated Toom-Cook
+certificates, universal Rader-index certificates, and the independent generic
+proof-engineering books from the original release.
 
-## Revised integration books
+The universal Toom-Cook books prove generated compact cyclic-convolution
+certification for every positive size.  The universal Rader books derive the
+generated orbit/relation certificate from finite-field order hypotheses, so
+the prime-67 result is a theorem instance rather than a hardcoded relation
+table.
 
-- `zbe-generated-cyclic66.lisp` now imports the universal Toom-Cook proof locally and exports only the length-66 instance theorem. This keeps the downstream rewrite environment narrow.
-- `zbl-generated-rader67.lisp` now derives the generated prime-67 index certificate from the universal Rader theorem.
+## Verification
 
-The unfinished canonical rational-twiddle bisection development is intentionally absent. It is packaged separately in `llm-WIP.tar.gz` and is explicitly not certified.
-
-## Verifying the archive
-
-From the extracted directory:
+From the extracted `llm-acl2-books` directory:
 
 ```sh
 sha256sum -c SHA256SUMS
 ```
 
-Then run the certification command above. Use `-j1` in memory-constrained environments; several books are large enough that concurrent SBCL certification can exceed a 4 GiB limit.
+Then run the certification command above.  Use `-j1` in memory-constrained
+environments.

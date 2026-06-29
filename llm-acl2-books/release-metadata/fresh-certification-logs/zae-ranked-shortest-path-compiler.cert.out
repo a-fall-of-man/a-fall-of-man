@@ -1,0 +1,1438 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zac-adp-min-plus-provenance.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zae-ranked-shortest-path-compiler" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zae-ranked-shortest-path-compiler
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.04 seconds (prove: 0.00, print: 0.00, other: 0.04)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/std/omaps/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zac-adp-min-plus-provenance" ...)
+Rules: NIL
+Time:  2.69 seconds (prove: 0.00, print: 0.00, other: 2.68)
+"/mnt/data/new-release/cert-work/zac-adp-min-plus-provenance.lisp"
+
+The event ( INCLUDE-BOOK "std/lists/top" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZAE-RANKED-SHORTEST-PATH-COMPILER
+)
+
+Summary
+Form:  ( DEFUN RSP-NODES ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-NODES
+
+Summary
+Form:  ( DEFUN RSP-NODE-AT ...)
+Rules: ((:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+RSP-NODE-AT
+
+Summary
+Form:  ( DEFUN RSP-ARCS-AT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ARCS-AT
+
+Summary
+Form:  ( DEFUN RSP-ARC-PRED ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ARC-PRED
+
+Summary
+Form:  ( DEFUN RSP-ARC-WEIGHT ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ARC-WEIGHT
+
+Summary
+Form:  ( DEFUN RSP-ARC-VALIDP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+RSP-ARC-VALIDP
+
+Summary
+Form:  ( DEFUN RSP-ARCS-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ARCS-VALIDP
+
+Summary
+Form:  ( DEFUN RSP-ITEM-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ITEM-VALIDP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RSP-PREFIX-VALIDP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION RSP-ITEM-VALIDP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+RSP-PREFIX-VALIDP
+
+Summary
+Form:  ( DEFUN RSP-SPEC-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-SPEC-VALIDP
+
+Summary
+Form:  ( DEFUN RSP-EDGE-FOR-ARC ...)
+Rules: ((:TYPE-PRESCRIPTION VWC-EDGE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-EDGE-FOR-ARC
+
+Summary
+Form:  ( DEFUN RSP-EDGES-FOR-ARCS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-EDGES-FOR-ARCS
+
+Summary
+Form:  ( DEFUN RSP-GRAPH-AUX ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-GRAPH-AUX
+
+Summary
+Form:  ( DEFUN RSP-GRAPH ...)
+Rules: ((:TYPE-PRESCRIPTION RSP-GRAPH-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-GRAPH
+
+Summary
+Form:  ( DEFUN RSP-ADP-RULES ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ADP-RULES
+
+Summary
+Form:  ( DEFUN RSP-ADP-PROGRAM-AUX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ADP-PROGRAM-AUX
+
+Summary
+Form:  ( DEFUN RSP-ADP-PROGRAM ...)
+Rules: ((:TYPE-PRESCRIPTION RSP-ADP-PROGRAM-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ADP-PROGRAM
+
+Summary
+Form:  ( DEFUN RSP-ENTRY-COST ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ENTRY-COST
+
+Summary
+Form:  ( DEFUN RSP-ENTRY-PATH ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ENTRY-PATH
+
+Summary
+Form:  ( DEFUN RSP-CHART-REF ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-CHART-REF
+
+Summary
+Form:  ( DEFUN RSP-CANDIDATE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-CANDIDATE
+
+Summary
+Form:  ( DEFUN RSP-BETTER-ENTRY ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-BETTER-ENTRY
+Goal'
+Goal''
+Goal'''
+Goal'4'
+Goal'5'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RSP-BEST-CANDIDATE ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-OF-SUM)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION ACL2-COUNT-OF-CONSP-POSITIVE)
+        (:TYPE-PRESCRIPTION RSP-BETTER-ENTRY)
+        (:TYPE-PRESCRIPTION RSP-CANDIDATE))
+Time:  0.08 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  7024
+RSP-BEST-CANDIDATE
+
+Summary
+Form:  ( DEFUN RSP-RUN-AUX ...)
+Rules: ((:TYPE-PRESCRIPTION ACONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-RUN-AUX
+
+Summary
+Form:  ( DEFUN RSP-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION RSP-RUN-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-RUN
+
+Summary
+Form:  ( DEFUN RSP-POTENTIALS-AUX ...)
+Rules: ((:TYPE-PRESCRIPTION OMAP::UPDATE-TYPE-PRESCRIPTION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-POTENTIALS-AUX
+
+Summary
+Form:  ( DEFUN RSP-POTENTIALS ...)
+Rules: ((:TYPE-PRESCRIPTION RSP-POTENTIALS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-POTENTIALS
+
+Summary
+Form:  ( DEFUN RSP-SOLVE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-SOLVE
+
+Summary
+Form:  ( DEFUN RSP-SOLUTION-COST ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-SOLUTION-COST
+
+Summary
+Form:  ( DEFUN RSP-SOLUTION-PATH ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-SOLUTION-PATH
+
+Summary
+Form:  ( DEFUN RSP-SOLUTION-POTENTIALS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-SOLUTION-POTENTIALS
+
+Summary
+Form:  ( DEFCONST *RSP-EXAMPLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*RSP-EXAMPLE*
+
+Summary
+Form:  ( DEFCONST *RSP-EXAMPLE-SOLUTION* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*RSP-EXAMPLE-SOLUTION*
+:PASSED
+:PASSED
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFUN RSP-ENTRY-GOODP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RSP-ENTRY-GOODP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RSP-CHART-GOODP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RSP-CHART-GOODP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RSP-BUILD-CHART ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACONS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+RSP-BUILD-CHART
+Goal'
+
+Summary
+Form:  ( DEFTHM RSP-CHART-REF-OF-ACONS-SAME ...)
+Rules: ((:DEFINITION ACONS)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NFIX)
+        (:DEFINITION RSP-CHART-REF)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  92
+RSP-CHART-REF-OF-ACONS-SAME
+Goal'
+
+Summary
+Form:  ( DEFTHM RSP-CHART-REF-OF-ACONS-DIFFERENT ...)
+Rules: ((:DEFINITION ACONS)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-CHART-REF)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1725
+RSP-CHART-REF-OF-ACONS-DIFFERENT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.36
+Subgoal *1/2.36'
+Subgoal *1/2.36''
+Subgoal *1/2.36'''
+Subgoal *1/2.35
+Subgoal *1/2.35'
+Subgoal *1/2.35''
+Subgoal *1/2.35'''
+Subgoal *1/2.34
+Subgoal *1/2.34'
+Subgoal *1/2.34''
+Subgoal *1/2.33
+Subgoal *1/2.33'
+Subgoal *1/2.33''
+Subgoal *1/2.32
+Subgoal *1/2.32'
+Subgoal *1/2.32''
+Subgoal *1/2.31
+Subgoal *1/2.31'
+Subgoal *1/2.31''
+Subgoal *1/2.30
+Subgoal *1/2.30'
+Subgoal *1/2.30''
+Subgoal *1/2.29
+Subgoal *1/2.29'
+Subgoal *1/2.29''
+Subgoal *1/2.28
+Subgoal *1/2.28'
+Subgoal *1/2.27
+Subgoal *1/2.27'
+Subgoal *1/2.26
+Subgoal *1/2.26'
+Subgoal *1/2.25
+Subgoal *1/2.25'
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.23'
+Subgoal *1/2.22
+Subgoal *1/2.22'
+Subgoal *1/2.21
+Subgoal *1/2.21'
+Subgoal *1/2.20
+Subgoal *1/2.20'
+Subgoal *1/2.19
+Subgoal *1/2.19'
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.17'
+Subgoal *1/2.16
+Subgoal *1/2.16'
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RSP-CHART-GOODP-REF ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-CHART-GOODP)
+        (:DEFINITION RSP-CHART-REF)
+        (:DEFINITION RSP-ENTRY-COST)
+        (:DEFINITION RSP-ENTRY-GOODP)
+        (:DEFINITION RSP-ENTRY-PATH)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-COST)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-PATH)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-COST)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RSP-CHART-GOODP)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Time:  2.06 seconds (prove: 2.05, print: 0.01, other: 0.00)
+Prover steps counted:  179550
+RSP-CHART-GOODP-REF
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RSP-EDGE-FOR-ARC-MEMBER-OF-EDGES-FOR-ARCS ...)
+Rules: ((:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-EDGES-FOR-ARCS)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.01)
+Prover steps counted:  662
+RSP-EDGE-FOR-ARC-MEMBER-OF-EDGES-FOR-ARCS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RSP-EDGE-FOR-ARC-MEMBER-OF-GRAPH-AUX ...)
+Rules: ((:CONGRUENCE SET-EQUIV-IMPLIES-IFF-MEMBER-2)
+        (:DEFINITION ENDP)
+        (:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-GRAPH-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RSP-GRAPH-AUX)
+        (:REWRITE COMMUTATIVITY-OF-APPEND-UNDER-SET-EQUIV)
+        (:REWRITE MEMBER-OF-APPEND)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE RSP-EDGE-FOR-ARC-MEMBER-OF-EDGES-FOR-ARCS)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-OF-APPEND-WHEN-SUBSET-OF-EITHER)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1109
+RSP-EDGE-FOR-ARC-MEMBER-OF-GRAPH-AUX
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RSP-EDGE-FOR-ARC-MEMBER-OF-GRAPH ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE VWC-EDGE-NAT-EQUIV-CONGRUENCE-ON-WEIGHT)
+        (:CONGRUENCE VWC-EDGE-SYMBOL-EQUIV-CONGRUENCE-ON-FROM)
+        (:CONGRUENCE VWC-EDGE-SYMBOL-EQUIV-CONGRUENCE-ON-TO)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARC-PRED)
+        (:DEFINITION RSP-ARC-WEIGHT)
+        (:DEFINITION RSP-ARCS-AT)
+        (:DEFINITION RSP-EDGE-FOR-ARC)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE MEMBER-OF-NTH)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE VWC-EDGE-OF-SYMBOL-FIX-TO)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Hint-events: ((:USE RSP-EDGE-FOR-ARC-MEMBER-OF-GRAPH-AUX))
+Time:  0.13 seconds (prove: 0.13, print: 0.00, other: 0.00)
+Prover steps counted:  9366
+RSP-EDGE-FOR-ARC-MEMBER-OF-GRAPH
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RSP-SINGLETON-ARC-CERTIFICATE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE VWC-EDGE-NAT-EQUIV-CONGRUENCE-ON-WEIGHT)
+        (:CONGRUENCE VWC-EDGE-SYMBOL-EQUIV-CONGRUENCE-ON-FROM)
+        (:CONGRUENCE VWC-EDGE-SYMBOL-EQUIV-CONGRUENCE-ON-TO)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARC-PRED)
+        (:DEFINITION RSP-ARC-VALIDP)
+        (:DEFINITION RSP-ARC-WEIGHT)
+        (:DEFINITION RSP-ARCS-AT)
+        (:DEFINITION RSP-EDGE-FOR-ARC)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VWC-EDGE->FROM-OF-VWC-EDGE)
+        (:REWRITE VWC-EDGE->TO-OF-VWC-EDGE)
+        (:REWRITE VWC-EDGE-FIX-WHEN-VWC-EDGE-P)
+        (:REWRITE VWC-EDGE-OF-SYMBOL-FIX-TO)
+        (:REWRITE VWC-EDGE-P-OF-VWC-EDGE)
+        (:REWRITE VWC-PATH-P-OF-CONS)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VWC-CERTIFICATE-P))
+Hint-events: ((:USE RSP-EDGE-FOR-ARC-MEMBER-OF-GRAPH))
+Time:  0.10 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  5664
+RSP-SINGLETON-ARC-CERTIFICATE
+Goal'
+Goal''
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 9'
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM RSP-CANDIDATE-GOOD ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:CONGRUENCE VWC-EDGE-NAT-EQUIV-CONGRUENCE-ON-WEIGHT)
+        (:CONGRUENCE VWC-EDGE-SYMBOL-EQUIV-CONGRUENCE-ON-FROM)
+        (:CONGRUENCE VWC-EDGE-SYMBOL-EQUIV-CONGRUENCE-ON-TO)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARC-PRED)
+        (:DEFINITION RSP-ARC-VALIDP)
+        (:DEFINITION RSP-ARC-WEIGHT)
+        (:DEFINITION RSP-ARCS-AT)
+        (:DEFINITION RSP-CANDIDATE)
+        (:DEFINITION RSP-CHART-REF)
+        (:DEFINITION RSP-EDGE-FOR-ARC)
+        (:DEFINITION RSP-ENTRY-COST)
+        (:DEFINITION RSP-ENTRY-GOODP)
+        (:DEFINITION RSP-ENTRY-PATH)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:DEFINITION VWC-PATH-COST)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-COST)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-PATH)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-COST)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VWC-EDGE->FROM-OF-VWC-EDGE)
+        (:REWRITE VWC-EDGE->TO-OF-VWC-EDGE)
+        (:REWRITE VWC-EDGE->WEIGHT-OF-VWC-EDGE)
+        (:REWRITE VWC-EDGE-FIX-WHEN-VWC-EDGE-P)
+        (:REWRITE VWC-EDGE-OF-SYMBOL-FIX-TO)
+        (:REWRITE VWC-EDGE-P-OF-VWC-EDGE)
+        (:REWRITE VWC-PATH-CHAINS-P-OF-APPEND)
+        (:REWRITE VWC-PATH-COST-OF-APPEND)
+        (:REWRITE VWC-PATH-IN-GRAPH-P-OF-APPEND)
+        (:REWRITE VWC-PATH-P-OF-APPEND)
+        (:REWRITE VWC-PATH-P-OF-CONS)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION RSP-CHART-GOODP)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-P))
+Hint-events: ((:USE RSP-CHART-GOODP-REF)
+              (:USE RSP-SINGLETON-ARC-CERTIFICATE)
+              (:USE VWC-CERTIFICATE-COMPOSE))
+Time:  2.66 seconds (prove: 2.65, print: 0.00, other: 0.00)
+Prover steps counted:  201783
+RSP-CANDIDATE-GOOD
+Goal'
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 12.2
+Subgoal 12.1
+Subgoal 11
+Subgoal 11'
+Subgoal 11.2
+Subgoal 11.1
+Subgoal 10
+Subgoal 10.2
+Subgoal 10.1
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.1
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 7'
+Subgoal 7.2
+Subgoal 7.1
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RSP-ENTRY-GOODP-OF-BETTER ...)
+Rules: ((:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION RSP-BETTER-ENTRY)
+        (:DEFINITION RSP-ENTRY-COST)
+        (:DEFINITION RSP-ENTRY-GOODP)
+        (:DEFINITION RSP-ENTRY-PATH)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Time:  2.15 seconds (prove: 2.14, print: 0.01, other: 0.00)
+Prover steps counted:  177864
+RSP-ENTRY-GOODP-OF-BETTER
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RSP-BEST-CANDIDATE-GOOD ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARC-VALIDP)
+        (:DEFINITION RSP-ARCS-VALIDP)
+        (:DEFINITION RSP-BEST-CANDIDATE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:INDUCTION RSP-BEST-CANDIDATE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE RSP-CANDIDATE-GOOD)
+        (:REWRITE RSP-ENTRY-GOODP-OF-BETTER)
+        (:REWRITE SUBSETP-CAR-MEMBER)
+        (:REWRITE SUBSETP-IMPLIES-SUBSETP-CDR)
+        (:TYPE-PRESCRIPTION RSP-ARCS-VALIDP)
+        (:TYPE-PRESCRIPTION RSP-CHART-GOODP)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3926
+RSP-BEST-CANDIDATE-GOOD
+Goal'
+
+Summary
+Form:  ( DEFTHM RSP-SOURCE-ENTRY-GOOD ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RSP-ENTRY-GOODP)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-COST)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-PATH)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-COST)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  755
+RSP-SOURCE-ENTRY-GOOD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.11''
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.9''
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RSP-ITEM-VALIDP-FROM-PREFIX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARC-VALIDP)
+        (:DEFINITION RSP-ARCS-VALIDP)
+        (:DEFINITION RSP-ITEM-VALIDP)
+        (:DEFINITION RSP-PREFIX-VALIDP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RSP-PREFIX-VALIDP)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION RSP-ARCS-VALIDP)
+        (:TYPE-PRESCRIPTION RSP-ITEM-VALIDP))
+Time:  0.24 seconds (prove: 0.24, print: 0.00, other: 0.00)
+Prover steps counted:  20973
+RSP-ITEM-VALIDP-FROM-PREFIX
+Goal'
+Goal''
+Subgoal 6
+Subgoal 6'
+Subgoal 6''
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 3'
+Subgoal 3''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RSP-NEW-ENTRY-GOOD ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARCS-AT)
+        (:DEFINITION RSP-ARCS-VALIDP)
+        (:DEFINITION RSP-CHART-GOODP)
+        (:DEFINITION RSP-ITEM-VALIDP)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION RSP-PREFIX-VALIDP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION RSP-ARCS-VALIDP)
+        (:TYPE-PRESCRIPTION RSP-CHART-GOODP)
+        (:TYPE-PRESCRIPTION RSP-ENTRY-GOODP)
+        (:TYPE-PRESCRIPTION ZP))
+Hint-events: ((:USE RSP-BEST-CANDIDATE-GOOD)
+              (:USE RSP-ITEM-VALIDP-FROM-PREFIX)
+              (:USE RSP-SOURCE-ENTRY-GOOD))
+Time:  0.62 seconds (prove: 0.62, print: 0.00, other: 0.00)
+Prover steps counted:  51930
+RSP-NEW-ENTRY-GOOD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.52
+Subgoal *1/2.51
+Subgoal *1/2.50
+Subgoal *1/2.49
+Subgoal *1/2.48
+Subgoal *1/2.47
+Subgoal *1/2.46
+Subgoal *1/2.45
+Subgoal *1/2.44
+Subgoal *1/2.43
+Subgoal *1/2.42
+Subgoal *1/2.41
+Subgoal *1/2.40
+Subgoal *1/2.39
+Subgoal *1/2.38
+Subgoal *1/2.37
+Subgoal *1/2.36
+Subgoal *1/2.35
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.31
+Subgoal *1/2.30
+Subgoal *1/2.29
+Subgoal *1/2.28
+Subgoal *1/2.27
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RSP-CHART-GOODP-OF-ACONS-ABOVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-CHART-GOODP)
+        (:DEFINITION RSP-CHART-REF)
+        (:DEFINITION RSP-ENTRY-COST)
+        (:DEFINITION RSP-ENTRY-GOODP)
+        (:DEFINITION RSP-ENTRY-PATH)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-COST)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RSP-CHART-GOODP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION RSP-CHART-GOODP))
+Time:  0.72 seconds (prove: 0.71, print: 0.00, other: 0.00)
+Prover steps counted:  72198
+RSP-CHART-GOODP-OF-ACONS-ABOVE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3.2
+Subgoal *1/2.3.2'
+Subgoal *1/2.3.2''
+Subgoal *1/2.3.1
+Subgoal *1/2.3.1'
+Subgoal *1/2.3.1''
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RSP-CHART-GOODP-OF-BUILD-CHART ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RSP-ARC-VALIDP)
+        (:DEFINITION RSP-ARCS-VALIDP)
+        (:DEFINITION RSP-BUILD-CHART)
+        (:DEFINITION RSP-CHART-GOODP)
+        (:DEFINITION RSP-CHART-REF)
+        (:DEFINITION RSP-ENTRY-COST)
+        (:DEFINITION RSP-ENTRY-GOODP)
+        (:DEFINITION RSP-ENTRY-PATH)
+        (:DEFINITION RSP-GRAPH)
+        (:DEFINITION RSP-ITEM-VALIDP)
+        (:DEFINITION RSP-NODE-AT)
+        (:DEFINITION RSP-PREFIX-VALIDP)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART ACONS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FLOOR)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RSP-CHART-REF)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-COST)
+        (:EXECUTABLE-COUNTERPART RSP-ENTRY-PATH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-COST)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RSP-BUILD-CHART)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE INTEGERP-+-REDUCE-CONSTANT)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RSP-ARCS-VALIDP)
+        (:TYPE-PRESCRIPTION RSP-BEST-CANDIDATE)
+        (:TYPE-PRESCRIPTION RSP-CHART-GOODP)
+        (:TYPE-PRESCRIPTION RSP-PREFIX-VALIDP)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Hint-events: ((:USE RSP-CHART-GOODP-OF-ACONS-ABOVE)
+              (:USE RSP-NEW-ENTRY-GOOD))
+Time:  3.17 seconds (prove: 3.17, print: 0.00, other: 0.00)
+Prover steps counted:  249595
+RSP-CHART-GOODP-OF-BUILD-CHART
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zae-ranked-shortest-path-compiler" ...)
+Rules: NIL
+Time:  15.02 seconds (prove: 12.04, print: 0.04, other: 2.94)
+Prover steps counted:  984606
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 15.02 seconds realtime, 13.98 seconds runtime
+; (1,604,245,152 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 41653 Jun 29 00:34 zae-ranked-shortest-path-compiler.cert

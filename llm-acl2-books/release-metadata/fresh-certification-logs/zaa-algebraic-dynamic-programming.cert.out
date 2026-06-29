@@ -1,0 +1,2547 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zlx-certified-parallel-fold.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "tools/def-functional-instance.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/basic/two-nats-measure.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zaa-algebraic-dynamic-programming" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zaa-algebraic-dynamic-programming
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zlx-certified-parallel-fold" ...)
+Rules: NIL
+Time:  1.04 seconds (prove: 0.00, print: 0.00, other: 1.04)
+"/mnt/data/new-release/cert-work/zlx-certified-parallel-fold.lisp"
+
+The event ( INCLUDE-BOOK "tools/def-functional-instance" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "tools/def-functional-instance" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+Summary
+Form:  ( INCLUDE-BOOK "std/basic/two-nats-measure" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/std/basic/two-nats-measure.lisp"
+
+The event ( INCLUDE-BOOK "std/lists/top" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+The event ( INCLUDE-BOOK "arithmetic-5/top" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZAA-ALGEBRAIC-DYNAMIC-PROGRAMMING
+)
+
+Summary
+Form:  ( DEFUN ADP-VALUEP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-VALUEP
+
+Summary
+Form:  ( DEFUN ADP-ZERO ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-ZERO
+
+Summary
+Form:  ( DEFUN ADP-ONE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-ONE
+
+Summary
+Form:  ( DEFUN ADP-PLUS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PLUS
+
+Summary
+Form:  ( DEFUN ADP-TIMES ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-TIMES
+
+Summary
+Form:  ( DEFTHM ADP-VALUEP-OF-ZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART ADP-VALUEP)
+        (:EXECUTABLE-COUNTERPART ADP-ZERO)
+        (:TYPE-PRESCRIPTION ADP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+ADP-VALUEP-OF-ZERO
+
+Summary
+Form:  ( DEFTHM ADP-VALUEP-OF-ONE ...)
+Rules: ((:EXECUTABLE-COUNTERPART ADP-ONE)
+        (:EXECUTABLE-COUNTERPART ADP-VALUEP)
+        (:TYPE-PRESCRIPTION ADP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+ADP-VALUEP-OF-ONE
+
+Summary
+Form:  ( DEFTHM ADP-VALUEP-OF-PLUS ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION ADP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  44
+ADP-VALUEP-OF-PLUS
+
+Summary
+Form:  ( DEFTHM ADP-VALUEP-OF-TIMES ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION ADP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  44
+ADP-VALUEP-OF-TIMES
+
+Summary
+Form:  ( DEFTHM ADP-PLUS-ASSOCIATIVE ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-VALUEP)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:REWRITE |(+ (+ x y) z)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  49
+ADP-PLUS-ASSOCIATIVE
+
+Summary
+Form:  ( DEFTHM ADP-PLUS-COMMUTATIVE ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  48
+ADP-PLUS-COMMUTATIVE
+
+Summary
+Form:  ( DEFTHM ADP-PLUS-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART ADP-ZERO)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  27
+ADP-PLUS-LEFT-IDENTITY
+
+Summary
+Form:  ( DEFTHM ADP-PLUS-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART ADP-ZERO)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  27
+ADP-PLUS-RIGHT-IDENTITY
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-ASSOCIATIVE ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:REWRITE |(* (* x y) z)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  49
+ADP-TIMES-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-COMMUTATIVE ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  105
+ADP-TIMES-COMMUTATIVE
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART ADP-ONE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  27
+ADP-TIMES-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART ADP-ONE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  61
+ADP-TIMES-RIGHT-IDENTITY
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-ZERO-LEFT ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:EXECUTABLE-COUNTERPART ADP-ZERO)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:REWRITE |(* 0 x)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  18
+ADP-TIMES-ZERO-LEFT
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-ZERO-RIGHT ...)
+Rules: ((:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART ADP-ZERO)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  27
+ADP-TIMES-ZERO-RIGHT
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (+ y z))|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  172
+ADP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-DISTRIBUTES-OVER-PLUS-RIGHT ...)
+Rules: ((:DEFINITION ADP-PLUS)
+        (:DEFINITION ADP-TIMES)
+        (:DEFINITION ADP-VALUEP)
+        (:DEFINITION NATP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  181
+ADP-TIMES-DISTRIBUTES-OVER-PLUS-RIGHT
+
+Summary
+Form:  ( ENCAPSULATE (((ADP-VALUEP * ...) ...) ...) ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.02, print: 0.00, other: 0.04)
+Prover steps counted:  883
+(ADP-VALUEP ADP-ZERO ADP-ONE ADP-PLUS ADP-TIMES)
+
+Summary
+Form:  ( DEFUN ADP-ALL-VALUESP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-ALL-VALUESP
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ADP-ALL-VALUESP-OF-APPEND ...)
+Rules: ((:DEFINITION ADP-ALL-VALUESP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ADP-ALL-VALUESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  308
+ADP-ALL-VALUESP-OF-APPEND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-PLUS-ROTATE-THREE ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-PLUS-COMMUTATIVE)
+        (:REWRITE ADP-VALUEP-OF-PLUS))
+Hint-events: ((:USE ADP-PLUS-ASSOCIATIVE)
+              (:USE ADP-PLUS-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  487
+ADP-PLUS-ROTATE-THREE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-TIMES-ROTATE-THREE ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-TIMES-COMMUTATIVE)
+        (:REWRITE ADP-VALUEP-OF-TIMES))
+Hint-events: ((:USE ADP-TIMES-ASSOCIATIVE)
+              (:USE ADP-TIMES-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  487
+ADP-TIMES-ROTATE-THREE
+
+Summary
+Form:  ( DEFUN ADP-FLATTEN-BLOCKS ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FLATTEN-BLOCKS
+
+Summary
+Form:  ( DEFUN ADP-SUM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-SUM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-VALUEP-OF-SUM ...)
+Rules: ((:DEFINITION ADP-ALL-VALUESP)
+        (:DEFINITION ADP-SUM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:INDUCTION ADP-SUM)
+        (:REWRITE ADP-VALUEP-OF-PLUS)
+        (:REWRITE ADP-VALUEP-OF-ZERO))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  221
+ADP-VALUEP-OF-SUM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-SUM-OF-APPEND ...)
+Rules: ((:DEFINITION ADP-ALL-VALUESP)
+        (:DEFINITION ADP-SUM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-SUM)
+        (:REWRITE ADP-PLUS-ASSOCIATIVE)
+        (:REWRITE ADP-PLUS-LEFT-IDENTITY)
+        (:REWRITE ADP-VALUEP-OF-SUM)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ADP-ALL-VALUESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  568
+ADP-SUM-OF-APPEND
+
+Summary
+Form:  ( DEFUN ADP-SUM-BLOCKS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-SUM-BLOCKS
+
+Summary
+Form:  ( DEFUN ADP-PRODUCT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PRODUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-VALUEP-OF-PRODUCT ...)
+Rules: ((:DEFINITION ADP-ALL-VALUESP)
+        (:DEFINITION ADP-PRODUCT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:INDUCTION ADP-PRODUCT)
+        (:REWRITE ADP-VALUEP-OF-ONE)
+        (:REWRITE ADP-VALUEP-OF-TIMES))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  221
+ADP-VALUEP-OF-PRODUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-PRODUCT-OF-APPEND ...)
+Rules: ((:DEFINITION ADP-ALL-VALUESP)
+        (:DEFINITION ADP-PRODUCT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-PRODUCT)
+        (:REWRITE ADP-TIMES-ASSOCIATIVE)
+        (:REWRITE ADP-TIMES-LEFT-IDENTITY)
+        (:REWRITE ADP-VALUEP-OF-PRODUCT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ADP-ALL-VALUESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  568
+ADP-PRODUCT-OF-APPEND
+
+Summary
+Form:  ( DEFUN ADP-PRODUCT-BLOCKS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PRODUCT-BLOCKS
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 5'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-SUM-BLOCKS-CORRECT ...)
+Rules: ((:DEFINITION ADP-FLATTEN-BLOCKS)
+        (:DEFINITION ADP-SUM)
+        (:DEFINITION ADP-SUM-BLOCKS)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART ADP-ALL-VALUESP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-FLATTEN-BLOCKS)
+        (:INDUCTION ADP-SUM-BLOCKS)
+        (:REWRITE ADP-ALL-VALUESP-OF-APPEND)
+        (:REWRITE ADP-SUM-OF-APPEND)
+        (:TYPE-PRESCRIPTION ADP-ALL-VALUESP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  847
+
+Summary
+Form:  ( MAKE-EVENT (DEF-FUNCTIONAL-INSTANCE-FN ...))
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  847
+ADP-SUM-BLOCKS-CORRECT
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 5'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-PRODUCT-BLOCKS-CORRECT ...)
+Rules: ((:DEFINITION ADP-FLATTEN-BLOCKS)
+        (:DEFINITION ADP-PRODUCT)
+        (:DEFINITION ADP-PRODUCT-BLOCKS)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART ADP-ALL-VALUESP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-FLATTEN-BLOCKS)
+        (:INDUCTION ADP-PRODUCT-BLOCKS)
+        (:REWRITE ADP-ALL-VALUESP-OF-APPEND)
+        (:REWRITE ADP-PRODUCT-OF-APPEND)
+        (:TYPE-PRESCRIPTION ADP-ALL-VALUESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  847
+
+Summary
+Form:  ( MAKE-EVENT (DEF-FUNCTIONAL-INSTANCE-FN ...))
+Rules: NIL
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  847
+ADP-PRODUCT-BLOCKS-CORRECT
+
+Summary
+Form:  ( DEFUN ADP-PREMISES-BELOWP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PREMISES-BELOWP
+
+Summary
+Form:  ( DEFUN ADP-RULE-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-RULE-VALIDP
+
+Summary
+Form:  ( DEFUN ADP-RULES-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-RULES-VALIDP
+
+Summary
+Form:  ( DEFUN ADP-ITEM-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-RULES-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-ITEM-VALIDP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ADP-PREFIX-VALIDP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ADP-ITEM-VALIDP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+ADP-PREFIX-VALIDP
+
+Summary
+Form:  ( DEFUN ADP-PROGRAM-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-PREFIX-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PROGRAM-VALIDP
+
+Summary
+Form:  ( DEFUN ADP-CHART-REF ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-CHART-REF
+
+Summary
+Form:  ( DEFUN ADP-EVAL-PREMISES ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-PREMISES
+
+Summary
+Form:  ( DEFUN ADP-EVAL-RULE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-RULE
+
+Summary
+Form:  ( DEFUN ADP-EVAL-RULES ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-RULES
+
+Summary
+Form:  ( DEFUN ADP-EVAL-ITEM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-ITEM
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ADP-BUILD-CHART ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACONS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+ADP-BUILD-CHART
+
+Summary
+Form:  ( DEFUN ADP-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-BUILD-CHART))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-RUN
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.2'
+Subgoal 6.1
+Subgoal 5
+Subgoal 5.2
+Subgoal 5.2'
+Subgoal 5.1
+Subgoal 4
+Subgoal 4.2
+Subgoal 4.2'
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.2
+Subgoal 3.2'
+Subgoal 3.1
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( MUTUAL-RECURSION ( DEFUN ADP-DENOTE-ITEM ...) ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION INTEGER-ABS)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE O-P-OF-TWO-NATS-MEASURE)
+        (:REWRITE O<-OF-TWO-NATS-MEASURE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.08 seconds (prove: 0.07, print: 0.00, other: 0.01)
+Prover steps counted:  5980
+(ADP-DENOTE-ITEM ADP-DENOTE-RULES
+                 ADP-DENOTE-RULE ADP-DENOTE-PREMISES)
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ADP-CHART-CORRECTP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  557
+ADP-CHART-CORRECTP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-CHART-REF-WHEN-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-CHART-CORRECTP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  6949
+ADP-CHART-REF-WHEN-CORRECT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-PREMISES-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-DENOTE-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-PREMISES-BELOWP)
+        (:DEFINITION ENDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-EVAL-PREMISES)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE ADP-CHART-REF-WHEN-CORRECT)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  3099
+ADP-EVAL-PREMISES-CORRECT
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-RULE-CORRECT ...)
+Rules: ((:DEFINITION ADP-DENOTE-RULE)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-RULE-VALIDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-EVAL-PREMISES-CORRECT)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  603
+ADP-EVAL-RULE-CORRECT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-RULES-CORRECT ...)
+Rules: ((:DEFINITION ADP-DENOTE-RULE)
+        (:DEFINITION ADP-DENOTE-RULES)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-RULE-VALIDP)
+        (:DEFINITION ADP-RULES-VALIDP)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-EVAL-RULES)
+        (:REWRITE ADP-EVAL-PREMISES-CORRECT)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3139
+ADP-EVAL-RULES-CORRECT
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-ITEM-CORRECT ...)
+Rules: ((:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-ITEM-VALIDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-EVAL-RULES-CORRECT)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  529
+ADP-EVAL-ITEM-CORRECT
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-CHART-REF-OF-ACONS-SAME ...)
+Rules: ((:DEFINITION ACONS)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  92
+ADP-CHART-REF-OF-ACONS-SAME
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-CHART-REF-OF-ACONS-DIFFERENT ...)
+Rules: ((:DEFINITION ACONS)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  805
+ADP-CHART-REF-OF-ACONS-DIFFERENT
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-CHART-CORRECTP-OF-ACONS-ABOVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-CHART-CORRECTP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.10 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  7469
+ADP-CHART-CORRECTP-OF-ACONS-ABOVE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-NTH-ITEM-CORRECT ...)
+Rules: ((:DEFINITION ADP-DENOTE-ITEM)
+        (:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-ITEM-VALIDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-EVAL-RULES-CORRECT)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP))
+Hint-events: ((:USE ADP-EVAL-ITEM-CORRECT))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2234
+ADP-EVAL-NTH-ITEM-CORRECT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-CHART-CORRECTP-EXTEND ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP))
+Hint-events: ((:USE ADP-CHART-CORRECTP-OF-ACONS-ABOVE))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1882
+ADP-CHART-CORRECTP-EXTEND
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-CHART-CORRECTP-EXTEND-BY-EVALUATION ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-CHART-CORRECTP))
+Hint-events: ((:USE ADP-CHART-CORRECTP-EXTEND)
+              (:USE ADP-EVAL-NTH-ITEM-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-CHART-CORRECTP-EXTEND-BY-EVALUATION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/2'6'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM ADP-BUILD-CHART-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ADP-BUILD-CHART)
+        (:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-DENOTE-ITEM)
+        (:DEFINITION ADP-ITEM-VALIDP)
+        (:DEFINITION ADP-PREFIX-VALIDP)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-BUILD-CHART)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE ADP-EVAL-NTH-ITEM-CORRECT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP))
+Hint-events: ((:USE ADP-CHART-CORRECTP-EXTEND-BY-EVALUATION))
+Time:  0.29 seconds (prove: 0.29, print: 0.00, other: 0.00)
+Prover steps counted:  20644
+ADP-BUILD-CHART-CORRECT
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ADP-RUN-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-PROGRAM-VALIDP)
+        (:DEFINITION ADP-RUN)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-BUILD-CHART-CORRECT)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-PREFIX-VALIDP)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ADP-CHART-REF-WHEN-CORRECT))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  7108
+ADP-RUN-CORRECT
+
+Summary
+Form:  ( DEFUN ADP-PREMISES-WORK ...)
+Rules: ((:TYPE-PRESCRIPTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PREMISES-WORK
+
+Summary
+Form:  ( DEFUN ADP-RULE-WORK ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ADP-PREMISES-WORK))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-RULE-WORK
+
+Summary
+Form:  ( DEFUN ADP-RULES-WORK ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ADP-RULE-WORK))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-RULES-WORK
+
+Summary
+Form:  ( DEFUN ADP-ITEM-WORK ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ADP-RULES-WORK))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-ITEM-WORK
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ADP-PREFIX-WORK ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ADP-ITEM-WORK))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+ADP-PREFIX-WORK
+
+Summary
+Form:  ( DEFUN ADP-PROGRAM-WORK ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-PREFIX-WORK))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-PROGRAM-WORK
+
+Summary
+Form:  ( DEFUN ADP-EVAL-PREMISES$ ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-PREMISES$
+
+Summary
+Form:  ( DEFUN ADP-EVAL-RULE$ ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-RULE$
+
+Summary
+Form:  ( DEFUN ADP-EVAL-RULES$ ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-RULES$
+
+Summary
+Form:  ( DEFUN ADP-EVAL-ITEM$ ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-EVAL-ITEM$
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ADP-BUILD-CHART$ ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+ADP-BUILD-CHART$
+
+Summary
+Form:  ( DEFUN ADP-RUN$ ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-BUILD-CHART$))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-RUN$
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-PREMISES$-VALUE ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-EVAL-PREMISES$)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE MV-NTH-OF-CONS))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  766
+ADP-EVAL-PREMISES$-VALUE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-PREMISES$-WORK ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MV-NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:INDUCTION ADP-EVAL-PREMISES$)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE MV-NTH-OF-CONS))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1057
+ADP-EVAL-PREMISES$-WORK
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-RULE$-VALUE ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3795
+ADP-EVAL-RULE$-VALUE
+Goal'
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6'
+Subgoal 6''
+Subgoal 6'''
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5'
+Subgoal 5''
+Subgoal 5'''
+Subgoal 5.2
+Subgoal 5.1
+Subgoal 4
+Subgoal 4'
+Subgoal 4''
+Subgoal 4'''
+Subgoal 4.2
+Subgoal 4.1
+Subgoal 3
+Subgoal 3'
+Subgoal 3''
+Subgoal 3'''
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+Subgoal 1'''
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-RULE$-WORK ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ADP-RULE-WORK)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MV-NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  5109
+ADP-EVAL-RULE$-WORK
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-RULES$-VALUE ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ENDP)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-EVAL-RULES$)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  9602
+ADP-EVAL-RULES$-VALUE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2.2
+Subgoal *1/2.2.1
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-RULES$-WORK ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ADP-RULE-WORK)
+        (:DEFINITION ADP-RULES-WORK)
+        (:DEFINITION ENDP)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MV-NTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-EVAL-RULES$)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE ADP-EVAL-RULES$-VALUE)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION ADP-RULES-WORK)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4319
+ADP-EVAL-RULES$-WORK
+Subgoal 14
+Subgoal 14'
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 11
+Subgoal 11'
+Subgoal 10
+Subgoal 9
+Subgoal 9'
+Subgoal 8
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-ITEM$-VALUE ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-EVAL-ITEM$)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE ADP-EVAL-RULES$-VALUE)
+        (:REWRITE ADP-EVAL-RULES$-WORK)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-RULES-WORK)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.07 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  9352
+ADP-EVAL-ITEM$-VALUE
+Goal'
+Subgoal 14
+Subgoal 14'
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 11
+Subgoal 11'
+Subgoal 11''
+Subgoal 11'''
+Subgoal 11.3
+Subgoal 11.2
+Subgoal 11.1
+Subgoal 10
+Subgoal 9
+Subgoal 9'
+Subgoal 9''
+Subgoal 9'''
+Subgoal 9.3
+Subgoal 9.2
+Subgoal 9.1
+Subgoal 8
+Subgoal 7
+Subgoal 7'
+Subgoal 7''
+Subgoal 7'''
+Subgoal 7.3
+Subgoal 7.2
+Subgoal 7.1
+Subgoal 6
+Subgoal 5
+Subgoal 5'
+Subgoal 5''
+Subgoal 5'''
+Subgoal 5.3
+Subgoal 5.2
+Subgoal 5.1
+Subgoal 4
+Subgoal 3
+Subgoal 3'
+Subgoal 3''
+Subgoal 3'''
+Subgoal 3.3
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+Subgoal 1'''
+Subgoal 1.3
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM ADP-EVAL-ITEM$-WORK ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-ITEM$)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-ITEM-WORK)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ADP-RULE-WORK)
+        (:DEFINITION ADP-RULES-WORK)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MV-NTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE ADP-EVAL-RULES$-VALUE)
+        (:REWRITE ADP-EVAL-RULES$-WORK)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION ADP-RULES-WORK)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  10758
+ADP-EVAL-ITEM$-WORK
+Subgoal *1/2
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ADP-BUILD-CHART$-VALUE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ADP-BUILD-CHART)
+        (:DEFINITION ADP-BUILD-CHART$)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-EVAL-ITEM$)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MV-NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-BUILD-CHART$)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE ADP-EVAL-RULES$-VALUE)
+        (:REWRITE ADP-EVAL-RULES$-WORK)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.70 seconds (prove: 0.70, print: 0.00, other: 0.00)
+Prover steps counted:  51905
+ADP-BUILD-CHART$-VALUE
+Subgoal *1/2
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.5'5'
+Subgoal *1/2.5.3
+Subgoal *1/2.5.2
+Subgoal *1/2.5.1
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ADP-BUILD-CHART$-WORK ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ADP-BUILD-CHART$)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-ITEM$)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-ITEM-WORK)
+        (:DEFINITION ADP-PREFIX-WORK)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ADP-RULE-WORK)
+        (:DEFINITION ADP-RULES-WORK)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MV-NTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-BUILD-CHART$)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE ADP-BUILD-CHART$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE ADP-EVAL-RULES$-VALUE)
+        (:REWRITE ADP-EVAL-RULES$-WORK)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE MV-NTH-OF-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION ADP-PREFIX-WORK)
+        (:TYPE-PRESCRIPTION ADP-RULES-WORK)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.29 seconds (prove: 0.29, print: 0.00, other: 0.00)
+Prover steps counted:  21191
+ADP-BUILD-CHART$-WORK
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ADP-RUN$-VALUE ...)
+Rules: ((:DEFINITION ACONS)
+        (:DEFINITION ADP-BUILD-CHART)
+        (:DEFINITION ADP-BUILD-CHART$)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-EVAL-ITEM$)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-EVAL-PREMISES$)
+        (:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULE$)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-EVAL-RULES$)
+        (:DEFINITION ADP-PREMISES-WORK)
+        (:DEFINITION ADP-RUN)
+        (:DEFINITION ADP-RUN$)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE ADP-BUILD-CHART$-VALUE)
+        (:REWRITE ADP-BUILD-CHART$-WORK)
+        (:REWRITE ADP-EVAL-PREMISES$-VALUE)
+        (:REWRITE ADP-EVAL-PREMISES$-WORK)
+        (:REWRITE ADP-EVAL-RULES$-VALUE)
+        (:REWRITE ADP-EVAL-RULES$-WORK)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.69 seconds (prove: 0.68, print: 0.00, other: 0.00)
+Prover steps counted:  49537
+ADP-RUN$-VALUE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-RUN$-EXACT-WORK ...)
+Rules: ((:DEFINITION ADP-PROGRAM-WORK)
+        (:DEFINITION ADP-RUN$)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-BUILD-CHART$-WORK))
+Hint-events: ((:USE ADP-BUILD-CHART$-WORK))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  53
+ADP-RUN$-EXACT-WORK
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-HONS-ASSOC-EQUAL-IS-ASSOC-EQUAL ...)
+Rules: ((:DEFINITION ALISTP)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION ATOM)
+        (:DEFINITION HONS-ASSOC-EQUAL)
+        (:DEFINITION HONS-EQUAL)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART ALISTP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ALISTP-FORWARD-TO-TRUE-LISTP)
+        (:INDUCTION HONS-ASSOC-EQUAL)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  661
+ADP-HONS-ASSOC-EQUAL-IS-ASSOC-EQUAL
+
+Summary
+Form:  ( DEFUN ADP-FAST-CHART-REF ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FAST-CHART-REF
+Goal'
+
+Summary
+Form:  ( DEFTHM ADP-FAST-CHART-REF-IS-CHART-REF ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-FAST-CHART-REF)
+        (:DEFINITION HONS-GET)
+        (:DEFINITION NFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-HONS-ASSOC-EQUAL-IS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  254
+ADP-FAST-CHART-REF-IS-CHART-REF
+
+Summary
+Form:  ( DEFUN ADP-FAST-EVAL-PREMISES ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FAST-EVAL-PREMISES
+
+Summary
+Form:  ( DEFUN ADP-FAST-EVAL-RULE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FAST-EVAL-RULE
+
+Summary
+Form:  ( DEFUN ADP-FAST-EVAL-RULES ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FAST-EVAL-RULES
+
+Summary
+Form:  ( DEFUN ADP-FAST-EVAL-ITEM ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ADP-FAST-EVAL-ITEM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-FAST-EVAL-PREMISES-IS-EVAL-PREMISES ...)
+Rules: ((:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-EVAL-PREMISES)
+        (:DEFINITION ADP-FAST-EVAL-PREMISES)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-FAST-EVAL-PREMISES)
+        (:REWRITE ADP-FAST-CHART-REF-IS-CHART-REF)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  806
+ADP-FAST-EVAL-PREMISES-IS-EVAL-PREMISES
+
+Summary
+Form:  ( DEFTHM ADP-FAST-EVAL-RULE-IS-EVAL-RULE ...)
+Rules: ((:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-FAST-EVAL-RULE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-FAST-EVAL-PREMISES-IS-EVAL-PREMISES)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  275
+ADP-FAST-EVAL-RULE-IS-EVAL-RULE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-FAST-EVAL-RULES-IS-EVAL-RULES ...)
+Rules: ((:DEFINITION ADP-EVAL-RULE)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-FAST-EVAL-RULES)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-FAST-EVAL-RULES)
+        (:REWRITE ADP-FAST-EVAL-RULE-IS-EVAL-RULE)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  874
+ADP-FAST-EVAL-RULES-IS-EVAL-RULES
+
+Summary
+Form:  ( DEFTHM ADP-FAST-EVAL-ITEM-IS-EVAL-ITEM ...)
+Rules: ((:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-FAST-EVAL-ITEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-FAST-EVAL-RULES-IS-EVAL-RULES)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  331
+ADP-FAST-EVAL-ITEM-IS-EVAL-ITEM
+
+Summary
+Form:  ( DEFUN ADP-FAST-RUN-AUX ...)
+Rules: ((:TYPE-PRESCRIPTION HONS-ACONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FAST-RUN-AUX
+
+Summary
+Form:  ( DEFUN ADP-FAST-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-FAST-RUN-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ADP-FAST-RUN
+
+Summary
+Form:  ( DEFUN ADP-FAST-VALUE ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ADP-FAST-VALUE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ADP-CDR-OF-NTHCDR ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTHCDR)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION NTHCDR)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE NTHCDR-OF-CDR)
+        (:REWRITE NTHCDR-WHEN-ZP)
+        (:REWRITE OPEN-SMALL-NTHCDR))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  479
+ADP-CDR-OF-NTHCDR
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ADP-ITEM-VALIDP-WHEN-PREFIX-VALID ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-ITEM-VALIDP)
+        (:DEFINITION ADP-PREFIX-VALIDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ADP-PREFIX-VALIDP)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ADP-ITEM-VALIDP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  4851
+ADP-ITEM-VALIDP-WHEN-PREFIX-VALID
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-CHART-CORRECTP-EXTEND-BY-FAST-EVALUATION ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACONS)
+        (:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-DENOTE-ITEM)
+        (:DEFINITION ADP-ITEM-VALIDP)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ALISTP-FORWARD-TO-TRUE-LISTP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE ADP-EVAL-NTH-ITEM-CORRECT)
+        (:REWRITE ADP-FAST-EVAL-ITEM-IS-EVAL-ITEM)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP)
+        (:TYPE-PRESCRIPTION ALISTP))
+Hint-events: ((:USE ADP-CHART-CORRECTP-EXTEND-BY-EVALUATION))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  4082
+ADP-CHART-CORRECTP-EXTEND-BY-FAST-EVALUATION
+Goal'
+Goal''
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ADP-FAST-CURRENT-ITEM-VALID ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-ITEM-VALIDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-OF-NTHCDR)
+        (:REWRITE CONSP-OF-NTHCDR)
+        (:REWRITE LEN-OF-NTHCDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:TYPE-PRESCRIPTION ADP-ITEM-VALIDP)
+        (:TYPE-PRESCRIPTION ADP-RULES-VALIDP)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ADP-ITEM-VALIDP-WHEN-PREFIX-VALID))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  3643
+ADP-FAST-CURRENT-ITEM-VALID
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-CHART-CORRECTP-FAST-STEP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE ADP-EVAL-NTH-ITEM-CORRECT)
+        (:REWRITE ADP-FAST-EVAL-ITEM-IS-EVAL-ITEM)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-OF-NTHCDR)
+        (:REWRITE CONSP-OF-NTHCDR)
+        (:REWRITE LEN-OF-NTHCDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-ITEM-VALIDP)
+        (:TYPE-PRESCRIPTION ALISTP)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ADP-CHART-CORRECTP-EXTEND-BY-FAST-EVALUATION)
+              (:USE ADP-FAST-CURRENT-ITEM-VALID))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  2428
+ADP-CHART-CORRECTP-FAST-STEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/2.1.2
+Subgoal *1/2.1.2'
+Subgoal *1/2.1.1
+Subgoal *1/2.1.1'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM ADP-FAST-RUN-AUX-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-DENOTE-ITEM)
+        (:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-EVAL-RULES)
+        (:DEFINITION ADP-FAST-RUN-AUX)
+        (:DEFINITION ALISTP)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION ENDP)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ALISTP-FORWARD-TO-TRUE-LISTP)
+        (:INDUCTION ADP-FAST-RUN-AUX)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE ADP-CDR-OF-NTHCDR)
+        (:REWRITE ADP-FAST-EVAL-ITEM-IS-EVAL-ITEM)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CAR-OF-NTHCDR)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-OF-NTHCDR)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LEN-OF-NTHCDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-PREFIX-VALIDP)
+        (:TYPE-PRESCRIPTION ALISTP)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ADP-CHART-CORRECTP-FAST-STEP))
+Time:  0.81 seconds (prove: 0.81, print: 0.00, other: 0.00)
+Prover steps counted:  57097
+ADP-FAST-RUN-AUX-CORRECT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ADP-ALISTP-OF-FAST-RUN-AUX ...)
+Rules: ((:DEFINITION ADP-EVAL-ITEM)
+        (:DEFINITION ADP-FAST-RUN-AUX)
+        (:DEFINITION ALISTP)
+        (:DEFINITION ENDP)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ALISTP-FORWARD-TO-TRUE-LISTP)
+        (:INDUCTION ADP-FAST-RUN-AUX)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE ADP-FAST-EVAL-ITEM-IS-EVAL-ITEM)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3227
+ADP-ALISTP-OF-FAST-RUN-AUX
+
+Summary
+Form:  ( DEFTHM ADP-ALISTP-OF-FAST-RUN ...)
+Rules: ((:DEFINITION ADP-FAST-RUN)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION ALISTP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  7
+ADP-ALISTP-OF-FAST-RUN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-FAST-RUN-CORRECT-CHART ...)
+Rules: ((:DEFINITION ADP-CHART-CORRECTP)
+        (:DEFINITION ADP-FAST-RUN)
+        (:DEFINITION ADP-PROGRAM-VALIDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ALISTP)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE OPEN-SMALL-NTHCDR)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION ADP-PREFIX-VALIDP)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ADP-FAST-RUN-AUX-CORRECT))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1687
+ADP-FAST-RUN-CORRECT-CHART
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ADP-FAST-VALUE-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ADP-CHART-REF)
+        (:DEFINITION ADP-FAST-CHART-REF)
+        (:DEFINITION ADP-FAST-RUN)
+        (:DEFINITION ADP-FAST-VALUE)
+        (:DEFINITION ADP-PROGRAM-VALIDP)
+        (:DEFINITION HONS-GET)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ALISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ADP-ALISTP-OF-FAST-RUN-AUX)
+        (:REWRITE ADP-HONS-ASSOC-EQUAL-IS-ASSOC-EQUAL)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-CHART-CORRECTP)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ADP-CHART-REF-WHEN-CORRECT)
+              (:USE ADP-FAST-RUN-CORRECT-CHART))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  5144
+ADP-FAST-VALUE-CORRECT
+(DEFXDOC ADP-CLIENT-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zaa-algebraic-dynamic-programming" ...)
+Rules: NIL
+Time:  5.68 seconds (prove: 4.19, print: 0.03, other: 1.45)
+Prover steps counted:  320337
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 5.68 seconds realtime, 5.29 seconds runtime
+; (658,334,992 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 43010 Jun 29 00:33 zaa-algebraic-dynamic-programming.cert

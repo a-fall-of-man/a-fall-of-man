@@ -1,0 +1,396 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbq-universal-toom-cook-certificate.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbr-universal-toom-cook-moments" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbr-universal-toom-cook-moments
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbq-universal-toom-cook-certificate" ...)
+Rules: NIL
+Time:  1.20 seconds (prove: 0.00, print: 0.00, other: 1.20)
+"/mnt/data/new-release/cert-work/zbq-universal-toom-cook-certificate.lisp"
+
+The event ( INCLUDE-BOOK "arithmetic-5/top" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+Summary
+Form:  ( DEFTHM TC-LAGRANGE-BANK-AUX-WHEN-ZP ...)
+Rules: ((:DEFINITION TC-LAGRANGE-BANK-AUX)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  41
+TC-LAGRANGE-BANK-AUX-WHEN-ZP
+
+Summary
+Form:  ( DEFTHM TC-LAGRANGE-BANK-AUX-OPEN ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-LAGRANGE-BANK-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  93
+TC-LAGRANGE-BANK-AUX-OPEN
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-POST-ROW-FROM-BANK-OF-NIL ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION TC-POST-ROW-FROM-BANK)
+        (:EXECUTABLE-COUNTERPART CONSP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  40
+TC-POST-ROW-FROM-BANK-OF-NIL
+
+Summary
+Form:  ( DEFTHM TC-POST-ROW-FROM-BANK-OF-CONS ...)
+Rules: ((:DEFINITION TC-POST-ROW-FROM-BANK)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  71
+TC-POST-ROW-FROM-BANK-OF-CONS
+
+Summary
+Form:  ( DEFTHM TC-ROW-MOMENT-AUX-OF-NIL ...)
+Rules: ((:DEFINITION TC-ROW-MOMENT-AUX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  18
+TC-ROW-MOMENT-AUX-OF-NIL
+
+Summary
+Form:  ( DEFTHM TC-ROW-MOMENT-AUX-OF-CONS ...)
+Rules: ((:DEFINITION TC-ROW-MOMENT-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  71
+TC-ROW-MOMENT-AUX-OF-CONS
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OPEN-WHEN-CONSP ...)
+Rules: ((:DEFINITION TC-NTH0)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  78
+TC-NTH0-OPEN-WHEN-CONSP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-TC-NTH0 ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RATIONAL-LISTP)
+        (:INDUCTION TC-NTH-SCALE-INDUCT)
+        (:REWRITE TC-NTH0-OF-NIL-TOTAL)
+        (:REWRITE TC-NTH0-OPEN-WHEN-CONSP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  858
+TC-RATIONALP-OF-TC-NTH0
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-NATURAL-EXPT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-INTEGERP-BASE)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-NONNEGATIVE-BASE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-RATIONALP-OF-NATURAL-EXPT
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-SUM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-RATIONALP-OF-SUM
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-PRODUCT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-RATIONALP-OF-PRODUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-LAGRANGE-COEFF-SUM-AUX ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:INDUCTION TC-LAGRANGE-COEFF-SUM-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-TC-LAGRANGE-ROW)
+        (:REWRITE RATIONALP-OF-TC-POLY-EVAL)
+        (:REWRITE TC-CURRENT-POINT-BELOW-BOUND)
+        (:REWRITE TC-LAGRANGE-COEFF-SUM-AUX-OPEN)
+        (:REWRITE TC-LAGRANGE-COEFF-SUM-AUX-WHEN-ZP)
+        (:REWRITE TC-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE TC-NATP-OF-ONE-PLUS)
+        (:REWRITE TC-NFIX-WHEN-NATP)
+        (:REWRITE TC-RATIONALP-OF-PRODUCT)
+        (:REWRITE TC-RATIONALP-OF-SUM)
+        (:REWRITE TC-RATIONALP-OF-TC-NTH0)
+        (:REWRITE TC-RATIONALP-WHEN-NATP)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-BOUND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  546
+TC-RATIONALP-OF-LAGRANGE-COEFF-SUM-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM TC-RATIONALP-OF-GENERATED-MOMENT-ACCUMULATOR-STEP ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RATIONAL-LISTP-OF-TC-LAGRANGE-ROW)
+              (:USE TC-CURRENT-POINT-BELOW-BOUND)
+              (:USE TC-RATIONALP-OF-NATURAL-EXPT)
+              (:USE TC-RATIONALP-OF-TC-NTH0))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  621
+TC-RATIONALP-OF-GENERATED-MOMENT-ACCUMULATOR-STEP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-GENERATED-ROW-MOMENT-INDUCT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE TC-NFIX-WHEN-NATP))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.01)
+Prover steps counted:  675
+TC-GENERATED-ROW-MOMENT-INDUCT
+Goal'
+
+Summary
+Form:  ( DEFTHM TC-TWO-CHANNEL-ACCUMULATOR-ALGEBRA ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  326
+TC-TWO-CHANNEL-ACCUMULATOR-ALGEBRA
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM TC-GENERATED-ROW-MOMENT-AS-TWO-COEFFICIENT-SUMS ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-GENERATED-ROW-MOMENT-INDUCT)
+        (:REWRITE RATIONAL-LISTP-OF-TC-LAGRANGE-ROW)
+        (:REWRITE RATIONAL-LISTP-OF-TC-MONOMIAL-COEFFS)
+        (:REWRITE TC-CURRENT-POINT-BELOW-BOUND)
+        (:REWRITE TC-LAGRANGE-BANK-AUX-OPEN)
+        (:REWRITE TC-LAGRANGE-BANK-AUX-WHEN-ZP)
+        (:REWRITE TC-LAGRANGE-COEFF-SUM-AUX-OPEN)
+        (:REWRITE TC-LAGRANGE-COEFF-SUM-AUX-WHEN-ZP)
+        (:REWRITE TC-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE TC-NATP-OF-ONE-PLUS)
+        (:REWRITE TC-NFIX-WHEN-NATP)
+        (:REWRITE TC-POLY-EVAL-OF-TC-MONOMIAL-COEFFS)
+        (:REWRITE TC-POST-ROW-FROM-BANK-OF-CONS)
+        (:REWRITE TC-POST-ROW-FROM-BANK-OF-NIL)
+        (:REWRITE TC-RATIONALP-OF-GENERATED-MOMENT-ACCUMULATOR-STEP)
+        (:REWRITE TC-RATIONALP-OF-LAGRANGE-COEFF-SUM-AUX)
+        (:REWRITE TC-RATIONALP-OF-NATURAL-EXPT)
+        (:REWRITE TC-RATIONALP-OF-TC-NTH0)
+        (:REWRITE TC-RATIONALP-WHEN-NATP)
+        (:REWRITE TC-ROW-MOMENT-AUX-OF-CONS)
+        (:REWRITE TC-ROW-MOMENT-AUX-OF-NIL)
+        (:REWRITE TC-SUCCESSOR-INTERVAL-BOUND)
+        (:REWRITE TC-TWO-CHANNEL-ACCUMULATOR-ALGEBRA))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1885
+TC-GENERATED-ROW-MOMENT-AS-TWO-COEFFICIENT-SUMS
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbr-universal-toom-cook-moments" ...)
+Rules: NIL
+Time:  1.28 seconds (prove: 0.03, print: 0.00, other: 1.25)
+Prover steps counted:  5323
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.28 seconds realtime, 1.21 seconds runtime
+; (149,439,168 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 25964 Jun 29 00:38 zbr-universal-toom-cook-moments.cert

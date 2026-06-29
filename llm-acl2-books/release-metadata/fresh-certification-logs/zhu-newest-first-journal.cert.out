@@ -1,0 +1,1051 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "centaur/fty/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/omaps/update.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zhu-newest-first-journal" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zhu-newest-first-journal
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "portcullis" ...)
+Rules: NIL
+Time:  0.24 seconds (prove: 0.00, print: 0.00, other: 0.24)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/std/omaps/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/top" ...)
+Rules: NIL
+Time:  1.37 seconds (prove: 0.00, print: 0.00, other: 1.37)
+"/mnt/data/acl2-8.7-recovery/books/centaur/fty/top.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/update" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+"/mnt/data/acl2-8.7-recovery/books/std/omaps/update.lisp"
+Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.45 seconds (prove: 0.00, print: 0.00, other: 0.45)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZHU-NEWEST-FIRST-JOURNAL)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TMP-DEFTYPES-SYMBOLP-OF-SYMBOL-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VJL-EVENT-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM CONSP-WHEN-VJL-EVENT-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (MAKE-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TAG-WHEN-VJL-EVENT-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VJL-EVENT-P-WHEN-WRONG-TAG ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VJL-EVENT-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VJL-EVENT-FIX$INLINE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Goal'
+Goal''
+Goal'''
+Form:  ( DEFTHM VJL-EVENT-P-OF-VJL-EVENT-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VJL-EVENT-P-OF-VJL-EVENT-FIX ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM VJL-EVENT-FIX-WHEN-VJL-EVENT-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VJL-EVENT-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM TAG-OF-VJL-EVENT-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VJL-EVENT->KEY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VJL-EVENT->KEY$INLINE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFTHM SYMBOLP-OF-VJL-EVENT->KEY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM SYMBOLP-OF-VJL-EVENT->KEY ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VJL-EVENT->KEY$INLINE-OF-VJL-EVENT-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VJL-EVENT->KEY ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VJL-EVENT->VALUE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VJL-EVENT->VALUE$INLINE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Goal'
+Form:  ( DEFTHM VJL-EVENT->VALUE$INLINE-OF-VJL-EVENT-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VJL-EVENT->VALUE ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM VJL-EVENT-P-OF-VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VJL-EVENT-P-OF-VJL-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Form:  ( DEFTHM VJL-EVENT->KEY-OF-VJL-EVENT ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VJL-EVENT->VALUE-OF-VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VJL-EVENT-OF-FIELDS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VJL-EVENT-FIX-WHEN-VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Subgoal 4
+Subgoal 4'
+Subgoal 4''
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM EQUAL-OF-VJL-EVENT ...)
+Time:  0.08 seconds (prove: 0.06, print: 0.00, other: 0.03)
+Goal'
+Form:  ( DEFTHM VJL-EVENT-OF-SYMBOL-FIX-KEY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFMACRO PATBIND-VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE B*-BINDER-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFMACRO PATBIND-VJL-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO MAKE-VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO CHANGE-VJL-EVENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VJL-EVENT->KEY-OF-VJL-EVENT ...) ...)
+Time:  0.10 seconds (prove: 0.06, print: 0.00, other: 0.03)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN REMAKE-VJL-EVENT ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFTHM VJL-EVENT-FIX-REDEF ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+Form:  ( DEFTHM TAG-OF-VJL-EVENT ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VJL-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VJL-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.35 seconds (prove: 0.09, print: 0.00, other: 0.25)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.37 seconds (prove: 0.09, print: 0.00, other: 0.28)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFPROD-FN ...))
+Rules: NIL
+Time:  0.37 seconds (prove: 0.09, print: 0.00, other: 0.28)
+Prover steps counted:  2657
+T
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VJL-JOURNAL-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+
+Deflist: attempting to show, using your current theory, that (VJL-EVENT-P X)
+is always Boolean valued.
+
+Deflist: introducing VJL-JOURNAL-P and proving deflist theorems.
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VJL-JOURNAL-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VJL-JOURNAL-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VJL-JOURNAL-P-OF-VJL-JOURNAL-FIX ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VJL-JOURNAL-P-OF-VJL-JOURNAL-FIX ...) ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VJL-JOURNAL-FIX-WHEN-VJL-JOURNAL-P ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VJL-JOURNAL-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Form:  ( DEFTHM CAR-OF-VJL-JOURNAL-FIX-X-UNDER-VJL-EVENT-EQUIV ...)
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+Form:  ( DEFTHM CDR-OF-VJL-JOURNAL-FIX-X-UNDER-VJL-JOURNAL-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VJL-EVENT-FIX-X-UNDER-VJL-JOURNAL-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VJL-JOURNAL-FIX-Y-UNDER-VJL-JOURNAL-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM CONSP-OF-VJL-JOURNAL-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VJL-JOURNAL-FIX-UNDER-IFF ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM VJL-JOURNAL-FIX-OF-CONS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Form:  ( DEFTHM LEN-OF-VJL-JOURNAL-FIX ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Form:  ( DEFTHM VJL-JOURNAL-FIX-OF-APPEND ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Form:  ( DEFTHM VJL-JOURNAL-FIX-OF-REPEAT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM LIST-EQUIV-REFINES-VJL-JOURNAL-EQUIV ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Subgoal *1/3
+Subgoal *1/3.9
+Subgoal *1/3.9'
+Subgoal *1/3.9''
+Subgoal *1/3.9'''
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.3'
+Subgoal *1/3.3''
+Subgoal *1/3.3'''
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.2'''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/3.1'''
+Subgoal *1/2
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Form:  ( DEFTHM NTH-OF-VJL-JOURNAL-FIX ...)
+Time:  0.14 seconds (prove: 0.14, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VJL-JOURNAL-EQUIV-IMPLIES-VJL-JOURNAL-EQUIV-APPEND-1
+...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VJL-JOURNAL-EQUIV-IMPLIES-VJL-JOURNAL-EQUIV-APPEND-2
+...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VJL-JOURNAL-EQUIV-IMPLIES-VJL-JOURNAL-EQUIV-NTHCDR-2
+...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (DEFCONG-FORM ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VJL-JOURNAL-EQUIV-IMPLIES-VJL-JOURNAL-EQUIV-TAKE-2
+...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (DEFCONG-FORM ...))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.28 seconds (prove: 0.23, print: 0.00, other: 0.04)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VJL-JOURNAL ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VJL-JOURNAL ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.42 seconds (prove: 0.24, print: 0.01, other: 0.17)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.45 seconds (prove: 0.24, print: 0.01, other: 0.20)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFLIST-FN ...))
+Rules: NIL
+Time:  0.45 seconds (prove: 0.24, print: 0.01, other: 0.20)
+Prover steps counted:  9627
+T
+
+Summary
+Form:  ( DEFUN VJL-APPLY-EVENT ...)
+Rules: ((:TYPE-PRESCRIPTION OMAP::UPDATE-TYPE-PRESCRIPTION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VJL-APPLY-EVENT
+
+Summary
+Form:  ( DEFUN VJL-REPLAY ...)
+Rules: ((:TYPE-PRESCRIPTION OMAP::MFIX)
+        (:TYPE-PRESCRIPTION VJL-APPLY-EVENT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VJL-REPLAY
+
+Summary
+Form:  ( DEFUN VJL-KEY-MEMBERP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VJL-KEY-MEMBERP
+
+Summary
+Form:  ( DEFUN VJL-REMOVE-KEY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VJL-REMOVE-KEY
+Goal'
+Goal''
+Goal'''
+Goal'4'
+Subgoal *1/6
+Subgoal *1/6'
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1.2
+Subgoal *1/1.1
+Subgoal *1/1.1'
+
+Summary
+Form:  ( DEFUN VJL-NORMALIZE ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION INTEGER-ABS)
+        (:DEFINITION LENGTH)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION VJL-REMOVE-KEY)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ACL2-COUNT)
+        (:INDUCTION VJL-REMOVE-KEY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE STR::COERCE-TO-LIST-REMOVAL)
+        (:REWRITE COMMUTATIVITY-2-OF-+)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE FOLD-CONSTS-IN-+)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION VJL-EVENT->KEY$INLINE)
+        (:TYPE-PRESCRIPTION VJL-REMOVE-KEY))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  9725
+VJL-NORMALIZE
+
+Summary
+Form:  ( DEFUN VJL-UNIQUE-KEYSP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VJL-UNIQUE-KEYSP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-KEY-MEMBERP-OF-REMOVE-SAME ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-KEY-MEMBERP)
+        (:DEFINITION VJL-REMOVE-KEY)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-REMOVE-KEY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION VJL-REMOVE-KEY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  380
+VJL-KEY-MEMBERP-OF-REMOVE-SAME
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-KEY-MEMBERP-OF-REMOVE-DIFFERENT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-KEY-MEMBERP)
+        (:DEFINITION VJL-REMOVE-KEY)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-REMOVE-KEY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION VJL-REMOVE-KEY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  795
+VJL-KEY-MEMBERP-OF-REMOVE-DIFFERENT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-KEY-MEMBERP-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-KEY-MEMBERP)
+        (:DEFINITION VJL-NORMALIZE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-NORMALIZE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VJL-KEY-MEMBERP-OF-REMOVE-DIFFERENT)
+        (:TYPE-PRESCRIPTION VJL-EVENT->KEY$INLINE)
+        (:TYPE-PRESCRIPTION VJL-NORMALIZE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  412
+VJL-KEY-MEMBERP-OF-NORMALIZE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-NORMALIZE-HAS-UNIQUE-KEYS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-NORMALIZE)
+        (:DEFINITION VJL-UNIQUE-KEYSP)
+        (:EXECUTABLE-COUNTERPART VJL-UNIQUE-KEYSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-NORMALIZE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VJL-KEY-MEMBERP-OF-NORMALIZE)
+        (:REWRITE VJL-KEY-MEMBERP-OF-REMOVE-SAME)
+        (:TYPE-PRESCRIPTION VJL-NORMALIZE)
+        (:TYPE-PRESCRIPTION VJL-UNIQUE-KEYSP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  171
+VJL-NORMALIZE-HAS-UNIQUE-KEYS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VJL-UPDATE-AROUND-DIFFERENT-KEY ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE OMAP::UPDATE-DIFFERENT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  333
+VJL-UPDATE-AROUND-DIFFERENT-KEY
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-REPLAY-REMOVE-KEY-UNDER-UPDATE ...)
+Rules: ((:CONGRUENCE OMAP::UPDATE-MEQUIV-CONGRUENCE-ON-MAP)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-APPLY-EVENT)
+        (:DEFINITION VJL-REMOVE-KEY)
+        (:DEFINITION VJL-REPLAY)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-REMOVE-KEY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE OMAP::MFIX-UNDER-MEQUIV)
+        (:REWRITE OMAP::UPDATE-SAME)
+        (:TYPE-PRESCRIPTION VJL-REMOVE-KEY))
+Hint-events: ((:USE VJL-UPDATE-AROUND-DIFFERENT-KEY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  859
+VJL-REPLAY-REMOVE-KEY-UNDER-UPDATE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-REPLAY-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-APPLY-EVENT)
+        (:DEFINITION VJL-NORMALIZE)
+        (:DEFINITION VJL-REPLAY)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-NORMALIZE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION VJL-EVENT->KEY$INLINE)
+        (:TYPE-PRESCRIPTION VJL-NORMALIZE))
+Hint-events: ((:USE VJL-REPLAY-REMOVE-KEY-UNDER-UPDATE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  690
+VJL-REPLAY-OF-NORMALIZE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-REMOVE-KEY-WHEN-ABSENT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VJL-KEY-MEMBERP)
+        (:DEFINITION VJL-REMOVE-KEY)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VJL-REMOVE-KEY)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-OF-CONS)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION VJL-KEY-MEMBERP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1027
+VJL-REMOVE-KEY-WHEN-ABSENT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VJL-NORMALIZE-WHEN-UNIQUE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VJL-NORMALIZE)
+        (:DEFINITION VJL-UNIQUE-KEYSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:EXECUTABLE-COUNTERPART VJL-NORMALIZE)
+        (:EXECUTABLE-COUNTERPART VJL-UNIQUE-KEYSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE VJL-REMOVE-KEY-WHEN-ABSENT)
+        (:TYPE-PRESCRIPTION VJL-NORMALIZE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  501
+VJL-NORMALIZE-WHEN-UNIQUE
+Goal'
+
+Summary
+Form:  ( DEFTHM VJL-NORMALIZE-IDEMPOTENT ...)
+Rules: ((:TYPE-PRESCRIPTION VJL-NORMALIZE)
+        (:TYPE-PRESCRIPTION VJL-UNIQUE-KEYSP))
+Hint-events: ((:USE VJL-NORMALIZE-HAS-UNIQUE-KEYS)
+              (:USE VJL-NORMALIZE-WHEN-UNIQUE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  54
+VJL-NORMALIZE-IDEMPOTENT
+
+Summary
+Form:  ( DEFCONST *VJL-DEMO* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VJL-DEMO*
+:PASSED
+(DEFXDOC VJL-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zhu-newest-first-journal" ...)
+Rules: NIL
+Time:  3.07 seconds (prove: 0.49, print: 0.01, other: 2.56)
+Prover steps counted:  27231
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 3.07 seconds realtime, 2.87 seconds runtime
+; (352,379,904 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 84501 Jun 29 00:40 zhu-newest-first-journal.cert

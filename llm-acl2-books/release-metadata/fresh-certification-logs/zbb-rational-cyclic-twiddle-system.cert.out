@@ -1,0 +1,1483 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zax-rational-winograd-interface.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbb-rational-cyclic-twiddle-system" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbb-rational-cyclic-twiddle-system
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zax-rational-winograd-interface" ...)
+Rules: NIL
+Time:  1.09 seconds (prove: 0.00, print: 0.00, other: 1.09)
+"/mnt/data/new-release/cert-work/zax-rational-winograd-interface.lisp"
+
+Summary
+Form:  ( DEFUN QCX-NORM-SQUARE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-NORM-SQUARE
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-NORM-SQUARE-OF-MUL ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-NORM-SQUARE)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EVENP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE |(expt (- x) n)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-RATIONALP-BASE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  592
+QCX-NORM-SQUARE-OF-MUL
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-NORM-SQUARE-OF-SCALE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NORM-SQUARE)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  344
+QCX-NORM-SQUARE-OF-SCALE
+
+Summary
+Form:  ( DEFTHM RCT-SQUARE-NONNEGATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (* x y) 0) rationalp (* x y)|)
+        (:REWRITE |(<= (/ x) y) with (< x 0)|)
+        (:REWRITE |(<= x (/ y)) with (< 0 y)|))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  81
+RCT-SQUARE-NONNEGATIVE
+
+Summary
+Form:  ( DEFUN RCT-UNIT-DENOMINATOR ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-UNIT-DENOMINATOR
+
+Summary
+Form:  ( DEFUN RCT-RATIONAL-UNIT ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-RATIONAL-UNIT
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RCT-UNIT-DENOMINATOR-POSITIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RCT-UNIT-DENOMINATOR)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x x)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:TYPE-PRESCRIPTION EXPT)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-RATIONALP-BASE))
+Hint-events: ((:USE RCT-SQUARE-NONNEGATIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  145
+RCT-UNIT-DENOMINATOR-POSITIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RCT-STEREOGRAPHIC-NUMERATOR-IDENTITY ...)
+Rules: ((:DEFINITION RCT-UNIT-DENOMINATOR)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EVENP)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE |(expt (- x) n)|)
+        (:REWRITE |(expt (expt x m) n)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-RATIONALP-BASE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  373
+RCT-STEREOGRAPHIC-NUMERATOR-IDENTITY
+
+Summary
+Form:  ( DEFTHM RCT-INVERSE-SQUARE-CANCEL ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:REWRITE |(* (/ x) (expt x n))|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(expt x 1)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  114
+RCT-INVERSE-SQUARE-CANCEL
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-RCT-RATIONAL-UNIT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RCT-RATIONAL-UNIT)
+        (:DEFINITION RCT-UNIT-DENOMINATOR)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE QCX-RATIONALP-OF-SCALE)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-RATIONALP-BASE)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Hint-events: ((:USE QCX-RATIONALP-OF-SCALE)
+              (:USE RCT-UNIT-DENOMINATOR-POSITIVE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  972
+QCX-RATIONALP-OF-RCT-RATIONAL-UNIT
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-NORM-SQUARE-OF-RCT-RATIONAL-UNIT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NORM-SQUARE)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RCT-RATIONAL-UNIT)
+        (:DEFINITION RCT-UNIT-DENOMINATOR)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART EVENP)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE |(expt (- x) n)|)
+        (:REWRITE |(expt (/ x) n)|)
+        (:REWRITE |(expt (expt x m) n)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-3)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE QCX-NORM-SQUARE-OF-SCALE)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-RATIONALP-BASE))
+Hint-events: ((:USE QCX-NORM-SQUARE-OF-SCALE)
+              (:USE RCT-INVERSE-SQUARE-CANCEL)
+              (:USE RCT-STEREOGRAPHIC-NUMERATOR-IDENTITY)
+              (:USE RCT-UNIT-DENOMINATOR-POSITIVE))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  2530
+QCX-NORM-SQUARE-OF-RCT-RATIONAL-UNIT
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RCT-ADVANCE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION QCX-MUL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RCT-ADVANCE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RCT-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RCT-POWER-TABLE-AUX
+
+Summary
+Form:  ( DEFUN RCT-POWER-TABLE ...)
+Rules: ((:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-POWER-TABLE
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM LEN-OF-RCT-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE LEN-OF-CONS))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  1813
+LEN-OF-RCT-POWER-TABLE-AUX
+
+Summary
+Form:  ( DEFTHM LEN-OF-RCT-POWER-TABLE ...)
+Rules: ((:DEFINITION RCT-POWER-TABLE)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:REWRITE LEN-OF-RCT-POWER-TABLE-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  13
+LEN-OF-RCT-POWER-TABLE
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM CONSP-OF-RCT-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  123
+CONSP-OF-RCT-POWER-TABLE-AUX
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM CAR-OF-RCT-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE ZP-OPEN))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1497
+CAR-OF-RCT-POWER-TABLE-AUX
+Subgoal 20
+Subgoal 19
+Subgoal 19'
+Subgoal 18
+Subgoal 18'
+Subgoal 17
+Subgoal 17'
+Subgoal 16
+Subgoal 16'
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 12'
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM CDR-OF-RCT-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2))
+Time:  0.11 seconds (prove: 0.11, print: 0.00, other: 0.00)
+Prover steps counted:  12212
+CDR-OF-RCT-POWER-TABLE-AUX
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-RCT-ADVANCE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RCT-ADVANCE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-ADVANCE)
+        (:REWRITE |(* y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QCX-MUL)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP)
+        (:TYPE-PRESCRIPTION RCT-ADVANCE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  545
+QCX-RATIONALP-OF-RCT-ADVANCE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-LIST-RATIONALP-OF-RCT-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:EXECUTABLE-COUNTERPART QCX-LIST-RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE |(* y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX))
+Time:  0.07 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  1877
+QCX-LIST-RATIONALP-OF-RCT-POWER-TABLE-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RCT-POWER-TABLE ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RCT-POWER-TABLE)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-RCT-POWER-TABLE-AUX)
+        (:REWRITE QCX-LIST-RATIONALP-OF-RCT-POWER-TABLE-AUX)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-LIST-RATIONALP-OF-RCT-POWER-TABLE-AUX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  366
+QCX-VECTORP-OF-RCT-POWER-TABLE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-NORM-SQUARE-OF-RCT-ADVANCE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RCT-ADVANCE)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:INDUCTION RCT-ADVANCE)
+        (:REWRITE QCX-NORM-SQUARE-OF-MUL)
+        (:REWRITE QCX-RATIONALP-OF-MUL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  665
+QCX-NORM-SQUARE-OF-RCT-ADVANCE
+
+Summary
+Form:  ( DEFUN RCT-UNIT-TABLEP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-UNIT-TABLEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RCT-UNIT-TABLEP-OF-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION RCT-UNIT-TABLEP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART RCT-UNIT-TABLEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE QCX-NORM-SQUARE-OF-MUL)
+        (:REWRITE QCX-RATIONALP-OF-MUL)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX)
+        (:TYPE-PRESCRIPTION RCT-UNIT-TABLEP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  778
+RCT-UNIT-TABLEP-OF-POWER-TABLE-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RCT-UNIT-TABLEP-OF-POWER-TABLE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NORM-SQUARE)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RCT-POWER-TABLE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-NORM-SQUARE)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:REWRITE |(* x x)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE RCT-UNIT-TABLEP-OF-POWER-TABLE-AUX)
+        (:TYPE-PRESCRIPTION RCT-UNIT-TABLEP))
+Hint-events: ((:USE RCT-UNIT-TABLEP-OF-POWER-TABLE-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  507
+RCT-UNIT-TABLEP-OF-POWER-TABLE
+
+Summary
+Form:  ( DEFUN RCT-POWER-CHAIN-TAILP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-POWER-CHAIN-TAILP
+
+Summary
+Form:  ( DEFUN RCT-POWER-CHAINP ...)
+Rules: ((:TYPE-PRESCRIPTION RCT-POWER-CHAIN-TAILP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-POWER-CHAINP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.20'
+Subgoal *1/2.19
+Subgoal *1/2.19'
+Subgoal *1/2.18
+Subgoal *1/2.18'
+Subgoal *1/2.17
+Subgoal *1/2.17'
+Subgoal *1/2.16
+Subgoal *1/2.16'
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RCT-POWER-CHAIN-TAILP-OF-POWER-TABLE-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RCT-POWER-CHAIN-TAILP)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ x x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-3)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE QCX-MUL-ASSOCIATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE)
+        (:REWRITE QCX-MUL-OF-QUOTED-ZERO-LEFT)
+        (:TYPE-PRESCRIPTION RCT-POWER-CHAIN-TAILP)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX))
+Time:  0.50 seconds (prove: 0.49, print: 0.01, other: 0.00)
+Prover steps counted:  34987
+RCT-POWER-CHAIN-TAILP-OF-POWER-TABLE-AUX
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RCT-POWER-CHAINP-OF-POWER-TABLE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RCT-POWER-CHAINP)
+        (:DEFINITION RCT-POWER-TABLE)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION RCT-POWER-CHAINP)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX))
+Hint-events: ((:USE QCX-MUL-LEFT-IDENTITY)
+              (:USE RCT-POWER-CHAIN-TAILP-OF-POWER-TABLE-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  779
+RCT-POWER-CHAINP-OF-POWER-TABLE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RCT-SEPARATED-ORBITP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-NEG)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1093
+RCT-SEPARATED-ORBITP
+
+Summary
+Form:  ( DEFUN RCT-TABLE-SEPARATED-FROM-ONE-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-TABLE-SEPARATED-FROM-ONE-P
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.106
+Subgoal *1/2.105
+Subgoal *1/2.104
+Subgoal *1/2.104.8
+Subgoal *1/2.104.8'
+Subgoal *1/2.104.7
+Subgoal *1/2.104.6
+Subgoal *1/2.104.6'
+Subgoal *1/2.104.5
+Subgoal *1/2.104.4
+Subgoal *1/2.104.4'
+Subgoal *1/2.104.4''
+Subgoal *1/2.104.3
+Subgoal *1/2.104.2
+Subgoal *1/2.104.2'
+Subgoal *1/2.104.1
+Subgoal *1/2.104.1'
+Subgoal *1/2.104.1''
+Subgoal *1/2.103
+Subgoal *1/2.103.4
+Subgoal *1/2.103.3
+Subgoal *1/2.103.2
+Subgoal *1/2.103.1
+Subgoal *1/2.102
+Subgoal *1/2.102.4
+Subgoal *1/2.102.4.2
+Subgoal *1/2.102.4.1
+Subgoal *1/2.102.3
+Subgoal *1/2.102.2
+Subgoal *1/2.102.2.2
+Subgoal *1/2.102.2.2'
+Subgoal *1/2.102.2.1
+Subgoal *1/2.102.2.1'
+Subgoal *1/2.102.1
+Subgoal *1/2.102.1'
+Subgoal *1/2.101
+Subgoal *1/2.101.8
+Subgoal *1/2.101.8'
+Subgoal *1/2.101.7
+Subgoal *1/2.101.6
+Subgoal *1/2.101.6'
+Subgoal *1/2.101.5
+Subgoal *1/2.101.4
+Subgoal *1/2.101.4'
+Subgoal *1/2.101.4''
+Subgoal *1/2.101.3
+Subgoal *1/2.101.2
+Subgoal *1/2.101.2'
+Subgoal *1/2.101.1
+Subgoal *1/2.101.1'
+Subgoal *1/2.101.1''
+Subgoal *1/2.101.1'''
+Subgoal *1/2.100
+Subgoal *1/2.100.4
+Subgoal *1/2.100.4.2
+Subgoal *1/2.100.4.1
+Subgoal *1/2.100.3
+Subgoal *1/2.100.2
+Subgoal *1/2.100.2.2
+Subgoal *1/2.100.2.2'
+Subgoal *1/2.100.2.1
+Subgoal *1/2.100.2.1'
+Subgoal *1/2.100.1
+Subgoal *1/2.100.1'
+Subgoal *1/2.99
+Subgoal *1/2.99.4
+Subgoal *1/2.99.3
+Subgoal *1/2.99.2
+Subgoal *1/2.99.1
+Subgoal *1/2.98
+Subgoal *1/2.97
+Subgoal *1/2.97.12
+Subgoal *1/2.97.11
+Subgoal *1/2.97.10
+Subgoal *1/2.97.9
+Subgoal *1/2.97.9'
+Subgoal *1/2.97.8
+Subgoal *1/2.97.8'
+Subgoal *1/2.97.7
+Subgoal *1/2.97.6
+Subgoal *1/2.97.6'
+Subgoal *1/2.97.5
+Subgoal *1/2.97.4
+Subgoal *1/2.97.4'
+Subgoal *1/2.97.4''
+Subgoal *1/2.97.3
+Subgoal *1/2.97.3'
+Subgoal *1/2.97.3''
+Subgoal *1/2.97.2
+Subgoal *1/2.97.2'
+Subgoal *1/2.97.1
+Subgoal *1/2.96
+Subgoal *1/2.96'
+Subgoal *1/2.95
+Subgoal *1/2.95'
+Subgoal *1/2.94
+Subgoal *1/2.94'
+Subgoal *1/2.93
+Subgoal *1/2.93'
+Subgoal *1/2.92
+Subgoal *1/2.91
+Subgoal *1/2.90
+Subgoal *1/2.89
+Subgoal *1/2.88
+Subgoal *1/2.87
+Subgoal *1/2.86
+Subgoal *1/2.85
+Subgoal *1/2.84
+Subgoal *1/2.84'
+Subgoal *1/2.84''
+Subgoal *1/2.84'''
+Subgoal *1/2.83
+Subgoal *1/2.82
+Subgoal *1/2.81
+Subgoal *1/2.80
+Subgoal *1/2.79
+Subgoal *1/2.78
+Subgoal *1/2.77
+Subgoal *1/2.76
+Subgoal *1/2.75
+Subgoal *1/2.74
+Subgoal *1/2.73
+Subgoal *1/2.72
+Subgoal *1/2.71
+Subgoal *1/2.70
+Subgoal *1/2.69
+Subgoal *1/2.68
+Subgoal *1/2.67
+Subgoal *1/2.66
+Subgoal *1/2.65
+Subgoal *1/2.65'
+Subgoal *1/2.65''
+Subgoal *1/2.65'''
+Subgoal *1/2.64
+Subgoal *1/2.63
+Subgoal *1/2.62
+Subgoal *1/2.61
+Subgoal *1/2.60
+Subgoal *1/2.59
+Subgoal *1/2.58
+Subgoal *1/2.57
+Subgoal *1/2.56
+Subgoal *1/2.56'
+Subgoal *1/2.56''
+Subgoal *1/2.55
+Subgoal *1/2.54
+Subgoal *1/2.53
+Subgoal *1/2.52
+Subgoal *1/2.51
+Subgoal *1/2.51'
+Subgoal *1/2.50
+Subgoal *1/2.49
+Subgoal *1/2.48
+Subgoal *1/2.47
+Subgoal *1/2.46
+Subgoal *1/2.45
+Subgoal *1/2.44
+Subgoal *1/2.43
+Subgoal *1/2.42
+Subgoal *1/2.41
+Subgoal *1/2.40
+Subgoal *1/2.40'
+Subgoal *1/2.40''
+Subgoal *1/2.40.2
+Subgoal *1/2.40.1
+Subgoal *1/2.39
+Subgoal *1/2.38
+Subgoal *1/2.37
+Subgoal *1/2.37'
+Subgoal *1/2.37''
+Subgoal *1/2.36
+Subgoal *1/2.35
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.31
+Subgoal *1/2.30
+Subgoal *1/2.30'
+Subgoal *1/2.30''
+Subgoal *1/2.30.2
+Subgoal *1/2.30.1
+Subgoal *1/2.29
+Subgoal *1/2.28
+Subgoal *1/2.28'
+Subgoal *1/2.27
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.24
+Subgoal *1/2.24'
+Subgoal *1/2.24''
+Subgoal *1/2.24.2
+Subgoal *1/2.24.1
+Subgoal *1/2.23
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.21'
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.18'
+Subgoal *1/2.18''
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.14''
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.6''
+Subgoal *1/2.6.2
+Subgoal *1/2.6.1
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RCT-SEPARATED-TABLE-OF-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION RCT-SEPARATED-ORBITP)
+        (:DEFINITION RCT-TABLE-SEPARATED-FROM-ONE-P)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-DIST)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART QCX-NEG)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RCT-POWER-TABLE-AUX)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< c (- x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CAR-OF-RCT-POWER-TABLE-AUX)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONSP-OF-RCT-POWER-TABLE-AUX)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX)
+        (:TYPE-PRESCRIPTION RCT-SEPARATED-ORBITP)
+        (:TYPE-PRESCRIPTION RCT-TABLE-SEPARATED-FROM-ONE-P))
+Time:  5.07 seconds (prove: 5.05, print: 0.02, other: 0.00)
+Prover steps counted:  246071
+RCT-SEPARATED-TABLE-OF-ORBIT
+
+Summary
+Form:  ( DEFUN RCT-SEED-CERTIFICATEP ...)
+Rules: ((:TYPE-PRESCRIPTION RCT-SEPARATED-ORBITP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-SEED-CERTIFICATEP
+
+Summary
+Form:  ( DEFUN RCT-TWIDDLE-SYSTEMP ...)
+Rules: ((:TYPE-PRESCRIPTION RCT-TABLE-SEPARATED-FROM-ONE-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-TWIDDLE-SYSTEMP
+Goal'
+Goal''
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RCT-POWER-TABLE-BUILDER-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ABS)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-NORM-SQUARE)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RCT-ADVANCE)
+        (:DEFINITION RCT-POWER-CHAINP)
+        (:DEFINITION RCT-POWER-TABLE)
+        (:DEFINITION RCT-POWER-TABLE-AUX)
+        (:DEFINITION RCT-SEED-CERTIFICATEP)
+        (:DEFINITION RCT-TWIDDLE-SYSTEMP)
+        (:DEFINITION RCT-UNIT-TABLEP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART QCX-NEG)
+        (:EXECUTABLE-COUNTERPART QCX-NORM-SQUARE)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-RCT-POWER-TABLE-AUX)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-LIST-RATIONALP-OF-RCT-POWER-TABLE-AUX)
+        (:REWRITE RCT-SEPARATED-TABLE-OF-ORBIT)
+        (:REWRITE RCT-UNIT-TABLEP-OF-POWER-TABLE-AUX)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION RCT-ADVANCE)
+        (:TYPE-PRESCRIPTION RCT-POWER-CHAIN-TAILP)
+        (:TYPE-PRESCRIPTION RCT-POWER-TABLE-AUX)
+        (:TYPE-PRESCRIPTION RCT-SEPARATED-ORBITP)
+        (:TYPE-PRESCRIPTION RCT-TWIDDLE-SYSTEMP))
+Hint-events: ((:USE QCX-VECTORP-OF-RCT-POWER-TABLE)
+              (:USE RCT-POWER-CHAINP-OF-POWER-TABLE)
+              (:USE RCT-SEPARATED-TABLE-OF-ORBIT)
+              (:USE RCT-UNIT-TABLEP-OF-POWER-TABLE))
+Time:  0.35 seconds (prove: 0.35, print: 0.00, other: 0.00)
+Prover steps counted:  29888
+RCT-POWER-TABLE-BUILDER-CORRECT
+
+Summary
+Form:  ( DEFUN RCT-PARAMETER-CERTIFICATEP ...)
+Rules: ((:TYPE-PRESCRIPTION RCT-SEED-CERTIFICATEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-PARAMETER-CERTIFICATEP
+
+Summary
+Form:  ( DEFUN RCT-TWIDDLE-TABLE ...)
+Rules: ((:TYPE-PRESCRIPTION RCT-POWER-TABLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-TWIDDLE-TABLE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RCT-TWIDDLE-TABLE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RCT-POWER-TABLE)
+        (:DEFINITION RCT-TWIDDLE-TABLE)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-RATIONALP-OF-RCT-RATIONAL-UNIT)
+              (:USE QCX-VECTORP-OF-RCT-POWER-TABLE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  77
+QCX-VECTORP-OF-RCT-TWIDDLE-TABLE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RCT-RATIONAL-PARAMETER-BUILDER-CORRECT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RCT-PARAMETER-CERTIFICATEP)
+        (:DEFINITION RCT-TWIDDLE-TABLE)
+        (:TYPE-PRESCRIPTION RCT-TWIDDLE-SYSTEMP))
+Hint-events: ((:USE RCT-POWER-TABLE-BUILDER-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  84
+RCT-RATIONAL-PARAMETER-BUILDER-CORRECT
+Goal'
+Goal''
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RCT-RATIONAL-PARAMETER-IS-UNIT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NORM-SQUARE)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RCT-POWER-TABLE)
+        (:DEFINITION RCT-RATIONAL-UNIT)
+        (:DEFINITION RCT-TWIDDLE-TABLE)
+        (:DEFINITION RCT-UNIT-DENOMINATOR)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART EVENP)
+        (:EXECUTABLE-COUNTERPART QCX-ONE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE |(expt (- x) n)|)
+        (:REWRITE |(expt (/ x) n)|)
+        (:REWRITE |(expt (expt x m) n)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-3)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-RATIONALP-BASE)
+        (:TYPE-PRESCRIPTION RCT-UNIT-TABLEP))
+Hint-events: ((:USE QCX-NORM-SQUARE-OF-RCT-RATIONAL-UNIT)
+              (:USE RCT-UNIT-TABLEP-OF-POWER-TABLE))
+Time:  1.17 seconds (prove: 1.17, print: 0.00, other: 0.00)
+Prover steps counted:  25813
+RCT-RATIONAL-PARAMETER-IS-UNIT
+Goal'
+
+Summary
+Form:  ( DEFTHM RCT-RWD-GENERATED-TABLE-CORRECT ...)
+Rules: NIL
+Hint-events: ((:USE QCX-VECTORP-OF-RCT-TWIDDLE-TABLE)
+              (:USE RWD-RATIONAL-INPUT-RUN-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-RWD-GENERATED-TABLE-CORRECT
+Goal'
+
+Summary
+Form:  ( DEFTHM RCT-QWB-GENERATED-TABLE-CORRECT ...)
+Rules: NIL
+Hint-events: ((:USE QCX-VECTORP-OF-RCT-TWIDDLE-TABLE)
+              (:USE QWB-RATIONAL-INPUT-RUN-CORRECT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RCT-QWB-GENERATED-TABLE-CORRECT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbb-rational-cyclic-twiddle-system" ...)
+Rules: NIL
+Time:  8.77 seconds (prove: 7.51, print: 0.03, other: 1.23)
+Prover steps counted:  364599
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 8.77 seconds realtime, 8.17 seconds runtime
+; (1,525,495,248 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 31514 Jun 29 00:37 zbb-rational-cyclic-twiddle-system.cert

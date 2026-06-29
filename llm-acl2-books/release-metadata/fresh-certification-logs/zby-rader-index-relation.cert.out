@@ -1,0 +1,345 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbx-rader-inverse-orbit.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "kestrel/lists-light/nth.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zby-rader-index-relation" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zby-rader-index-relation
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.17 seconds (prove: 0.00, print: 0.00, other: 0.17)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/number-theory/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbx-rader-inverse-orbit" ...)
+Rules: NIL
+Time:  1.46 seconds (prove: 0.00, print: 0.00, other: 1.46)
+"/mnt/data/new-release/cert-work/zbx-rader-inverse-orbit.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/lists-light/nth" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/kestrel/lists-light/nth.lisp"
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RGI-NTH-OF-CONS-ONE-REVERSE-CDR ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CONSP-FROM-LEN-CHEAP)
+        (:REWRITE LEN-OF-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-CDR)
+        (:REWRITE NTH-OF-CONS-SAFE)
+        (:REWRITE NTH-OF-REVERSE)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE RGI-NATP-OF-ONE-LESS-WHEN-POSITIVE)
+        (:REWRITE RGI-NATP-OF-POSITIVE-INTEGER)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE NTH-OF-REVERSE))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1386
+RGI-NTH-OF-CONS-ONE-REVERSE-CDR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM NTH-ZERO-OF-RGI-INVERSE-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-INVERSE-ORBIT)
+        (:DEFINITION RGI-ORBIT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE CONSP-OF-RGI-ORBIT-AUX)
+        (:REWRITE NTH-OF-CONS-CONSTANT-VERSION)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION RGI-ORBIT-AUX))
+Hint-events: ((:USE CONSP-OF-RGI-ORBIT))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  603
+NTH-ZERO-OF-RGI-INVERSE-ORBIT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM NTH-POSITIVE-OF-RGI-INVERSE-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-INVERSE-ORBIT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING PFIELD::FEP-FW-TO-NATP)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(< c (- x))|)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-REV)
+        (:REWRITE LEN-OF-RGI-ORBIT)
+        (:REWRITE LEN-OF-RGI-POWER-ORBIT-AUX)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-APPEND)
+        (:REWRITE NTH-OF-CONS-SAFE)
+        (:REWRITE NTH-OF-REV)
+        (:REWRITE NTH-WHEN-NOT-CONSP-CHEAP)
+        (:REWRITE PFIELD::POW-OF-0-ARG2)
+        (:REWRITE PFIELD::POW-OF-1-ARG2)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REVERSE-OF-CONS)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE RGI-NATP-OF-ONE-LESS-POSITIVE-INTEGER)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ORBIT-AS-POWER-ORBIT)
+        (:REWRITE RGI-POWER-ORBIT-AUX-OPEN)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION PFIELD::FEP)
+        (:TYPE-PRESCRIPTION RGI-POWER-ORBIT-AUX))
+Hint-events: ((:USE CONSP-OF-RGI-ORBIT)
+              (:USE LEN-OF-RGI-ORBIT)
+              (:USE NTH-OF-RGI-ORBIT)
+              (:USE RGI-NTH-OF-CONS-ONE-REVERSE-CDR))
+Time:  0.18 seconds (prove: 0.18, print: 0.00, other: 0.00)
+Prover steps counted:  11673
+NTH-POSITIVE-OF-RGI-INVERSE-ORBIT
+
+Summary
+Form:  ( DEFTHM RGI-ZP-OF-NATP-NONPOSITIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:TYPE-PRESCRIPTION ZP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-ZP-OF-NATP-NONPOSITIVE
+
+Summary
+Form:  ( DEFTHM RGI-NOT-ZP-WHEN-POSITIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-NOT-ZP-WHEN-POSITIVE
+
+Summary
+Form:  ( DEFTHM RGI-NATURAL-NONPOSITIVE-IS-ZERO ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-NATURAL-NONPOSITIVE-IS-ZERO
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM NTH-OF-RGI-INVERSE-ORBIT-PIECEWISE ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RGI-NOT-ZP-WHEN-POSITIVE)
+        (:REWRITE RGI-ZP-OF-NATP-NONPOSITIVE))
+Hint-events: ((:USE NTH-POSITIVE-OF-RGI-INVERSE-ORBIT)
+              (:USE NTH-ZERO-OF-RGI-INVERSE-ORBIT)
+              (:USE RGI-NATURAL-NONPOSITIVE-IS-ZERO))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1148
+NTH-OF-RGI-INVERSE-ORBIT-PIECEWISE
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zby-rader-index-relation" ...)
+Rules: NIL
+Time:  1.75 seconds (prove: 0.23, print: 0.00, other: 1.52)
+Prover steps counted:  14810
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.75 seconds realtime, 1.64 seconds runtime
+; (184,932,192 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 40218 Jun 29 00:39 zby-rader-index-relation.cert

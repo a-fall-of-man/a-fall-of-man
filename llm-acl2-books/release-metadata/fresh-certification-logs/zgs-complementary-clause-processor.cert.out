@@ -1,0 +1,738 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zgs-complementary-clause-processor" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zgs-complementary-clause-processor
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.63 seconds (prove: 0.00, print: 0.00, other: 0.63)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZGS-COMPLEMENTARY-CLAUSE-PROCESSOR
+)
+
+Summary
+Form:  ( MAKE-EVENT (ER-PROGN ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+NIL
+("theory")
+
+Summary
+Form:  ( IN-THEORY *DEFEVALUATOR-FORM-BASE-THEORY*)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 47)
+
+Summary
+Form:  ( DEFUN APPLY-FOR-DEFEVALUATOR ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:DEFUN-NX APPLY-FOR-DEFEVALUATOR)
+Goal'
+Goal''
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( MUTUAL-RECURSION ( DEFUN VTC-EV ...) ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ATOM)
+        (:DEFINITION EQ)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:ELIM CAR-CDR-ELIM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  1606
+((:DEFUN-NX VTC-EV)
+ (:DEFUN-NX VTC-EV-LIST))
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 50)
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM EVAL-LIST-KWOTE-LST ...)
+Rules: ((:DEFINITION EQ)
+        (:DEFINITION KWOTE)
+        (:DEFINITION KWOTE-LST)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION TRUE-LIST-FIX)
+        (:DEFINITION VTC-EV)
+        (:DEFINITION VTC-EV-LIST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TRUE-LIST-FIX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  197
+EVAL-LIST-KWOTE-LST
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM TRUE-LIST-FIX-EV-LST ...)
+Rules: ((:DEFINITION TRUE-LIST-FIX)
+        (:DEFINITION VTC-EV-LIST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION VTC-EV-LIST))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  143
+TRUE-LIST-FIX-EV-LST
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM EV-COMMUTES-CAR ...)
+Rules: ((:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:DEFINITION VTC-EV-LIST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE DEFAULT-CAR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  91
+EV-COMMUTES-CAR
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM EV-LST-COMMUTES-CDR ...)
+Rules: ((:DEFINITION VTC-EV-LIST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  79
+EV-LST-COMMUTES-CDR
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-0 ...)
+Rules: ((:DEFINITION RETURN-LAST)
+        (:DEFINITION SYNP)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE EVAL-LIST-KWOTE-LST)
+        (:REWRITE TRUE-LIST-FIX-EV-LST))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  331
+(:DEFTHMD VTC-EV-CONSTRAINT-0)
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-1 ...)
+Rules: ((:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  82
+VTC-EV-CONSTRAINT-1
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-2 ...)
+Rules: ((:DEFINITION EQ)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  91
+VTC-EV-CONSTRAINT-2
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-3 ...)
+Rules: ((:DEFINITION EQ)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  142
+VTC-EV-CONSTRAINT-3
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-4 ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VTC-EV-LIST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  38
+VTC-EV-CONSTRAINT-4
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-5 ...)
+Rules: ((:DEFINITION VTC-EV-LIST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  70
+VTC-EV-CONSTRAINT-5
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-6 ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  67
+(:DEFTHMD VTC-EV-CONSTRAINT-6)
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-7 ...)
+Rules: ((:DEFINITION EQ)
+        (:DEFINITION NOT)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  114
+(:DEFTHMD VTC-EV-CONSTRAINT-7)
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-8 ...)
+Rules: ((:DEFINITION APPLY-FOR-DEFEVALUATOR)
+        (:DEFINITION EQ)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE EV-COMMUTES-CAR)
+        (:REWRITE EV-LST-COMMUTES-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  203
+VTC-EV-CONSTRAINT-8
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( DEFTHM VTC-EV-CONSTRAINT-9 ...)
+Rules: ((:DEFINITION APPLY-FOR-DEFEVALUATOR)
+        (:DEFINITION EQ)
+        (:DEFINITION NOT)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION VTC-EV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE EV-COMMUTES-CAR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  149
+VTC-EV-CONSTRAINT-9
+
+Summary
+Form:  ( IN-THEORY (DISABLE ...))
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+(:NUMBER-OF-ENABLED-RUNES 54)
+
+Summary
+Form:  ( ENCAPSULATE (((VTC-EV * ...) ...) ...) ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.01, print: 0.00, other: 0.04)
+Prover steps counted:  3403
+(VTC-EV VTC-EV-LIST)
+
+Summary
+Form:  ( PROGN (WITH-OUTPUT :OFF ...) ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.01, print: 0.00, other: 0.04)
+Prover steps counted:  3403
+(VTC-EV VTC-EV-LIST)
+
+Summary
+Form:  ( DEFUN VTC-NOT-FORM-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-NOT-FORM-P
+
+Summary
+Form:  ( DEFUN VTC-COMPLEMENT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-COMPLEMENT
+
+Summary
+Form:  ( DEFUN VTC-COMPLEMENTARYP ...)
+Rules: ((:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-COMPLEMENTARYP
+
+Summary
+Form:  ( DEFUN VTC-DEDUP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-DEDUP
+
+Summary
+Form:  ( DEFUN VTC-CLAUSE-PROCESSOR ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-CLAUSE-PROCESSOR
+Goal'
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VTC-EV-OF-COMPLEMENT ...)
+Rules: ((:CONGRUENCE IFF-IMPLIES-EQUAL-NOT)
+        (:DEFINITION IFF)
+        (:DEFINITION NOT)
+        (:DEFINITION VTC-COMPLEMENT)
+        (:DEFINITION VTC-NOT-FORM-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VTC-EV-CONSTRAINT-9))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  828
+VTC-EV-OF-COMPLEMENT
+Goal'
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VTC-EV-OF-DISJOIN2 ...)
+Rules: ((:DEFINITION DISJOIN2)
+        (:DEFINITION IFF)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VTC-EV-CONSTRAINT-2)
+        (:REWRITE VTC-EV-CONSTRAINT-8))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  700
+VTC-EV-OF-DISJOIN2
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.4
+Subgoal *1/1.4'
+Subgoal *1/1.4''
+Subgoal *1/1.3
+Subgoal *1/1.3'
+Subgoal *1/1.3''
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM VTC-EV-DISJOIN-WHEN-MEMBER ...)
+Rules: ((:DEFINITION DISJOIN)
+        (:DEFINITION NOT)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VTC-EV-CONSTRAINT-2)
+        (:REWRITE VTC-EV-OF-DISJOIN2))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1528
+VTC-EV-DISJOIN-WHEN-MEMBER
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.10
+Subgoal *1/3.9
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VTC-COMPLEMENTARYP-IS-TRUE ...)
+Rules: ((:DEFINITION DISJOIN)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VTC-COMPLEMENT)
+        (:DEFINITION VTC-COMPLEMENTARYP)
+        (:DEFINITION VTC-NOT-FORM-P)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VTC-COMPLEMENTARYP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VTC-EV-CONSTRAINT-2)
+        (:REWRITE VTC-EV-CONSTRAINT-9)
+        (:REWRITE VTC-EV-DISJOIN-WHEN-MEMBER)
+        (:REWRITE VTC-EV-OF-DISJOIN2)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  4677
+VTC-COMPLEMENTARYP-IS-TRUE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.12
+Subgoal *1/3.11
+Subgoal *1/3.10
+Subgoal *1/3.9
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VTC-EV-OF-DISJOIN-DEDUP ...)
+Rules: ((:DEFINITION DISJOIN)
+        (:DEFINITION ENDP)
+        (:DEFINITION IFF)
+        (:DEFINITION NOT)
+        (:DEFINITION VTC-DEDUP)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART DISJOIN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VTC-DEDUP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VTC-EV-CONSTRAINT-2)
+        (:REWRITE VTC-EV-DISJOIN-WHEN-MEMBER)
+        (:REWRITE VTC-EV-OF-DISJOIN2)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION VTC-DEDUP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  6538
+VTC-EV-OF-DISJOIN-DEDUP
+Goal'
+
+Summary
+Form:  ( DEFTHM VTC-EV-OF-CONJOIN-SINGLETON ...)
+Rules: ((:DEFINITION CONJOIN)
+        (:DEFINITION IFF)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  92
+VTC-EV-OF-CONJOIN-SINGLETON
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VTC-CLAUSE-PROCESSOR-CORRECT-WHEN-NOT-COMPLEMENTARY
+...)
+Rules: ((:DEFINITION CONJOIN-CLAUSES)
+        (:DEFINITION DISJOIN-LST)
+        (:DEFINITION IFF)
+        (:DEFINITION NOT)
+        (:DEFINITION VTC-CLAUSE-PROCESSOR)
+        (:EXECUTABLE-COUNTERPART DISJOIN-LST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Hint-events: ((:USE VTC-EV-OF-CONJOIN-SINGLETON)
+              (:USE VTC-EV-OF-DISJOIN-DEDUP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  821
+VTC-CLAUSE-PROCESSOR-CORRECT-WHEN-NOT-COMPLEMENTARY
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VTC-CLAUSE-PROCESSOR-CORRECT ...)
+Rules: NIL
+Hint-events: ((:USE VTC-CLAUSE-PROCESSOR-CORRECT-WHEN-NOT-COMPLEMENTARY)
+              (:USE VTC-COMPLEMENTARYP-IS-TRUE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-CLAUSE-PROCESSOR-CORRECT
+
+Summary
+Form:  ( DEFTHM VTC-GROUND-WITNESS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VTC-GROUND-WITNESS
+(DEFXDOC VTC-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zgs-complementary-clause-processor" ...)
+Rules: NIL
+Time:  0.84 seconds (prove: 0.09, print: 0.01, other: 0.74)
+Prover steps counted:  18587
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 0.84 seconds realtime, 0.78 seconds runtime
+; (105,255,072 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 19988 Jun 29 00:40 zgs-complementary-clause-processor.cert

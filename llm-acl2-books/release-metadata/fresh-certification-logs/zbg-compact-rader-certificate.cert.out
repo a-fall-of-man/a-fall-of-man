@@ -1,0 +1,3064 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbe-generated-cyclic66.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zbf-rader-index-certificate.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbg-compact-rader-certificate" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbg-compact-rader-certificate
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbe-generated-cyclic66" ...)
+Rules: NIL
+Time:  1.16 seconds (prove: 0.00, print: 0.00, other: 1.16)
+"/mnt/data/new-release/cert-work/zbe-generated-cyclic66.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zbf-rader-index-certificate" ...)
+Rules: NIL
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+"/mnt/data/new-release/cert-work/zbf-rader-index-certificate.lisp"
+
+Summary
+Form:  ( DEFUN RGI-POSITION ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-POSITION
+
+Summary
+Form:  ( DEFUN RGI-LIFTED-ENTRY ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+RGI-LIFTED-ENTRY
+
+Summary
+Form:  ( DEFUN RGI-BASE-ENTRY ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-BASE-ENTRY
+
+Summary
+Form:  ( DEFUN RGI-FOURIER-ENTRY ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-FOURIER-ENTRY
+Subgoal 2
+Subgoal 1
+Subgoal 1.494
+Subgoal 1.493
+Subgoal 1.492
+Subgoal 1.491
+Subgoal 1.490
+Subgoal 1.489
+Subgoal 1.488
+Subgoal 1.487
+Subgoal 1.486
+Subgoal 1.485
+Subgoal 1.484
+Subgoal 1.483
+Subgoal 1.482
+Subgoal 1.482'
+Subgoal 1.481
+Subgoal 1.480
+Subgoal 1.479
+Subgoal 1.478
+Subgoal 1.478'
+Subgoal 1.477
+Subgoal 1.476
+Subgoal 1.475
+Subgoal 1.475'
+Subgoal 1.474
+Subgoal 1.473
+Subgoal 1.473'
+Subgoal 1.472
+Subgoal 1.471
+Subgoal 1.471'
+Subgoal 1.470
+Subgoal 1.470'
+Subgoal 1.469
+Subgoal 1.469'
+Subgoal 1.468
+Subgoal 1.468'
+Subgoal 1.467
+Subgoal 1.467'
+Subgoal 1.466
+Subgoal 1.466'
+Subgoal 1.465
+Subgoal 1.464
+Subgoal 1.463
+Subgoal 1.463'
+Subgoal 1.462
+Subgoal 1.461
+Subgoal 1.461'
+Subgoal 1.461''
+Subgoal 1.460
+Subgoal 1.460'
+Subgoal 1.460''
+Subgoal 1.459
+Subgoal 1.458
+Subgoal 1.458'
+Subgoal 1.458''
+Subgoal 1.457
+Subgoal 1.457'
+Subgoal 1.457''
+Subgoal 1.457'''
+Subgoal 1.456
+Subgoal 1.455
+Subgoal 1.455'
+Subgoal 1.455''
+Subgoal 1.454
+Subgoal 1.454'
+Subgoal 1.454''
+Subgoal 1.453
+Subgoal 1.452
+Subgoal 1.451
+Subgoal 1.451'
+Subgoal 1.450
+Subgoal 1.450'
+Subgoal 1.449
+Subgoal 1.449'
+Subgoal 1.448
+Subgoal 1.448'
+Subgoal 1.447
+Subgoal 1.446
+Subgoal 1.445
+Subgoal 1.445'
+Subgoal 1.444
+Subgoal 1.444'
+Subgoal 1.443
+Subgoal 1.443'
+Subgoal 1.442
+Subgoal 1.442'
+Subgoal 1.441
+Subgoal 1.440
+Subgoal 1.440'
+Subgoal 1.439
+Subgoal 1.439'
+Subgoal 1.438
+Subgoal 1.438'
+Subgoal 1.437
+Subgoal 1.437'
+Subgoal 1.436
+Subgoal 1.436'
+Subgoal 1.435
+Subgoal 1.434
+Subgoal 1.433
+Subgoal 1.433'
+Subgoal 1.432
+Subgoal 1.432'
+Subgoal 1.431
+Subgoal 1.430
+Subgoal 1.430'
+Subgoal 1.429
+Subgoal 1.428
+Subgoal 1.427
+Subgoal 1.426
+Subgoal 1.425
+Subgoal 1.424
+Subgoal 1.424'
+Subgoal 1.423
+Subgoal 1.422
+Subgoal 1.421
+Subgoal 1.420
+Subgoal 1.419
+Subgoal 1.418
+Subgoal 1.418'
+Subgoal 1.417
+Subgoal 1.416
+Subgoal 1.415
+Subgoal 1.414
+Subgoal 1.413
+Subgoal 1.412
+Subgoal 1.412'
+Subgoal 1.411
+Subgoal 1.410
+Subgoal 1.409
+Subgoal 1.408
+Subgoal 1.407
+Subgoal 1.406
+Subgoal 1.405
+Subgoal 1.404
+Subgoal 1.403
+Subgoal 1.402
+Subgoal 1.402'
+Subgoal 1.401
+Subgoal 1.400
+Subgoal 1.399
+Subgoal 1.398
+Subgoal 1.397
+Subgoal 1.396
+Subgoal 1.395
+Subgoal 1.394
+Subgoal 1.393
+Subgoal 1.392
+Subgoal 1.391
+Subgoal 1.390
+Subgoal 1.389
+Subgoal 1.388
+Subgoal 1.388'
+Subgoal 1.387
+Subgoal 1.386
+Subgoal 1.385
+Subgoal 1.384
+Subgoal 1.383
+Subgoal 1.382
+Subgoal 1.382'
+Subgoal 1.381
+Subgoal 1.380
+Subgoal 1.379
+Subgoal 1.378
+Subgoal 1.377
+Subgoal 1.376
+Subgoal 1.376'
+Subgoal 1.375
+Subgoal 1.374
+Subgoal 1.373
+Subgoal 1.372
+Subgoal 1.371
+Subgoal 1.370
+Subgoal 1.370'
+Subgoal 1.369
+Subgoal 1.368
+Subgoal 1.367
+Subgoal 1.366
+Subgoal 1.365
+Subgoal 1.364
+Subgoal 1.364'
+Subgoal 1.363
+Subgoal 1.362
+Subgoal 1.361
+Subgoal 1.360
+Subgoal 1.359
+Subgoal 1.358
+Subgoal 1.358'
+Subgoal 1.357
+Subgoal 1.356
+Subgoal 1.355
+Subgoal 1.354
+Subgoal 1.353
+Subgoal 1.352
+Subgoal 1.352'
+Subgoal 1.351
+Subgoal 1.350
+Subgoal 1.349
+Subgoal 1.348
+Subgoal 1.347
+Subgoal 1.346
+Subgoal 1.345
+Subgoal 1.344
+Subgoal 1.343
+Subgoal 1.342
+Subgoal 1.342'
+Subgoal 1.341
+Subgoal 1.340
+Subgoal 1.339
+Subgoal 1.338
+Subgoal 1.337
+Subgoal 1.336
+Subgoal 1.335
+Subgoal 1.334
+Subgoal 1.333
+Subgoal 1.332
+Subgoal 1.331
+Subgoal 1.331'
+Subgoal 1.330
+Subgoal 1.330'
+Subgoal 1.329
+Subgoal 1.329'
+Subgoal 1.328
+Subgoal 1.328'
+Subgoal 1.327
+Subgoal 1.326
+Subgoal 1.325
+Subgoal 1.325'
+Subgoal 1.324
+Subgoal 1.324'
+Subgoal 1.323
+Subgoal 1.323'
+Subgoal 1.322
+Subgoal 1.322'
+Subgoal 1.321
+Subgoal 1.320
+Subgoal 1.320'
+Subgoal 1.319
+Subgoal 1.319'
+Subgoal 1.318
+Subgoal 1.318'
+Subgoal 1.317
+Subgoal 1.317'
+Subgoal 1.316
+Subgoal 1.316'
+Subgoal 1.315
+Subgoal 1.314
+Subgoal 1.313
+Subgoal 1.313'
+Subgoal 1.312
+Subgoal 1.312'
+Subgoal 1.311
+Subgoal 1.310
+Subgoal 1.310'
+Subgoal 1.309
+Subgoal 1.308
+Subgoal 1.307
+Subgoal 1.306
+Subgoal 1.305
+Subgoal 1.304
+Subgoal 1.304'
+Subgoal 1.303
+Subgoal 1.302
+Subgoal 1.301
+Subgoal 1.300
+Subgoal 1.299
+Subgoal 1.298
+Subgoal 1.298'
+Subgoal 1.297
+Subgoal 1.296
+Subgoal 1.295
+Subgoal 1.294
+Subgoal 1.293
+Subgoal 1.292
+Subgoal 1.292'
+Subgoal 1.291
+Subgoal 1.290
+Subgoal 1.289
+Subgoal 1.288
+Subgoal 1.287
+Subgoal 1.286
+Subgoal 1.285
+Subgoal 1.284
+Subgoal 1.283
+Subgoal 1.282
+Subgoal 1.282'
+Subgoal 1.281
+Subgoal 1.280
+Subgoal 1.279
+Subgoal 1.278
+Subgoal 1.277
+Subgoal 1.276
+Subgoal 1.275
+Subgoal 1.274
+Subgoal 1.273
+Subgoal 1.272
+Subgoal 1.271
+Subgoal 1.270
+Subgoal 1.269
+Subgoal 1.268
+Subgoal 1.268'
+Subgoal 1.268''
+Subgoal 1.267
+Subgoal 1.266
+Subgoal 1.265
+Subgoal 1.264
+Subgoal 1.263
+Subgoal 1.262
+Subgoal 1.262'
+Subgoal 1.262''
+Subgoal 1.261
+Subgoal 1.260
+Subgoal 1.259
+Subgoal 1.258
+Subgoal 1.257
+Subgoal 1.256
+Subgoal 1.256'
+Subgoal 1.256''
+Subgoal 1.255
+Subgoal 1.254
+Subgoal 1.253
+Subgoal 1.252
+Subgoal 1.251
+Subgoal 1.250
+Subgoal 1.250'
+Subgoal 1.249
+Subgoal 1.248
+Subgoal 1.247
+Subgoal 1.246
+Subgoal 1.245
+Subgoal 1.244
+Subgoal 1.244'
+Subgoal 1.243
+Subgoal 1.242
+Subgoal 1.241
+Subgoal 1.240
+Subgoal 1.239
+Subgoal 1.238
+Subgoal 1.238'
+Subgoal 1.237
+Subgoal 1.236
+Subgoal 1.235
+Subgoal 1.234
+Subgoal 1.233
+Subgoal 1.232
+Subgoal 1.232'
+Subgoal 1.231
+Subgoal 1.230
+Subgoal 1.229
+Subgoal 1.228
+Subgoal 1.227
+Subgoal 1.226
+Subgoal 1.225
+Subgoal 1.224
+Subgoal 1.223
+Subgoal 1.222
+Subgoal 1.222'
+Subgoal 1.221
+Subgoal 1.220
+Subgoal 1.219
+Subgoal 1.218
+Subgoal 1.217
+Subgoal 1.216
+Subgoal 1.215
+Subgoal 1.214
+Subgoal 1.213
+Subgoal 1.212
+Subgoal 1.211
+Subgoal 1.210
+Subgoal 1.209
+Subgoal 1.208
+Subgoal 1.208'
+Subgoal 1.207
+Subgoal 1.206
+Subgoal 1.205
+Subgoal 1.204
+Subgoal 1.203
+Subgoal 1.202
+Subgoal 1.202'
+Subgoal 1.201
+Subgoal 1.200
+Subgoal 1.199
+Subgoal 1.198
+Subgoal 1.197
+Subgoal 1.196
+Subgoal 1.196'
+Subgoal 1.195
+Subgoal 1.194
+Subgoal 1.193
+Subgoal 1.192
+Subgoal 1.191
+Subgoal 1.190
+Subgoal 1.190'
+Subgoal 1.189
+Subgoal 1.188
+Subgoal 1.187
+Subgoal 1.186
+Subgoal 1.185
+Subgoal 1.184
+Subgoal 1.184'
+Subgoal 1.183
+Subgoal 1.182
+Subgoal 1.181
+Subgoal 1.180
+Subgoal 1.179
+Subgoal 1.178
+Subgoal 1.178'
+Subgoal 1.177
+Subgoal 1.176
+Subgoal 1.175
+Subgoal 1.174
+Subgoal 1.173
+Subgoal 1.172
+Subgoal 1.172'
+Subgoal 1.171
+Subgoal 1.170
+Subgoal 1.169
+Subgoal 1.168
+Subgoal 1.167
+Subgoal 1.166
+Subgoal 1.165
+Subgoal 1.164
+Subgoal 1.163
+Subgoal 1.162
+Subgoal 1.162'
+Subgoal 1.161
+Subgoal 1.160
+Subgoal 1.159
+Subgoal 1.158
+Subgoal 1.157
+Subgoal 1.156
+Subgoal 1.155
+Subgoal 1.154
+Subgoal 1.153
+Subgoal 1.152
+Subgoal 1.151
+Subgoal 1.150
+Subgoal 1.149
+Subgoal 1.148
+Subgoal 1.148'
+Subgoal 1.148''
+Subgoal 1.147
+Subgoal 1.146
+Subgoal 1.145
+Subgoal 1.144
+Subgoal 1.143
+Subgoal 1.142
+Subgoal 1.142'
+Subgoal 1.142''
+Subgoal 1.141
+Subgoal 1.140
+Subgoal 1.139
+Subgoal 1.138
+Subgoal 1.137
+Subgoal 1.136
+Subgoal 1.136'
+Subgoal 1.136''
+Subgoal 1.135
+Subgoal 1.134
+Subgoal 1.133
+Subgoal 1.132
+Subgoal 1.131
+Subgoal 1.130
+Subgoal 1.130'
+Subgoal 1.129
+Subgoal 1.128
+Subgoal 1.127
+Subgoal 1.126
+Subgoal 1.125
+Subgoal 1.124
+Subgoal 1.124'
+Subgoal 1.123
+Subgoal 1.122
+Subgoal 1.121
+Subgoal 1.120
+Subgoal 1.119
+Subgoal 1.118
+Subgoal 1.118'
+Subgoal 1.117
+Subgoal 1.116
+Subgoal 1.115
+Subgoal 1.114
+Subgoal 1.113
+Subgoal 1.112
+Subgoal 1.112'
+Subgoal 1.111
+Subgoal 1.110
+Subgoal 1.109
+Subgoal 1.108
+Subgoal 1.107
+Subgoal 1.106
+Subgoal 1.105
+Subgoal 1.104
+Subgoal 1.103
+Subgoal 1.102
+Subgoal 1.102'
+Subgoal 1.101
+Subgoal 1.100
+Subgoal 1.99
+Subgoal 1.98
+Subgoal 1.97
+Subgoal 1.96
+Subgoal 1.95
+Subgoal 1.94
+Subgoal 1.93
+Subgoal 1.92
+Subgoal 1.92'
+Subgoal 1.91
+Subgoal 1.90
+Subgoal 1.89
+Subgoal 1.88
+Subgoal 1.87
+Subgoal 1.86
+Subgoal 1.86'
+Subgoal 1.85
+Subgoal 1.84
+Subgoal 1.83
+Subgoal 1.82
+Subgoal 1.81
+Subgoal 1.80
+Subgoal 1.80'
+Subgoal 1.79
+Subgoal 1.78
+Subgoal 1.77
+Subgoal 1.76
+Subgoal 1.75
+Subgoal 1.74
+Subgoal 1.74'
+Subgoal 1.73
+Subgoal 1.72
+Subgoal 1.71
+Subgoal 1.70
+Subgoal 1.69
+
+TIME-TRACKER-NOTE [:TAU]: Elapsed realtime in tau is 1.00 secs; see
+:DOC time-tracker-tau.
+
+Subgoal 1.68
+Subgoal 1.67
+Subgoal 1.66
+Subgoal 1.65
+Subgoal 1.64
+Subgoal 1.64'
+Subgoal 1.63
+Subgoal 1.62
+Subgoal 1.61
+Subgoal 1.60
+Subgoal 1.59
+Subgoal 1.58
+Subgoal 1.57
+Subgoal 1.56
+Subgoal 1.55
+Subgoal 1.54
+Subgoal 1.54'
+Subgoal 1.53
+Subgoal 1.52
+Subgoal 1.51
+Subgoal 1.50
+Subgoal 1.49
+Subgoal 1.48
+Subgoal 1.48'
+Subgoal 1.47
+Subgoal 1.46
+Subgoal 1.45
+Subgoal 1.44
+Subgoal 1.43
+Subgoal 1.42
+Subgoal 1.42'
+Subgoal 1.41
+Subgoal 1.40
+Subgoal 1.39
+Subgoal 1.38
+Subgoal 1.37
+Subgoal 1.36
+Subgoal 1.36'
+Subgoal 1.35
+Subgoal 1.34
+Subgoal 1.33
+Subgoal 1.32
+Subgoal 1.31
+Subgoal 1.30
+Subgoal 1.29
+Subgoal 1.28
+Subgoal 1.27
+Subgoal 1.26
+Subgoal 1.26'
+Subgoal 1.25
+Subgoal 1.24
+Subgoal 1.23
+Subgoal 1.22
+Subgoal 1.21
+Subgoal 1.20
+Subgoal 1.19
+Subgoal 1.18
+Subgoal 1.17
+Subgoal 1.16
+Subgoal 1.15
+Subgoal 1.14
+Subgoal 1.13
+Subgoal 1.12
+Subgoal 1.11
+Subgoal 1.10
+Subgoal 1.9
+Subgoal 1.8
+Subgoal 1.7
+Subgoal 1.6
+Subgoal 1.5
+Subgoal 1.5'
+Subgoal 1.4
+Subgoal 1.3
+Subgoal 1.2
+Subgoal 1.1
+Subgoal 1.1'
+
+Summary
+Form:  ( DEFUN RGI-COMPACT-OUTPUT-ROWP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION RGI-BASE-ENTRY)
+        (:DEFINITION RGI-FOURIER-ENTRY)
+        (:DEFINITION RGI-LIFTED-ENTRY)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART MOD)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART O<)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR MOD-BOUNDS-1)
+        (:LINEAR MOD-BOUNDS-3)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (- x) c)|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(integerp (- x))|)
+        (:REWRITE |(mod (+ x y) z) where (<= 0 z)| . 1)
+        (:REWRITE |(mod (- x) y)| . 1)
+        (:REWRITE |(mod (if a b c) x)|)
+        (:REWRITE |(mod 0 y)|)
+        (:REWRITE |(mod x 0)|)
+        (:REWRITE |(mod y (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE MOD-X-Y-=-X . 3)
+        (:REWRITE MOD-ZERO . 3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION INTEGERP-MOD-1)
+        (:TYPE-PRESCRIPTION MOD-NONNEGATIVE)
+        (:TYPE-PRESCRIPTION MOD-POSITIVE . 2)
+        (:TYPE-PRESCRIPTION MOD-ZERO . 1)
+        (:TYPE-PRESCRIPTION MOD-ZERO . 2)
+        (:TYPE-PRESCRIPTION RATIONALP-MOD)
+        (:TYPE-PRESCRIPTION RGI-POSITION))
+Time:  11.40 seconds (prove: 11.33, print: 0.07, other: 0.01)
+Prover steps counted:  316965
+
+TIME-TRACKER-NOTE [:TAU]: For the proof above, the total realtime spent
+in the tau system was 1.10 seconds.  See :DOC time-tracker-tau.
+
+RGI-COMPACT-OUTPUT-ROWP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RGI-COMPACT-OUTPUTP-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1162
+RGI-COMPACT-OUTPUTP-AUX
+
+Summary
+Form:  ( DEFUN RGI-COMPACT-OUTPUTP ...)
+Rules: ((:TYPE-PRESCRIPTION RGI-COMPACT-OUTPUTP-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-COMPACT-OUTPUTP
+
+Summary
+Form:  ( DEFUN RGI-COMPACT-BANKP-AUX ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-COMPACT-BANKP-AUX
+
+Summary
+Form:  ( DEFUN RGI-COMPACT-BANKP ...)
+Rules: ((:TYPE-PRESCRIPTION RGI-COMPACT-BANKP-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-COMPACT-BANKP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.5
+Subgoal *1/3.5'
+Subgoal *1/3.5''
+Subgoal *1/3.4
+Subgoal *1/3.4'
+Subgoal *1/3.4''
+Subgoal *1/3.3
+Subgoal *1/3.3'
+Subgoal *1/3.3''
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.2'''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/3.1'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RGI-POSITION-BOUND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-POSITION)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:INDUCTION RGI-POSITION)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RGI-POSITION))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4243
+RGI-POSITION-BOUND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN RGI-COEFFICIENT-INDUCT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+RGI-COEFFICIENT-INDUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.15.3
+Subgoal *1/2.15.3'
+Subgoal *1/2.15.3.2
+Subgoal *1/2.15.3.2'
+Subgoal *1/2.15.3.1
+Subgoal *1/2.15.3.1'
+Subgoal *1/2.15.3.1''
+Subgoal *1/2.15.3.1'''
+Subgoal *1/2.15.3.1'4'
+Subgoal *1/2.15.3.1'5'
+Subgoal *1/2.15.3.1'6'
+Subgoal *1/2.15.2
+Subgoal *1/2.15.2'
+Subgoal *1/2.15.2''
+Subgoal *1/2.15.2.2
+Subgoal *1/2.15.2.2'
+Subgoal *1/2.15.2.1
+Subgoal *1/2.15.2.1'
+Subgoal *1/2.15.2.1''
+Subgoal *1/2.15.2.1'''
+Subgoal *1/2.15.2.1'4'
+Subgoal *1/2.15.2.1'5'
+Subgoal *1/2.15.2.1'6'
+Subgoal *1/2.15.1
+Subgoal *1/2.15.1'
+Subgoal *1/2.15.1''
+Subgoal *1/2.15.1'''
+Subgoal *1/2.15.1'4'
+Subgoal *1/2.15.1'5'
+Subgoal *1/2.15.1'6'
+Subgoal *1/2.15.1'7'
+Subgoal *1/2.15.1'8'
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.14.3
+Subgoal *1/2.14.3'
+Subgoal *1/2.14.3.2
+Subgoal *1/2.14.3.2'
+Subgoal *1/2.14.3.1
+Subgoal *1/2.14.3.1'
+Subgoal *1/2.14.3.1''
+Subgoal *1/2.14.3.1'''
+Subgoal *1/2.14.3.1'4'
+Subgoal *1/2.14.3.1'5'
+Subgoal *1/2.14.3.1'6'
+Subgoal *1/2.14.2
+Subgoal *1/2.14.2'
+Subgoal *1/2.14.2''
+Subgoal *1/2.14.2.2
+Subgoal *1/2.14.2.2'
+Subgoal *1/2.14.2.1
+Subgoal *1/2.14.2.1'
+Subgoal *1/2.14.2.1''
+Subgoal *1/2.14.2.1'''
+Subgoal *1/2.14.2.1'4'
+Subgoal *1/2.14.2.1'5'
+Subgoal *1/2.14.2.1'6'
+Subgoal *1/2.14.1
+Subgoal *1/2.14.1'
+Subgoal *1/2.14.1''
+Subgoal *1/2.14.1'''
+Subgoal *1/2.14.1'4'
+Subgoal *1/2.14.1'5'
+Subgoal *1/2.14.1'6'
+Subgoal *1/2.14.1'7'
+Subgoal *1/2.14.1'8'
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.13.3
+Subgoal *1/2.13.3'
+Subgoal *1/2.13.3.2
+Subgoal *1/2.13.3.2'
+Subgoal *1/2.13.3.1
+Subgoal *1/2.13.3.1'
+Subgoal *1/2.13.3.1''
+Subgoal *1/2.13.3.1'''
+Subgoal *1/2.13.3.1'4'
+Subgoal *1/2.13.3.1'5'
+Subgoal *1/2.13.3.1'6'
+Subgoal *1/2.13.2
+Subgoal *1/2.13.2'
+Subgoal *1/2.13.2''
+Subgoal *1/2.13.2.2
+Subgoal *1/2.13.2.2'
+Subgoal *1/2.13.2.1
+Subgoal *1/2.13.2.1'
+Subgoal *1/2.13.2.1''
+Subgoal *1/2.13.2.1'''
+Subgoal *1/2.13.2.1'4'
+Subgoal *1/2.13.2.1'5'
+Subgoal *1/2.13.2.1'6'
+Subgoal *1/2.13.1
+Subgoal *1/2.13.1'
+Subgoal *1/2.13.1''
+Subgoal *1/2.13.1'''
+Subgoal *1/2.13.1'4'
+Subgoal *1/2.13.1'5'
+Subgoal *1/2.13.1'6'
+Subgoal *1/2.13.1'7'
+Subgoal *1/2.13.1'8'
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.12.3
+Subgoal *1/2.12.3'
+Subgoal *1/2.12.3.2
+Subgoal *1/2.12.3.2'
+Subgoal *1/2.12.3.1
+Subgoal *1/2.12.3.1'
+Subgoal *1/2.12.3.1''
+Subgoal *1/2.12.3.1'''
+Subgoal *1/2.12.3.1'4'
+Subgoal *1/2.12.3.1'5'
+Subgoal *1/2.12.3.1'6'
+Subgoal *1/2.12.2
+Subgoal *1/2.12.2'
+Subgoal *1/2.12.2''
+Subgoal *1/2.12.2.2
+Subgoal *1/2.12.2.2'
+Subgoal *1/2.12.2.1
+Subgoal *1/2.12.2.1'
+Subgoal *1/2.12.2.1''
+Subgoal *1/2.12.2.1'''
+Subgoal *1/2.12.2.1'4'
+Subgoal *1/2.12.2.1'5'
+Subgoal *1/2.12.2.1'6'
+Subgoal *1/2.12.1
+Subgoal *1/2.12.1'
+Subgoal *1/2.12.1''
+Subgoal *1/2.12.1'''
+Subgoal *1/2.12.1'4'
+Subgoal *1/2.12.1'5'
+Subgoal *1/2.12.1'6'
+Subgoal *1/2.12.1'7'
+Subgoal *1/2.12.1'8'
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.11.3
+Subgoal *1/2.11.3'
+Subgoal *1/2.11.3.2
+Subgoal *1/2.11.3.2'
+Subgoal *1/2.11.3.1
+Subgoal *1/2.11.3.1'
+Subgoal *1/2.11.3.1''
+Subgoal *1/2.11.3.1'''
+Subgoal *1/2.11.3.1'4'
+Subgoal *1/2.11.3.1'5'
+Subgoal *1/2.11.3.1'6'
+Subgoal *1/2.11.2
+Subgoal *1/2.11.2'
+Subgoal *1/2.11.2''
+Subgoal *1/2.11.2.2
+Subgoal *1/2.11.2.2'
+Subgoal *1/2.11.2.1
+Subgoal *1/2.11.2.1'
+Subgoal *1/2.11.2.1''
+Subgoal *1/2.11.2.1'''
+Subgoal *1/2.11.2.1'4'
+Subgoal *1/2.11.2.1'5'
+Subgoal *1/2.11.2.1'6'
+Subgoal *1/2.11.1
+Subgoal *1/2.11.1'
+Subgoal *1/2.11.1''
+Subgoal *1/2.11.1'''
+Subgoal *1/2.11.1'4'
+Subgoal *1/2.11.1'5'
+Subgoal *1/2.11.1'6'
+Subgoal *1/2.11.1'7'
+Subgoal *1/2.11.1'8'
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.10'''
+Subgoal *1/2.10'4'
+Subgoal *1/2.10'5'
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.9''
+Subgoal *1/2.9'''
+Subgoal *1/2.9'4'
+Subgoal *1/2.9'5'
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.8''
+Subgoal *1/2.8'''
+Subgoal *1/2.8'4'
+Subgoal *1/2.8'5'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.7''
+Subgoal *1/2.7'''
+Subgoal *1/2.7'4'
+Subgoal *1/2.7'5'
+Subgoal *1/2.7'6'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.6''
+Subgoal *1/2.6'''
+Subgoal *1/2.6'4'
+Subgoal *1/2.6'5'
+Subgoal *1/2.6'6'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.5'5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4'4'
+Subgoal *1/2.4'5'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RWD-COEFFICIENT-AT-IS-POSITION ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION RGI-POSITION)
+        (:DEFINITION RWD-COEFFICIENT-AT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-COEFFICIENT-INDUCT)
+        (:LINEAR RGI-POSITION-BOUND)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NTH-WHEN-TOO-LARGE-CHEAP)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RGI-POSITION))
+Time:  0.77 seconds (prove: 0.75, print: 0.02, other: 0.00)
+Prover steps counted:  83851
+RWD-COEFFICIENT-AT-IS-POSITION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4'4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RWD-COEFFICIENT-AT-ZERO-OUTSIDE-POSITION ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-POSITION)
+        (:DEFINITION RWD-COEFFICIENT-AT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-COEFFICIENT-INDUCT)
+        (:LINEAR RGI-POSITION-BOUND)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RGI-POSITION))
+Time:  0.18 seconds (prove: 0.18, print: 0.00, other: 0.00)
+Prover steps counted:  17899
+RWD-COEFFICIENT-AT-ZERO-OUTSIDE-POSITION
+Goal'
+
+Summary
+Form:  ( DEFUN RGI-LIFT-NTH-INDUCT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION INTEGER-ABS)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  135
+RGI-LIFT-NTH-INDUCT
+
+Summary
+Form:  ( DEFTHM CAR-OF-RWD-LIFT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-LIFT-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE CAR-CONS))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3971
+CAR-OF-RWD-LIFT-ROW-AUX
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-RWD-LIFT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-LIFT-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-NTH0)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-LIFT-NTH-INDUCT)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE CAR-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:TYPE-PRESCRIPTION RWD-LIFT-ROW-AUX))
+Time:  0.21 seconds (prove: 0.21, print: 0.00, other: 0.00)
+Prover steps counted:  19505
+TC-NTH0-OF-RWD-LIFT-ROW-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-RWD-LIFT-ROW ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE TC-NTH0-OF-RWD-LIFT-ROW-AUX))
+Hint-events: ((:USE TC-NTH0-OF-RWD-LIFT-ROW-AUX))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2913
+TC-NTH0-OF-RWD-LIFT-ROW
+
+Summary
+Form:  ( DEFUN RGI-ROW-NTH-INDUCT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-ROW-NTH-INDUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.20'
+Subgoal *1/2.20''
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.18'
+Subgoal *1/2.18''
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.15''
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.12''
+Subgoal *1/2.12'''
+Subgoal *1/2.12'4'
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.10'''
+Subgoal *1/2.10'4'
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.6.2
+Subgoal *1/2.6.1
+Subgoal *1/2.6.1'
+Subgoal *1/2.6.1''
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.4
+Subgoal *1/2.4.2
+Subgoal *1/2.4.1
+Subgoal *1/2.4.1'
+Subgoal *1/2.4.1''
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+Subgoal *1/1.3
+Subgoal *1/1.3'
+Subgoal *1/1.2
+Subgoal *1/1.2'
+Subgoal *1/1.1
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/1
+
+Summary
+Form:  ( DEFTHM TC-NTH0-OF-WBC-ROW-SCALE-GENERAL ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-NTH0)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-ROW-NTH-INDUCT)
+        (:INDUCTION WBC-ROW-SCALE)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (+ (- c) x) y)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(equal (* x y) 0)|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-WBC-ROW-SCALE)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NTH-WHEN-TOO-LARGE-CHEAP)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-EQUAL)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:REWRITE TC-NTH0-OF-NIL)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.38 seconds (prove: 0.37, print: 0.01, other: 0.00)
+Prover steps counted:  34454
+TC-NTH0-OF-WBC-ROW-SCALE-GENERAL
+
+Summary
+Form:  ( DEFUN RGI-MATRIX-NTH-INDUCT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-MATRIX-NTH-INDUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+Subgoal *1/1'4'
+Subgoal *1/1'5'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-ROW-OF-WBC-MATRIX-SCALE-GENERAL ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-NTH0)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-MATRIX-NTH-INDUCT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(< (+ (- c) x) y)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-WBC-MATRIX-SCALE)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NTH-WHEN-TOO-LARGE-CHEAP)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:REWRITE TC-NTH0-OF-NIL)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.07 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  7302
+TC-NTH0-ROW-OF-WBC-MATRIX-SCALE-GENERAL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-WBC-MATRIX-SCALE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:REWRITE TC-NTH0-OF-WBC-ROW-SCALE-GENERAL)
+        (:REWRITE TC-NTH0-ROW-OF-WBC-MATRIX-SCALE-GENERAL))
+Hint-events: ((:USE TC-NTH0-OF-WBC-ROW-SCALE-GENERAL)
+              (:USE TC-NTH0-ROW-OF-WBC-MATRIX-SCALE-GENERAL))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3122
+RGI-ENTRY-OF-WBC-MATRIX-SCALE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+Subgoal *1/1'4'
+Subgoal *1/1'5'
+
+Summary
+Form:  ( DEFTHM TC-NTH0-ROW-OF-WBC-OUTER ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-NTH0)
+        (:DEFINITION WBC-OUTER)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-MATRIX-NTH-INDUCT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(< (+ (- c) x) y)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-WBC-OUTER)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NTH-WHEN-TOO-LARGE-CHEAP)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:REWRITE TC-NTH0-OF-NIL)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION WBC-ROW-SCALE))
+Time:  0.07 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  7652
+TC-NTH0-ROW-OF-WBC-OUTER
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-WBC-OUTER ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:REWRITE TC-NTH0-OF-WBC-ROW-SCALE-GENERAL)
+        (:REWRITE TC-NTH0-ROW-OF-WBC-OUTER))
+Hint-events: ((:USE TC-NTH0-OF-WBC-ROW-SCALE-GENERAL)
+              (:USE TC-NTH0-ROW-OF-WBC-OUTER))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1643
+RGI-ENTRY-OF-WBC-OUTER
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-LIFT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION RWD-LIFT-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-LIFT-ROW-AUX)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE LEN-OF-CONS))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2673
+LEN-OF-RWD-LIFT-ROW-AUX
+Goal'
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-LIFT-ROW ...)
+Rules: ((:DEFINITION RWD-LIFT-ROW)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX))
+Hint-events: ((:USE LEN-OF-RWD-LIFT-ROW-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  29
+LEN-OF-RWD-LIFT-ROW
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-LIFTED-TERM-MATRIX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE LEN-OF-WBC-OUTER)
+        (:REWRITE LEN-OF-WBC-ROW-SCALE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE TC-NTH0-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE TC-NTH0-OF-WBC-ROW-SCALE-GENERAL)
+        (:REWRITE TC-NTH0-ROW-OF-WBC-MATRIX-SCALE-GENERAL)
+        (:REWRITE TC-NTH0-ROW-OF-WBC-OUTER))
+Hint-events: ((:USE RGI-ENTRY-OF-WBC-MATRIX-SCALE)
+              (:USE RGI-ENTRY-OF-WBC-OUTER))
+Time:  0.53 seconds (prove: 0.53, print: 0.00, other: 0.00)
+Prover steps counted:  50003
+RGI-ENTRY-OF-LIFTED-TERM-MATRIX
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RWD-COEFFICIENT-AT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RGI-POSITION)
+        (:DEFINITION RWD-COEFFICIENT-AT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RWD-COEFFICIENT-AT)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE RWD-COEFFICIENT-AT-ZERO-OUTSIDE-POSITION)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  4946
+RATIONALP-OF-RWD-COEFFICIENT-AT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RWD-LIFT-ROW-AUX)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-LIFT-ROW-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RATIONALP-OF-RWD-COEFFICIENT-AT)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RWD-LIFT-ROW-AUX))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1277
+RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-RWD-LIFT-ROW ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Hint-events: ((:USE RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1120
+RATIONAL-ROWP-OF-RWD-LIFT-ROW
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-LIFT-TERMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION RWD-LIFT-TERMS)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION RWD-LIFT-TERMS)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.09 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  7279
+LEN-OF-RWD-LIFT-TERMS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-TERMS-VALIDP-OF-RWD-LIFT-TERMS ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION RWD-LIFT-TERMS)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-LIFT-TERMS)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RWD-LIFT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RWD-LIFT-TERMS)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3383
+WBC-TERMS-VALIDP-OF-RWD-LIFT-TERMS
+Goal'
+Goal''
+Goal'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM WBC-PLAN-VALIDP-OF-RWD-LIFT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION RWD-LIFT-TERMS)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RWD-LIFT-TERMS)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE LEN-OF-RWD-LIFT-TERMS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE WBC-TERMS-VALIDP-OF-RWD-LIFT-TERMS)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RWD-LIFT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RWD-LIFT-TERMS)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.20 seconds (prove: 0.19, print: 0.01, other: 0.00)
+Prover steps counted:  18104
+WBC-PLAN-VALIDP-OF-RWD-LIFT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN RGI-PLAN-ENTRY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.01)
+Prover steps counted:  426
+RGI-PLAN-ENTRY
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-CONSP-OF-POSITIVE-RATIONAL-MATRIX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-MATRIXP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  76
+RGI-CONSP-OF-POSITIVE-RATIONAL-MATRIX
+
+Summary
+Form:  ( DEFTHM RGI-RATIONAL-ROWP-IMPLIES-RATIONAL-LISTP ...)
+Rules: ((:DEFINITION RATIONAL-ROWP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  19
+RGI-RATIONAL-ROWP-IMPLIES-RATIONAL-LISTP
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RGI-RATIONAL-MATRIXP-OF-LIFTED-TERM ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE RATIONAL-MATRIXP-OF-MATRIX-SCALE)
+        (:REWRITE RATIONAL-MATRIXP-OF-OUTER)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION RWD-LIFT-ROW-AUX))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-WBC-TERM-MATRIX)
+              (:USE RATIONAL-ROWP-OF-RWD-LIFT-ROW)
+              (:USE RGI-RATIONAL-ROWP-IMPLIES-RATIONAL-LISTP))
+Time:  0.11 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  10515
+RGI-RATIONAL-MATRIXP-OF-LIFTED-TERM
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-LIFTED-TERM-MATRIX-POSP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RWD-LIFT-ROW)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE LEN-OF-WBC-OUTER)
+        (:REWRITE LEN-OF-WBC-ROW-SCALE)
+        (:REWRITE TC-NTH0-OF-RWD-LIFT-ROW-AUX)
+        (:REWRITE TC-NTH0-OF-WBC-ROW-SCALE-GENERAL)
+        (:REWRITE TC-NTH0-ROW-OF-WBC-MATRIX-SCALE-GENERAL)
+        (:REWRITE TC-NTH0-ROW-OF-WBC-OUTER))
+Hint-events: ((:USE RGI-ENTRY-OF-LIFTED-TERM-MATRIX))
+Time:  0.11 seconds (prove: 0.11, print: 0.00, other: 0.00)
+Prover steps counted:  9565
+RGI-ENTRY-OF-LIFTED-TERM-MATRIX-POSP
+Goal'
+Goal''
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-MATRIX-ENTRY-STEP-NONEMPTY ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-WBC-MATRIX-ADD)
+        (:REWRITE TC-LEN-OF-RATIONAL-MATRIXP)
+        (:REWRITE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-PLAN-MATRIX))
+Hint-events: ((:USE RGI-CONSP-OF-POSITIVE-RATIONAL-MATRIX)
+              (:USE TC-ENTRY-OF-WBC-MATRIX-ADD-RATIONAL))
+Time:  0.24 seconds (prove: 0.23, print: 0.00, other: 0.00)
+Prover steps counted:  26811
+RGI-PLAN-MATRIX-ENTRY-STEP-NONEMPTY
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-MATRIX-ENTRY-NIL ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:DEFINITION TC-NTH0)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE TC-NTH0-OF-NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  123
+RGI-MATRIX-ENTRY-NIL
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-MATRIX-LEFT-EMPTY ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:EXECUTABLE-COUNTERPART CONSP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  34
+RGI-PLAN-MATRIX-LEFT-EMPTY
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-MATRIX-SINGLETON ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RGI-PLAN-MATRIX-LEFT-EMPTY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  308
+RGI-PLAN-MATRIX-SINGLETON
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-MATRIX-ENTRY-STEP-EMPTY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION WBC-PLAN-MATRIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  885
+RGI-PLAN-MATRIX-ENTRY-STEP-EMPTY
+Goal'
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-VALIDP-HEAD-FACTS ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1343
+RGI-PLAN-VALIDP-HEAD-FACTS
+Subgoal 3
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal 2'4'
+Subgoal 2'5'
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+Subgoal 1'''
+Subgoal 1'4'
+Subgoal 1'5'
+
+Summary
+Form:  ( DEFTHM RGI-EQUAL-LEN-CONSP-CDR ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CONSP-OF-CDR-BY-LEN)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  852
+RGI-EQUAL-LEN-CONSP-CDR
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-VALIDP-LENGTHS ...)
+Rules: ((:DEFINITION POSP)
+        (:DEFINITION WBC-PLAN-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  43
+RGI-PLAN-VALIDP-LENGTHS
+
+Summary
+Form:  ( DEFTHM RGI-CONS-CAR-CDR ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CONS-CAR-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  44
+RGI-CONS-CAR-CDR
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-VALIDP-TAIL-SHAPES ...)
+Rules: NIL
+Hint-events: ((:USE RGI-EQUAL-LEN-CONSP-CDR)
+              (:USE RGI-PLAN-VALIDP-HEAD-FACTS)
+              (:USE RGI-PLAN-VALIDP-LENGTHS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-PLAN-VALIDP-TAIL-SHAPES
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+Subgoal 1'''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-LIFTED-PLAN-STEP ...)
+Rules: ((:DEFINITION RWD-LIFT-TERMS)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-PLAN-MATRIX)
+              (:USE RGI-CONS-CAR-CDR)
+              (:USE RGI-ENTRY-OF-LIFTED-TERM-MATRIX-POSP)
+              (:USE RGI-MATRIX-ENTRY-NIL)
+              (:USE RGI-PLAN-MATRIX-ENTRY-STEP-NONEMPTY)
+              (:USE RGI-PLAN-MATRIX-LEFT-EMPTY)
+              (:USE RGI-PLAN-MATRIX-SINGLETON)
+              (:USE RGI-PLAN-VALIDP-HEAD-FACTS)
+              (:USE RGI-PLAN-VALIDP-TAIL-SHAPES)
+              (:USE RGI-RATIONAL-MATRIXP-OF-LIFTED-TERM)
+              (:USE WBC-PLAN-VALIDP-OF-RWD-LIFT)
+              (:USE WBC-PLAN-VALIDP-OF-TAIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2697
+RGI-ENTRY-OF-LIFTED-PLAN-STEP
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-LIFTED-PLAN-ENTRY-EMPTY-TERMS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION RWD-LIFT-TERMS)
+        (:DEFINITION TC-MATRIX-ENTRY)
+        (:DEFINITION TC-NTH0)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RGI-PLAN-MATRIX-LEFT-EMPTY)
+        (:REWRITE TC-NTH0-OF-NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  164
+RGI-LIFTED-PLAN-ENTRY-EMPTY-TERMS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-LIFTED-PLAN ...)
+Rules: ((:DEFINITION RGI-PLAN-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-PLAN-OUTPUT))
+Hint-events: ((:USE RGI-ENTRY-OF-LIFTED-PLAN-STEP)
+              (:USE RGI-LIFTED-PLAN-ENTRY-EMPTY-TERMS)
+              (:USE RGI-PLAN-VALIDP-HEAD-FACTS)
+              (:USE WBC-PLAN-VALIDP-OF-TAIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1620
+RGI-ENTRY-OF-LIFTED-PLAN
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM NATP-OF-RGI-POSITION ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:INDUCTION RGI-POSITION)
+        (:TYPE-PRESCRIPTION RGI-POSITION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+NATP-OF-RGI-POSITION
+
+Summary
+Form:  ( DEFTHM RGI-LEN-FROM-RATIONAL-ROWP ...)
+Rules: ((:DEFINITION RATIONAL-ROWP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  22
+RGI-LEN-FROM-RATIONAL-ROWP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-COEFFICIENT-AT-POSITION ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RGI-LEN-FROM-RATIONAL-ROWP)
+              (:USE RWD-COEFFICIENT-AT-IS-POSITION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  191
+RGI-COEFFICIENT-AT-POSITION
+
+Summary
+Form:  ( DEFTHM RGI-WBC-TERM-MATRIX-OPEN ...)
+Rules: ((:DEFINITION WBC-TERM-MATRIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  225
+RGI-WBC-TERM-MATRIX-OPEN
+
+Summary
+Form:  ( DEFTHM RGI-MUL-CONGRUENCE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  34
+RGI-MUL-CONGRUENCE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-LEN-OF-WBC-OUTER-ROW ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE LEN-OF-WBC-ROW-SCALE)
+              (:USE TC-NTH0-ROW-OF-WBC-OUTER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  141
+RGI-LEN-OF-WBC-OUTER-ROW
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-WBC-TERM-MATRIX-GENERAL ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE LEN-OF-WBC-OUTER)
+              (:USE RGI-ENTRY-OF-WBC-MATRIX-SCALE)
+              (:USE RGI-ENTRY-OF-WBC-OUTER)
+              (:USE RGI-LEN-OF-WBC-OUTER-ROW)
+              (:USE RGI-MUL-CONGRUENCE)
+              (:USE RGI-WBC-TERM-MATRIX-OPEN)
+              (:USE TC-EQUALITY-CHAIN-3))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  952
+RGI-ENTRY-OF-WBC-TERM-MATRIX-GENERAL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-TERM-AT-POSITIONS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE NATP-OF-RGI-POSITION)
+              (:USE RGI-COEFFICIENT-AT-POSITION)
+              (:USE RGI-ENTRY-OF-WBC-TERM-MATRIX-GENERAL)
+              (:USE RGI-LEN-FROM-RATIONAL-ROWP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  593
+RGI-ENTRY-OF-TERM-AT-POSITIONS
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-MATRIX-WHEN-ENDP-TERMS ...)
+Rules: ((:DEFINITION ENDP)
+        (:REWRITE WBC-PLAN-MATRIX-NONEMPTY-IMPLIES-CONSP-TERMS)
+        (:TYPE-PRESCRIPTION WBC-PLAN-MATRIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  29
+RGI-PLAN-MATRIX-WHEN-ENDP-TERMS
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-VALIDP-IMPLIES-POSP ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION POSP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION POSP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  40
+RGI-PLAN-VALIDP-IMPLIES-POSP
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-NFIX-WHEN-POSP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  61
+RGI-NFIX-WHEN-POSP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-MATRIX-ENTRY-ONE-TERM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RGI-CONS-CAR-CDR)
+              (:USE RGI-PLAN-MATRIX-ENTRY-STEP-EMPTY)
+              (:USE RGI-PLAN-MATRIX-WHEN-ENDP-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  296
+RGI-PLAN-MATRIX-ENTRY-ONE-TERM
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+Subgoal 1'''
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-ENTRY-AT-POSITIONS-STEP ...)
+Rules: ((:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE NATP-OF-RGI-POSITION)
+              (:USE RATIONAL-MATRIXP-OF-PLAN-MATRIX)
+              (:USE RATIONAL-MATRIXP-OF-WBC-TERM-MATRIX)
+              (:USE RGI-CONS-CAR-CDR)
+              (:USE RGI-ENTRY-OF-TERM-AT-POSITIONS)
+              (:USE RGI-MATRIX-ENTRY-NIL)
+              (:USE RGI-NFIX-WHEN-POSP)
+              (:USE RGI-PLAN-MATRIX-ENTRY-ONE-TERM)
+              (:USE RGI-PLAN-MATRIX-ENTRY-STEP-NONEMPTY)
+              (:USE RGI-PLAN-MATRIX-WHEN-ENDP-TERMS)
+              (:USE RGI-PLAN-VALIDP-HEAD-FACTS)
+              (:USE RGI-PLAN-VALIDP-IMPLIES-POSP)
+              (:USE RGI-PLAN-VALIDP-TAIL-SHAPES)
+              (:USE WBC-PLAN-VALIDP-OF-TAIL))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2843
+RGI-PLAN-ENTRY-AT-POSITIONS-STEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-ENTRY-AT-POSITIONS ...)
+Rules: ((:DEFINITION RGI-PLAN-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-PLAN-OUTPUT))
+Hint-events: ((:USE RGI-MATRIX-ENTRY-NIL)
+              (:USE RGI-PLAN-ENTRY-AT-POSITIONS-STEP)
+              (:USE RGI-PLAN-MATRIX-WHEN-ENDP-TERMS)
+              (:USE RGI-PLAN-VALIDP-HEAD-FACTS)
+              (:USE WBC-PLAN-VALIDP-OF-TAIL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2494
+RGI-PLAN-ENTRY-AT-POSITIONS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RGI-PLAN-ENTRY-ZERO-OUTSIDE-POSITION ...)
+Rules: ((:DEFINITION RGI-PLAN-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-PLAN-OUTPUT))
+Hint-events: ((:USE RWD-COEFFICIENT-AT-ZERO-OUTSIDE-POSITION))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  777
+RGI-PLAN-ENTRY-ZERO-OUTSIDE-POSITION
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-LIFTED-ENTRY-WHEN-INSIDE ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:DEFINITION RGI-LIFTED-ENTRY)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(mod (+ x y) z) where (<= 0 z)| . 1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE MOD-X-Y-=-X . 3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE RGI-NFIX-WHEN-POSP)
+        (:TYPE-PRESCRIPTION NATP-OF-RGI-POSITION))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  1583
+RGI-LIFTED-ENTRY-WHEN-INSIDE
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-LIFTED-ENTRY-WHEN-OUTSIDE ...)
+Rules: ((:DEFINITION RGI-LIFTED-ENTRY))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  69
+RGI-LIFTED-ENTRY-WHEN-OUTSIDE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-COMPACT-LIFTED-PLAN-INSIDE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE NATP-OF-RGI-POSITION)
+              (:USE RGI-ENTRY-OF-LIFTED-PLAN)
+              (:USE RGI-LIFTED-ENTRY-WHEN-INSIDE)
+              (:USE RGI-NFIX-WHEN-POSP)
+              (:USE RGI-PLAN-ENTRY-AT-POSITIONS)
+              (:USE TC-COMPACT-POST-CERTIFIESP-IMPLIES-POSP)
+              (:USE TC-COMPACT-POST-PLAN-VALIDP)
+              (:USE TC-ENTRY-OF-COMPACT-CERTIFIED-PLAN)
+              (:USE TC-EQUALITY-CHAIN-5))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1638
+RGI-ENTRY-OF-COMPACT-LIFTED-PLAN-INSIDE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-COMPACT-LIFTED-PLAN-OUTSIDE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RGI-ENTRY-OF-LIFTED-PLAN)
+              (:USE RGI-LIFTED-ENTRY-WHEN-OUTSIDE)
+              (:USE RGI-PLAN-ENTRY-ZERO-OUTSIDE-POSITION)
+              (:USE TC-COMPACT-POST-PLAN-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  609
+RGI-ENTRY-OF-COMPACT-LIFTED-PLAN-OUTSIDE
+
+Summary
+Form:  ( DEFTHM RGI-NOT-LESS-IMPLIES-GE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-NOT-LESS-IMPLIES-GE
+
+Summary
+Form:  ( DEFTHM RGI-INSIDE-OR-OUTSIDE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-INSIDE-OR-OUTSIDE
+Goal'
+
+Summary
+Form:  ( DEFTHM RGI-ENTRY-OF-COMPACT-LIFTED-PLAN ...)
+Rules: NIL
+Hint-events: ((:USE NATP-OF-RGI-POSITION)
+              (:USE RGI-ENTRY-OF-COMPACT-LIFTED-PLAN-INSIDE)
+              (:USE RGI-ENTRY-OF-COMPACT-LIFTED-PLAN-OUTSIDE)
+              (:USE RGI-INSIDE-OR-OUTSIDE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RGI-ENTRY-OF-COMPACT-LIFTED-PLAN
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-CONSTANT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION RWD-CONSTANT-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-CONSTANT-ROW-AUX)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE RGI-NFIX-WHEN-POSP)
+        (:REWRITE RGI-NOT-LESS-IMPLIES-GE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  269
+LEN-OF-RWD-CONSTANT-ROW-AUX
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-RWD-CONSTANT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RWD-CONSTANT-ROW-AUX)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-CONSTANT-ROW-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RWD-CONSTANT-ROW-AUX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  190
+RATIONAL-LISTP-OF-RWD-CONSTANT-ROW-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-RWD-CONSTANT-ROW-AUX ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-ROWP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-RWD-CONSTANT-ROW-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-RWD-CONSTANT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Hint-events: ((:USE LEN-OF-RWD-CONSTANT-ROW-AUX)
+              (:USE RATIONAL-LISTP-OF-RWD-CONSTANT-ROW-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  164
+RATIONAL-ROWP-OF-RWD-CONSTANT-ROW-AUX
+Subgoal *1/2
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-UNIT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-UNIT-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-UNIT-ROW-AUX)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE RGI-NFIX-WHEN-POSP)
+        (:REWRITE RGI-NOT-LESS-IMPLIES-GE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1497
+LEN-OF-RWD-UNIT-ROW-AUX
+Subgoal *1/2
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-RWD-UNIT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RWD-UNIT-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-UNIT-ROW-AUX)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE RGI-NFIX-WHEN-POSP)
+        (:REWRITE RGI-NOT-LESS-IMPLIES-GE)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RWD-UNIT-ROW-AUX))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4273
+RATIONAL-LISTP-OF-RWD-UNIT-ROW-AUX
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-RWD-UNIT-ROW ...)
+Rules: ((:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-UNIT-ROW)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE LEN-OF-RWD-UNIT-ROW-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-RWD-UNIT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Hint-events: ((:USE LEN-OF-RWD-UNIT-ROW-AUX)
+              (:USE RATIONAL-LISTP-OF-RWD-UNIT-ROW-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  49
+RATIONAL-ROWP-OF-RWD-UNIT-ROW
+
+Summary
+Form:  ( DEFTHM TC-COMPACT-POST-RATIONAL-LISTP ...)
+Rules: ((:DEFINITION POSP)
+        (:DEFINITION TC-COMPACT-POST-CERTIFIESP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  88
+TC-COMPACT-POST-RATIONAL-LISTP
+
+Summary
+Form:  ( DEFTHM TC-COMPACT-POST-LENGTH ...)
+Rules: ((:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-COMPACT-POST-CERTIFIESP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  113
+TC-COMPACT-POST-LENGTH
+Goal'
+Goal''
+Goal'''
+Goal'4'
+
+Summary
+Form:  ( DEFTHM RGI-WBC-TERMS-VALIDP-CONS2 ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RGI-NFIX-WHEN-POSP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1276
+RGI-WBC-TERMS-VALIDP-CONS2
+
+Summary
+Form:  ( DEFTHM RGI-FULL-TERMS-OPEN ...)
+Rules: ((:DEFINITION RWD-BASE-TERM)
+        (:DEFINITION RWD-DC-TERM)
+        (:DEFINITION RWD-FULL-TERMS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  79
+(:DEFTHMD RGI-FULL-TERMS-OPEN)
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-FULL-TERMS-VALIDP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Hint-events: ((:USE RATIONAL-ROWP-OF-RWD-CONSTANT-ROW-AUX)
+              (:USE RATIONAL-ROWP-OF-RWD-UNIT-ROW)
+              (:USE RGI-FULL-TERMS-OPEN)
+              (:USE RGI-WBC-TERMS-VALIDP-CONS2)
+              (:USE WBC-TERMS-VALIDP-OF-RWD-LIFT-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  401
+RGI-FULL-TERMS-VALIDP
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-RWD-NONZERO-POST ...)
+Rules: ((:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RWD-NONZERO-POST)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  83
+RATIONAL-LISTP-OF-RWD-NONZERO-POST
+
+Summary
+Form:  ( DEFTHM RGI-LEN-CONS2 ...)
+Rules: ((:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:REWRITE LEN-OF-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  19
+RGI-LEN-CONS2
+Goal'
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-FULL-TERMS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE LEN-OF-RWD-LIFT-TERMS)
+              (:USE RGI-FULL-TERMS-OPEN)
+              (:USE RGI-LEN-CONS2))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  145
+LEN-OF-RWD-FULL-TERMS
+
+Summary
+Form:  ( DEFTHM RGI-RWD-NONZERO-POST-OPEN ...)
+Rules: ((:DEFINITION RWD-NONZERO-POST))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  13
+RGI-RWD-NONZERO-POST-OPEN
+Goal'
+
+Summary
+Form:  ( DEFTHM LEN-OF-RWD-NONZERO-POST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RGI-LEN-CONS2)
+              (:USE RGI-RWD-NONZERO-POST-OPEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  52
+LEN-OF-RWD-NONZERO-POST
+
+Summary
+Form:  ( DEFTHM CONSP-OF-RWD-FULL-TERMS ...)
+Rules: ((:DEFINITION RWD-FULL-TERMS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-FULL-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  23
+CONSP-OF-RWD-FULL-TERMS
+
+Summary
+Form:  ( DEFTHM RGI-WBC-PLAN-VALIDP-COMPONENTS ...)
+Rules: ((:DEFINITION POSP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  52
+RGI-WBC-PLAN-VALIDP-COMPONENTS
+
+Summary
+Form:  ( DEFTHM RGI-WBC-PLAN-VALIDP-FROM-COMPONENTS ...)
+Rules: ((:DEFINITION WBC-PLAN-VALIDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  100
+RGI-WBC-PLAN-VALIDP-FROM-COMPONENTS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-NONZERO-FULL-PLAN-VALIDP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP))
+Hint-events: ((:USE CONSP-OF-RWD-FULL-TERMS)
+              (:USE LEN-OF-RWD-FULL-TERMS)
+              (:USE LEN-OF-RWD-NONZERO-POST)
+              (:USE RATIONAL-LISTP-OF-RWD-NONZERO-POST)
+              (:USE RGI-FULL-TERMS-VALIDP)
+              (:USE RGI-WBC-PLAN-VALIDP-COMPONENTS)
+              (:USE RGI-WBC-PLAN-VALIDP-FROM-COMPONENTS)
+              (:USE TC-COMPACT-POST-PLAN-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  441
+RGI-NONZERO-FULL-PLAN-VALIDP
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbg-compact-rader-certificate" ...)
+Rules: NIL
+Time:  16.36 seconds (prove: 14.85, print: 0.12, other: 1.39)
+Prover steps counted:  671506
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 16.36 seconds realtime, 15.20 seconds runtime
+; (2,622,481,824 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 43580 Jun 29 00:39 zbg-compact-rader-certificate.cert

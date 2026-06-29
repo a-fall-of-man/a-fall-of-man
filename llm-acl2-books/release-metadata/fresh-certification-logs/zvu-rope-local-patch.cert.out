@@ -1,0 +1,592 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zyl-verified-patch-calculus.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zvu-rope-local-patch" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zvu-rope-local-patch
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zyl-verified-patch-calculus" ...)
+Rules: NIL
+Time:  1.05 seconds (prove: 0.00, print: 0.00, other: 1.05)
+"/mnt/data/new-release/cert-work/zyl-verified-patch-calculus.lisp"
+(DEFXDOC ZVU-ROPE-LOCAL-PATCH)
+
+Summary
+Form:  ( DEFUN ZVR-RUN-BI-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-RUN-BI-SUMMARY
+
+Summary
+Form:  ( DEFUN ZVR-RLE-BI-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-EMPTY)
+        (:TYPE-PRESCRIPTION XEF-BI-JOIN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-RLE-BI-SUMMARY
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZVR-APPEND-REPEAT-SINGLETON ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-REPEAT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE XEF-REPEAT-ONE))
+Hint-events: ((:USE XEF-REPEAT-OF-SUM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  474
+ZVR-APPEND-REPEAT-SINGLETON
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZVR-REV-OF-REPEAT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION XEF-REPEAT)
+        (:DEFINITION XEF-REV)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-REV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REPEAT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE ZVR-APPEND-REPEAT-SINGLETON)
+        (:TYPE-PRESCRIPTION XEF-REPEAT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  136
+ZVR-REV-OF-REPEAT
+
+Summary
+Form:  ( DEFTHM ZVR-RUN-BI-SUMMARY-REFINES-REPEAT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:DEFINITION ZVR-RUN-BI-SUMMARY)
+        (:EXECUTABLE-COUNTERPART <)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE XEF-COCYCLE-FIX-OF-POWER)
+        (:REWRITE XEF-LEN-OF-REPEAT)
+        (:REWRITE XEF-WORD-SUMMARY-OF-REPEAT)
+        (:REWRITE ZVR-REV-OF-REPEAT))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4533
+ZVR-RUN-BI-SUMMARY-REFINES-REPEAT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZVR-RLE-BI-SUMMARY-REFINES-DECODING ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION ZVR-RLE-BI-SUMMARY)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-BI-EMPTY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZVR-RLE-BI-SUMMARY)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-NIL)
+        (:REWRITE ZVR-RUN-BI-SUMMARY-REFINES-REPEAT)
+        (:REWRITE ZYP-RLE-DECODE-WHEN-CANONICALIZE-NOT-CONSP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3110
+ZVR-RLE-BI-SUMMARY-REFINES-DECODING
+
+Summary
+Form:  ( DEFUN ZVR-STEP-OUTPUT-BI-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-EMPTY)
+        (:TYPE-PRESCRIPTION XEF-WORD-BI-SUMMARY)
+        (:TYPE-PRESCRIPTION ZVR-RLE-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-STEP-OUTPUT-BI-SUMMARY
+
+Summary
+Form:  ( DEFUN ZVR-PATCH-OUTPUT-BI-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-EMPTY)
+        (:TYPE-PRESCRIPTION XEF-BI-JOIN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-PATCH-OUTPUT-BI-SUMMARY
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZVR-STEP-OUTPUT-BI-SUMMARY-REFINES-OUTPUT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:DEFINITION ZVR-STEP-OUTPUT-BI-SUMMARY)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-BI-EMPTY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-LEN-OF-RLE-DECODE)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-NIL)
+        (:REWRITE ZVR-RLE-BI-SUMMARY-REFINES-DECODING)
+        (:TYPE-PRESCRIPTION XEF-RLE-SYMBOL-COUNT))
+Time:  0.07 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  9412
+ZVR-STEP-OUTPUT-BI-SUMMARY-REFINES-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZVR-PATCH-OUTPUT-BI-SUMMARY-REFINES-OUTPUT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZVR-PATCH-OUTPUT-BI-SUMMARY)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-BI-EMPTY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZVR-PATCH-OUTPUT-BI-SUMMARY)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-NIL)
+        (:REWRITE ZVR-STEP-OUTPUT-BI-SUMMARY-REFINES-OUTPUT)
+        (:REWRITE ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  293
+ZVR-PATCH-OUTPUT-BI-SUMMARY-REFINES-OUTPUT
+
+Summary
+Form:  ( DEFUN ZVR-PATCH-WORD ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-OF-ZYP-PATCH-REST))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-PATCH-WORD
+
+Summary
+Form:  ( DEFUN ZVR-PATCH-WORD-BI-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-JOIN)
+        (:TYPE-PRESCRIPTION XEF-WORD-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-PATCH-WORD-BI-SUMMARY
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZVR-WORD-SUMMARY-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION TRUE-LIST-FIX)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TRUE-LIST-FIX)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION XEF-LOOKUP-COCYCLE)
+        (:TYPE-PRESCRIPTION XEF-WORD-SUMMARY))
+Time:  0.31 seconds (prove: 0.31, print: 0.00, other: 0.00)
+Prover steps counted:  46862
+ZVR-WORD-SUMMARY-OF-TRUE-LIST-FIX
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZVR-REV-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION TRUE-LIST-FIX)
+        (:DEFINITION XEF-REV)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-REV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TRUE-LIST-FIX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  307
+ZVR-REV-OF-TRUE-LIST-FIX
+
+Summary
+Form:  ( DEFTHM ZVR-WORD-BI-SUMMARY-OF-TRUE-LIST-FIX ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-LIST-FIX)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE ZVR-REV-OF-TRUE-LIST-FIX)
+        (:REWRITE ZVR-WORD-SUMMARY-OF-TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  5605
+ZVR-WORD-BI-SUMMARY-OF-TRUE-LIST-FIX
+
+Summary
+Form:  ( DEFTHM ZVR-TRUE-LISTP-OF-PATCH-WORD ...)
+Rules: ((:TYPE-PRESCRIPTION ZVR-PATCH-WORD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-TRUE-LISTP-OF-PATCH-WORD
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZVR-PATCH-WORD-BI-SUMMARY-REFINES-WORD ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:DEFINITION ZVR-PATCH-WORD-BI-SUMMARY)
+        (:DEFINITION ZYP-OUTPUT-LENGTH)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND)
+        (:REWRITE ZVR-PATCH-OUTPUT-BI-SUMMARY-REFINES-OUTPUT)
+        (:REWRITE ZVR-WORD-BI-SUMMARY-OF-TRUE-LIST-FIX)
+        (:REWRITE ZYP-LEN-OF-PATCH-OUTPUT-WHEN-OKP)
+        (:REWRITE ZYP-LEN-OF-PATCH-REST-WHEN-OKP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZYP-INSERTED-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-KEPT-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.16 seconds (prove: 0.16, print: 0.00, other: 0.00)
+Prover steps counted:  23059
+ZVR-PATCH-WORD-BI-SUMMARY-REFINES-WORD
+
+Summary
+Form:  ( DEFTHM ZVR-PATCH-WORD-OF-NORMALIZE ...)
+Rules: ((:DEFINITION ZVR-PATCH-WORD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZYP-PATCH-OKP-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-NORMALIZE)
+        (:REWRITE ZYP-PATCH-REST-OF-NORMALIZE))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  6225
+ZVR-PATCH-WORD-OF-NORMALIZE
+Goal'
+
+Summary
+Form:  ( DEFTHM ZVR-PATCH-WORD-BI-SUMMARY-OF-NORMALIZE ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:REWRITE ZVR-PATCH-WORD-OF-NORMALIZE))
+Hint-events: ((:USE ZVR-PATCH-WORD-BI-SUMMARY-REFINES-WORD))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  68
+ZVR-PATCH-WORD-BI-SUMMARY-OF-NORMALIZE
+
+Summary
+Form:  ( DEFTHM ZVR-LEN-OF-PATCH-WORD-WHEN-OKP ...)
+Rules: ((:DEFINITION ZVR-PATCH-WORD)
+        (:DEFINITION ZYP-OUTPUT-LENGTH)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE ZYP-LEN-OF-PATCH-OUTPUT-WHEN-OKP)
+        (:REWRITE ZYP-LEN-OF-PATCH-REST-WHEN-OKP)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4756
+ZVR-LEN-OF-PATCH-WORD-WHEN-OKP
+
+Summary
+Form:  ( DEFUN ZVR-EDIT-FOCUS ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-PLUG-ROPE)
+        (:TYPE-PRESCRIPTION XEF-ROPE-LEAF))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-EDIT-FOCUS
+
+Summary
+Form:  ( DEFUN ZVR-EDIT-FOCUS-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-PLUG-SUMMARY)
+        (:TYPE-PRESCRIPTION ZVR-PATCH-WORD-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZVR-EDIT-FOCUS-SUMMARY
+Goal'
+
+Summary
+Form:  ( DEFTHM ZVR-FLATTEN-OF-EDIT-FOCUS ...)
+Rules: ((:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZVR-EDIT-FOCUS)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-FLATTEN-OF-PLUG-ROPE)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-OF-ZYP-PATCH-REST)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  7877
+ZVR-FLATTEN-OF-EDIT-FOCUS
+Goal'
+
+Summary
+Form:  ( DEFTHM ZVR-EDIT-FOCUS-SUMMARY-CORRECT ...)
+Rules: ((:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZVR-EDIT-FOCUS)
+        (:DEFINITION ZVR-EDIT-FOCUS-SUMMARY)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-FLATTEN-OF-PLUG-ROPE)
+        (:REWRITE XEF-PLUG-SUMMARY-REFINES-PLUG-WORD)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE ZVR-PATCH-WORD-BI-SUMMARY-REFINES-WORD)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-OF-ZYP-PATCH-REST)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  7901
+ZVR-EDIT-FOCUS-SUMMARY-CORRECT
+Goal'
+
+Summary
+Form:  ( DEFTHM ZVR-FLATTEN-OF-FAILED-EDIT-FOCUS ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZVR-EDIT-FOCUS)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-FLATTEN-OF-PLUG-ROPE)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1956
+ZVR-FLATTEN-OF-FAILED-EDIT-FOCUS
+
+Summary
+Form:  ( DEFTHM ZVR-EDIT-FOCUS-SUMMARY-OF-NORMALIZE ...)
+Rules: ((:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION ZVR-EDIT-FOCUS)
+        (:REWRITE XEF-FLATTEN-OF-PLUG-ROPE)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE ZVR-EDIT-FOCUS-SUMMARY-CORRECT)
+        (:REWRITE ZVR-PATCH-WORD-OF-NORMALIZE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  63
+ZVR-EDIT-FOCUS-SUMMARY-OF-NORMALIZE
+
+Summary
+Form:  ( DEFCONST *ZVR-DEMO-FOCUS* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZVR-DEMO-FOCUS*
+
+Summary
+Form:  ( DEFCONST *ZVR-DEMO-CONTEXT* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZVR-DEMO-CONTEXT*
+
+Summary
+Form:  ( DEFCONST *ZVR-DEMO-PATCH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZVR-DEMO-PATCH*
+:PASSED
+(DEFXDOC ZVR-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zvu-rope-local-patch" ...)
+Rules: NIL
+Time:  2.05 seconds (prove: 0.89, print: 0.01, other: 1.14)
+Prover steps counted:  122637
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 2.05 seconds realtime, 1.91 seconds runtime
+; (258,083,408 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 26568 Jun 29 00:41 zvu-rope-local-patch.cert

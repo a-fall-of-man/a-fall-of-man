@@ -1,0 +1,709 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbj-rader-output-matrix-certificate.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbk-rader-bank-certificate" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbk-rader-bank-certificate
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbj-rader-output-matrix-certificate" ...)
+Rules: NIL
+Time:  1.31 seconds (prove: 0.00, print: 0.00, other: 1.31)
+"/mnt/data/new-release/cert-work/zbj-rader-output-matrix-certificate.lisp"
+
+Summary
+Form:  ( DEFTHM RBK-NFIX-OF-LEN ...)
+Rules: ((:REWRITE RCB-NFIX-OF-LEN))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  8
+RBK-NFIX-OF-LEN
+
+Summary
+Form:  ( DEFTHM RBK-LEN-OF-ZERO-ROW ...)
+Rules: ((:DEFINITION RWD-ZERO-ROW)
+        (:REWRITE LEN-OF-REPEAT)
+        (:REWRITE REPEAT-OF-NFIX)
+        (:REWRITE RFB-CONSTANT-ROW-IS-REPEAT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  18
+RBK-LEN-OF-ZERO-ROW
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RBK-RATIONAL-LISTP-OF-ZERO-ROW ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RWD-ZERO-ROW)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:INDUCTION RWD-CONSTANT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  46
+RBK-RATIONAL-LISTP-OF-ZERO-ROW
+
+Summary
+Form:  ( DEFTHM RBK-DC-POST-OPEN ...)
+Rules: ((:DEFINITION RWD-DC-POST))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  15
+RBK-DC-POST-OPEN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-CDR-OF-DC-POST ...)
+Rules: ((:DEFINITION HIDE) (:REWRITE CDR-CONS))
+Hint-events: ((:USE RBK-DC-POST-OPEN))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  91
+RBK-CDR-OF-DC-POST
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-RATIONAL-LISTP-OF-DC-POST ...)
+Rules: ((:DEFINITION HIDE)
+        (:DEFINITION RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Hint-events: ((:USE RBK-DC-POST-OPEN)
+              (:USE RBK-RATIONAL-LISTP-OF-ZERO-ROW))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  193
+RBK-RATIONAL-LISTP-OF-DC-POST
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RBK-LEN-OF-DC-POST ...)
+Rules: ((:DEFINITION HIDE)
+        (:DEFINITION LEN)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS))
+Hint-events: ((:USE RBK-DC-POST-OPEN)
+              (:USE RBK-LEN-OF-ZERO-ROW))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  240
+RBK-LEN-OF-DC-POST
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-FULL-PLAN-VALIDP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP))
+Hint-events: ((:USE CONSP-OF-RWD-FULL-TERMS)
+              (:USE LEN-OF-RWD-FULL-TERMS)
+              (:USE RBK-LEN-OF-DC-POST)
+              (:USE RBK-NFIX-OF-LEN)
+              (:USE RBK-RATIONAL-LISTP-OF-DC-POST)
+              (:USE RGI-FULL-TERMS-VALIDP)
+              (:USE RGI-WBC-PLAN-VALIDP-FROM-COMPONENTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  338
+RBK-DC-FULL-PLAN-VALIDP
+
+Summary
+Form:  ( DEFUN RBK-ZERO-POSTP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RBK-ZERO-POSTP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RBK-ZERO-POSTP-OF-ZERO-ROW ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RBK-ZERO-POSTP)
+        (:DEFINITION RWD-CONSTANT-ROW-AUX)
+        (:DEFINITION RWD-ZERO-ROW)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART RBK-ZERO-POSTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-CONSTANT-ROW-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION RBK-ZERO-POSTP)
+        (:TYPE-PRESCRIPTION RWD-CONSTANT-ROW-AUX))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  784
+RBK-ZERO-POSTP-OF-ZERO-ROW
+
+Summary
+Form:  ( DEFTHM RBK-ZERO-POSTP-CAR ...)
+Rules: ((:DEFINITION RBK-ZERO-POSTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  50
+RBK-ZERO-POSTP-CAR
+
+Summary
+Form:  ( DEFTHM RBK-ZERO-POSTP-CDR ...)
+Rules: ((:DEFINITION RBK-ZERO-POSTP)
+        (:EXECUTABLE-COUNTERPART RBK-ZERO-POSTP)
+        (:REWRITE DEFAULT-CDR)
+        (:TYPE-PRESCRIPTION RBK-ZERO-POSTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  60
+RBK-ZERO-POSTP-CDR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-TERM-ENTRY-AT-ZERO ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CONS-CAR-CDR))
+Hint-events: ((:USE RGI-ENTRY-OF-WBC-TERM-MATRIX-GENERAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  212
+RBK-TERM-ENTRY-AT-ZERO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-ZERO-SMALL-PLAN-VALIDP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP))
+Hint-events: ((:USE RBK-LEN-OF-ZERO-ROW)
+              (:USE RBK-NFIX-OF-LEN)
+              (:USE RBK-RATIONAL-LISTP-OF-ZERO-ROW)
+              (:USE RGI-WBC-PLAN-VALIDP-FROM-COMPONENTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  188
+RBK-ZERO-SMALL-PLAN-VALIDP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RBK-RGI-PLAN-ENTRY-OF-ZERO-POST ...)
+Rules: ((:DEFINITION RBK-ZERO-POSTP)
+        (:DEFINITION RGI-PLAN-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-PLAN-ENTRY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  298
+RBK-RGI-PLAN-ENTRY-OF-ZERO-POST
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-LIFTED-ZERO-PLAN-ENTRY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RBK-RGI-PLAN-ENTRY-OF-ZERO-POST)
+              (:USE RBK-ZERO-POSTP-OF-ZERO-ROW)
+              (:USE RBK-ZERO-SMALL-PLAN-VALIDP)
+              (:USE RGI-ENTRY-OF-LIFTED-PLAN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  327
+RBK-LIFTED-ZERO-PLAN-ENTRY
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RBK-ENTRY-OF-BASE-TERM-ZERO ...)
+Rules: ((:DEFINITION RWD-BASE-TERM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Hint-events: ((:USE RBK-TERM-ENTRY-AT-ZERO)
+              (:USE RFB-LEN-OF-UNIT-ROW)
+              (:USE RGI-NFIX-WHEN-POSP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  508
+RBK-ENTRY-OF-BASE-TERM-ZERO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-TAIL-VALIDP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP))
+Hint-events: ((:USE RBK-CDR-OF-DC-POST)
+              (:USE RBK-DC-FULL-PLAN-VALIDP)
+              (:USE RFB-CDR-OF-FULL-TERMS)
+              (:USE WBC-PLAN-VALIDP-OF-TAIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  320
+RBK-DC-TAIL-VALIDP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-TAIL-ENTRY ...)
+Rules: NIL
+Hint-events: ((:USE RBK-DC-TAIL-VALIDP)
+              (:USE RBK-ENTRY-OF-BASE-TERM-ZERO)
+              (:USE RBK-LIFTED-ZERO-PLAN-ENTRY)
+              (:USE RBK-ZERO-SMALL-PLAN-VALIDP)
+              (:USE RFB-VALID-PLAN-ENTRY-STEP)
+              (:USE WBC-PLAN-VALIDP-OF-RWD-LIFT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  818
+RBK-DC-TAIL-ENTRY
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-ENTRY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RBK-DC-FULL-PLAN-VALIDP)
+              (:USE RBK-DC-POST-OPEN)
+              (:USE RBK-DC-TAIL-ENTRY)
+              (:USE RBK-DC-TAIL-VALIDP)
+              (:USE RFB-ENTRY-OF-DC-TERM-ONE)
+              (:USE RFB-FULL-TERMS-EXACT-OPEN)
+              (:USE RFB-VALID-PLAN-ENTRY-STEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  955
+RBK-DC-PLAN-ENTRY
+
+Summary
+Form:  ( DEFTHM RBK-TIMES-ZERO ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RBK-TIMES-ZERO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-FOURIER-ZERO-ENTRY ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION RGI-FOURIER-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(mod 0 y)|)
+        (:REWRITE RBK-TIMES-ZERO))
+Hint-events: ((:USE RGI-NFIX-WHEN-POSP)
+              (:USE ROM-ENTRY-OF-FOURIER-MATRIX)
+              (:USE ROM-NATP-ZERO)
+              (:USE ROM-NFIX-WHEN-NATP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  395
+RBK-FOURIER-ZERO-ENTRY
+Goal'
+
+Summary
+Form:  ( DEFTHM RBK-RATIONAL-MATRIXP-OF-DC-PLAN ...)
+Rules: ((:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-PLAN-MATRIX)
+              (:USE RBK-DC-FULL-PLAN-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RBK-RATIONAL-MATRIXP-OF-DC-PLAN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-ROW-LENGTH ...)
+Rules: ((:REWRITE RGI-NFIX-WHEN-POSP))
+Hint-events: ((:USE LEN-OF-TC-NTH0-OF-RATIONAL-MATRIXP)
+              (:USE RBK-RATIONAL-MATRIXP-OF-DC-PLAN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  256
+RBK-DC-PLAN-ROW-LENGTH
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-ROW-TRUE-LISTP ...)
+Rules: ((:FAKE-RUNE-FOR-LINEAR NIL)
+        (:REWRITE RGI-NFIX-WHEN-POSP)
+        (:TYPE-PRESCRIPTION TRUE-LISTP))
+Hint-events: ((:USE RBK-RATIONAL-MATRIXP-OF-DC-PLAN)
+              (:USE ROM-PROPER-MATRIXP-OF-WBC-PLAN-MATRIX)
+              (:USE ROM-TRUE-LISTP-OF-PROPER-MATRIX-ROW)
+              (:USE TC-LEN-OF-RATIONAL-MATRIXP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  493
+RBK-DC-PLAN-ROW-TRUE-LISTP
+Goal'
+Goal''
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RBK-NTH-OF-DC-PLAN-ROW-EQUALS-FOURIER-ZERO ...)
+Rules: ((:DEFINITION TC-MATRIX-ENTRY)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RBK-DC-PLAN-ENTRY)
+              (:USE RBK-DC-PLAN-ROW-LENGTH)
+              (:USE RBK-FOURIER-ZERO-ENTRY)
+              (:USE ROM-FOURIER-ROW-LENGTH)
+              (:USE TC-EQUALITY-CHAIN-5)
+              (:USE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2534
+RBK-NTH-OF-DC-PLAN-ROW-EQUALS-FOURIER-ZERO
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-ROW-EQUALS-FOURIER-ZERO-ROW ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RBK-DC-PLAN-ROW-LENGTH)
+        (:REWRITE RBK-DC-PLAN-ROW-TRUE-LISTP)
+        (:REWRITE RBK-NTH-OF-DC-PLAN-ROW-EQUALS-FOURIER-ZERO)
+        (:REWRITE ROM-FOURIER-ROW-LENGTH)
+        (:REWRITE ROM-FOURIER-ROW-TRUE-LISTP))
+Hint-events: ((:USE EQUAL-BY-NTHS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  554
+RBK-DC-PLAN-ROW-EQUALS-FOURIER-ZERO-ROW
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-MATRIX-LENGTH ...)
+Rules: ((:REWRITE RGI-NFIX-WHEN-POSP))
+Hint-events: ((:USE RBK-RATIONAL-MATRIXP-OF-DC-PLAN)
+              (:USE TC-LEN-OF-RATIONAL-MATRIXP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  197
+RBK-DC-PLAN-MATRIX-LENGTH
+Goal'
+Goal''
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RBK-NTH-OF-DC-PLAN-MATRIX-EQUALS-FOURIER-ZERO ...)
+Rules: ((:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RBK-DC-PLAN-MATRIX-LENGTH)
+              (:USE RBK-DC-PLAN-ROW-EQUALS-FOURIER-ZERO-ROW)
+              (:USE ROM-FOURIER-MATRIX-LENGTH)
+              (:USE TC-EQUALITY-CHAIN-3)
+              (:USE TC-NTH0-IS-NTH-WHEN-IN-BOUNDS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1353
+RBK-NTH-OF-DC-PLAN-MATRIX-EQUALS-FOURIER-ZERO
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-MATRIX-EQUALS-FOURIER-ZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART IF)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RBK-DC-PLAN-MATRIX-LENGTH)
+        (:REWRITE RBK-NTH-OF-DC-PLAN-MATRIX-EQUALS-FOURIER-ZERO)
+        (:REWRITE ROM-FOURIER-MATRIX-LENGTH)
+        (:REWRITE ROM-TRUE-LISTP-OF-FOURIER-MATRIX)
+        (:REWRITE TC-TRUE-LISTP-OF-WBC-PLAN-MATRIX))
+Hint-events: ((:USE EQUAL-BY-NTHS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  391
+RBK-DC-PLAN-MATRIX-EQUALS-FOURIER-ZERO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-DC-PLAN-CERTIFICATE ...)
+Rules: ((:DEFINITION RWD-PLAN-CERTIFIES-OUTPUTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-PLAN-CERTIFIES-OUTPUTP))
+Hint-events: ((:USE RBK-DC-FULL-PLAN-VALIDP)
+              (:USE RBK-DC-PLAN-MATRIX-EQUALS-FOURIER-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  244
+RBK-DC-PLAN-CERTIFICATE
+
+Summary
+Form:  ( DEFUN RBK-COMPACT-BANKP ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+RBK-COMPACT-BANKP
+
+Summary
+Form:  ( DEFUN RBK-NAT-LISTP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RBK-NAT-LISTP
+
+Summary
+Form:  ( DEFTHM RBK-NAT-LISTP-HEAD ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RBK-NAT-LISTP)
+        (:TYPE-PRESCRIPTION NATP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  58
+RBK-NAT-LISTP-HEAD
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM RBK-NAT-LISTP-TAIL ...)
+Rules: ((:DEFINITION RBK-NAT-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  84
+RBK-NAT-LISTP-TAIL
+
+Summary
+Form:  ( DEFTHM RBK-NATP-OF-NFIX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RBK-NATP-OF-NFIX
+
+Summary
+Form:  ( DEFTHM RBK-NATP-NEXT-INDEX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+RBK-NATP-NEXT-INDEX
+
+Summary
+Form:  ( DEFTHM RBK-RWD-BANK-EMPTY-POSTS ...)
+Rules: ((:DEFINITION RWD-BANK-CERTIFIES-AUX)
+        (:TYPE-PRESCRIPTION RWD-BANK-CERTIFIES-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  36
+RBK-RWD-BANK-EMPTY-POSTS
+
+Summary
+Form:  ( DEFTHM RBK-RWD-BANK-NONZERO-POSTS-OPEN ...)
+Rules: ((:DEFINITION RWD-BANK-CERTIFIES-AUX)
+        (:DEFINITION RWD-NONZERO-POSTS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  134
+RBK-RWD-BANK-NONZERO-POSTS-OPEN
+
+Summary
+Form:  ( DEFUN RBK-COMPACT-BANK-INDUCT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RBK-COMPACT-BANK-INDUCT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RBK-COMPACT-BANK-IMPLIES-NONZERO-CERTIFICATE ...)
+Rules: ((:DEFINITION RBK-COMPACT-BANKP)
+        (:DEFINITION RWD-NONZERO-POSTS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RBK-COMPACT-BANK-INDUCT)
+        (:TYPE-PRESCRIPTION RWD-BANK-CERTIFIES-AUX))
+Hint-events: ((:USE RBK-NAT-LISTP-HEAD)
+              (:USE RBK-NAT-LISTP-TAIL)
+              (:USE RBK-NATP-NEXT-INDEX)
+              (:USE RBK-NATP-OF-NFIX)
+              (:USE RBK-RWD-BANK-EMPTY-POSTS)
+              (:USE RBK-RWD-BANK-NONZERO-POSTS-OPEN)
+              (:USE ROM-COMPACT-OUTPUT-IMPLIES-PLAN-CERTIFICATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1743
+RBK-COMPACT-BANK-IMPLIES-NONZERO-CERTIFICATE
+Goal'
+
+Summary
+Form:  ( DEFTHM RBK-GENERATED-TERMS-VALIDP ...)
+Rules: ((:DEFINITION TC-PLAN-TERMS)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Hint-events: ((:USE WBC-TERMS-VALIDP-OF-TC-PLAN-TERMS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  61
+RBK-GENERATED-TERMS-VALIDP
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RBK-GENERATED-TERMS-CONSP ...)
+Rules: ((:DEFINITION POSP)
+        (:DEFINITION TC-PLAN-TERMS)
+        (:DEFINITION ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE CONSP-OF-TC-PLAN-TERMS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  186
+RBK-GENERATED-TERMS-CONSP
+Goal'
+
+Summary
+Form:  ( DEFTHM RBK-FULL-BANK-OPEN ...)
+Rules: ((:DEFINITION RWD-BANK-CERTIFIES-AUX)
+        (:DEFINITION RWD-BANK-CERTIFIESP)
+        (:DEFINITION RWD-FULL-POSTS)
+        (:DEFINITION RWD-OUTPUT-ORDER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  184
+RBK-FULL-BANK-OPEN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RBK-COMPACT-BANK-IMPLIES-FULL-CERTIFICATE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-BANK-CERTIFIESP))
+Hint-events: ((:USE RBK-COMPACT-BANK-IMPLIES-NONZERO-CERTIFICATE)
+              (:USE RBK-DC-PLAN-CERTIFICATE)
+              (:USE RBK-FULL-BANK-OPEN)
+              (:USE RBK-GENERATED-TERMS-CONSP)
+              (:USE RBK-GENERATED-TERMS-VALIDP)
+              (:USE ROM-NATP-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  562
+RBK-COMPACT-BANK-IMPLIES-FULL-CERTIFICATE
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbk-rader-bank-certificate" ...)
+Rules: NIL
+Time:  1.55 seconds (prove: 0.14, print: 0.01, other: 1.41)
+Prover steps counted:  14934
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.55 seconds realtime, 1.42 seconds runtime
+; (167,318,048 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 33590 Jun 29 00:39 zbk-rader-bank-certificate.cert

@@ -1,0 +1,1412 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "centaur/fty/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/omaps/update.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zkx-weighted-path-certificates" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zkx-weighted-path-certificates
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "portcullis" ...)
+Rules: NIL
+Time:  0.31 seconds (prove: 0.00, print: 0.00, other: 0.31)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.07 seconds (prove: 0.00, print: 0.00, other: 0.07)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/portcullis" ...)
+Rules: NIL
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+ "/mnt/data/acl2-8.7-recovery/books/std/omaps/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/top" ...)
+Rules: NIL
+Time:  1.42 seconds (prove: 0.00, print: 0.00, other: 1.42)
+"/mnt/data/acl2-8.7-recovery/books/centaur/fty/top.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/update" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+"/mnt/data/acl2-8.7-recovery/books/std/omaps/update.lisp"
+Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.45 seconds (prove: 0.00, print: 0.00, other: 0.45)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.45 seconds (prove: 0.00, print: 0.00, other: 0.45)
+"/mnt/data/acl2-8.7-recovery/books/arithmetic-5/top.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZKX-WEIGHTED-PATH-CERTIFICATES)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TMP-DEFTYPES-SYMBOLP-OF-SYMBOL-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TMP-DEFTYPES-NATP-OF-NFIX ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Goal'
+Form:  ( DEFTHM TMP-DEFTYPES-NFIX-WHEN-NATP ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VWC-EDGE-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM CONSP-WHEN-VWC-EDGE-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (MAKE-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TAG-WHEN-VWC-EDGE-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-EDGE-P-WHEN-WRONG-TAG ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VWC-EDGE-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VWC-EDGE-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM VWC-EDGE-P-OF-VWC-EDGE-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VWC-EDGE-P-OF-VWC-EDGE-FIX ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM VWC-EDGE-FIX-WHEN-VWC-EDGE-P ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VWC-EDGE-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.03 seconds (prove: 0.01, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM TAG-OF-VWC-EDGE-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VWC-EDGE->FROM ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VWC-EDGE->FROM$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM SYMBOLP-OF-VWC-EDGE->FROM ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM SYMBOLP-OF-VWC-EDGE->FROM ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-EDGE->FROM$INLINE-OF-VWC-EDGE-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VWC-EDGE->FROM ...) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VWC-EDGE->TO ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VWC-EDGE->TO$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM SYMBOLP-OF-VWC-EDGE->TO ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM SYMBOLP-OF-VWC-EDGE->TO ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-EDGE->TO$INLINE-OF-VWC-EDGE-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VWC-EDGE->TO ...) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VWC-EDGE->WEIGHT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VWC-EDGE->WEIGHT$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM NATP-OF-VWC-EDGE->WEIGHT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM NATP-OF-VWC-EDGE->WEIGHT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-EDGE->WEIGHT$INLINE-OF-VWC-EDGE-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VWC-EDGE->WEIGHT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VWC-EDGE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM VWC-EDGE-P-OF-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VWC-EDGE-P-OF-VWC-EDGE ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Form:  ( DEFTHM VWC-EDGE->FROM-OF-VWC-EDGE ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Form:  ( DEFTHM VWC-EDGE->TO-OF-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Form:  ( DEFTHM VWC-EDGE->WEIGHT-OF-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-EDGE-OF-FIELDS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-EDGE-FIX-WHEN-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Subgoal 5
+Subgoal 5'
+Subgoal 5''
+Subgoal 5'''
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM EQUAL-OF-VWC-EDGE ...)
+Time:  0.06 seconds (prove: 0.03, print: 0.00, other: 0.03)
+Goal'
+Form:  ( DEFTHM VWC-EDGE-OF-SYMBOL-FIX-FROM ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM VWC-EDGE-OF-SYMBOL-FIX-TO ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM VWC-EDGE-OF-NFIX-WEIGHT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFMACRO PATBIND-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE B*-BINDER-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFMACRO PATBIND-VWC-EDGE ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO MAKE-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO CHANGE-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VWC-EDGE->FROM-OF-VWC-EDGE ...) ...)
+Time:  0.09 seconds (prove: 0.05, print: 0.00, other: 0.04)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN REMAKE-VWC-EDGE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFTHM VWC-EDGE-FIX-REDEF ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+Form:  ( DEFTHM TAG-OF-VWC-EDGE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VWC-EDGE ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VWC-EDGE ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.38 seconds (prove: 0.09, print: 0.00, other: 0.29)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.42 seconds (prove: 0.09, print: 0.00, other: 0.32)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFPROD-FN ...))
+Rules: NIL
+Time:  0.42 seconds (prove: 0.09, print: 0.00, other: 0.32)
+Prover steps counted:  5012
+T
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VWC-PATH-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+
+Deflist: attempting to show, using your current theory, that (VWC-EDGE-P X)
+is always Boolean valued.
+
+Deflist: introducing VWC-PATH-P and proving deflist theorems.
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VWC-PATH-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VWC-PATH-FIX$INLINE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VWC-PATH-P-OF-VWC-PATH-FIX ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VWC-PATH-P-OF-VWC-PATH-FIX ...) ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VWC-PATH-FIX-WHEN-VWC-PATH-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VWC-PATH-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Form:  ( DEFTHM CAR-OF-VWC-PATH-FIX-X-UNDER-VWC-EDGE-EQUIV ...)
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+Form:  ( DEFTHM CDR-OF-VWC-PATH-FIX-X-UNDER-VWC-PATH-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VWC-EDGE-FIX-X-UNDER-VWC-PATH-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VWC-PATH-FIX-Y-UNDER-VWC-PATH-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM CONSP-OF-VWC-PATH-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VWC-PATH-FIX-UNDER-IFF ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM VWC-PATH-FIX-OF-CONS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Form:  ( DEFTHM LEN-OF-VWC-PATH-FIX ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Form:  ( DEFTHM VWC-PATH-FIX-OF-APPEND ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Form:  ( DEFTHM VWC-PATH-FIX-OF-REPEAT ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM LIST-EQUIV-REFINES-VWC-PATH-EQUIV ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/3
+Subgoal *1/3.9
+Subgoal *1/3.9'
+Subgoal *1/3.9''
+Subgoal *1/3.9'''
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.3'
+Subgoal *1/3.3''
+Subgoal *1/3.3'''
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.2'''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/3.1'''
+Subgoal *1/2
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Form:  ( DEFTHM NTH-OF-VWC-PATH-FIX ...)
+Time:  0.19 seconds (prove: 0.19, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VWC-PATH-EQUIV-IMPLIES-VWC-PATH-EQUIV-APPEND-1 ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VWC-PATH-EQUIV-IMPLIES-VWC-PATH-EQUIV-APPEND-2 ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VWC-PATH-EQUIV-IMPLIES-VWC-PATH-EQUIV-NTHCDR-2 ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (DEFCONG-FORM ...))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VWC-PATH-EQUIV-IMPLIES-VWC-PATH-EQUIV-TAKE-2 ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (DEFCONG-FORM ...))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.33 seconds (prove: 0.29, print: 0.01, other: 0.04)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VWC-PATH ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VWC-PATH ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.50 seconds (prove: 0.30, print: 0.01, other: 0.20)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.53 seconds (prove: 0.30, print: 0.01, other: 0.23)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFLIST-FN ...))
+Rules: NIL
+Time:  0.53 seconds (prove: 0.30, print: 0.01, other: 0.23)
+Prover steps counted:  9627
+T
+
+Summary
+Form:  ( DEFUN VWC-POTENTIAL ...)
+Rules: ((:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-POTENTIAL
+
+Summary
+Form:  ( DEFUN VWC-PATH-COST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION VWC-EDGE->WEIGHT$INLINE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VWC-PATH-COST
+
+Summary
+Form:  ( DEFUN VWC-PATH-CHAINS-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-PATH-CHAINS-P
+
+Summary
+Form:  ( DEFUN VWC-PATH-IN-GRAPH-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-PATH-IN-GRAPH-P
+
+Summary
+Form:  ( DEFUN VWC-CERTIFICATE-P ...)
+Rules: ((:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-CERTIFICATE-P
+
+Summary
+Form:  ( DEFUN VWC-EDGE-MODEL-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-EDGE-MODEL-P
+
+Summary
+Form:  ( DEFUN VWC-GRAPH-MODEL-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-GRAPH-MODEL-P
+
+Summary
+Form:  ( DEFUN VWC-PATH-MODEL-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VWC-PATH-MODEL-P
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VWC-PATH-COST-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-PATH-COST)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VWC-PATH-COST)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  352
+VWC-PATH-COST-OF-APPEND
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VWC-PATH-IN-GRAPH-P-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VWC-PATH-IN-GRAPH-P)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  665
+VWC-PATH-IN-GRAPH-P-OF-APPEND
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/2
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM VWC-PATH-CHAINS-P-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VWC-PATH-CHAINS-P)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1490
+VWC-PATH-CHAINS-P-OF-APPEND
+Goal'
+
+Summary
+Form:  ( DEFTHM VWC-CERTIFICATE-COMPOSE ...)
+Rules: ((:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VWC-PATH-CHAINS-P-OF-APPEND)
+        (:REWRITE VWC-PATH-IN-GRAPH-P-OF-APPEND)
+        (:REWRITE VWC-PATH-P-OF-APPEND)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VWC-CERTIFICATE-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  507
+VWC-CERTIFICATE-COMPOSE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.18
+Subgoal *1/3.17
+Subgoal *1/3.16
+Subgoal *1/3.15
+Subgoal *1/3.14
+Subgoal *1/3.13
+Subgoal *1/3.12
+Subgoal *1/3.11
+Subgoal *1/3.10
+Subgoal *1/3.9
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.105
+Subgoal *1/2.105.15
+Subgoal *1/2.105.14
+Subgoal *1/2.105.14'
+Subgoal *1/2.105.14''
+Subgoal *1/2.105.13
+Subgoal *1/2.105.13'
+Subgoal *1/2.105.13''
+Subgoal *1/2.105.12
+Subgoal *1/2.105.12'
+Subgoal *1/2.105.12''
+Subgoal *1/2.105.12'''
+Subgoal *1/2.105.11
+Subgoal *1/2.105.10
+Subgoal *1/2.105.10'
+Subgoal *1/2.105.10''
+Subgoal *1/2.105.9
+Subgoal *1/2.105.8
+Subgoal *1/2.105.8'
+Subgoal *1/2.105.8''
+Subgoal *1/2.105.8'''
+Subgoal *1/2.105.7
+Subgoal *1/2.105.6
+Subgoal *1/2.105.5
+Subgoal *1/2.105.4
+Subgoal *1/2.105.3
+Subgoal *1/2.105.2
+Subgoal *1/2.105.1
+Subgoal *1/2.104
+Subgoal *1/2.103
+Subgoal *1/2.103.15
+Subgoal *1/2.103.14
+Subgoal *1/2.103.14'
+Subgoal *1/2.103.14''
+Subgoal *1/2.103.13
+Subgoal *1/2.103.13'
+Subgoal *1/2.103.13''
+Subgoal *1/2.103.12
+Subgoal *1/2.103.12'
+Subgoal *1/2.103.12''
+Subgoal *1/2.103.12'''
+Subgoal *1/2.103.11
+Subgoal *1/2.103.10
+Subgoal *1/2.103.10'
+Subgoal *1/2.103.10''
+Subgoal *1/2.103.9
+Subgoal *1/2.103.8
+Subgoal *1/2.103.8'
+Subgoal *1/2.103.8''
+Subgoal *1/2.103.8'''
+Subgoal *1/2.103.7
+Subgoal *1/2.103.6
+Subgoal *1/2.103.5
+Subgoal *1/2.103.4
+Subgoal *1/2.103.3
+Subgoal *1/2.103.2
+Subgoal *1/2.103.1
+Subgoal *1/2.102
+Subgoal *1/2.101
+Subgoal *1/2.100
+Subgoal *1/2.100.9
+Subgoal *1/2.100.8
+Subgoal *1/2.100.8'
+Subgoal *1/2.100.8''
+Subgoal *1/2.100.7
+Subgoal *1/2.100.7'
+Subgoal *1/2.100.7''
+Subgoal *1/2.100.6
+Subgoal *1/2.100.6'
+Subgoal *1/2.100.6''
+Subgoal *1/2.100.6'''
+Subgoal *1/2.100.5
+Subgoal *1/2.100.4
+Subgoal *1/2.100.4'
+Subgoal *1/2.100.4''
+Subgoal *1/2.100.3
+Subgoal *1/2.100.2
+Subgoal *1/2.100.2'
+Subgoal *1/2.100.2''
+Subgoal *1/2.100.2'''
+Subgoal *1/2.100.1
+Subgoal *1/2.99
+Subgoal *1/2.98
+Subgoal *1/2.97
+Subgoal *1/2.96
+Subgoal *1/2.95
+Subgoal *1/2.94
+Subgoal *1/2.93
+Subgoal *1/2.92
+Subgoal *1/2.91
+Subgoal *1/2.90
+Subgoal *1/2.89
+Subgoal *1/2.89'
+Subgoal *1/2.89''
+Subgoal *1/2.89'''
+Subgoal *1/2.88
+Subgoal *1/2.88'
+Subgoal *1/2.88''
+Subgoal *1/2.88'''
+Subgoal *1/2.87
+Subgoal *1/2.87'
+Subgoal *1/2.87''
+Subgoal *1/2.87'''
+Subgoal *1/2.86
+Subgoal *1/2.85
+Subgoal *1/2.85'
+Subgoal *1/2.85''
+Subgoal *1/2.85'''
+Subgoal *1/2.84
+Subgoal *1/2.83
+Subgoal *1/2.83'
+Subgoal *1/2.83''
+Subgoal *1/2.83'''
+Subgoal *1/2.82
+Subgoal *1/2.81
+Subgoal *1/2.80
+Subgoal *1/2.79
+Subgoal *1/2.78
+Subgoal *1/2.77
+Subgoal *1/2.76
+Subgoal *1/2.75
+Subgoal *1/2.74
+Subgoal *1/2.74'
+Subgoal *1/2.74''
+Subgoal *1/2.74'''
+Subgoal *1/2.73
+Subgoal *1/2.73'
+Subgoal *1/2.73''
+Subgoal *1/2.73'''
+Subgoal *1/2.72
+Subgoal *1/2.72'
+Subgoal *1/2.72''
+Subgoal *1/2.72'''
+Subgoal *1/2.71
+Subgoal *1/2.70
+Subgoal *1/2.70'
+Subgoal *1/2.70''
+Subgoal *1/2.70'''
+Subgoal *1/2.69
+Subgoal *1/2.68
+Subgoal *1/2.68'
+Subgoal *1/2.68''
+Subgoal *1/2.68'''
+Subgoal *1/2.67
+Subgoal *1/2.66
+Subgoal *1/2.65
+Subgoal *1/2.64
+Subgoal *1/2.63
+Subgoal *1/2.62
+Subgoal *1/2.61
+Subgoal *1/2.60
+Subgoal *1/2.59
+Subgoal *1/2.59'
+Subgoal *1/2.59''
+Subgoal *1/2.58
+Subgoal *1/2.58'
+Subgoal *1/2.58''
+Subgoal *1/2.57
+Subgoal *1/2.57'
+Subgoal *1/2.57''
+Subgoal *1/2.57'''
+Subgoal *1/2.56
+Subgoal *1/2.55
+Subgoal *1/2.55'
+Subgoal *1/2.55''
+Subgoal *1/2.54
+Subgoal *1/2.53
+Subgoal *1/2.53'
+Subgoal *1/2.53''
+Subgoal *1/2.53'''
+Subgoal *1/2.52
+Subgoal *1/2.51
+Subgoal *1/2.50
+Subgoal *1/2.49
+Subgoal *1/2.48
+Subgoal *1/2.47
+Subgoal *1/2.46
+Subgoal *1/2.45
+Subgoal *1/2.44
+Subgoal *1/2.44'
+Subgoal *1/2.44''
+Subgoal *1/2.44'''
+Subgoal *1/2.43
+Subgoal *1/2.43'
+Subgoal *1/2.43''
+Subgoal *1/2.43'''
+Subgoal *1/2.42
+Subgoal *1/2.42'
+Subgoal *1/2.42''
+Subgoal *1/2.42'''
+Subgoal *1/2.41
+Subgoal *1/2.40
+Subgoal *1/2.40'
+Subgoal *1/2.40''
+Subgoal *1/2.40'''
+Subgoal *1/2.39
+Subgoal *1/2.38
+Subgoal *1/2.38'
+Subgoal *1/2.38''
+Subgoal *1/2.38'''
+Subgoal *1/2.37
+Subgoal *1/2.36
+Subgoal *1/2.35
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.31
+Subgoal *1/2.30
+Subgoal *1/2.29
+Subgoal *1/2.29'
+Subgoal *1/2.29''
+Subgoal *1/2.29'''
+Subgoal *1/2.28
+Subgoal *1/2.28'
+Subgoal *1/2.28''
+Subgoal *1/2.28'''
+Subgoal *1/2.27
+Subgoal *1/2.27'
+Subgoal *1/2.27''
+Subgoal *1/2.27'''
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.25'
+Subgoal *1/2.25''
+Subgoal *1/2.25'''
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.23'
+Subgoal *1/2.23''
+Subgoal *1/2.23'''
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.14''
+Subgoal *1/2.14'''
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.13''
+Subgoal *1/2.13'''
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.12''
+Subgoal *1/2.12'''
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.10'''
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.8''
+Subgoal *1/2.8'''
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VWC-MEMBER-EDGE-IN-GRAPH-MODEL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-EDGE-MODEL-P)
+        (:DEFINITION VWC-GRAPH-MODEL-P)
+        (:DEFINITION VWC-POTENTIAL)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VWC-GRAPH-MODEL-P)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION VWC-EDGE->FROM$INLINE)
+        (:TYPE-PRESCRIPTION VWC-EDGE->TO$INLINE)
+        (:TYPE-PRESCRIPTION VWC-EDGE->WEIGHT$INLINE)
+        (:TYPE-PRESCRIPTION VWC-EDGE-MODEL-P)
+        (:TYPE-PRESCRIPTION VWC-GRAPH-MODEL-P))
+Time:  0.95 seconds (prove: 0.93, print: 0.02, other: 0.00)
+Prover steps counted:  96845
+VWC-MEMBER-EDGE-IN-GRAPH-MODEL
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VWC-CERTIFICATE-IMPLIES-PATH-MODEL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-EDGE-MODEL-P)
+        (:DEFINITION VWC-PATH-IN-GRAPH-P)
+        (:DEFINITION VWC-PATH-MODEL-P)
+        (:DEFINITION VWC-POTENTIAL)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VWC-PATH-IN-GRAPH-P)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VWC-EDGE->FROM$INLINE-OF-VWC-EDGE-FIX-X)
+        (:REWRITE VWC-EDGE->TO$INLINE-OF-VWC-EDGE-FIX-X)
+        (:REWRITE VWC-EDGE->WEIGHT$INLINE-OF-VWC-EDGE-FIX-X)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION VWC-EDGE->FROM$INLINE)
+        (:TYPE-PRESCRIPTION VWC-EDGE->TO$INLINE)
+        (:TYPE-PRESCRIPTION VWC-EDGE->WEIGHT$INLINE)
+        (:TYPE-PRESCRIPTION VWC-GRAPH-MODEL-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-MODEL-P))
+Hint-events: ((:USE VWC-MEMBER-EDGE-IN-GRAPH-MODEL))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  4418
+VWC-CERTIFICATE-IMPLIES-PATH-MODEL
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VWC-PATH-MODEL-BOUND ...)
+Rules: ((:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VWC-EDGE-MODEL-P)
+        (:DEFINITION VWC-PATH-CHAINS-P)
+        (:DEFINITION VWC-PATH-COST)
+        (:DEFINITION VWC-PATH-MODEL-P)
+        (:DEFINITION VWC-POTENTIAL)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-COST)
+        (:EXECUTABLE-COUNTERPART VWC-PATH-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VWC-PATH-CHAINS-P)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SUBSETP-CAR-MEMBER)
+        (:REWRITE SUBSETP-OF-CDR)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VWC-EDGE-FIX-WHEN-VWC-EDGE-P)
+        (:REWRITE VWC-EDGE-P-WHEN-MEMBER-EQUAL-OF-VWC-PATH-P)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VWC-EDGE->TO$INLINE)
+        (:TYPE-PRESCRIPTION VWC-EDGE->WEIGHT$INLINE)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST))
+Time:  0.08 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  9200
+VWC-PATH-MODEL-BOUND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VWC-CERTIFICATE-SOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-POTENTIAL))
+Hint-events: ((:USE VWC-CERTIFICATE-IMPLIES-PATH-MODEL)
+              (:USE VWC-PATH-MODEL-BOUND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  214
+VWC-CERTIFICATE-SOUND
+
+Summary
+Form:  ( DEFCONST *VWC-GRAPH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VWC-GRAPH*
+
+Summary
+Form:  ( DEFCONST *VWC-PATH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VWC-PATH*
+:PASSED
+(DEFXDOC VWC-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zkx-weighted-path-certificates" ...)
+Rules: NIL
+Time:  4.76 seconds (prove: 1.54, print: 0.03, other: 3.18)
+Prover steps counted:  128330
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 4.76 seconds realtime, 4.44 seconds runtime
+; (528,064,400 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 98487 Jun 29 00:33 zkx-weighted-path-certificates.cert

@@ -1,0 +1,250 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zcb-universal-rader-certificate.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zcc-universal-generated-rader-certificate" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zcc-universal-generated-rader-certificate
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/number-theory/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zcb-universal-rader-certificate" ...)
+Rules: NIL
+Time:  1.49 seconds (prove: 0.00, print: 0.00, other: 1.49)
+"/mnt/data/new-release/cert-work/zcb-universal-rader-certificate.lisp"
+
+Summary
+Form:  ( DEFTHM RGI-RELATIONP-AUX-OPEN ...)
+Rules: ((:DEFINITION RGI-RELATIONP-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  158
+RGI-RELATIONP-AUX-OPEN
+
+Summary
+Form:  ( DEFTHM RGI-RELATIONP-AUX-ZERO ...)
+Rules: ((:DEFINITION RGI-RELATIONP-AUX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  20
+RGI-RELATIONP-AUX-ZERO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-GENERATED-RELATIONP-AUX-STEP ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RGI-NATP-OF-ONE-LESS-POSITIVE-INTEGER)
+        (:REWRITE RGI-NATP-OF-POSITIVE-INTEGER)
+        (:REWRITE RGI-NATP-OF-PREDECESSOR)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-PREDECESSOR-BELOW-BOUND)
+        (:REWRITE RGI-RELATIONP-AUX-OPEN)
+        (:TYPE-PRESCRIPTION RGI-RELATIONP-AUX))
+Hint-events: ((:USE RGI-GENERATED-RELATION-ROWP)
+              (:USE RGI-RELATIONP-AUX-OPEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1077
+RGI-GENERATED-RELATIONP-AUX-STEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM RGI-GENERATED-RELATIONP-AUX ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-COUNT-INDUCT)
+        (:REWRITE RGI-NATP-OF-PREDECESSOR)
+        (:REWRITE RGI-PREDECESSOR-NOT-ABOVE-BOUND)
+        (:TYPE-PRESCRIPTION RGI-RELATIONP-AUX))
+Hint-events: ((:USE RGI-GENERATED-RELATIONP-AUX-STEP)
+              (:USE RGI-RELATIONP-AUX-ZERO)
+              (:USE RGI-ZP-NATURAL-IS-ZERO))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1222
+RGI-GENERATED-RELATIONP-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-INDEX-CERTIFICATEP-OF-GENERATED-ORBITS ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RGI-INDEX-CERTIFICATEP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE RGI-NATP-OF-ONE-LESS-POSITIVE-INTEGER)
+        (:REWRITE RGI-NATP-OF-POSITIVE-INTEGER)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:TYPE-PRESCRIPTION RGI-INDEX-CERTIFICATEP))
+Hint-events: ((:USE RGI-GENERATED-RELATIONP-AUX)
+              (:USE RGI-PERMUTATIONP-OF-GENERATED-INVERSE-ORBIT)
+              (:USE RGI-PERMUTATIONP-OF-GENERATED-ORBIT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  816
+RGI-INDEX-CERTIFICATEP-OF-GENERATED-ORBITS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-GENERATED-INDEX-CERTIFICATEP-UNIVERSAL ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RGI-GENERATED-INDEX-CERTIFICATEP)
+        (:DEFINITION RGI-GENERATED-INPUTS)
+        (:DEFINITION RGI-GENERATED-KERNELS)
+        (:DEFINITION RGI-GENERATED-OUTPUTS)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RGI-GENERATED-INDEX-CERTIFICATEP))
+Hint-events: ((:USE RGI-INDEX-CERTIFICATEP-OF-GENERATED-ORBITS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  382
+RGI-GENERATED-INDEX-CERTIFICATEP-UNIVERSAL
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zcc-universal-generated-rader-certificate" ...)
+Rules: NIL
+Time:  1.55 seconds (prove: 0.02, print: 0.00, other: 1.53)
+Prover steps counted:  3675
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.55 seconds realtime, 1.45 seconds runtime
+; (170,517,904 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 41609 Jun 29 00:40 zcc-universal-generated-rader-certificate.cert

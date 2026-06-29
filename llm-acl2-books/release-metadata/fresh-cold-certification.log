@@ -1,0 +1,299 @@
+System books directory is /mnt/data/acl2-8.7-recovery/books
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/complex.cert on 29-Jun-2026 00:30:46.122
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/complex.cert (0.816s) at 29-Jun-2026 00:30:46.962[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/denominator.cert on 29-Jun-2026 00:30:47.038
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/denominator.cert (1.199s) at 29-Jun-2026 00:30:48.259[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/less-than.cert on 29-Jun-2026 00:30:48.334
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/less-than.cert (0.871s) at 29-Jun-2026 00:30:49.231[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/plus-and-minus.cert on 29-Jun-2026 00:30:49.309
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/plus-and-minus.cert (0.827s) at 29-Jun-2026 00:30:50.163[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/minus.cert on 29-Jun-2026 00:30:50.240
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/minus.cert (0.922s) at 29-Jun-2026 00:30:51.188[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/imagpart.cert on 29-Jun-2026 00:30:51.294
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/imagpart.cert (1.074s) at 29-Jun-2026 00:30:52.402[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/realpart.cert on 29-Jun-2026 00:30:52.479
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/realpart.cert (1.058s) at 29-Jun-2026 00:30:53.567[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/times.cert on 29-Jun-2026 00:30:53.644
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/times.cert (1.230s) at 29-Jun-2026 00:30:54.902[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/plus.cert on 29-Jun-2026 00:30:54.984
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/plus.cert (0.895s) at 29-Jun-2026 00:30:55.904[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/divide.cert on 29-Jun-2026 00:30:55.988
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/divide.cert (1.101s) at 29-Jun-2026 00:30:57.117[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/times-and-divide.cert on 29-Jun-2026 00:30:57.193
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/times-and-divide.cert (1.012s) at 29-Jun-2026 00:30:58.228[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/numerator.cert on 29-Jun-2026 00:30:58.314
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/numerator.cert (1.195s) at 29-Jun-2026 00:30:59.534[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/nonnegative-integer-quotient.cert on 29-Jun-2026 00:30:59.608
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/nonnegative-integer-quotient.cert (1.492s) at 29-Jun-2026 00:31:01.123[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/integerp.cert on 29-Jun-2026 00:31:01.195
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/integerp.cert (1.111s) at 29-Jun-2026 00:31:02.328[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/even-and-odd.cert on 29-Jun-2026 00:31:02.396
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/even-and-odd.cert (1.084s) at 29-Jun-2026 00:31:03.502[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/expt.cert on 29-Jun-2026 00:31:03.571
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/expt.cert (3.268s) at 29-Jun-2026 00:31:06.867[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/power-of-2p-def.cert on 29-Jun-2026 00:31:06.937
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/power-of-2p-def.cert (0.853s) at 29-Jun-2026 00:31:07.815[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/floor.cert on 29-Jun-2026 00:31:07.884
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/floor.cert (3.602s) at 29-Jun-2026 00:31:11.521[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/expt2.cert on 29-Jun-2026 00:31:11.614
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/expt2.cert (1.530s) at 29-Jun-2026 00:31:13.175[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/floor-and-expt.cert on 29-Jun-2026 00:31:13.248
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/floor-and-expt.cert (1.239s) at 29-Jun-2026 00:31:14.510[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/ifix.cert on 29-Jun-2026 00:31:14.587
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/ifix.cert (0.810s) at 29-Jun-2026 00:31:15.421[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/mod.cert on 29-Jun-2026 00:31:15.498
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/mod.cert (3.030s) at 29-Jun-2026 00:31:18.559[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/plus-times-and-divide.cert on 29-Jun-2026 00:31:18.633
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/plus-times-and-divide.cert (1.056s) at 29-Jun-2026 00:31:19.714[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/mod-and-expt.cert on 29-Jun-2026 00:31:19.783
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/arithmetic-light/mod-and-expt.cert (4.868s) at 29-Jun-2026 00:31:24.677[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/bool-fix-def.cert on 29-Jun-2026 00:31:24.749
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/bool-fix-def.cert (0.822s) at 29-Jun-2026 00:31:25.600[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/bool-fix.cert on 29-Jun-2026 00:31:25.675
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/bool-fix.cert (0.791s) at 29-Jun-2026 00:31:26.488[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/booland.cert on 29-Jun-2026 00:31:26.557
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/booland.cert (0.956s) at 29-Jun-2026 00:31:27.535[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/boolor.cert on 29-Jun-2026 00:31:27.602
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/booleans/boolor.cert (0.969s) at 29-Jun-2026 00:31:28.596[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/lists-light/reverse.cert on 29-Jun-2026 00:31:28.679
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/lists-light/reverse.cert (0.978s) at 29-Jun-2026 00:31:29.681[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/portcullis.cert on 29-Jun-2026 00:31:29.752
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/portcullis.cert (0.909s) at 29-Jun-2026 00:31:30.684[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/portcullis.cert on 29-Jun-2026 00:31:30.757
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/portcullis.cert (1.093s) at 29-Jun-2026 00:31:31.874[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/support/basic.cert on 29-Jun-2026 00:31:31.941
+[33mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/support/basic.cert (27.480s) at 29-Jun-2026 00:31:59.449[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/localize-macros.cert on 29-Jun-2026 00:31:59.530
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/localize-macros.cert (0.867s) at 29-Jun-2026 00:32:00.421[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/support/util.cert on 29-Jun-2026 00:32:00.496
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/rtl/rel11/support/util.cert (1.281s) at 29-Jun-2026 00:32:01.807[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/euclid.cert on 29-Jun-2026 00:32:01.887
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/euclid.cert (3.923s) at 29-Jun-2026 00:32:05.842[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/fta.cert on 29-Jun-2026 00:32:05.918
+[32;1mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/fta.cert (11.135s) at 29-Jun-2026 00:32:17.080[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/crt.cert on 29-Jun-2026 00:32:17.151
+[32;1mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/crt.cert (10.832s) at 29-Jun-2026 00:32:28.012[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/euclid.cert on 29-Jun-2026 00:32:28.089
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/euclid.cert (1.774s) at 29-Jun-2026 00:32:29.895[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.cert on 29-Jun-2026 00:32:29.973
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.cert (1.122s) at 29-Jun-2026 00:32:31.121[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/portcullis.cert on 29-Jun-2026 00:32:31.198
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/portcullis.cert (1.013s) at 29-Jun-2026 00:32:32.234[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/divides.cert on 29-Jun-2026 00:32:32.311
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/divides.cert (1.206s) at 29-Jun-2026 00:32:33.541[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/primep-def.cert on 29-Jun-2026 00:32:33.620
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/primep-def.cert (1.237s) at 29-Jun-2026 00:32:34.881[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/primes.cert on 29-Jun-2026 00:32:34.959
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/number-theory/primes.cert (1.174s) at 29-Jun-2026 00:32:36.159[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/fep.cert on 29-Jun-2026 00:32:36.235
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/fep.cert (1.208s) at 29-Jun-2026 00:32:37.466[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/pos-fix.cert on 29-Jun-2026 00:32:37.542
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/pos-fix.cert (0.800s) at 29-Jun-2026 00:32:38.367[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/smaller-termp.cert on 29-Jun-2026 00:32:38.441
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/smaller-termp.cert (0.856s) at 29-Jun-2026 00:32:39.320[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/forms.cert on 29-Jun-2026 00:32:39.397
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/forms.cert (0.771s) at 29-Jun-2026 00:32:40.192[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/add.cert on 29-Jun-2026 00:32:40.266
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/add.cert (1.467s) at 29-Jun-2026 00:32:41.756[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/bind-free-common.cert on 29-Jun-2026 00:32:41.838
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/bind-free-common.cert (1.135s) at 29-Jun-2026 00:32:42.999[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/mul.cert on 29-Jun-2026 00:32:43.073
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/mul.cert (1.539s) at 29-Jun-2026 00:32:44.635[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/minus1.cert on 29-Jun-2026 00:32:44.710
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/minus1.cert (1.372s) at 29-Jun-2026 00:32:46.105[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/fermat.cert on 29-Jun-2026 00:32:46.192
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/support/fermat.cert (2.633s) at 29-Jun-2026 00:32:48.859[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/fermat.cert on 29-Jun-2026 00:32:48.928
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/projects/numbers/fermat.cert (1.237s) at 29-Jun-2026 00:32:50.188[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/pow.cert on 29-Jun-2026 00:32:50.256
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/pow.cert (1.661s) at 29-Jun-2026 00:32:51.939[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/fep-fix.cert on 29-Jun-2026 00:32:52.008
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/fep-fix.cert (1.161s) at 29-Jun-2026 00:32:53.190[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/inv.cert on 29-Jun-2026 00:32:53.259
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/inv.cert (1.465s) at 29-Jun-2026 00:32:54.746[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/div.cert on 29-Jun-2026 00:32:54.814
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/div.cert (1.236s) at 29-Jun-2026 00:32:56.072[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/neg.cert on 29-Jun-2026 00:32:56.142
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/neg.cert (1.346s) at 29-Jun-2026 00:32:57.510[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/sub.cert on 29-Jun-2026 00:32:57.581
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/sub.cert (1.970s) at 29-Jun-2026 00:32:59.575[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/support.cert on 29-Jun-2026 00:32:59.651
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/support.cert (1.005s) at 29-Jun-2026 00:33:00.679[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/prime-fields.cert on 29-Jun-2026 00:33:00.750
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/prime-fields.cert (1.279s) at 29-Jun-2026 00:33:02.052[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/prime-fields-rules.cert on 29-Jun-2026 00:33:02.121
+[32;1mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/prime-fields-rules.cert (11.692s) at 29-Jun-2026 00:33:13.842[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/symbol-term-alistp.cert on 29-Jun-2026 00:33:13.919
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/utilities/symbol-term-alistp.cert (1.063s) at 29-Jun-2026 00:33:15.011[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/terms-light/all-fnnames1.cert on 29-Jun-2026 00:33:15.092
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/terms-light/all-fnnames1.cert (0.878s) at 29-Jun-2026 00:33:15.997[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/equal-of-add-move-negs-bind-free.cert on 29-Jun-2026 00:33:16.069
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/equal-of-add-move-negs-bind-free.cert (1.632s) at 29-Jun-2026 00:33:17.730[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/rules2.cert on 29-Jun-2026 00:33:17.804
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/kestrel/prime-fields/rules2.cert (1.610s) at 29-Jun-2026 00:33:19.437[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/nonstd/polynomials/polynomial-defuns.cert on 29-Jun-2026 00:33:19.518
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/nonstd/polynomials/polynomial-defuns.cert (0.940s) at 29-Jun-2026 00:33:20.482[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/nonstd/polynomials/polynomial-lemmas.cert on 29-Jun-2026 00:33:20.553
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/nonstd/polynomials/polynomial-lemmas.cert (1.500s) at 29-Jun-2026 00:33:22.084[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/workshops/2022/gamboa-primitive-roots/order.cert on 29-Jun-2026 00:33:22.166
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/workshops/2022/gamboa-primitive-roots/order.cert (2.557s) at 29-Jun-2026 00:33:24.752[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/workshops/2022/gamboa-primitive-roots/pfield-polynomial.cert on 29-Jun-2026 00:33:24.828
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/workshops/2022/gamboa-primitive-roots/pfield-polynomial.cert (5.454s) at 29-Jun-2026 00:33:30.319[0m
+Making /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/workshops/2022/gamboa-primitive-roots/order-constructions.cert on 29-Jun-2026 00:33:30.394
+[32mBuilt /mnt/data/new-release/cert-work/../../acl2-8.7-recovery/books/workshops/2022/gamboa-primitive-roots/order-constructions.cert (6.356s) at 29-Jun-2026 00:33:36.786[0m
+Making /mnt/data/new-release/cert-work/zlx-certified-parallel-fold.cert on 29-Jun-2026 00:33:36.856
+[32mBuilt /mnt/data/new-release/cert-work/zlx-certified-parallel-fold.cert (2.181s) at 29-Jun-2026 00:33:39.061[0m
+Making /mnt/data/new-release/cert-work/zaa-algebraic-dynamic-programming.cert on 29-Jun-2026 00:33:39.137
+[32mBuilt /mnt/data/new-release/cert-work/zaa-algebraic-dynamic-programming.cert (6.773s) at 29-Jun-2026 00:33:45.941[0m
+Making /mnt/data/new-release/cert-work/zab-adp-natural-counting.cert on 29-Jun-2026 00:33:46.012
+[32mBuilt /mnt/data/new-release/cert-work/zab-adp-natural-counting.cert (2.441s) at 29-Jun-2026 00:33:48.476[0m
+Making /mnt/data/new-release/cert-work/zkx-weighted-path-certificates.cert on 29-Jun-2026 00:33:48.569
+[32mBuilt /mnt/data/new-release/cert-work/zkx-weighted-path-certificates.cert (6.150s) at 29-Jun-2026 00:33:54.753[0m
+Making /mnt/data/new-release/cert-work/zac-adp-min-plus-provenance.cert on 29-Jun-2026 00:33:54.845
+[32mBuilt /mnt/data/new-release/cert-work/zac-adp-min-plus-provenance.cert (6.913s) at 29-Jun-2026 00:34:01.792[0m
+Making /mnt/data/new-release/cert-work/zad-adp-shortest-path.cert on 29-Jun-2026 00:34:01.864
+[32mBuilt /mnt/data/new-release/cert-work/zad-adp-shortest-path.cert (3.760s) at 29-Jun-2026 00:34:05.652[0m
+Making /mnt/data/new-release/cert-work/zae-ranked-shortest-path-compiler.cert on 29-Jun-2026 00:34:05.731
+[32;1mBuilt /mnt/data/new-release/cert-work/zae-ranked-shortest-path-compiler.cert (16.239s) at 29-Jun-2026 00:34:22.000[0m
+Making /mnt/data/new-release/cert-work/zaf-ranked-shortest-path-certificates.cert on 29-Jun-2026 00:34:22.074
+[32mBuilt /mnt/data/new-release/cert-work/zaf-ranked-shortest-path-certificates.cert (6.676s) at 29-Jun-2026 00:34:28.781[0m
+Making /mnt/data/new-release/cert-work/zag-ranked-shortest-path-optimality.cert on 29-Jun-2026 00:34:28.852
+[32;1mBuilt /mnt/data/new-release/cert-work/zag-ranked-shortest-path-optimality.cert (12.867s) at 29-Jun-2026 00:34:41.745[0m
+Making /mnt/data/new-release/cert-work/zah-ranked-shortest-path-executable.cert on 29-Jun-2026 00:34:41.816
+[32mBuilt /mnt/data/new-release/cert-work/zah-ranked-shortest-path-executable.cert (7.076s) at 29-Jun-2026 00:34:48.916[0m
+Making /mnt/data/new-release/cert-work/zai-ranked-shortest-path-interface.cert on 29-Jun-2026 00:34:48.991
+[32mBuilt /mnt/data/new-release/cert-work/zai-ranked-shortest-path-interface.cert (4.246s) at 29-Jun-2026 00:34:53.263[0m
+Making /mnt/data/new-release/cert-work/zaj-ranked-planning-client.cert on 29-Jun-2026 00:34:53.334
+[32mBuilt /mnt/data/new-release/cert-work/zaj-ranked-planning-client.cert (4.126s) at 29-Jun-2026 00:34:57.482[0m
+Making /mnt/data/new-release/cert-work/zak-rational-dft-core.cert on 29-Jun-2026 00:34:57.551
+[32;1mBuilt /mnt/data/new-release/cert-work/zak-rational-dft-core.cert (18.376s) at 29-Jun-2026 00:35:15.952[0m
+Making /mnt/data/new-release/cert-work/zal-rational-fourier-kernel.cert on 29-Jun-2026 00:35:16.020
+[32mBuilt /mnt/data/new-release/cert-work/zal-rational-fourier-kernel.cert (5.907s) at 29-Jun-2026 00:35:21.948[0m
+Making /mnt/data/new-release/cert-work/zam-qcx-adp-linear.cert on 29-Jun-2026 00:35:22.017
+[32;1mBuilt /mnt/data/new-release/cert-work/zam-qcx-adp-linear.cert (17.778s) at 29-Jun-2026 00:35:39.821[0m
+Making /mnt/data/new-release/cert-work/zan-adp-rational-dft-builder.cert on 29-Jun-2026 00:35:39.891
+[32mBuilt /mnt/data/new-release/cert-work/zan-adp-rational-dft-builder.cert (6.390s) at 29-Jun-2026 00:35:46.306[0m
+Making /mnt/data/new-release/cert-work/zao-winograd-bilinear-convolution.cert on 29-Jun-2026 00:35:46.374
+[32;1mBuilt /mnt/data/new-release/cert-work/zao-winograd-bilinear-convolution.cert (18.346s) at 29-Jun-2026 00:36:04.751[0m
+Making /mnt/data/new-release/cert-work/zap-winograd-cyclic2.cert on 29-Jun-2026 00:36:04.822
+[32;1mBuilt /mnt/data/new-release/cert-work/zap-winograd-cyclic2.cert (13.554s) at 29-Jun-2026 00:36:18.401[0m
+Making /mnt/data/new-release/cert-work/zaq-winograd-bilinear-bank.cert on 29-Jun-2026 00:36:18.497
+[32;1mBuilt /mnt/data/new-release/cert-work/zaq-winograd-bilinear-bank.cert (10.790s) at 29-Jun-2026 00:36:29.318[0m
+Making /mnt/data/new-release/cert-work/zar-rader-winograd-dft.cert on 29-Jun-2026 00:36:29.383
+[32mBuilt /mnt/data/new-release/cert-work/zar-rader-winograd-dft.cert (8.128s) at 29-Jun-2026 00:36:37.534[0m
+Making /mnt/data/new-release/cert-work/zas-rader-winograd3.cert on 29-Jun-2026 00:36:37.601
+[32mBuilt /mnt/data/new-release/cert-work/zas-rader-winograd3.cert (2.265s) at 29-Jun-2026 00:36:39.891[0m
+Making /mnt/data/new-release/cert-work/zat-adp-winograd-bank.cert on 29-Jun-2026 00:36:39.962
+[32;1mBuilt /mnt/data/new-release/cert-work/zat-adp-winograd-bank.cert (14.137s) at 29-Jun-2026 00:36:54.122[0m
+Making /mnt/data/new-release/cert-work/zau-adp-winograd3-equivalence.cert on 29-Jun-2026 00:36:54.188
+[32mBuilt /mnt/data/new-release/cert-work/zau-adp-winograd3-equivalence.cert (2.665s) at 29-Jun-2026 00:36:56.876[0m
+Making /mnt/data/new-release/cert-work/zav-winograd-direct-equivalence.cert on 29-Jun-2026 00:36:56.958
+[32mBuilt /mnt/data/new-release/cert-work/zav-winograd-direct-equivalence.cert (9.245s) at 29-Jun-2026 00:37:06.237[0m
+Making /mnt/data/new-release/cert-work/zaw-rational-cauchy-interest.cert on 29-Jun-2026 00:37:06.306
+[32;1mBuilt /mnt/data/new-release/cert-work/zaw-rational-cauchy-interest.cert (10.781s) at 29-Jun-2026 00:37:17.110[0m
+Making /mnt/data/new-release/cert-work/zax-rational-winograd-interface.cert on 29-Jun-2026 00:37:17.177
+[32mBuilt /mnt/data/new-release/cert-work/zax-rational-winograd-interface.cert (3.445s) at 29-Jun-2026 00:37:20.649[0m
+Making /mnt/data/new-release/cert-work/zay-rational-winograd3-client.cert on 29-Jun-2026 00:37:20.725
+[32mBuilt /mnt/data/new-release/cert-work/zay-rational-winograd3-client.cert (2.537s) at 29-Jun-2026 00:37:23.289[0m
+Making /mnt/data/new-release/cert-work/zaz-rational-unit-square-root.cert on 29-Jun-2026 00:37:23.364
+[32mBuilt /mnt/data/new-release/cert-work/zaz-rational-unit-square-root.cert (6.810s) at 29-Jun-2026 00:37:30.202[0m
+Making /mnt/data/new-release/cert-work/zba-rational-winograd3-twiddle-builder.cert on 29-Jun-2026 00:37:30.269
+[32mBuilt /mnt/data/new-release/cert-work/zba-rational-winograd3-twiddle-builder.cert (7.206s) at 29-Jun-2026 00:37:37.507[0m
+Making /mnt/data/new-release/cert-work/zbb-rational-cyclic-twiddle-system.cert on 29-Jun-2026 00:37:37.579
+[32mBuilt /mnt/data/new-release/cert-work/zbb-rational-cyclic-twiddle-system.cert (9.855s) at 29-Jun-2026 00:37:47.464[0m
+Making /mnt/data/new-release/cert-work/zbc-toom-cook-cyclic-generator.cert on 29-Jun-2026 00:37:47.532
+[32mBuilt /mnt/data/new-release/cert-work/zbc-toom-cook-cyclic-generator.cert (2.723s) at 29-Jun-2026 00:37:50.282[0m
+Making /mnt/data/new-release/cert-work/zbd-toom-cook-moment-certificate.cert on 29-Jun-2026 00:37:50.357
+[33mBuilt /mnt/data/new-release/cert-work/zbd-toom-cook-moment-certificate.cert (22.150s) at 29-Jun-2026 00:38:12.601[0m
+Making /mnt/data/new-release/cert-work/zbn-rational-polynomial-root-bound.cert on 29-Jun-2026 00:38:12.673
+[32mBuilt /mnt/data/new-release/cert-work/zbn-rational-polynomial-root-bound.cert (2.797s) at 29-Jun-2026 00:38:15.500[0m
+Making /mnt/data/new-release/cert-work/zbo-rational-lagrange-interpolation.cert on 29-Jun-2026 00:38:15.580
+[32mBuilt /mnt/data/new-release/cert-work/zbo-rational-lagrange-interpolation.cert (3.988s) at 29-Jun-2026 00:38:19.599[0m
+Making /mnt/data/new-release/cert-work/zbp-rational-lagrange-reconstruction.cert on 29-Jun-2026 00:38:19.678
+[32;1mBuilt /mnt/data/new-release/cert-work/zbp-rational-lagrange-reconstruction.cert (17.597s) at 29-Jun-2026 00:38:37.307[0m
+Making /mnt/data/new-release/cert-work/zbq-universal-toom-cook-certificate.cert on 29-Jun-2026 00:38:37.377
+[32mBuilt /mnt/data/new-release/cert-work/zbq-universal-toom-cook-certificate.cert (6.273s) at 29-Jun-2026 00:38:43.678[0m
+Making /mnt/data/new-release/cert-work/zbr-universal-toom-cook-moments.cert on 29-Jun-2026 00:38:43.747
+[32mBuilt /mnt/data/new-release/cert-work/zbr-universal-toom-cook-moments.cert (2.395s) at 29-Jun-2026 00:38:46.166[0m
+Making /mnt/data/new-release/cert-work/zbs-universal-toom-cook-certificate.cert on 29-Jun-2026 00:38:46.240
+[32mBuilt /mnt/data/new-release/cert-work/zbs-universal-toom-cook-certificate.cert (7.732s) at 29-Jun-2026 00:38:53.995[0m
+Making /mnt/data/new-release/cert-work/zbt-universal-generated-compact.cert on 29-Jun-2026 00:38:54.061
+[32mBuilt /mnt/data/new-release/cert-work/zbt-universal-generated-compact.cert (2.389s) at 29-Jun-2026 00:38:56.477[0m
+Making /mnt/data/new-release/cert-work/zbe-generated-cyclic66.cert on 29-Jun-2026 00:38:56.552
+[32mBuilt /mnt/data/new-release/cert-work/zbe-generated-cyclic66.cert (2.570s) at 29-Jun-2026 00:38:59.145[0m
+Making /mnt/data/new-release/cert-work/zbf-rader-index-certificate.cert on 29-Jun-2026 00:38:59.224
+[32mBuilt /mnt/data/new-release/cert-work/zbf-rader-index-certificate.cert (6.353s) at 29-Jun-2026 00:39:05.603[0m
+Making /mnt/data/new-release/cert-work/zbg-compact-rader-certificate.cert on 29-Jun-2026 00:39:05.676
+[32;1mBuilt /mnt/data/new-release/cert-work/zbg-compact-rader-certificate.cert (17.601s) at 29-Jun-2026 00:39:23.314[0m
+Making /mnt/data/new-release/cert-work/zbh-rader-fourier-bridge.cert on 29-Jun-2026 00:39:23.383
+[32mBuilt /mnt/data/new-release/cert-work/zbh-rader-fourier-bridge.cert (2.607s) at 29-Jun-2026 00:39:26.051[0m
+Making /mnt/data/new-release/cert-work/zbi-rader-compact-output-bridge.cert on 29-Jun-2026 00:39:26.121
+[32mBuilt /mnt/data/new-release/cert-work/zbi-rader-compact-output-bridge.cert (2.553s) at 29-Jun-2026 00:39:28.700[0m
+Making /mnt/data/new-release/cert-work/zbj-rader-output-matrix-certificate.cert on 29-Jun-2026 00:39:28.777
+[32mBuilt /mnt/data/new-release/cert-work/zbj-rader-output-matrix-certificate.cert (2.658s) at 29-Jun-2026 00:39:31.466[0m
+Making /mnt/data/new-release/cert-work/zbk-rader-bank-certificate.cert on 29-Jun-2026 00:39:31.546
+[32mBuilt /mnt/data/new-release/cert-work/zbk-rader-bank-certificate.cert (2.732s) at 29-Jun-2026 00:39:34.313[0m
+Making /mnt/data/new-release/cert-work/zbu-rader-power-orbit.cert on 29-Jun-2026 00:39:34.392
+[32mBuilt /mnt/data/new-release/cert-work/zbu-rader-power-orbit.cert (2.778s) at 29-Jun-2026 00:39:37.199[0m
+Making /mnt/data/new-release/cert-work/zbv-rader-power-permutation.cert on 29-Jun-2026 00:39:37.270
+[32mBuilt /mnt/data/new-release/cert-work/zbv-rader-power-permutation.cert (2.790s) at 29-Jun-2026 00:39:40.089[0m
+Making /mnt/data/new-release/cert-work/zbw-rader-orbit-permutation.cert on 29-Jun-2026 00:39:40.163
+[32mBuilt /mnt/data/new-release/cert-work/zbw-rader-orbit-permutation.cert (2.941s) at 29-Jun-2026 00:39:43.130[0m
+Making /mnt/data/new-release/cert-work/zbx-rader-inverse-orbit.cert on 29-Jun-2026 00:39:43.205
+[32mBuilt /mnt/data/new-release/cert-work/zbx-rader-inverse-orbit.cert (3.167s) at 29-Jun-2026 00:39:46.398[0m
+Making /mnt/data/new-release/cert-work/zby-rader-index-relation.cert on 29-Jun-2026 00:39:46.474
+[32mBuilt /mnt/data/new-release/cert-work/zby-rader-index-relation.cert (2.989s) at 29-Jun-2026 00:39:49.488[0m
+Making /mnt/data/new-release/cert-work/zbz-rader-relation.cert on 29-Jun-2026 00:39:49.567
+[32mBuilt /mnt/data/new-release/cert-work/zbz-rader-relation.cert (3.003s) at 29-Jun-2026 00:39:52.595[0m
+Making /mnt/data/new-release/cert-work/zca-universal-rader-relation.cert on 29-Jun-2026 00:39:52.666
+[32mBuilt /mnt/data/new-release/cert-work/zca-universal-rader-relation.cert (3.439s) at 29-Jun-2026 00:39:56.133[0m
+Making /mnt/data/new-release/cert-work/zcb-universal-rader-certificate.cert on 29-Jun-2026 00:39:56.209
+[32mBuilt /mnt/data/new-release/cert-work/zcb-universal-rader-certificate.cert (2.859s) at 29-Jun-2026 00:39:59.094[0m
+Making /mnt/data/new-release/cert-work/zcc-universal-generated-rader-certificate.cert on 29-Jun-2026 00:39:59.174
+[32mBuilt /mnt/data/new-release/cert-work/zcc-universal-generated-rader-certificate.cert (2.706s) at 29-Jun-2026 00:40:01.906[0m
+Making /mnt/data/new-release/cert-work/zbl-generated-rader67.cert on 29-Jun-2026 00:40:01.980
+[32mBuilt /mnt/data/new-release/cert-work/zbl-generated-rader67.cert (4.224s) at 29-Jun-2026 00:40:06.231[0m
+Making /mnt/data/new-release/cert-work/zbm-rational-rader67.cert on 29-Jun-2026 00:40:06.322
+[32mBuilt /mnt/data/new-release/cert-work/zbm-rational-rader67.cert (2.820s) at 29-Jun-2026 00:40:09.176[0m
+Making /mnt/data/new-release/cert-work/zby-text-file-census.cert on 29-Jun-2026 00:40:09.260
+[32mBuilt /mnt/data/new-release/cert-work/zby-text-file-census.cert (0.882s) at 29-Jun-2026 00:40:10.169[0m
+Making /mnt/data/new-release/cert-work/zcy-prefix-scan-report.cert on 29-Jun-2026 00:40:10.237
+[32mBuilt /mnt/data/new-release/cert-work/zcy-prefix-scan-report.cert (0.818s) at 29-Jun-2026 00:40:11.078[0m
+Making /mnt/data/new-release/cert-work/zdz-rle-report.cert on 29-Jun-2026 00:40:11.146
+[32mBuilt /mnt/data/new-release/cert-work/zdz-rle-report.cert (0.874s) at 29-Jun-2026 00:40:12.044[0m
+Making /mnt/data/new-release/cert-work/zez-self-checking-object-manifest.cert on 29-Jun-2026 00:40:12.113
+[32mBuilt /mnt/data/new-release/cert-work/zez-self-checking-object-manifest.cert (0.804s) at 29-Jun-2026 00:40:12.941[0m
+Making /mnt/data/new-release/cert-work/zfz-certificate-ledger-report.cert on 29-Jun-2026 00:40:13.009
+[32mBuilt /mnt/data/new-release/cert-work/zfz-certificate-ledger-report.cert (1.989s) at 29-Jun-2026 00:40:15.021[0m
+Making /mnt/data/new-release/cert-work/zgs-complementary-clause-processor.cert on 29-Jun-2026 00:40:15.089
+[32mBuilt /mnt/data/new-release/cert-work/zgs-complementary-clause-processor.cert (1.878s) at 29-Jun-2026 00:40:16.989[0m
+Making /mnt/data/new-release/cert-work/zhu-newest-first-journal.cert on 29-Jun-2026 00:40:17.060
+[32mBuilt /mnt/data/new-release/cert-work/zhu-newest-first-journal.cert (4.136s) at 29-Jun-2026 00:40:21.222[0m
+Making /mnt/data/new-release/cert-work/ziw-minimal-obligation-basis.cert on 29-Jun-2026 00:40:21.298
+[32mBuilt /mnt/data/new-release/cert-work/ziw-minimal-obligation-basis.cert (0.936s) at 29-Jun-2026 00:40:22.258[0m
+Making /mnt/data/new-release/cert-work/zjy-exact-affine-intervals.cert on 29-Jun-2026 00:40:22.327
+[32mBuilt /mnt/data/new-release/cert-work/zjy-exact-affine-intervals.cert (4.342s) at 29-Jun-2026 00:40:26.695[0m
+Making /mnt/data/new-release/cert-work/zml-tame-pipeline-fusion.cert on 29-Jun-2026 00:40:26.774
+[32mBuilt /mnt/data/new-release/cert-work/zml-tame-pipeline-fusion.cert (1.157s) at 29-Jun-2026 00:40:27.957[0m
+Making /mnt/data/new-release/cert-work/znr-epochal-dependency-cache.cert on 29-Jun-2026 00:40:28.032
+[32mBuilt /mnt/data/new-release/cert-work/znr-epochal-dependency-cache.cert (4.634s) at 29-Jun-2026 00:40:32.693[0m
+Making /mnt/data/new-release/cert-work/zoq-proof-carrying-horn-closure.cert on 29-Jun-2026 00:40:32.762
+[32mBuilt /mnt/data/new-release/cert-work/zoq-proof-carrying-horn-closure.cert (2.055s) at 29-Jun-2026 00:40:34.844[0m
+Making /mnt/data/new-release/cert-work/zpq-independent-action-calculus.cert on 29-Jun-2026 00:40:34.920
+[32mBuilt /mnt/data/new-release/cert-work/zpq-independent-action-calculus.cert (3.554s) at 29-Jun-2026 00:40:38.502[0m
+Making /mnt/data/new-release/cert-work/zze-exotic-fertile-kernel.cert on 29-Jun-2026 00:40:38.572
+[33;1mBuilt /mnt/data/new-release/cert-work/zze-exotic-fertile-kernel.cert (45.192s) at 29-Jun-2026 00:41:23.807[0m
+Making /mnt/data/new-release/cert-work/zyl-verified-patch-calculus.cert on 29-Jun-2026 00:41:23.876
+[32mBuilt /mnt/data/new-release/cert-work/zyl-verified-patch-calculus.cert (9.927s) at 29-Jun-2026 00:41:33.835[0m
+Making /mnt/data/new-release/cert-work/zvu-rope-local-patch.cert on 29-Jun-2026 00:41:33.905
+[32mBuilt /mnt/data/new-release/cert-work/zvu-rope-local-patch.cert (3.144s) at 29-Jun-2026 00:41:37.075[0m
+Making /mnt/data/new-release/cert-work/zux-structural-rope-split.cert on 29-Jun-2026 00:41:37.147
+[32mBuilt /mnt/data/new-release/cert-work/zux-structural-rope-split.cert (3.142s) at 29-Jun-2026 00:41:40.318[0m
+Making /mnt/data/new-release/cert-work/zts-structural-rope-patch.cert on 29-Jun-2026 00:41:40.399
+[32mBuilt /mnt/data/new-release/cert-work/zts-structural-rope-patch.cert (3.617s) at 29-Jun-2026 00:41:44.046[0m
+Making /mnt/data/new-release/cert-work/zsh-verified-patch-composition.cert on 29-Jun-2026 00:41:44.122
+[32;1mBuilt /mnt/data/new-release/cert-work/zsh-verified-patch-composition.cert (13.059s) at 29-Jun-2026 00:41:57.214[0m
+Making /mnt/data/new-release/cert-work/zqz-reversible-patch-receipts.cert on 29-Jun-2026 00:41:57.286
+[33mBuilt /mnt/data/new-release/cert-work/zqz-reversible-patch-receipts.cert (20.235s) at 29-Jun-2026 00:42:17.551[0m
+Making /mnt/data/new-release/cert-work/zxh-cyclic-canon-calculus.cert on 29-Jun-2026 00:42:17.628
+[32mBuilt /mnt/data/new-release/cert-work/zxh-cyclic-canon-calculus.cert (3.046s) at 29-Jun-2026 00:42:20.702[0m

@@ -1,0 +1,920 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zoq-proof-carrying-horn-closure" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zoq-proof-carrying-horn-closure
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.62 seconds (prove: 0.00, print: 0.00, other: 0.62)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZOQ-PROOF-CARRYING-HORN-CLOSURE
+)
+
+Summary
+Form:  ( DEFUN VHC-SUBSETP ...)
+Rules: ((:TYPE-PRESCRIPTION SUBSETP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-SUBSETP
+
+Summary
+Form:  ( DEFUN VHC-RULE-CONCLUSION ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-RULE-CONCLUSION
+
+Summary
+Form:  ( DEFUN VHC-RULE-PREMISES ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-RULE-PREMISES
+
+Summary
+Form:  ( DEFUN VHC-RULE-ENABLEDP ...)
+Rules: ((:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-RULE-ENABLEDP
+
+Summary
+Form:  ( DEFUN VHC-FIRE-RULE ...)
+Rules: ((:TYPE-PRESCRIPTION ADD-TO-SET-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-FIRE-RULE
+
+Summary
+Form:  ( DEFUN VHC-SWEEP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-SWEEP
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFUN VHC-CLOSE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  103
+VHC-CLOSE
+
+Summary
+Form:  ( DEFTHM VHC-SUBSETP-REFLEXIVE ...)
+Rules: ((:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  7
+VHC-SUBSETP-REFLEXIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM VHC-SUBSETP-TRANSITIVE ...)
+Rules: ((:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  70
+VHC-SUBSETP-TRANSITIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM VHC-MEMBER-WHEN-SUBSETP ...)
+Rules: ((:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-MEMBER . 4)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  57
+VHC-MEMBER-WHEN-SUBSETP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VHC-SUBSETP-OF-ADD-RIGHT ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  113
+VHC-SUBSETP-OF-ADD-RIGHT
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VHC-SUBSETP-ADD-SELF ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  67
+VHC-SUBSETP-ADD-SELF
+Goal'
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VHC-FACTS-SUBSET-OF-FIRE ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  191
+VHC-FACTS-SUBSET-OF-FIRE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-FACTS-SUBSET-OF-SWEEP ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:DEFINITION VHC-SWEEP)
+        (:INDUCTION VHC-SWEEP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  265
+VHC-FACTS-SUBSET-OF-SWEEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VHC-ENABLEDP-MONOTONE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:TYPE-PRESCRIPTION VHC-RULE-ENABLEDP))
+Hint-events: ((:USE VHC-SUBSETP-TRANSITIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  84
+VHC-ENABLEDP-MONOTONE
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1'
+Subgoal 1.4
+Subgoal 1.3
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM VHC-FIRE-RULE-MONOTONE ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-CONS-SAME)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 4)
+        (:REWRITE SUBSETP-OF-CONS)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1995
+VHC-FIRE-RULE-MONOTONE
+
+Summary
+Form:  ( DEFUN VHC-SWEEP-PAIR-INDUCTION ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-SWEEP-PAIR-INDUCTION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-SWEEP-MONOTONE ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:DEFINITION VHC-SWEEP)
+        (:INDUCTION VHC-SWEEP-PAIR-INDUCTION)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-CONS-SAME)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 2)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-MEMBER . 4)
+        (:REWRITE SUBSETP-OF-CONS)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  8182
+VHC-SWEEP-MONOTONE
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFUN VHC-CLOSE-PAIR-INDUCTION ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  103
+VHC-CLOSE-PAIR-INDUCTION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-CLOSE-MONOTONE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-CLOSE)
+        (:INDUCTION VHC-CLOSE-PAIR-INDUCTION)
+        (:REWRITE VHC-SUBSETP-REFLEXIVE)
+        (:REWRITE VHC-SUBSETP-TRANSITIVE)
+        (:REWRITE VHC-SWEEP-MONOTONE)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Hint-events: ((:USE VHC-SWEEP-MONOTONE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1349
+VHC-CLOSE-MONOTONE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM VHC-FACTS-SUBSET-OF-CLOSE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-CLOSE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:INDUCTION VHC-CLOSE)
+        (:REWRITE VHC-CLOSE-MONOTONE)
+        (:REWRITE VHC-FACTS-SUBSET-OF-SWEEP)
+        (:REWRITE VHC-SUBSETP-REFLEXIVE)
+        (:REWRITE VHC-SUBSETP-TRANSITIVE)
+        (:REWRITE VHC-SWEEP-MONOTONE)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Hint-events: ((:USE VHC-FACTS-SUBSET-OF-SWEEP)
+              (:USE VHC-SUBSETP-TRANSITIVE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  396
+VHC-FACTS-SUBSET-OF-CLOSE
+
+Summary
+Form:  ( DEFUN VHC-TRACE-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-TRACE-VALIDP
+
+Summary
+Form:  ( DEFUN VHC-REPLAY ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-REPLAY
+
+Summary
+Form:  ( DEFUN VHC-CERTIFIEDP ...)
+Rules: ((:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-CERTIFIEDP
+
+Summary
+Form:  ( DEFTHM VHC-REPLAY-OF-CONS ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-REPLAY)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  353
+VHC-REPLAY-OF-CONS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-FACTS-SUBSET-OF-REPLAY ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-REPLAY)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:INDUCTION VHC-REPLAY)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  265
+VHC-FACTS-SUBSET-OF-REPLAY
+
+Summary
+Form:  ( DEFUN VHC-THEORY-MODELP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-THEORY-MODELP
+
+Summary
+Form:  ( DEFUN VHC-MODELP ...)
+Rules: ((:TYPE-PRESCRIPTION VHC-THEORY-MODELP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-MODELP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.2
+Subgoal *1/1.2.2
+Subgoal *1/1.2.2'
+Subgoal *1/1.2.2.2
+Subgoal *1/1.2.2.1
+Subgoal *1/1.2.1
+Subgoal *1/1.2.1'
+Subgoal *1/1.2.1.2
+Subgoal *1/1.2.1.1
+Subgoal *1/1.2.1.1'
+Subgoal *1/1.1
+Subgoal *1/1.1.2
+Subgoal *1/1.1.2'
+Subgoal *1/1.1.2.2
+Subgoal *1/1.1.2.1
+Subgoal *1/1.1.1
+Subgoal *1/1.1.1'
+Subgoal *1/1.1.1.2
+Subgoal *1/1.1.1.1
+Subgoal *1/1.1.1.1'
+
+Summary
+Form:  ( DEFTHM VHC-MEMBER-CONCLUSION-WHEN-RULE-IN-MODEL ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:DEFINITION VHC-THEORY-MODELP)
+        (:ELIM CAR-CDR-ELIM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-NIL)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  5697
+VHC-MEMBER-CONCLUSION-WHEN-RULE-IN-MODEL
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+Subgoal 1''
+
+Summary
+Form:  ( DEFTHM VHC-FIRE-RULE-SUBSET-OF-MODEL ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-OF-CONS)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP)
+        (:TYPE-PRESCRIPTION VHC-THEORY-MODELP))
+Hint-events: ((:USE VHC-ENABLEDP-MONOTONE)
+              (:USE VHC-MEMBER-CONCLUSION-WHEN-RULE-IN-MODEL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1822
+VHC-FIRE-RULE-SUBSET-OF-MODEL
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-REPLAY-SUBSET-OF-EVERY-MODEL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-REPLAY)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-TRACE-VALIDP)
+        (:INDUCTION VHC-REPLAY)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VHC-SUBSETP-REFLEXIVE)
+        (:REWRITE VHC-SUBSETP-TRANSITIVE)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP)
+        (:TYPE-PRESCRIPTION VHC-THEORY-MODELP)
+        (:TYPE-PRESCRIPTION VHC-TRACE-VALIDP))
+Hint-events: ((:USE VHC-FIRE-RULE-SUBSET-OF-MODEL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  905
+VHC-REPLAY-SUBSET-OF-EVERY-MODEL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VHC-CERTIFIEDP-SOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VHC-CERTIFIEDP)
+        (:DEFINITION VHC-MODELP)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-MEMBER . 4)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-THEORY-MODELP)
+        (:TYPE-PRESCRIPTION VHC-TRACE-VALIDP))
+Hint-events: ((:USE VHC-REPLAY-SUBSET-OF-EVERY-MODEL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  801
+VHC-CERTIFIEDP-SOUND
+Goal'
+
+Summary
+Form:  ( DEFTHM VHC-MEMBER-PRESERVED-BY-FIRE ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  174
+VHC-MEMBER-PRESERVED-BY-FIRE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-MEMBER-PRESERVED-BY-SWEEP ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:DEFINITION VHC-SWEEP)
+        (:INDUCTION VHC-SWEEP)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  464
+VHC-MEMBER-PRESERVED-BY-SWEEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2.3
+Subgoal *1/2.2.3.2
+Subgoal *1/2.2.3.2'
+Subgoal *1/2.2.3.2.2
+Subgoal *1/2.2.3.2.1
+Subgoal *1/2.2.3.1
+Subgoal *1/2.2.3.1'
+Subgoal *1/2.2.3.1.2
+Subgoal *1/2.2.3.1.1
+Subgoal *1/2.2.2
+Subgoal *1/2.2.2.2
+Subgoal *1/2.2.2.2'
+Subgoal *1/2.2.2.2.2
+Subgoal *1/2.2.2.2.1
+Subgoal *1/2.2.2.1
+Subgoal *1/2.2.2.1'
+Subgoal *1/2.2.2.1.2
+Subgoal *1/2.2.2.1.1
+Subgoal *1/2.2.1
+Subgoal *1/2.2.1.2
+Subgoal *1/2.2.1.2'
+Subgoal *1/2.2.1.2.2
+Subgoal *1/2.2.1.2.1
+Subgoal *1/2.2.1.1
+Subgoal *1/2.2.1.1'
+Subgoal *1/2.2.1.1.2
+Subgoal *1/2.2.1.1.1
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-SWEEP-COVERS-ENABLED-MEMBER-RULE ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:DEFINITION VHC-SWEEP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VHC-SWEEP)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-NIL)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:REWRITE VHC-MEMBER-PRESERVED-BY-SWEEP)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  8493
+VHC-SWEEP-COVERS-ENABLED-MEMBER-RULE
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM VHC-FIRE-SUBSET-OF-SWEEP-UNDER-SIMULATION ...)
+Rules: ((:DEFINITION ADD-TO-SET-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-FIRE-RULE)
+        (:DEFINITION VHC-RULE-CONCLUSION)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-OF-CONS)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE SUBSETP-TRANS2)
+        (:REWRITE VHC-FACTS-SUBSET-OF-SWEEP)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP))
+Hint-events: ((:USE VHC-ENABLEDP-MONOTONE)
+              (:USE VHC-SUBSETP-TRANSITIVE)
+              (:USE VHC-SWEEP-COVERS-ENABLED-MEMBER-RULE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1560
+VHC-FIRE-SUBSET-OF-SWEEP-UNDER-SIMULATION
+
+Summary
+Form:  ( DEFUN VHC-REPLAY-CLOSE-INDUCTION ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-REPLAY-CLOSE-INDUCTION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-REPLAY-SUBSET-OF-BOUNDED-CLOSE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION VHC-CLOSE)
+        (:DEFINITION VHC-REPLAY)
+        (:DEFINITION VHC-RULE-ENABLEDP)
+        (:DEFINITION VHC-RULE-PREMISES)
+        (:DEFINITION VHC-TRACE-VALIDP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VHC-REPLAY-CLOSE-INDUCTION)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE FOLD-CONSTS-IN-+)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE UNICITY-OF-0)
+        (:REWRITE VHC-CLOSE-MONOTONE)
+        (:REWRITE VHC-FIRE-SUBSET-OF-SWEEP-UNDER-SIMULATION)
+        (:REWRITE VHC-SUBSETP-REFLEXIVE)
+        (:REWRITE VHC-SUBSETP-TRANSITIVE)
+        (:REWRITE VHC-SWEEP-MONOTONE)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-SUBSETP)
+        (:TYPE-PRESCRIPTION VHC-TRACE-VALIDP))
+Hint-events: ((:USE VHC-FIRE-SUBSET-OF-SWEEP-UNDER-SIMULATION))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  3358
+VHC-REPLAY-SUBSET-OF-BOUNDED-CLOSE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VHC-CERTIFIEDP-FOUND-BY-BOUNDED-CLOSE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VHC-CERTIFIEDP)
+        (:DEFINITION VHC-SUBSETP)
+        (:REWRITE SUBSETP-MEMBER . 4)
+        (:REWRITE VHC-SUBSETP-REFLEXIVE)
+        (:TYPE-PRESCRIPTION SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VHC-TRACE-VALIDP))
+Hint-events: ((:USE VHC-REPLAY-SUBSET-OF-BOUNDED-CLOSE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  660
+VHC-CERTIFIEDP-FOUND-BY-BOUNDED-CLOSE
+
+Summary
+Form:  ( DEFUN VHC-STABLEP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VHC-STABLEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VHC-CLOSE-WHEN-STABLE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION VHC-CLOSE)
+        (:DEFINITION VHC-STABLEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VHC-CLOSE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  958
+VHC-CLOSE-WHEN-STABLE
+
+Summary
+Form:  ( DEFCONST *VHC-THEORY* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VHC-THEORY*
+
+Summary
+Form:  ( DEFCONST *VHC-TRACE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*VHC-TRACE*
+:PASSED
+(DEFXDOC VHC-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zoq-proof-carrying-horn-closure" ...)
+Rules: NIL
+Time:  1.01 seconds (prove: 0.28, print: 0.01, other: 0.73)
+Prover steps counted:  38492
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.01 seconds realtime, 0.95 seconds runtime
+; (135,682,384 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 20201 Jun 29 00:40 zoq-proof-carrying-horn-closure.cert

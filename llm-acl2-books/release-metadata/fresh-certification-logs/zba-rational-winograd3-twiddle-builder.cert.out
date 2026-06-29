@@ -1,0 +1,1533 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zay-rational-winograd3-client.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zaz-rational-unit-square-root.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zba-rational-winograd3-twiddle-builder" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zba-rational-winograd3-twiddle-builder
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zay-rational-winograd3-client" ...)
+Rules: NIL
+Time:  1.18 seconds (prove: 0.00, print: 0.00, other: 1.18)
+"/mnt/data/new-release/cert-work/zay-rational-winograd3-client.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zaz-rational-unit-square-root" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/new-release/cert-work/zaz-rational-unit-square-root.lisp"
+
+Summary
+Form:  ( DEFUN RW3-SINE-INTERVAL ...)
+Rules: ((:TYPE-PRESCRIPTION RUSQRT-BUILD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-SINE-INTERVAL
+
+Summary
+Form:  ( DEFUN RW3-SINE-LO ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-SINE-LO
+
+Summary
+Form:  ( DEFUN RW3-SINE-HI ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-SINE-HI
+
+Summary
+Form:  ( DEFUN RW3-SINE-MID ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-SINE-MID
+
+Summary
+Form:  ( DEFUN RW3-SINE-CERTIFICATEP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-SINE-CERTIFICATEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-SINE-BUILDER-CERTIFICATE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RW3-SINE-CERTIFICATEP)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO)
+        (:DEFINITION SYNP)
+        (:REWRITE |(* x x)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE)
+        (:TYPE-PRESCRIPTION RW3-SINE-CERTIFICATEP))
+Hint-events: ((:USE RATIONALP-OF-RUSQRT-BUILD-HI)
+              (:USE RATIONALP-OF-RUSQRT-BUILD-LO)
+              (:USE RUSQRT-BUILD-LO-AT-MOST-HI)
+              (:USE RUSQRT-BUILD-LO-NONNEGATIVE)
+              (:USE RUSQRT-BUILD-LOWER-SQUARE-BOUND)
+              (:USE RUSQRT-BUILD-UPPER-SQUARE-BOUND))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  852
+RW3-SINE-BUILDER-CERTIFICATE
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RW3-SINE-LO ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RW3-SINE-CERTIFICATEP)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO))
+Hint-events: ((:USE RW3-SINE-BUILDER-CERTIFICATE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  124
+RATIONALP-OF-RW3-SINE-LO
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RW3-SINE-HI ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RW3-SINE-CERTIFICATEP)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO))
+Hint-events: ((:USE RW3-SINE-BUILDER-CERTIFICATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  124
+RATIONALP-OF-RW3-SINE-HI
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RW3-SINE-MID ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO)
+        (:DEFINITION RW3-SINE-MID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE))
+Hint-events: ((:USE RATIONALP-OF-RW3-SINE-HI)
+              (:USE RATIONALP-OF-RW3-SINE-LO))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  216
+RATIONALP-OF-RW3-SINE-MID
+Goal'
+
+Summary
+Form:  ( DEFTHM RW3-SINE-LO-NONNEGATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RW3-SINE-CERTIFICATEP)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO))
+Hint-events: ((:USE RW3-SINE-BUILDER-CERTIFICATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  136
+RW3-SINE-LO-NONNEGATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RW3-SINE-LO-AT-MOST-HI ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RW3-SINE-CERTIFICATEP)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO))
+Hint-events: ((:USE RW3-SINE-BUILDER-CERTIFICATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  151
+RW3-SINE-LO-AT-MOST-HI
+Goal'
+
+Summary
+Form:  ( DEFTHM RW3-SINE-INTERVAL-WIDTH ...)
+Rules: ((:DEFINITION RW3-SINE-INTERVAL))
+Hint-events: ((:USE RUSQRT-BUILD-WIDTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  19
+RW3-SINE-INTERVAL-WIDTH
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-SINE-WIDTH ...)
+Rules: ((:DEFINITION RUSQRT-WIDTH)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-LO))
+Hint-events: ((:USE RW3-SINE-INTERVAL-WIDTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  56
+RW3-SINE-WIDTH
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RUSQRT-DYADIC-WIDTH-UPPER-BOUND ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION RUSQRT-DYADIC-WIDTH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART RUSQRT-DYADIC-WIDTH)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RUSQRT-DYADIC-WIDTH)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (+ x y) z)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(<= x (/ y)) with (< 0 y)|)
+        (:REWRITE ARITH-BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE ARITH-NORMALIZE-FACTORS-SCATTER-EXPONENTS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE |arith (* -1 x)|)
+        (:REWRITE |arith (* x (/ x))|)
+        (:REWRITE |arith (fix x)|)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2453
+RUSQRT-DYADIC-WIDTH-UPPER-BOUND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RECIPROCAL-ONE-PLUS-DENOMINATOR-BELOW-POSITIVE-RATIONAL
+...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* r (denominator r))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(<= (/ x) y) with (< 0 x)|)
+        (:REWRITE NUMERATOR-POSITIVE)
+        (:REWRITE RATIONAL-IMPLIES2)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:TYPE-PRESCRIPTION NUMERATOR-POSITIVE . 1)
+        (:TYPE-PRESCRIPTION NUMERATOR-POSITIVE . 2))
+Hint-events: ((:USE NUMERATOR-POSITIVE)
+              (:USE RATIONAL-IMPLIES2))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  279
+RECIPROCAL-ONE-PLUS-DENOMINATOR-BELOW-POSITIVE-RATIONAL
+
+Summary
+Form:  ( DEFUN RW3-PRECISION-FUEL-BOUND ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-PRECISION-FUEL-BOUND
+
+Summary
+Form:  ( DEFTHM NATP-OF-RW3-PRECISION-FUEL-BOUND ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:TYPE-PRESCRIPTION RW3-PRECISION-FUEL-BOUND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+NATP-OF-RW3-PRECISION-FUEL-BOUND
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RW3-PRECISION-FUEL-BOUND-SUFFICES ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RW3-PRECISION-FUEL-BOUND)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR RECIPROCAL-ONE-PLUS-DENOMINATOR-BELOW-POSITIVE-RATIONAL)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* r (denominator r))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(<= (/ x) y) with (< 0 x)|)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:TYPE-PRESCRIPTION NUMERATOR-POSITIVE . 1)
+        (:TYPE-PRESCRIPTION NUMERATOR-POSITIVE . 2)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Hint-events: ((:USE RECIPROCAL-ONE-PLUS-DENOMINATOR-BELOW-POSITIVE-RATIONAL)
+              (:USE RUSQRT-DYADIC-WIDTH-UPPER-BOUND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  467
+RW3-PRECISION-FUEL-BOUND-SUFFICES
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RW3-PRECISION-SEARCH ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  258
+RW3-PRECISION-SEARCH
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM NATP-OF-RW3-PRECISION-SEARCH ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:INDUCTION RW3-PRECISION-SEARCH)
+        (:TYPE-PRESCRIPTION RW3-PRECISION-SEARCH))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+NATP-OF-RW3-PRECISION-SEARCH
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RW3-PRECISION-SEARCH-SUFFICES ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RW3-PRECISION-SEARCH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RW3-PRECISION-SEARCH)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1006
+RW3-PRECISION-SEARCH-SUFFICES
+
+Summary
+Form:  ( DEFUN RW3-PRECISION-FOR-EPSILON ...)
+Rules: ((:TYPE-PRESCRIPTION RW3-PRECISION-SEARCH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-PRECISION-FOR-EPSILON
+Goal'
+
+Summary
+Form:  ( DEFTHM NATP-OF-RW3-PRECISION-FOR-EPSILON ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:TYPE-PRESCRIPTION RW3-PRECISION-FOR-EPSILON))
+Hint-events: ((:USE NATP-OF-RW3-PRECISION-SEARCH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+NATP-OF-RW3-PRECISION-FOR-EPSILON
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-PRECISION-FOR-EPSILON-SUFFICES ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RW3-PRECISION-FOR-EPSILON)
+        (:DEFINITION RW3-PRECISION-FUEL-BOUND)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE NATP-OF-RW3-PRECISION-FUEL-BOUND)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE RW3-PRECISION-SEARCH-SUFFICES)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Hint-events: ((:USE NATP-OF-RW3-PRECISION-FUEL-BOUND)
+              (:USE RW3-PRECISION-FUEL-BOUND-SUFFICES)
+              (:USE RW3-PRECISION-SEARCH-SUFFICES))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  557
+RW3-PRECISION-FOR-EPSILON-SUFFICES
+
+Summary
+Form:  ( DEFUN RW3-TWIDDLE-TABLE-FROM-SINE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-TWIDDLE-TABLE-FROM-SINE
+
+Summary
+Form:  ( DEFUN RW3-TWIDDLE-TABLE-LO ...)
+Rules: ((:TYPE-PRESCRIPTION RW3-TWIDDLE-TABLE-FROM-SINE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-TWIDDLE-TABLE-LO
+
+Summary
+Form:  ( DEFUN RW3-TWIDDLE-TABLE-HI ...)
+Rules: ((:TYPE-PRESCRIPTION RW3-TWIDDLE-TABLE-FROM-SINE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-TWIDDLE-TABLE-HI
+
+Summary
+Form:  ( DEFUN RW3-TWIDDLE-TABLE-MID ...)
+Rules: ((:TYPE-PRESCRIPTION RW3-TWIDDLE-TABLE-FROM-SINE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-TWIDDLE-TABLE-MID
+
+Summary
+Form:  ( DEFUN RW3-TWIDDLE-TABLE-FOR-EPSILON ...)
+Rules: ((:TYPE-PRESCRIPTION RW3-TWIDDLE-TABLE-MID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-TWIDDLE-TABLE-FOR-EPSILON
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FROM-SINE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RW3-TWIDDLE-TABLE-FROM-SINE)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-LIST-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-CONS)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  150
+QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FROM-SINE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-LO ...)
+Rules: ((:DEFINITION RW3-TWIDDLE-TABLE-LO)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FROM-SINE)
+              (:USE RATIONALP-OF-RW3-SINE-LO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  25
+QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-LO
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-HI ...)
+Rules: ((:DEFINITION RW3-TWIDDLE-TABLE-HI)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FROM-SINE)
+              (:USE RATIONALP-OF-RW3-SINE-HI))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  25
+QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-HI
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-MID ...)
+Rules: ((:DEFINITION RW3-TWIDDLE-TABLE-MID)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FROM-SINE)
+              (:USE RATIONALP-OF-RW3-SINE-MID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  25
+QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-MID
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FOR-EPSILON ...)
+Rules: ((:DEFINITION RW3-TWIDDLE-TABLE-FOR-EPSILON)
+        (:TYPE-PRESCRIPTION QCX-VECTORP))
+Hint-events: ((:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-MID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  15
+QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-FOR-EPSILON
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RW3-TWIDDLE-TABLE-FROM-SINE-CONJUGATE-PAIR ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION RW3-TWIDDLE-TABLE-FROM-SINE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE NTH-ADD1)
+        (:REWRITE NTH-WHEN-ZP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  487
+RW3-TWIDDLE-TABLE-FROM-SINE-CONJUGATE-PAIR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-DIST-OF-RW3-TWIDDLES-FROM-SINES ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ x x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  551
+QCX-DIST-OF-RW3-TWIDDLES-FROM-SINES
+Goal'
+Goal''
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RW3-GENERATED-TWIDDLE-TABLES-CLOSE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION QCX-TABLE-CLOSEP)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO)
+        (:DEFINITION RW3-TWIDDLE-TABLE-FROM-SINE)
+        (:DEFINITION RW3-TWIDDLE-TABLE-HI)
+        (:DEFINITION RW3-TWIDDLE-TABLE-LO)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-DIST)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-NEG)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ x x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-LESS-THAN-2)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE))
+Hint-events: ((:USE QCX-DIST-OF-RW3-TWIDDLES-FROM-SINES)
+              (:USE RW3-SINE-LO-AT-MOST-HI)
+              (:USE RW3-SINE-WIDTH))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  6824
+RW3-GENERATED-TWIDDLE-TABLES-CLOSE
+Goal'
+Goal''
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RW3-GENERATED-MID-TABLE-CLOSE-TO-LO ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION QCX-TABLE-CLOSEP)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO)
+        (:DEFINITION RW3-SINE-MID)
+        (:DEFINITION RW3-TWIDDLE-TABLE-FROM-SINE)
+        (:DEFINITION RW3-TWIDDLE-TABLE-LO)
+        (:DEFINITION RW3-TWIDDLE-TABLE-MID)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-DIST)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (* c x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-LESS-THAN-2)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE))
+Hint-events: ((:USE RATIONALP-OF-RW3-SINE-HI)
+              (:USE RATIONALP-OF-RW3-SINE-LO)
+              (:USE RW3-SINE-LO-AT-MOST-HI)
+              (:USE RW3-SINE-WIDTH))
+Time:  0.06 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  2900
+RW3-GENERATED-MID-TABLE-CLOSE-TO-LO
+Goal'
+Goal''
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RW3-GENERATED-MID-TABLE-CLOSE-TO-HI ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION QCX-TABLE-CLOSEP)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RW3-SINE-HI)
+        (:DEFINITION RW3-SINE-INTERVAL)
+        (:DEFINITION RW3-SINE-LO)
+        (:DEFINITION RW3-SINE-MID)
+        (:DEFINITION RW3-TWIDDLE-TABLE-FROM-SINE)
+        (:DEFINITION RW3-TWIDDLE-TABLE-HI)
+        (:DEFINITION RW3-TWIDDLE-TABLE-MID)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-DIST)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (* c x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-LESS-THAN-2)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE))
+Hint-events: ((:USE RATIONALP-OF-RW3-SINE-HI)
+              (:USE RATIONALP-OF-RW3-SINE-LO)
+              (:USE RW3-SINE-LO-AT-MOST-HI)
+              (:USE RW3-SINE-WIDTH))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  2910
+RW3-GENERATED-MID-TABLE-CLOSE-TO-HI
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.80
+Subgoal *1/4.80'
+Subgoal *1/4.79
+Subgoal *1/4.79'
+Subgoal *1/4.79''
+Subgoal *1/4.78
+Subgoal *1/4.77
+Subgoal *1/4.76
+Subgoal *1/4.75
+Subgoal *1/4.74
+Subgoal *1/4.73
+Subgoal *1/4.72
+Subgoal *1/4.72'
+Subgoal *1/4.72.2
+Subgoal *1/4.72.1
+Subgoal *1/4.71
+Subgoal *1/4.71'
+Subgoal *1/4.71''
+Subgoal *1/4.71'''
+Subgoal *1/4.70
+Subgoal *1/4.70'
+Subgoal *1/4.69
+Subgoal *1/4.69'
+Subgoal *1/4.68
+Subgoal *1/4.67
+Subgoal *1/4.66
+Subgoal *1/4.65
+Subgoal *1/4.64
+Subgoal *1/4.63
+Subgoal *1/4.62
+Subgoal *1/4.62'
+Subgoal *1/4.62''
+Subgoal *1/4.61
+Subgoal *1/4.61'
+Subgoal *1/4.61.2
+Subgoal *1/4.61.1
+Subgoal *1/4.60
+Subgoal *1/4.59
+Subgoal *1/4.58
+Subgoal *1/4.57
+Subgoal *1/4.56
+Subgoal *1/4.55
+Subgoal *1/4.54
+Subgoal *1/4.53
+Subgoal *1/4.52
+Subgoal *1/4.51
+Subgoal *1/4.50
+Subgoal *1/4.49
+Subgoal *1/4.48
+Subgoal *1/4.47
+Subgoal *1/4.46
+Subgoal *1/4.45
+Subgoal *1/4.44
+Subgoal *1/4.43
+Subgoal *1/4.42
+Subgoal *1/4.41
+Subgoal *1/4.40
+Subgoal *1/4.39
+Subgoal *1/4.38
+Subgoal *1/4.37
+Subgoal *1/4.36
+Subgoal *1/4.35
+Subgoal *1/4.34
+Subgoal *1/4.33
+Subgoal *1/4.32
+Subgoal *1/4.31
+Subgoal *1/4.30
+Subgoal *1/4.29
+Subgoal *1/4.28
+Subgoal *1/4.27
+Subgoal *1/4.26
+Subgoal *1/4.25
+Subgoal *1/4.24
+Subgoal *1/4.23
+Subgoal *1/4.22
+Subgoal *1/4.21
+Subgoal *1/4.20
+Subgoal *1/4.19
+Subgoal *1/4.18
+Subgoal *1/4.17
+Subgoal *1/4.16
+Subgoal *1/4.15
+Subgoal *1/4.14
+Subgoal *1/4.13
+Subgoal *1/4.12
+Subgoal *1/4.11
+Subgoal *1/4.10
+Subgoal *1/4.9
+Subgoal *1/4.8
+Subgoal *1/4.7
+Subgoal *1/4.6
+Subgoal *1/4.5
+Subgoal *1/4.4
+Subgoal *1/4.3
+Subgoal *1/4.2
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.114
+Subgoal *1/3.114.18
+Subgoal *1/3.114.18'
+Subgoal *1/3.114.17
+Subgoal *1/3.114.16
+Subgoal *1/3.114.15
+Subgoal *1/3.114.14
+Subgoal *1/3.114.13
+Subgoal *1/3.114.12
+Subgoal *1/3.114.11
+Subgoal *1/3.114.10
+Subgoal *1/3.114.9
+Subgoal *1/3.114.8
+Subgoal *1/3.114.7
+Subgoal *1/3.114.6
+Subgoal *1/3.114.5
+Subgoal *1/3.114.4
+Subgoal *1/3.114.3
+Subgoal *1/3.114.2
+Subgoal *1/3.114.1
+Subgoal *1/3.114.1'
+Subgoal *1/3.113
+Subgoal *1/3.112
+Subgoal *1/3.112.6
+Subgoal *1/3.112.5
+Subgoal *1/3.112.4
+Subgoal *1/3.112.3
+Subgoal *1/3.112.2
+Subgoal *1/3.112.1
+Subgoal *1/3.111
+Subgoal *1/3.110
+Subgoal *1/3.110.11
+Subgoal *1/3.110.10
+Subgoal *1/3.110.9
+Subgoal *1/3.110.8
+Subgoal *1/3.110.7
+Subgoal *1/3.110.6
+Subgoal *1/3.110.5
+Subgoal *1/3.110.4
+Subgoal *1/3.110.3
+Subgoal *1/3.110.2
+Subgoal *1/3.110.1
+Subgoal *1/3.109
+Subgoal *1/3.108
+Subgoal *1/3.108.40
+Subgoal *1/3.108.39
+Subgoal *1/3.108.38
+Subgoal *1/3.108.37
+Subgoal *1/3.108.36
+Subgoal *1/3.108.35
+Subgoal *1/3.108.34
+Subgoal *1/3.108.33
+Subgoal *1/3.108.32
+Subgoal *1/3.108.31
+Subgoal *1/3.108.30
+Subgoal *1/3.108.29
+Subgoal *1/3.108.28
+Subgoal *1/3.108.27
+Subgoal *1/3.108.26
+Subgoal *1/3.108.25
+Subgoal *1/3.108.24
+Subgoal *1/3.108.23
+Subgoal *1/3.108.22
+Subgoal *1/3.108.21
+Subgoal *1/3.108.20
+Subgoal *1/3.108.19
+Subgoal *1/3.108.18
+Subgoal *1/3.108.17
+Subgoal *1/3.108.16
+Subgoal *1/3.108.15
+Subgoal *1/3.108.14
+Subgoal *1/3.108.13
+Subgoal *1/3.108.12
+Subgoal *1/3.108.11
+Subgoal *1/3.108.10
+Subgoal *1/3.108.9
+Subgoal *1/3.108.8
+Subgoal *1/3.108.7
+Subgoal *1/3.108.6
+Subgoal *1/3.108.5
+Subgoal *1/3.108.4
+Subgoal *1/3.108.3
+Subgoal *1/3.108.2
+Subgoal *1/3.108.1
+Subgoal *1/3.107
+Subgoal *1/3.106
+Subgoal *1/3.106.20
+Subgoal *1/3.106.19
+Subgoal *1/3.106.18
+Subgoal *1/3.106.17
+Subgoal *1/3.106.16
+Subgoal *1/3.106.15
+Subgoal *1/3.106.14
+Subgoal *1/3.106.13
+Subgoal *1/3.106.12
+Subgoal *1/3.106.11
+Subgoal *1/3.106.10
+Subgoal *1/3.106.9
+Subgoal *1/3.106.8
+Subgoal *1/3.106.7
+Subgoal *1/3.106.6
+Subgoal *1/3.106.5
+Subgoal *1/3.106.4
+Subgoal *1/3.106.3
+Subgoal *1/3.106.2
+Subgoal *1/3.106.1
+Subgoal *1/3.105
+Subgoal *1/3.104
+Subgoal *1/3.104.28
+Subgoal *1/3.104.27
+Subgoal *1/3.104.26
+Subgoal *1/3.104.25
+Subgoal *1/3.104.24
+Subgoal *1/3.104.23
+Subgoal *1/3.104.22
+Subgoal *1/3.104.21
+Subgoal *1/3.104.20
+Subgoal *1/3.104.19
+Subgoal *1/3.104.18
+Subgoal *1/3.104.17
+Subgoal *1/3.104.16
+Subgoal *1/3.104.15
+Subgoal *1/3.104.14
+Subgoal *1/3.104.13
+Subgoal *1/3.104.12
+Subgoal *1/3.104.11
+Subgoal *1/3.104.10
+Subgoal *1/3.104.9
+Subgoal *1/3.104.8
+Subgoal *1/3.104.7
+Subgoal *1/3.104.6
+Subgoal *1/3.104.5
+Subgoal *1/3.104.4
+Subgoal *1/3.104.3
+Subgoal *1/3.104.2
+Subgoal *1/3.104.1
+Subgoal *1/3.103
+Subgoal *1/3.102
+Subgoal *1/3.102.28
+Subgoal *1/3.102.27
+Subgoal *1/3.102.26
+Subgoal *1/3.102.25
+Subgoal *1/3.102.24
+Subgoal *1/3.102.23
+Subgoal *1/3.102.22
+Subgoal *1/3.102.21
+Subgoal *1/3.102.20
+Subgoal *1/3.102.19
+Subgoal *1/3.102.18
+Subgoal *1/3.102.17
+Subgoal *1/3.102.16
+Subgoal *1/3.102.15
+Subgoal *1/3.102.14
+Subgoal *1/3.102.13
+Subgoal *1/3.102.12
+Subgoal *1/3.102.11
+Subgoal *1/3.102.10
+Subgoal *1/3.102.9
+Subgoal *1/3.102.8
+Subgoal *1/3.102.7
+Subgoal *1/3.102.6
+Subgoal *1/3.102.5
+Subgoal *1/3.102.4
+Subgoal *1/3.102.3
+Subgoal *1/3.102.2
+Subgoal *1/3.102.1
+Subgoal *1/3.101
+Subgoal *1/3.100
+Subgoal *1/3.100.11
+Subgoal *1/3.100.10
+Subgoal *1/3.100.9
+Subgoal *1/3.100.8
+Subgoal *1/3.100.7
+Subgoal *1/3.100.6
+Subgoal *1/3.100.5
+Subgoal *1/3.100.4
+Subgoal *1/3.100.3
+Subgoal *1/3.100.2
+Subgoal *1/3.100.1
+Subgoal *1/3.99
+Subgoal *1/3.98
+Subgoal *1/3.97
+Subgoal *1/3.96
+Subgoal *1/3.95
+Subgoal *1/3.94
+Subgoal *1/3.93
+Subgoal *1/3.93'
+Subgoal *1/3.93''
+Subgoal *1/3.92
+Subgoal *1/3.92'
+Subgoal *1/3.92''
+Subgoal *1/3.91
+Subgoal *1/3.90
+Subgoal *1/3.89
+Subgoal *1/3.88
+Subgoal *1/3.87
+Subgoal *1/3.86
+Subgoal *1/3.85
+Subgoal *1/3.84
+Subgoal *1/3.83
+Subgoal *1/3.82
+Subgoal *1/3.81
+Subgoal *1/3.80
+Subgoal *1/3.79
+Subgoal *1/3.78
+Subgoal *1/3.77
+Subgoal *1/3.76
+Subgoal *1/3.75
+Subgoal *1/3.74
+Subgoal *1/3.73
+Subgoal *1/3.72
+Subgoal *1/3.71
+Subgoal *1/3.70
+Subgoal *1/3.69
+Subgoal *1/3.68
+Subgoal *1/3.67
+Subgoal *1/3.66
+Subgoal *1/3.65
+Subgoal *1/3.64
+Subgoal *1/3.63
+Subgoal *1/3.62
+Subgoal *1/3.61
+Subgoal *1/3.60
+Subgoal *1/3.59
+Subgoal *1/3.58
+Subgoal *1/3.57
+Subgoal *1/3.56
+Subgoal *1/3.55
+Subgoal *1/3.54
+Subgoal *1/3.53
+Subgoal *1/3.52
+Subgoal *1/3.51
+Subgoal *1/3.50
+Subgoal *1/3.49
+Subgoal *1/3.48
+Subgoal *1/3.47
+Subgoal *1/3.46
+Subgoal *1/3.45
+Subgoal *1/3.44
+Subgoal *1/3.43
+Subgoal *1/3.42
+Subgoal *1/3.41
+Subgoal *1/3.40
+Subgoal *1/3.39
+Subgoal *1/3.38
+Subgoal *1/3.37
+Subgoal *1/3.36
+Subgoal *1/3.35
+Subgoal *1/3.34
+Subgoal *1/3.33
+Subgoal *1/3.32
+Subgoal *1/3.31
+Subgoal *1/3.30
+Subgoal *1/3.29
+Subgoal *1/3.28
+Subgoal *1/3.27
+Subgoal *1/3.26
+Subgoal *1/3.25
+Subgoal *1/3.24
+Subgoal *1/3.23
+Subgoal *1/3.22
+Subgoal *1/3.21
+Subgoal *1/3.20
+Subgoal *1/3.19
+Subgoal *1/3.18
+Subgoal *1/3.17
+Subgoal *1/3.16
+Subgoal *1/3.15
+Subgoal *1/3.14
+Subgoal *1/3.13
+Subgoal *1/3.12
+Subgoal *1/3.11
+Subgoal *1/3.10
+Subgoal *1/3.9
+Subgoal *1/3.8
+Subgoal *1/3.7
+Subgoal *1/3.6
+Subgoal *1/3.5
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.2
+Subgoal *1/3.1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RW3-QCX-TABLE-CLOSEP-MONOTONE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION QCX-TABLE-CLOSEP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION QCX-TABLE-CLOSEP)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< c (- x))|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-LESS-THAN-2)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP))
+Time:  4.45 seconds (prove: 4.43, print: 0.02, other: 0.00)
+Prover steps counted:  388448
+RW3-QCX-TABLE-CLOSEP-MONOTONE
+Goal'
+
+Summary
+Form:  ( DEFTHM RW3-GENERATED-TWIDDLE-TABLES-CLOSE-FOR-EPSILON ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP))
+Hint-events: ((:USE RW3-GENERATED-TWIDDLE-TABLES-CLOSE)
+              (:USE RW3-PRECISION-FOR-EPSILON-SUFFICES)
+              (:USE RW3-QCX-TABLE-CLOSEP-MONOTONE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-GENERATED-TWIDDLE-TABLES-CLOSE-FOR-EPSILON
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-BUILT-TWIDDLE-TABLE-CLOSE-TO-CERTIFICATE ...)
+Rules: ((:DEFINITION RW3-TWIDDLE-TABLE-FOR-EPSILON)
+        (:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP))
+Hint-events: ((:USE RW3-GENERATED-MID-TABLE-CLOSE-TO-HI)
+              (:USE RW3-GENERATED-MID-TABLE-CLOSE-TO-LO)
+              (:USE RW3-PRECISION-FOR-EPSILON-SUFFICES)
+              (:USE RW3-QCX-TABLE-CLOSEP-MONOTONE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  137
+RW3-BUILT-TWIDDLE-TABLE-CLOSE-TO-CERTIFICATE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW-TABLE-EPSILON-FOR-POSITIVE-OUTPUT-POSITIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RW-TABLE-EPSILON-FOR-OUTPUT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< 0 (* x y))|)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Hint-events: ((:USE RECIPROCAL-ONE-PLUS-RATIONAL-LIST-L1-POSITIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  457
+RW-TABLE-EPSILON-FOR-POSITIVE-OUTPUT-POSITIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RW3-GENERATED-WINOGRAD-OUTPUTS-CLOSE ...)
+Rules: ((:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-HI)
+              (:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-LO)
+              (:USE RW3-GENERATED-TWIDDLE-TABLES-CLOSE)
+              (:USE RW3-QCX-TABLE-CLOSEP-MONOTONE)
+              (:USE RW3-RATIONAL-WINOGRAD-REQUESTED-OUTPUT-TOLERANCE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-GENERATED-WINOGRAD-OUTPUTS-CLOSE
+Goal'
+
+Summary
+Form:  ( DEFTHM RW3-GENERATED-ADP-OUTPUTS-CLOSE ...)
+Rules: ((:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-HI)
+              (:USE QCX-VECTORP-OF-RW3-TWIDDLE-TABLE-LO)
+              (:USE RW3-GENERATED-TWIDDLE-TABLES-CLOSE)
+              (:USE RW3-QCX-TABLE-CLOSEP-MONOTONE)
+              (:USE RW3-RATIONAL-ADP-REQUESTED-OUTPUT-TOLERANCE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-GENERATED-ADP-OUTPUTS-CLOSE
+
+Summary
+Form:  ( DEFUN RW3-OUTPUT-PRECISION ...)
+Rules: ((:TYPE-PRESCRIPTION RW3-PRECISION-FOR-EPSILON))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RW3-OUTPUT-PRECISION
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-OUTPUT-PRECISION-SUFFICES ...)
+Rules: ((:DEFINITION RW3-OUTPUT-PRECISION))
+Hint-events: ((:USE RATIONALP-OF-RW-TABLE-EPSILON-FOR-OUTPUT)
+              (:USE RW-TABLE-EPSILON-FOR-POSITIVE-OUTPUT-POSITIVE)
+              (:USE RW3-PRECISION-FOR-EPSILON-SUFFICES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  88
+RW3-OUTPUT-PRECISION-SUFFICES
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-BUILT-WINOGRAD-OUTPUTS-MEET-POSITIVE-REQUEST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE RW3-GENERATED-WINOGRAD-OUTPUTS-CLOSE)
+              (:USE RW3-OUTPUT-PRECISION-SUFFICES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  234
+RW3-BUILT-WINOGRAD-OUTPUTS-MEET-POSITIVE-REQUEST
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RW3-BUILT-ADP-OUTPUTS-MEET-POSITIVE-REQUEST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION DFT-OUTPUT-CLOSEP))
+Hint-events: ((:USE RW3-GENERATED-ADP-OUTPUTS-CLOSE)
+              (:USE RW3-OUTPUT-PRECISION-SUFFICES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  234
+RW3-BUILT-ADP-OUTPUTS-MEET-POSITIVE-REQUEST
+
+Summary
+Form:  ( DEFTHM RW3-SINE-WIDTH-AT-PRECISION-10 ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART RUSQRT-DYADIC-WIDTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  4
+RW3-SINE-WIDTH-AT-PRECISION-10
+
+Summary
+Form:  ( DEFTHM RW3-SINE-INTERVAL-AT-PRECISION-10 ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART RW3-SINE-INTERVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  4
+RW3-SINE-INTERVAL-AT-PRECISION-10
+
+Summary
+Form:  ( DEFTHM RW3-PRECISION-FOR-ONE-THOUSANDTH ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART RW3-PRECISION-FOR-EPSILON))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  4
+RW3-PRECISION-FOR-ONE-THOUSANDTH
+
+Summary
+Form:  ( DEFTHM RW3-OUTPUT-PRECISION-FOR-SMOKE-INPUT ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART RW3-OUTPUT-PRECISION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  5
+RW3-OUTPUT-PRECISION-FOR-SMOKE-INPUT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zba-rational-winograd3-twiddle-builder" ...)
+Rules: NIL
+Time:  6.07 seconds (prove: 4.72, print: 0.03, other: 1.32)
+Prover steps counted:  410225
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 6.07 seconds realtime, 5.66 seconds runtime
+; (792,643,056 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 32041 Jun 29 00:37 zba-rational-winograd3-twiddle-builder.cert

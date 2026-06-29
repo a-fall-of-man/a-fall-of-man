@@ -1,0 +1,1395 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zaa-algebraic-dynamic-programming.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zkx-weighted-path-certificates.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zac-adp-min-plus-provenance" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zac-adp-min-plus-provenance
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.11 seconds (prove: 0.00, print: 0.00, other: 0.11)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/std/omaps/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zaa-algebraic-dynamic-programming" ...)
+Rules: NIL
+Time:  1.06 seconds (prove: 0.00, print: 0.00, other: 1.06)
+"/mnt/data/new-release/cert-work/zaa-algebraic-dynamic-programming.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zkx-weighted-path-certificates" ...)
+Rules: NIL
+Time:  1.26 seconds (prove: 0.00, print: 0.00, other: 1.26)
+"/mnt/data/new-release/cert-work/zkx-weighted-path-certificates.lisp"
+
+The event ( INCLUDE-BOOK "arithmetic-5/top" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZAC-ADP-MIN-PLUS-PROVENANCE)
+
+Summary
+Form:  ( DEFUN MWP-VALUEP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+MWP-VALUEP
+
+Summary
+Form:  ( DEFUN MWP-ZERO ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-ZERO
+
+Summary
+Form:  ( DEFUN MWP-ONE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-ONE
+
+Summary
+Form:  ( DEFUN MWP-PLUS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-PLUS
+
+Summary
+Form:  ( DEFUN MWP-TIMES ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-TIMES
+
+Summary
+Form:  ( VERIFY-GUARDS MWP-VALUEP)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-VALUEP
+
+Summary
+Form:  ( VERIFY-GUARDS MWP-ZERO)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-ZERO
+
+Summary
+Form:  ( VERIFY-GUARDS MWP-ONE)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-ONE
+
+Summary
+Form:  ( VERIFY-GUARDS MWP-PLUS)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-PLUS
+
+Summary
+Form:  ( VERIFY-GUARDS MWP-TIMES)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-TIMES
+
+Summary
+Form:  ( DEFTHM MWP-VALUEP-OF-ZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:TYPE-PRESCRIPTION MWP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+MWP-VALUEP-OF-ZERO
+
+Summary
+Form:  ( DEFTHM MWP-VALUEP-OF-ONE ...)
+Rules: ((:EXECUTABLE-COUNTERPART MWP-ONE)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:TYPE-PRESCRIPTION MWP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+MWP-VALUEP-OF-ONE
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-VALUEP-OF-PLUS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION MWP-PLUS)
+        (:TYPE-PRESCRIPTION MWP-VALUEP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  114
+MWP-VALUEP-OF-PLUS
+
+Summary
+Form:  ( DEFTHM MWP-VALUEP-OF-TIMES ...)
+Rules: ((:DEFINITION MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION MWP-VALUEP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  26
+MWP-VALUEP-OF-TIMES
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM MWP-PLUS-COMMUTATIVE ...)
+Rules: ((:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  339
+MWP-PLUS-COMMUTATIVE
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM MWP-PLUS-ASSOCIATIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE MWP-PLUS-COMMUTATIVE))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1441
+MWP-PLUS-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-PLUS-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  56
+MWP-PLUS-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-PLUS-RIGHT-IDENTITY ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE MWP-PLUS-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  69
+MWP-PLUS-RIGHT-IDENTITY
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-COMMUTATIVE ...)
+Rules: ((:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ y x)|))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  212
+MWP-TIMES-COMMUTATIVE
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-ASSOCIATIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE MWP-TIMES-COMMUTATIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  658
+MWP-TIMES-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-ONE)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  73
+MWP-TIMES-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-RIGHT-IDENTITY ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-ONE)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE MWP-TIMES-COMMUTATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  86
+MWP-TIMES-RIGHT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-ZERO-LEFT ...)
+Rules: ((:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  56
+MWP-TIMES-ZERO-LEFT
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-ZERO-RIGHT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE MWP-TIMES-COMMUTATIVE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  69
+MWP-TIMES-ZERO-RIGHT
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-TRANSLATE-MIN ...)
+Rules: ((:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  263
+MWP-TRANSLATE-MIN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE MWP-PLUS-COMMUTATIVE)
+        (:REWRITE MWP-TIMES-COMMUTATIVE)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Hint-events: ((:USE MWP-TRANSLATE-MIN))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2571
+MWP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM MWP-TIMES-DISTRIBUTES-OVER-PLUS-RIGHT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IMPLIES)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE MWP-PLUS-COMMUTATIVE)
+        (:REWRITE MWP-TIMES-COMMUTATIVE)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION MWP-VALUEP))
+Hint-events: ((:USE MWP-TIMES-COMMUTATIVE)
+              (:USE MWP-TIMES-DISTRIBUTES-OVER-PLUS-LEFT))
+Time:  0.14 seconds (prove: 0.14, print: 0.00, other: 0.00)
+Prover steps counted:  17008
+MWP-TIMES-DISTRIBUTES-OVER-PLUS-RIGHT
+Subgoal 13
+Subgoal 12
+Subgoal 12.7
+Subgoal 12.6
+Subgoal 12.5
+Subgoal 12.4
+Subgoal 12.3
+Subgoal 12.2
+Subgoal 12.1
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFATTACH (ADP-VALUEP MWP-VALUEP) ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART MWP-ONE)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-TIMES)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE MWP-PLUS-COMMUTATIVE)
+        (:REWRITE MWP-TIMES-COMMUTATIVE)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION MWP-PLUS))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  4917
+:ATTACHMENTS-RECORDED
+
+Summary
+Form:  ( DEFUN MWP-FAST-CHART-REF ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-CHART-REF
+
+Summary
+Form:  ( DEFUN MWP-FAST-EVAL-PREMISES ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-ONE)
+        (:TYPE-PRESCRIPTION MWP-TIMES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-EVAL-PREMISES
+
+Summary
+Form:  ( DEFUN MWP-FAST-EVAL-RULE ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-TIMES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-EVAL-RULE
+
+Summary
+Form:  ( DEFUN MWP-FAST-EVAL-RULES ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-FAST-EVAL-RULE)
+        (:TYPE-PRESCRIPTION MWP-PLUS)
+        (:TYPE-PRESCRIPTION MWP-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-EVAL-RULES
+
+Summary
+Form:  ( DEFUN MWP-FAST-EVAL-ITEM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-EVAL-ITEM
+
+Summary
+Form:  ( DEFUN MWP-FAST-RUN-AUX ...)
+Rules: ((:TYPE-PRESCRIPTION HONS-ACONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-RUN-AUX
+
+Summary
+Form:  ( DEFUN MWP-FAST-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-FAST-RUN-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-RUN
+
+Summary
+Form:  ( DEFUN MWP-FAST-VALUE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-FAST-VALUE
+
+Summary
+Form:  ( DEFUN MWP-RULE-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-RULE-VALIDP
+
+Summary
+Form:  ( DEFUN MWP-RULES-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-RULES-VALIDP
+
+Summary
+Form:  ( DEFUN MWP-ITEM-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-RULES-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-ITEM-VALIDP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN MWP-PREFIX-VALIDP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION MWP-ITEM-VALIDP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+MWP-PREFIX-VALIDP
+
+Summary
+Form:  ( DEFUN MWP-PROGRAM-VALIDP ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-PREFIX-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-PROGRAM-VALIDP
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.2'
+Subgoal 6.1
+Subgoal 5
+Subgoal 5.2
+Subgoal 5.2'
+Subgoal 5.1
+Subgoal 4
+Subgoal 4.2
+Subgoal 4.2'
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.2
+Subgoal 3.2'
+Subgoal 3.1
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( MUTUAL-RECURSION ( DEFUN MWP-DENOTE-ITEM ...) ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION INTEGER-ABS)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-OF-SUM)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE O-P-OF-TWO-NATS-MEASURE)
+        (:REWRITE O<-OF-TWO-NATS-MEASURE)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION ACL2-COUNT-OF-CONSP-POSITIVE)
+        (:TYPE-PRESCRIPTION MWP-ONE)
+        (:TYPE-PRESCRIPTION MWP-PLUS)
+        (:TYPE-PRESCRIPTION MWP-TIMES)
+        (:TYPE-PRESCRIPTION MWP-ZERO))
+Time:  0.14 seconds (prove: 0.13, print: 0.00, other: 0.01)
+Prover steps counted:  12244
+(MWP-DENOTE-ITEM MWP-DENOTE-RULES
+                 MWP-DENOTE-RULE MWP-DENOTE-PREMISES)
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM MWP-DENOTE-ITEM-WHEN-NOT-CONSP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION MWP-DENOTE-ITEM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION NTH)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NTH-WHEN-TOO-LARGE-CHEAP)
+        (:REWRITE NTH-WHEN-ZP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  1704
+MWP-DENOTE-ITEM-WHEN-NOT-CONSP
+Subgoal 17
+Subgoal 17.2
+Subgoal 17.2'
+Subgoal 17.2.3
+Subgoal 17.2.3.8
+Subgoal 17.2.3.7
+Subgoal 17.2.3.6
+Subgoal 17.2.3.5
+Subgoal 17.2.3.4
+Subgoal 17.2.3.3
+Subgoal 17.2.3.2
+Subgoal 17.2.3.1
+Subgoal 17.2.2
+Subgoal 17.2.1
+Subgoal 17.2.1.8
+Subgoal 17.2.1.7
+Subgoal 17.2.1.6
+Subgoal 17.2.1.5
+Subgoal 17.2.1.4
+Subgoal 17.2.1.3
+Subgoal 17.2.1.2
+Subgoal 17.2.1.1
+Subgoal 17.1
+Subgoal 17.1'
+Subgoal 16
+Subgoal 16.2
+Subgoal 16.2'
+Subgoal 16.1
+Subgoal 16.1'
+Subgoal 15
+Subgoal 15.2
+Subgoal 15.1
+Subgoal 15.1'
+Subgoal 14
+Subgoal 14.4
+Subgoal 14.4'
+Subgoal 14.3
+Subgoal 14.3'
+Subgoal 14.2
+Subgoal 14.2'
+Subgoal 14.1
+Subgoal 14.1'
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 11.2
+Subgoal 11.2'
+Subgoal 11.1
+Subgoal 11.1'
+Subgoal 11.1.24
+Subgoal 11.1.23
+Subgoal 11.1.22
+Subgoal 11.1.21
+Subgoal 11.1.20
+Subgoal 11.1.19
+Subgoal 11.1.19'
+Subgoal 11.1.19''
+Subgoal 11.1.18
+Subgoal 11.1.17
+Subgoal 11.1.16
+Subgoal 11.1.16'
+Subgoal 11.1.16''
+Subgoal 11.1.15
+Subgoal 11.1.14
+Subgoal 11.1.13
+Subgoal 11.1.12
+Subgoal 11.1.11
+Subgoal 11.1.10
+Subgoal 11.1.9
+Subgoal 11.1.8
+Subgoal 11.1.7
+Subgoal 11.1.6
+Subgoal 11.1.5
+Subgoal 11.1.5'
+Subgoal 11.1.5''
+Subgoal 11.1.4
+Subgoal 11.1.3
+Subgoal 11.1.2
+Subgoal 11.1.1
+Subgoal 10
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.2'
+Subgoal 9.1
+Subgoal 9.1'
+Subgoal 9.1.12
+Subgoal 9.1.11
+Subgoal 9.1.10
+Subgoal 9.1.10'
+Subgoal 9.1.9
+Subgoal 9.1.8
+Subgoal 9.1.8'
+Subgoal 9.1.7
+Subgoal 9.1.7'
+Subgoal 9.1.6
+Subgoal 9.1.5
+Subgoal 9.1.5'
+Subgoal 9.1.4
+Subgoal 9.1.3
+Subgoal 9.1.3'
+Subgoal 9.1.2
+Subgoal 9.1.2'
+Subgoal 9.1.1
+Subgoal 8
+Subgoal 7
+Subgoal 7.2
+Subgoal 7.2'
+Subgoal 7.1
+Subgoal 7.1'
+Subgoal 7.1.18
+Subgoal 7.1.17
+Subgoal 7.1.16
+Subgoal 7.1.15
+Subgoal 7.1.14
+Subgoal 7.1.13
+Subgoal 7.1.12
+Subgoal 7.1.11
+Subgoal 7.1.10
+Subgoal 7.1.9
+Subgoal 7.1.8
+Subgoal 7.1.7
+Subgoal 7.1.6
+Subgoal 7.1.5
+Subgoal 7.1.4
+Subgoal 7.1.3
+Subgoal 7.1.2
+Subgoal 7.1.1
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.2'
+Subgoal 6.1
+Subgoal 5
+Subgoal 4
+Subgoal 4.3
+Subgoal 4.2
+Subgoal 4.2'
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.3
+Subgoal 3.3'
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 3.1'
+Subgoal 3.1''
+Subgoal 2
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 1
+Subgoal 1.3
+Subgoal 1.3'
+Subgoal 1.2
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFTHM MWP-FAST-VALUE-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION HONS-GET)
+        (:DEFINITION MWP-DENOTE-ITEM)
+        (:DEFINITION MWP-DENOTE-PREMISES)
+        (:DEFINITION MWP-DENOTE-RULE)
+        (:DEFINITION MWP-DENOTE-RULES)
+        (:DEFINITION MWP-FAST-CHART-REF)
+        (:DEFINITION MWP-FAST-EVAL-ITEM)
+        (:DEFINITION MWP-FAST-EVAL-PREMISES)
+        (:DEFINITION MWP-FAST-EVAL-RULE)
+        (:DEFINITION MWP-FAST-EVAL-RULES)
+        (:DEFINITION MWP-FAST-RUN)
+        (:DEFINITION MWP-FAST-RUN-AUX)
+        (:DEFINITION MWP-FAST-VALUE)
+        (:DEFINITION MWP-ITEM-VALIDP)
+        (:DEFINITION MWP-PLUS)
+        (:DEFINITION MWP-PREFIX-VALIDP)
+        (:DEFINITION MWP-PROGRAM-VALIDP)
+        (:DEFINITION MWP-RULE-VALIDP)
+        (:DEFINITION MWP-RULES-VALIDP)
+        (:DEFINITION MWP-TIMES)
+        (:DEFINITION MWP-VALUEP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RETURN-LAST)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART MWP-ONE)
+        (:EXECUTABLE-COUNTERPART MWP-PLUS)
+        (:EXECUTABLE-COUNTERPART MWP-VALUEP)
+        (:EXECUTABLE-COUNTERPART MWP-ZERO)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE MWP-DENOTE-ITEM-WHEN-NOT-CONSP)
+        (:REWRITE MWP-PLUS-COMMUTATIVE)
+        (:REWRITE MWP-TIMES-COMMUTATIVE)
+        (:REWRITE NTH-OF-NFIX)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ADP-PREMISES-BELOWP)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION MWP-DENOTE-PREMISES)
+        (:TYPE-PRESCRIPTION MWP-DENOTE-RULE)
+        (:TYPE-PRESCRIPTION MWP-DENOTE-RULES)
+        (:TYPE-PRESCRIPTION MWP-FAST-EVAL-PREMISES)
+        (:TYPE-PRESCRIPTION MWP-FAST-EVAL-RULES)
+        (:TYPE-PRESCRIPTION MWP-PREFIX-VALIDP))
+Hint-events: ((:USE ADP-FAST-VALUE-CORRECT))
+Time:  2.38 seconds (prove: 2.37, print: 0.02, other: 0.00)
+Prover steps counted:  246773
+MWP-FAST-VALUE-CORRECT
+
+Summary
+Form:  ( DEFUN MWP-PACK ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+MWP-PACK
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-PACK-ADD ...)
+Rules: ((:DEFINITION MWP-PACK)
+        (:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(equal (if a b c) x)|))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  7791
+MWP-PACK-ADD
+
+Summary
+Form:  ( DEFUN MWP-BASE-FIX ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-BASE-FIX
+
+Summary
+Form:  ( DEFUN MWP-UNPACK-COST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION FLOOR-NONNEGATIVE . 2)
+        (:TYPE-PRESCRIPTION MWP-BASE-FIX)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+MWP-UNPACK-COST
+
+Summary
+Form:  ( DEFUN MWP-UNPACK-CODE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION INTEGERP-MOD-1)
+        (:TYPE-PRESCRIPTION MOD-NONNEGATIVE)
+        (:TYPE-PRESCRIPTION MWP-BASE-FIX)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-UNPACK-CODE
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-UNPACK-COST-OF-PACK ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-BASE-FIX)
+        (:DEFINITION MWP-PACK)
+        (:DEFINITION MWP-UNPACK-COST)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CANCEL-FLOOR-+)
+        (:REWRITE FLOOR-ZERO . 4)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  618
+MWP-UNPACK-COST-OF-PACK
+Goal'
+
+Summary
+Form:  ( DEFTHM MWP-UNPACK-CODE-OF-PACK ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION MWP-BASE-FIX)
+        (:DEFINITION MWP-PACK)
+        (:DEFINITION MWP-UNPACK-CODE)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CANCEL-MOD-+)
+        (:REWRITE MOD-X-Y-=-X . 3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  436
+MWP-UNPACK-CODE-OF-PACK
+
+Summary
+Form:  ( DEFUN MWP-EDGE-SELECTEDP ...)
+Rules: ((:TYPE-PRESCRIPTION LOGBITP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-EDGE-SELECTEDP
+
+Summary
+Form:  ( DEFUN MWP-DECODE-PATH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-DECODE-PATH
+
+Summary
+Form:  ( DEFUN MWP-TABLE-GRAPH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-TABLE-GRAPH
+
+Summary
+Form:  ( DEFUN MWP-NODE-INDEX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-NODE-INDEX
+
+Summary
+Form:  ( DEFUN MWP-RULES-FOR-NODE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-RULES-FOR-NODE
+
+Summary
+Form:  ( DEFUN MWP-COMPILE-PROGRAM-AUX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-COMPILE-PROGRAM-AUX
+
+Summary
+Form:  ( DEFUN MWP-BASE-FOR-TABLE ...)
+Rules: ((:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-INTEGERP-BASE)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-NONNEGATIVE-BASE)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-POSITIVE-BASE)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-BASE-FOR-TABLE
+
+Summary
+Form:  ( DEFUN MWP-COMPILE-PROGRAM ...)
+Rules: ((:TYPE-PRESCRIPTION MWP-COMPILE-PROGRAM-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-COMPILE-PROGRAM
+
+Summary
+Form:  ( DEFUN MWP-CHART-POTENTIALS ...)
+Rules: ((:TYPE-PRESCRIPTION OMAP::UPDATE-TYPE-PRESCRIPTION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-CHART-POTENTIALS
+
+Summary
+Form:  ( DEFUN MWP-SOLVE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+MWP-SOLVE
+
+Summary
+Form:  ( DEFUN MWP-SOLUTION-COST ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-SOLUTION-COST
+
+Summary
+Form:  ( DEFUN MWP-SOLUTION-PATH ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-SOLUTION-PATH
+
+Summary
+Form:  ( DEFUN MWP-SOLUTION-POTENTIALS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-SOLUTION-POTENTIALS
+
+Summary
+Form:  ( DEFUN MWP-SOLUTION-PACKED ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-SOLUTION-PACKED
+
+Summary
+Form:  ( DEFUN MWP-SOLUTION-CODE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-SOLUTION-CODE
+
+Summary
+Form:  ( DEFUN MWP-OPTIMAL-CERTIFICATE-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+MWP-OPTIMAL-CERTIFICATE-P
+Goal'
+Goal''
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM MWP-OPTIMAL-CERTIFICATE-LOWER-BOUND ...)
+Rules: ((:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION IFIX)
+        (:DEFINITION MWP-OPTIMAL-CERTIFICATE-P)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-POTENTIAL)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION VWC-GRAPH-MODEL-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Hint-events: ((:USE VWC-CERTIFICATE-SOUND))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2028
+MWP-OPTIMAL-CERTIFICATE-LOWER-BOUND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM MWP-CHECKED-SOLUTION-IS-GLOBALLY-OPTIMAL ...)
+Rules: ((:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION IFIX)
+        (:DEFINITION MWP-OPTIMAL-CERTIFICATE-P)
+        (:DEFINITION MWP-SOLUTION-COST)
+        (:DEFINITION MWP-SOLUTION-PATH)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:DEFINITION VWC-POTENTIAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION VWC-GRAPH-MODEL-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-COST)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Hint-events: ((:USE MWP-OPTIMAL-CERTIFICATE-LOWER-BOUND))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1631
+MWP-CHECKED-SOLUTION-IS-GLOBALLY-OPTIMAL
+(DEFXDOC MWP-CLIENT-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zac-adp-min-plus-provenance" ...)
+Rules: NIL
+Time:  5.66 seconds (prove: 3.03, print: 0.03, other: 2.60)
+Prover steps counted:  301317
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 5.66 seconds realtime, 5.27 seconds runtime
+; (650,627,072 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 45309 Jun 29 00:34 zac-adp-min-plus-provenance.cert

@@ -1,22 +1,29 @@
-llm-acl2-books final release audit
-==================================
+llm-acl2-books crash-recovery release audit
+============================================
 
-Source books:                  78
-Fresh certificates produced:  78
-Cold certification exit:      0
-Idempotence pass exit:         0
-Missing certificates:         none
-WIP zcd included in release:   no
+ACL2:                         8.7
+Host Lisp:                    SBCL 2.6.5-85913ede1
+System-book cache verified:   1446 certificates; SHA-256 manifest passed
+Source books:                 78
+Fresh project certificates:   78
+Fresh project cert logs:      78
+Cold serial certification:    exit 0
+Idempotence certification:    exit 0
+Idempotence rebuilt books:    0
+Release/cert-work source diff lines: 0
+Potential trust admissions:   0
+Program-mode declarations:    3
 
-Logical trust audit:
-- skip-proofs events: none
-- defaxiom events: none
-- trust-tag events: none
-- raw-Lisp admission events: none
+Recovered and freshly certified after crash:
+- zam-qcx-adp-linear.lisp
+- zaw-rational-cauchy-interest.lisp
+- zax-rational-winograd-interface.lisp (certified later source superseding reconstructed failed draft)
 
-Executable program-mode declarations:
-- zby-text-file-census.lisp: one file-audit I/O utility
-- zez-self-checking-object-manifest.lisp: two manifest save/load I/O utilities
+The release archive is source-only. Fresh .cert products remain represented by
+FRESH-CERTIFICATE-SHA256SUMS and the complete cert.pl log, not vendored as
+implementation-specific build products.
 
-These program-mode functions are older executable report/file-I/O utilities.
-They are not used to admit logical theorems.
+Transcript verification:
+- fresh .cert.out files: 78
+- transcripts reporting ACL2 certification exit code 43: 78
+- transcripts containing a Summary form: 78

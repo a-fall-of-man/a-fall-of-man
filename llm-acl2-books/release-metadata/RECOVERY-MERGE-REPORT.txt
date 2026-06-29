@@ -1,0 +1,22 @@
+Crash-snapshot source comparison against freshly certified release
+================================================================
+IDENTICAL  zaa-algebraic-dynamic-programming.lisp
+IDENTICAL  zak-rational-dft-core.lisp
+IDENTICAL  zal-rational-fourier-kernel.lisp
+IDENTICAL  zao-winograd-bilinear-convolution.lisp
+IDENTICAL  zap-winograd-cyclic2.lisp
+IDENTICAL  zaq-winograd-bilinear-bank.lisp
+IDENTICAL  zar-rader-winograd-dft.lisp
+IDENTICAL  zas-rader-winograd3.lisp
+IDENTICAL  zat-adp-winograd-bank.lisp
+IDENTICAL  zau-adp-winograd3-equivalence.lisp
+DIFFERENT  zav-winograd-direct-equivalence.lisp
+WIP-ONLY   zaw-rational-cauchy-dft.lisp
+IDENTICAL  zlx-certified-parallel-fold.lisp
+
+Previously reported missing sources now present and freshly certified:
+RECOVERED+CERTIFIED  zam-qcx-adp-linear.lisp
+RECOVERED+CERTIFIED  zaw-rational-cauchy-interest.lisp
+
+Reconstructed zax draft status:
+SUPERSEDED BY CERTIFIED RELEASE SOURCE  zax-rational-winograd-interface.lisp

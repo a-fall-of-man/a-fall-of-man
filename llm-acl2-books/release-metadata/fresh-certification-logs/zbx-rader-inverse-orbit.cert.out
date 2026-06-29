@@ -1,0 +1,586 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zbw-rader-orbit-permutation.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "kestrel/lists-light/reverse.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "kestrel/lists-light/no-duplicatesp-equal.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "kestrel/lists-light/len.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbx-rader-inverse-orbit" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbx-rader-inverse-orbit
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/prime-fields/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/prime-fields/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/number-theory/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/kestrel/number-theory/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zbw-rader-orbit-permutation" ...)
+Rules: NIL
+Time:  1.48 seconds (prove: 0.00, print: 0.00, other: 1.48)
+"/mnt/data/new-release/cert-work/zbw-rader-orbit-permutation.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/lists-light/reverse" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/kestrel/lists-light/reverse.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/lists-light/no-duplicatesp-equal" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/kestrel/lists-light/no-duplicatesp-equal.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "kestrel/lists-light/len" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/kestrel/lists-light/len.lisp"
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RGI-POSITIVE-RESIDUESP-OF-APPEND ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RGI-POSITIVE-RESIDUESP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING CONSP-FORWARD-TO-LEN-BOUND)
+        (:INDUCTION RGI-POSITIVE-RESIDUESP)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-FROM-LEN-CHEAP)
+        (:REWRITE PFIELD::LEN-APPEND)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RGI-POSITIVE-RESIDUESP))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  1600
+RGI-POSITIVE-RESIDUESP-OF-APPEND
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RGI-POSITIVE-RESIDUESP-OF-REVERSE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION REVERSE)
+        (:DEFINITION RGI-POSITIVE-RESIDUESP)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RGI-POSITIVE-RESIDUESP)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE REV-OF-CONS)
+        (:REWRITE REV-WHEN-NOT-CONSP)
+        (:REWRITE REVAPPEND-REMOVAL)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-POSITIVE-RESIDUESP-OF-APPEND)
+        (:TYPE-PRESCRIPTION REV)
+        (:TYPE-PRESCRIPTION RGI-POSITIVE-RESIDUESP))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  4548
+RGI-POSITIVE-RESIDUESP-OF-REVERSE
+
+Summary
+Form:  ( DEFTHM RGI-POSITIVE-RESIDUESP-OF-CDR ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:DEFINITION RGI-POSITIVE-RESIDUESP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE DEFAULT-CDR)
+        (:TYPE-PRESCRIPTION RGI-POSITIVE-RESIDUESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  113
+RGI-POSITIVE-RESIDUESP-OF-CDR
+
+Summary
+Form:  ( DEFTHM RGI-POSITIVE-RESIDUESP-OF-CONS-ONE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RGI-POSITIVE-RESIDUESP)
+        (:EXECUTABLE-COUNTERPART POSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:TYPE-PRESCRIPTION RGI-POSITIVE-RESIDUESP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  132
+RGI-POSITIVE-RESIDUESP-OF-CONS-ONE
+
+Summary
+Form:  ( DEFTHM RGI-PRIMEP-IMPLIES-INTEGER-GREATER-THAN-ONE ...)
+Rules: ((:DEFINITION DM::PRIMEP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  28
+RGI-PRIMEP-IMPLIES-INTEGER-GREATER-THAN-ONE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM CAR-OF-RGI-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE PFIELD::POW-OF-0-ARG2)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE RGI-ORBIT-AS-POWER-ORBIT)
+        (:REWRITE RGI-POWER-ORBIT-AUX-OPEN)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION PFIELD::FEP))
+Hint-events: ((:USE NTH-OF-RGI-ORBIT))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  615
+CAR-OF-RGI-ORBIT
+
+Summary
+Form:  ( DEFTHM CONSP-OF-RGI-ORBIT-AUX ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RGI-ORBIT-AUX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  60
+CONSP-OF-RGI-ORBIT-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM CONSP-OF-RGI-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-ORBIT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE CONSP-OF-RGI-ORBIT-AUX)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN))
+Hint-events: ((:USE CONSP-OF-RGI-ORBIT-AUX))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  504
+CONSP-OF-RGI-ORBIT
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM LEN-OF-CDR-OF-RGI-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-ORBIT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CONSP-OF-RGI-ORBIT-AUX)
+        (:REWRITE LEN-OF-CDR)
+        (:REWRITE LEN-OF-RGI-ORBIT)
+        (:REWRITE LEN-OF-RGI-ORBIT-AUX)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN))
+Hint-events: ((:USE CONSP-OF-RGI-ORBIT)
+              (:USE LEN-OF-RGI-ORBIT))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  781
+LEN-OF-CDR-OF-RGI-ORBIT
+Goal'
+Goal''
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-RGI-INVERSE-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RGI-INVERSE-ORBIT)
+        (:DEFINITION RGI-ORBIT)
+        (:DEFINITION RGI-ORBIT-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(mod (if a b c) x)|)
+        (:REWRITE CONSP-OF-RGI-ORBIT-AUX)
+        (:REWRITE EQUAL-OF-LEN-AND-0)
+        (:REWRITE PFIELD::FEP-WHEN-CONSTANT)
+        (:REWRITE LEN-OF-CDR)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-REV)
+        (:REWRITE LEN-OF-RGI-ORBIT-AUX)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE RGI-MOD-OF-FEP)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RGI-ORBIT-AUX))
+Hint-events: ((:USE CONSP-OF-RGI-ORBIT)
+              (:USE LEN-OF-CDR-OF-RGI-ORBIT))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1409
+LEN-OF-RGI-INVERSE-ORBIT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-POSITIVE-RESIDUESP-OF-INVERSE-ORBIT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RGI-INVERSE-ORBIT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FORWARD-CHAINING RGI-PRIMEP-IMPLIES-INTEGER-GREATER-THAN-ONE)
+        (:TYPE-PRESCRIPTION RGI-POSITIVE-RESIDUESP))
+Hint-events: ((:USE CONSP-OF-RGI-ORBIT)
+              (:USE RGI-POSITIVE-RESIDUESP-OF-CDR)
+              (:USE RGI-POSITIVE-RESIDUESP-OF-CONS-ONE)
+              (:USE RGI-POSITIVE-RESIDUESP-OF-ORBIT)
+              (:USE RGI-POSITIVE-RESIDUESP-OF-REVERSE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  576
+RGI-POSITIVE-RESIDUESP-OF-INVERSE-ORBIT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM NO-DUPLICATESP-EQUAL-OF-RGI-INVERSE-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE SET-EQUIV-IMPLIES-IFF-MEMBER-2)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION DM::PRIMEP)
+        (:DEFINITION RGI-INVERSE-ORBIT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NO-DUPLICATESP-EQUAL-OF-CONS)
+        (:REWRITE NO-DUPLICATESP-EQUAL-OF-REV)
+        (:REWRITE NO-DUPLICATESP-EQUAL-OF-RGI-POWER-ORBIT-AUX)
+        (:REWRITE PFIELD::POW-OF-0-ARG2)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE REV-UNDER-SET-EQUIV)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE RGI-ORBIT-AS-POWER-ORBIT)
+        (:REWRITE RGI-POWER-ORBIT-AUX-OPEN)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION PFIELD::FEP)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL)
+        (:TYPE-PRESCRIPTION PFIELD::ORDER)
+        (:TYPE-PRESCRIPTION RGI-POWER-ORBIT-AUX))
+Hint-events: ((:USE CAR-OF-RGI-ORBIT)
+              (:USE NO-DUPLICATESP-EQUAL-OF-RGI-ORBIT))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.01)
+Prover steps counted:  3792
+NO-DUPLICATESP-EQUAL-OF-RGI-INVERSE-ORBIT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RGI-PERMUTATIONP-OF-GENERATED-INVERSE-ORBIT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE SET-EQUIV-IMPLIES-IFF-MEMBER-2)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION DM::PRIMEP)
+        (:DEFINITION RGI-INVERSE-ORBIT)
+        (:DEFINITION RGI-PERMUTATIONP)
+        (:DEFINITION RGI-POSITIVE-RESIDUESP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART POSP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-OF-REV)
+        (:REWRITE LEN-OF-RGI-POWER-ORBIT-AUX)
+        (:REWRITE NO-DUPLICATESP-EQUAL-OF-CONS)
+        (:REWRITE NO-DUPLICATESP-EQUAL-OF-REV)
+        (:REWRITE NO-DUPLICATESP-EQUAL-OF-RGI-POWER-ORBIT-AUX)
+        (:REWRITE PFIELD::POW-OF-0-ARG2)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE REV-UNDER-SET-EQUIV)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE RGI-NFIX-WHEN-NATP)
+        (:REWRITE RGI-ORBIT-AS-POWER-ORBIT)
+        (:REWRITE RGI-POSITIVE-RESIDUESP-OF-CONS-ONE)
+        (:REWRITE RGI-POWER-ORBIT-AUX-OPEN)
+        (:REWRITE RGI-ZERO-PLUS-NATURAL)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION PFIELD::FEP)
+        (:TYPE-PRESCRIPTION PFIELD::ORDER)
+        (:TYPE-PRESCRIPTION REV)
+        (:TYPE-PRESCRIPTION RGI-PERMUTATIONP)
+        (:TYPE-PRESCRIPTION RGI-POSITIVE-RESIDUESP)
+        (:TYPE-PRESCRIPTION RGI-POWER-ORBIT-AUX))
+Hint-events: ((:USE LEN-OF-RGI-INVERSE-ORBIT)
+              (:USE NO-DUPLICATESP-EQUAL-OF-RGI-INVERSE-ORBIT)
+              (:USE RGI-POSITIVE-RESIDUESP-OF-INVERSE-ORBIT))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  6304
+RGI-PERMUTATIONP-OF-GENERATED-INVERSE-ORBIT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbx-rader-inverse-orbit" ...)
+Rules: NIL
+Time:  1.96 seconds (prove: 0.36, print: 0.01, other: 1.58)
+Prover steps counted:  20462
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.96 seconds realtime, 1.83 seconds runtime
+; (195,561,808 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 40624 Jun 29 00:39 zbx-rader-inverse-orbit.cert

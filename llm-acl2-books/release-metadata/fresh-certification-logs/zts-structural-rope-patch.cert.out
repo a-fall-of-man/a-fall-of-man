@@ -1,0 +1,749 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zux-structural-rope-split.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zts-structural-rope-patch" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zts-structural-rope-patch
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zux-structural-rope-split" ...)
+Rules: NIL
+Time:  1.04 seconds (prove: 0.00, print: 0.00, other: 1.04)
+"/mnt/data/new-release/cert-work/zux-structural-rope-split.lisp"
+(DEFXDOC ZTS-STRUCTURAL-ROPE-PATCH)
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.2'''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/3.1'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-OKP-IS-SOURCE-DEMAND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OKP)
+        (:DEFINITION ZYP-SOURCE-DEMAND)
+        (:DEFINITION ZYP-STEP-OKP)
+        (:DEFINITION ZYP-STEP-REST)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-PATCH-OKP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZYP-LEN-OF-DROP-WHEN-ENOUGH)
+        (:REWRITE ZYP-PATCH-OKP-OPEN-WHEN-CONSP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZYP-PATCH-OKP)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.21 seconds (prove: 0.21, print: 0.00, other: 0.00)
+Prover steps counted:  21178
+ZSP-PATCH-OKP-IS-SOURCE-DEMAND
+
+Summary
+Form:  ( DEFUN ZSP-PATCH-ROPE-OKP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-PATCH-ROPE-OKP
+Goal'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-ROPE-OKP-REFINES-LIST-SEMANTICS ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZSP-PATCH-ROPE-OKP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZRS-ROPE-LENGTH-REFINES-FLATTENING)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  664
+ZSP-PATCH-ROPE-OKP-REFINES-LIST-SEMANTICS
+
+Summary
+Form:  ( DEFUN ZSP-EMPTY-ROPE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-ROPE-LEAF))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-EMPTY-ROPE
+
+Summary
+Form:  ( DEFUN ZSP-STEP-ROPE-REST ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-STEP-ROPE-REST
+
+Summary
+Form:  ( DEFUN ZSP-STEP-ROPE-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-ROPE-LEAF)
+        (:TYPE-PRESCRIPTION ZRS-ROPE-TAKE)
+        (:TYPE-PRESCRIPTION ZSP-EMPTY-ROPE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-STEP-ROPE-OUTPUT
+
+Summary
+Form:  ( DEFUN ZSP-PATCH-ROPE-REST ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-PATCH-ROPE-REST
+
+Summary
+Form:  ( DEFUN ZSP-PATCH-ROPE-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-ROPE-CAT)
+        (:TYPE-PRESCRIPTION ZSP-EMPTY-ROPE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-PATCH-ROPE-OUTPUT
+
+Summary
+Form:  ( DEFUN ZSP-PATCH-ROPE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-ROPE-CAT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-PATCH-ROPE
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZSP-TRUE-LISTP-OF-RLE-DECODE ...)
+Rules: ((:INDUCTION XEF-RLE-DECODE)
+        (:TYPE-PRESCRIPTION XEF-RLE-DECODE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+ZSP-TRUE-LISTP-OF-RLE-DECODE
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-EMPTY-ROPE ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:EXECUTABLE-COUNTERPART ZSP-EMPTY-ROPE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  4
+ZSP-FLATTEN-OF-EMPTY-ROPE
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-STEP-ROPE-REST ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZSP-STEP-ROPE-REST)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:REWRITE EQUAL-OF-LIST-FIX-AND-SELF)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-DROP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1651
+ZSP-FLATTEN-OF-STEP-ROPE-REST
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-STEP-ROPE-OUTPUT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZSP-STEP-ROPE-OUTPUT)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:EXECUTABLE-COUNTERPART ZSP-EMPTY-ROPE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-TAKE)
+        (:TYPE-PRESCRIPTION ZSP-TRUE-LISTP-OF-RLE-DECODE))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2994
+ZSP-FLATTEN-OF-STEP-ROPE-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-PATCH-ROPE-REST ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZRS-ROPE-DROP)
+        (:DEFINITION ZSP-PATCH-ROPE-REST)
+        (:DEFINITION ZSP-STEP-ROPE-REST)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-REST)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZSP-PATCH-ROPE-REST)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZSP-FLATTEN-OF-STEP-ROPE-REST)
+        (:REWRITE ZYP-PATCH-REST-OF-TRUE-LIST-FIX)
+        (:REWRITE ZYP-PATCH-REST-OPEN-WHEN-CONSP)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.13 seconds (prove: 0.12, print: 0.00, other: 0.00)
+Prover steps counted:  14605
+ZSP-FLATTEN-OF-PATCH-ROPE-REST
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-PATCH-ROPE-OUTPUT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-ROPE-CAT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZRS-ROPE-TAKE)
+        (:DEFINITION ZSP-PATCH-ROPE-OUTPUT)
+        (:DEFINITION ZSP-STEP-ROPE-OUTPUT)
+        (:DEFINITION ZSP-STEP-ROPE-REST)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:DEFINITION ZYP-TAKE)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-LEAF)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZSP-EMPTY-ROPE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZSP-PATCH-ROPE-OUTPUT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE EQUAL-OF-APPEND-AND-APPEND-SAME-ARG2)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-TAKE)
+        (:REWRITE ZSP-FLATTEN-OF-STEP-ROPE-REST)
+        (:REWRITE ZYP-PATCH-OUTPUT-OF-TRUE-LIST-FIX)
+        (:REWRITE ZYP-PATCH-OUTPUT-OPEN-WHEN-CONSP)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN)
+        (:TYPE-PRESCRIPTION ZSP-TRUE-LISTP-OF-RLE-DECODE))
+Time:  0.34 seconds (prove: 0.33, print: 0.00, other: 0.00)
+Prover steps counted:  36701
+ZSP-FLATTEN-OF-PATCH-ROPE-OUTPUT
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-PATCH-ROPE ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-ROPE-CAT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZSP-PATCH-ROPE)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE-OUTPUT)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE-REST)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:REWRITE ZSP-PATCH-ROPE-OKP-REFINES-LIST-SEMANTICS)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.12 seconds (prove: 0.12, print: 0.00, other: 0.00)
+Prover steps counted:  12310
+ZSP-FLATTEN-OF-PATCH-ROPE
+
+Summary
+Form:  ( DEFUN ZSP-STEP-ROPE-OUTPUT-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-EMPTY)
+        (:TYPE-PRESCRIPTION XEF-ROPE-SUMMARY)
+        (:TYPE-PRESCRIPTION ZVR-RLE-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-STEP-ROPE-OUTPUT-SUMMARY
+
+Summary
+Form:  ( DEFUN ZSP-PATCH-ROPE-OUTPUT-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-EMPTY)
+        (:TYPE-PRESCRIPTION XEF-BI-JOIN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-PATCH-ROPE-OUTPUT-SUMMARY
+
+Summary
+Form:  ( DEFUN ZSP-PATCH-ROPE-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-JOIN)
+        (:TYPE-PRESCRIPTION XEF-ROPE-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZSP-PATCH-ROPE-SUMMARY
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZSP-TRUE-LISTP-OF-ROPE-FLATTEN ...)
+Rules: ((:INDUCTION XEF-ROPE-FLATTEN)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+ZSP-TRUE-LISTP-OF-ROPE-FLATTEN
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZSP-TRUE-LISTP-OF-DROP-PREFIX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  263
+ZSP-TRUE-LISTP-OF-DROP-PREFIX
+Goal'
+
+Summary
+Form:  ( DEFTHM ZSP-FLATTEN-OF-STEP-ROPE-REST-EXACT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION ZRS-ROPE-DROP)
+        (:DEFINITION ZSP-STEP-ROPE-REST)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ZSP-TRUE-LISTP-OF-DROP-PREFIX)
+        (:TYPE-PRESCRIPTION ZSP-TRUE-LISTP-OF-ROPE-FLATTEN))
+Hint-events: ((:USE ZSP-FLATTEN-OF-STEP-ROPE-REST))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  5180
+ZSP-FLATTEN-OF-STEP-ROPE-REST-EXACT
+Goal'
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZSP-STEP-ROPE-OUTPUT-SUMMARY-REFINES-ZVR ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:DEFINITION ZSP-STEP-ROPE-OUTPUT-SUMMARY)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-INSERT-P)
+        (:DEFINITION ZYP-INSERT-RUNS)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-STEP-OUTPUT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-BI-EMPTY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-LEN-OF-RLE-DECODE)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-NIL)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-TAKE)
+        (:REWRITE ZVR-RLE-BI-SUMMARY-REFINES-DECODING)
+        (:REWRITE ZVR-STEP-OUTPUT-BI-SUMMARY-REFINES-OUTPUT)
+        (:TYPE-PRESCRIPTION XEF-RLE-SYMBOL-COUNT))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  10583
+ZSP-STEP-ROPE-OUTPUT-SUMMARY-REFINES-ZVR
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-ROPE-OUTPUT-SUMMARY-REFINES-ZVR ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZSP-PATCH-ROPE-OUTPUT-SUMMARY)
+        (:DEFINITION ZVR-PATCH-OUTPUT-BI-SUMMARY)
+        (:DEFINITION ZYP-COUNT)
+        (:DEFINITION ZYP-DROP-P)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:DEFINITION ZYP-KEEP-P)
+        (:DEFINITION ZYP-PATCH-OUTPUT)
+        (:DEFINITION ZYP-STEP-REST)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZSP-PATCH-ROPE-OUTPUT-SUMMARY)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-NIL)
+        (:REWRITE ZSP-FLATTEN-OF-STEP-ROPE-REST-EXACT)
+        (:REWRITE ZSP-STEP-ROPE-OUTPUT-SUMMARY-REFINES-ZVR)
+        (:REWRITE ZVR-PATCH-OUTPUT-BI-SUMMARY-REFINES-OUTPUT))
+Hint-events: ((:USE ZSP-STEP-ROPE-OUTPUT-SUMMARY-REFINES-ZVR))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2522
+ZSP-PATCH-ROPE-OUTPUT-SUMMARY-REFINES-ZVR
+Goal'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-ROPE-OUTPUT-SUMMARY-CORRECT ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE-OUTPUT))
+Hint-events: ((:USE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+              (:USE ZSP-PATCH-ROPE-OUTPUT-SUMMARY-REFINES-ZVR)
+              (:USE ZVR-PATCH-OUTPUT-BI-SUMMARY-REFINES-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  100
+ZSP-PATCH-ROPE-OUTPUT-SUMMARY-CORRECT
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-ROPE-SUMMARY-CORRECT ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:DEFINITION XEF-BI-REVERSE)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:DEFINITION ZSP-PATCH-ROPE-SUMMARY)
+        (:DEFINITION ZVR-PATCH-WORD)
+        (:DEFINITION ZYP-OUTPUT-LENGTH)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND)
+        (:REWRITE ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE-OUTPUT)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE-REST)
+        (:REWRITE ZSP-PATCH-OKP-IS-SOURCE-DEMAND)
+        (:REWRITE ZSP-PATCH-ROPE-OKP-REFINES-LIST-SEMANTICS)
+        (:REWRITE ZSP-PATCH-ROPE-OUTPUT-SUMMARY-CORRECT)
+        (:REWRITE ZYP-LEN-OF-PATCH-OUTPUT-WHEN-OKP)
+        (:REWRITE ZYP-LEN-OF-PATCH-REST-WHEN-OKP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION XEF-WORD-SUMMARY)
+        (:TYPE-PRESCRIPTION ZSP-TRUE-LISTP-OF-ROPE-FLATTEN)
+        (:TYPE-PRESCRIPTION ZYP-INSERTED-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-KEPT-LENGTH)
+        (:TYPE-PRESCRIPTION ZYP-SOURCE-DEMAND))
+Time:  0.32 seconds (prove: 0.31, print: 0.00, other: 0.00)
+Prover steps counted:  35121
+ZSP-PATCH-ROPE-SUMMARY-CORRECT
+Goal'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-ROPE-SUMMARY-REFINES-WORD ...)
+Rules: ((:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE))
+Hint-events: ((:USE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+              (:USE ZSP-PATCH-ROPE-SUMMARY-CORRECT)
+              (:USE ZVR-PATCH-WORD-BI-SUMMARY-REFINES-WORD))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  100
+ZSP-PATCH-ROPE-SUMMARY-REFINES-WORD
+Goal'
+
+Summary
+Form:  ( DEFTHM ZSP-PATCH-ROPE-SUMMARY-OF-NORMALIZE ...)
+Rules: ((:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE ZSP-FLATTEN-OF-PATCH-ROPE)
+        (:REWRITE ZSP-PATCH-ROPE-SUMMARY-CORRECT)
+        (:REWRITE ZVR-PATCH-WORD-BI-SUMMARY-OF-NORMALIZE)
+        (:REWRITE ZVR-PATCH-WORD-BI-SUMMARY-REFINES-WORD)
+        (:REWRITE ZVR-PATCH-WORD-OF-NORMALIZE))
+Hint-events: ((:USE ZSP-PATCH-ROPE-SUMMARY-REFINES-WORD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  110
+ZSP-PATCH-ROPE-SUMMARY-OF-NORMALIZE
+
+Summary
+Form:  ( DEFCONST *ZSP-DEMO-ROPE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZSP-DEMO-ROPE*
+
+Summary
+Form:  ( DEFCONST *ZSP-DEMO-PATCH* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZSP-DEMO-PATCH*
+:PASSED
+(DEFXDOC ZSP-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zts-structural-rope-patch" ...)
+Rules: NIL
+Time:  2.52 seconds (prove: 1.35, print: 0.01, other: 1.16)
+Prover steps counted:  144086
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 2.52 seconds realtime, 2.35 seconds runtime
+; (297,554,624 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 26882 Jun 29 00:41 zts-structural-rope-patch.cert

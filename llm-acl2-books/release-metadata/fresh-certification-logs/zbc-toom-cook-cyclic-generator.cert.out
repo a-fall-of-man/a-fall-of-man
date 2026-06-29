@@ -1,0 +1,800 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zaq-winograd-bilinear-bank.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zbc-toom-cook-cyclic-generator" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zbc-toom-cook-cyclic-generator
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.16 seconds (prove: 0.00, print: 0.00, other: 0.16)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zaq-winograd-bilinear-bank" ...)
+Rules: NIL
+Time:  1.11 seconds (prove: 0.00, print: 0.00, other: 1.11)
+"/mnt/data/new-release/cert-work/zaq-winograd-bilinear-bank.lisp"
+
+The event ( INCLUDE-BOOK "arithmetic-5/top" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+
+Summary
+Form:  ( DEFUN TC-POLY-ADD ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POLY-ADD
+
+Summary
+Form:  ( DEFUN TC-POLY-SCALE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POLY-SCALE
+
+Summary
+Form:  ( DEFUN TC-POLY-MUL-LINEAR ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION TC-POLY-ADD)
+        (:TYPE-PRESCRIPTION TC-POLY-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POLY-MUL-LINEAR
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-LAGRANGE-NUMERATOR-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION TC-POLY-MUL-LINEAR))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+TC-LAGRANGE-NUMERATOR-AUX
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-LAGRANGE-DENOMINATOR-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+TC-LAGRANGE-DENOMINATOR-AUX
+
+Summary
+Form:  ( DEFUN TC-LAGRANGE-ROW ...)
+Rules: ((:TYPE-PRESCRIPTION TC-POLY-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-LAGRANGE-ROW
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-POWERS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+TC-POWERS-AUX
+
+Summary
+Form:  ( DEFUN TC-EVALUATION-ROW ...)
+Rules: ((:TYPE-PRESCRIPTION TC-POWERS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-EVALUATION-ROW
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-PLAN-TERMS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+TC-PLAN-TERMS-AUX
+
+Summary
+Form:  ( DEFUN TC-PLAN-TERMS ...)
+Rules: ((:TYPE-PRESCRIPTION TC-PLAN-TERMS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-PLAN-TERMS
+
+Summary
+Form:  ( DEFUN TC-NTH0 ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-NTH0
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-LAGRANGE-BANK-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+TC-LAGRANGE-BANK-AUX
+
+Summary
+Form:  ( DEFUN TC-LAGRANGE-BANK ...)
+Rules: ((:TYPE-PRESCRIPTION TC-LAGRANGE-BANK-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-LAGRANGE-BANK
+
+Summary
+Form:  ( DEFUN TC-POST-ROW-FROM-BANK ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POST-ROW-FROM-BANK
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-PLAN-POSTS-FROM-BANK ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+TC-PLAN-POSTS-FROM-BANK
+
+Summary
+Form:  ( DEFUN TC-POST-ROW ...)
+Rules: ((:TYPE-PRESCRIPTION TC-POST-ROW-FROM-BANK))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POST-ROW
+
+Summary
+Form:  ( DEFUN TC-PLAN-POSTS ...)
+Rules: ((:TYPE-PRESCRIPTION TC-PLAN-POSTS-FROM-BANK))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-PLAN-POSTS
+
+Summary
+Form:  ( DEFUN TC-GENERATED-PLAN-CERTIFIESP ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-BANK-CERTIFIESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-GENERATED-PLAN-CERTIFIESP
+
+Summary
+Form:  ( DEFUN TC-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-BANK-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-RUN
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM LEN-OF-TC-POLY-SCALE ...)
+Rules: ((:DEFINITION SYNP)
+        (:DEFINITION TC-POLY-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION LEN)
+        (:INDUCTION TC-POLY-SCALE)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  628
+LEN-OF-TC-POLY-SCALE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-TC-POLY-SCALE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION TC-POLY-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RATIONAL-LISTP)
+        (:INDUCTION TC-POLY-SCALE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION TC-POLY-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  548
+RATIONAL-LISTP-OF-TC-POLY-SCALE
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM LEN-OF-TC-POWERS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-POWERS-AUX)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-POWERS-AUX)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION TC-POWERS-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  740
+LEN-OF-TC-POWERS-AUX
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-TC-POWERS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION TC-POWERS-AUX)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-POWERS-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION TC-POWERS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  319
+RATIONAL-LISTP-OF-TC-POWERS-AUX
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-TC-EVALUATION-ROW ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION TC-EVALUATION-ROW)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-TC-POWERS-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-TC-POWERS-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  91
+RATIONAL-ROWP-OF-TC-EVALUATION-ROW
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM LEN-OF-TC-PLAN-TERMS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-EVALUATION-ROW)
+        (:DEFINITION TC-PLAN-TERMS-AUX)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-PLAN-TERMS-AUX)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION TC-PLAN-TERMS-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1318
+LEN-OF-TC-PLAN-TERMS-AUX
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM WBC-TERMS-VALIDP-OF-TC-PLAN-TERMS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION TC-EVALUATION-ROW)
+        (:DEFINITION TC-PLAN-TERMS-AUX)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION TC-PLAN-TERMS-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-TC-POWERS-AUX)
+        (:REWRITE RATIONAL-LISTP-OF-TC-POWERS-AUX)
+        (:TYPE-PRESCRIPTION TC-PLAN-TERMS-AUX)
+        (:TYPE-PRESCRIPTION TC-POWERS-AUX)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  944
+WBC-TERMS-VALIDP-OF-TC-PLAN-TERMS-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM LEN-OF-TC-PLAN-TERMS ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-PLAN-TERMS)
+        (:DEFINITION TC-PLAN-TERMS-AUX)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE LEN-OF-TC-PLAN-TERMS-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  228
+LEN-OF-TC-PLAN-TERMS
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM TC-GENERATED-RANK ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-PLAN-TERMS)
+        (:DEFINITION TC-PLAN-TERMS-AUX)
+        (:DEFINITION WBC-BANK-RANK)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE LEN-OF-TC-PLAN-TERMS-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  243
+TC-GENERATED-RANK
+
+Summary
+Form:  ( DEFUN TC-ROW-MOMENT-AUX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-ROW-MOMENT-AUX
+
+Summary
+Form:  ( DEFUN TC-ROW-MOMENT ...)
+Rules: ((:TYPE-PRESCRIPTION TC-ROW-MOMENT-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-ROW-MOMENT
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-POST-MOMENTS-OKP-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-ROW-MOMENT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART MOD)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(mod (if a b c) x)|)
+        (:REWRITE |(mod 0 y)|)
+        (:REWRITE |(mod x 0)|)
+        (:REWRITE |(mod y (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.01)
+Prover steps counted:  2965
+TC-POST-MOMENTS-OKP-AUX
+
+Summary
+Form:  ( DEFUN TC-POST-MOMENTS-OKP ...)
+Rules: ((:TYPE-PRESCRIPTION TC-POST-MOMENTS-OKP-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POST-MOMENTS-OKP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN TC-BANK-MOMENTS-OKP-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-POST-MOMENTS-OKP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  647
+TC-BANK-MOMENTS-OKP-AUX
+
+Summary
+Form:  ( DEFUN TC-GENERATED-MOMENT-CERTIFICATEP ...)
+Rules: ((:TYPE-PRESCRIPTION TC-BANK-MOMENTS-OKP-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-GENERATED-MOMENT-CERTIFICATEP
+
+Summary
+Form:  ( DEFTHM TC-POSITIVE-SQUARE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+TC-POSITIVE-SQUARE
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM TC-GENERATED-RANK-BEATS-SCHOOLBOOK ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-PLAN-TERMS)
+        (:DEFINITION WBC-BANK-RANK)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE LEN-OF-TC-PLAN-TERMS-AUX)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-INTEGERP-BASE)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-NONNEGATIVE-BASE)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-POSITIVE-BASE))
+Hint-events: ((:USE TC-GENERATED-RANK)
+              (:USE TC-POSITIVE-SQUARE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  774
+TC-GENERATED-RANK-BEATS-SCHOOLBOOK
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM TC-GENERATED-PLAN-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION SYNP)
+        (:DEFINITION TC-GENERATED-PLAN-CERTIFIESP)
+        (:DEFINITION TC-LAGRANGE-BANK)
+        (:DEFINITION TC-PLAN-POSTS)
+        (:DEFINITION TC-PLAN-POSTS-FROM-BANK)
+        (:DEFINITION TC-PLAN-TERMS)
+        (:DEFINITION TC-PLAN-TERMS-AUX)
+        (:DEFINITION TC-RUN)
+        (:DEFINITION WBC-BANK-CERTIFIES-AUX)
+        (:DEFINITION WBC-BANK-CERTIFIESP)
+        (:DEFINITION WBC-BANK-OUTPUT)
+        (:DEFINITION WBC-CYCLIC-CONVOLUTION)
+        (:DEFINITION WBC-CYCLIC-CONVOLUTION-AUX)
+        (:DEFINITION WBC-PRODUCT-BANK)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART TC-LAGRANGE-BANK)
+        (:EXECUTABLE-COUNTERPART TC-PLAN-POSTS)
+        (:EXECUTABLE-COUNTERPART TC-PLAN-TERMS)
+        (:EXECUTABLE-COUNTERPART TC-PLAN-TERMS-AUX)
+        (:EXECUTABLE-COUNTERPART WBC-POST-BANK-OUTPUT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE WBC-BANK-CERTIFIES-AUX-CORRECT)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION WBC-BANK-CERTIFIES-AUX))
+Hint-events: ((:USE WBC-CERTIFIED-BANK-CORRECT))
+Time:  0.15 seconds (prove: 0.15, print: 0.00, other: 0.00)
+Prover steps counted:  14420
+TC-GENERATED-PLAN-CORRECT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zbc-toom-cook-cyclic-generator" ...)
+Rules: NIL
+Time:  1.58 seconds (prove: 0.29, print: 0.01, other: 1.28)
+Prover steps counted:  24645
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.58 seconds realtime, 1.47 seconds runtime
+; (204,215,888 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 29242 Jun 29 00:37 zbc-toom-cook-cyclic-generator.cert

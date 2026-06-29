@@ -1,0 +1,194 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zai-ranked-shortest-path-interface.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zaj-ranked-planning-client" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zaj-ranked-planning-client
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/std/omaps/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zai-ranked-shortest-path-interface" ...)
+Rules: NIL
+Time:  2.71 seconds (prove: 0.00, print: 0.00, other: 2.71)
+"/mnt/data/new-release/cert-work/zai-ranked-shortest-path-interface.lisp"
+
+Summary
+Form:  ( DEFCONST *DEPLOYMENT-PLAN* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*DEPLOYMENT-PLAN*
+
+Summary
+Form:  ( DEFCONST *DEPLOYMENT-ANSWER* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*DEPLOYMENT-ANSWER*
+
+Summary
+Form:  ( DEFTHM DEPLOYMENT-PLAN-VALID ...)
+Rules: ((:EXECUTABLE-COUNTERPART RSP-SPEC-VALIDP)
+        (:TYPE-PRESCRIPTION RSP-SPEC-VALIDP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2
+DEPLOYMENT-PLAN-VALID
+:PASSED
+:PASSED
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM DEPLOYMENT-ANSWER-IS-GLOBALLY-OPTIMAL ...)
+Rules: ((:COMPOUND-RECOGNIZER TRUE-LISTP-WHEN-VWC-PATH-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION VWC-CERTIFICATE-P)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RSP-FINAL-INDEX)
+        (:EXECUTABLE-COUNTERPART RSP-GRAPH)
+        (:EXECUTABLE-COUNTERPART RSP-NODE-AT)
+        (:EXECUTABLE-COUNTERPART RSP-SOLUTION-COST)
+        (:EXECUTABLE-COUNTERPART RSP-SOLVE-FINAL)
+        (:EXECUTABLE-COUNTERPART RSP-SPEC-VALIDP)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE VWC-PATH-P-WHEN-SUBSETP-EQUAL)
+        (:TYPE-PRESCRIPTION VWC-PATH-CHAINS-P)
+        (:TYPE-PRESCRIPTION VWC-PATH-IN-GRAPH-P))
+Hint-events: ((:USE RSP-SOLVE-FINAL-ANSWER-IS-GLOBALLY-OPTIMAL))
+Time:  0.26 seconds (prove: 0.25, print: 0.00, other: 0.00)
+Prover steps counted:  15578
+DEPLOYMENT-ANSWER-IS-GLOBALLY-OPTIMAL
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zaj-ranked-planning-client" ...)
+Rules: NIL
+Time:  3.02 seconds (prove: 0.26, print: 0.00, other: 2.75)
+Prover steps counted:  15580
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 3.02 seconds realtime, 2.81 seconds runtime
+; (307,079,104 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 31152 Jun 29 00:34 zaj-ranked-planning-client.cert

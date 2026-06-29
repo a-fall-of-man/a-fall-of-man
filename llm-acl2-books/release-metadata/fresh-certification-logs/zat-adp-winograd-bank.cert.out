@@ -1,0 +1,810 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zam-qcx-adp-linear.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "zar-rader-winograd-dft.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zat-adp-winograd-bank" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zat-adp-winograd-bank
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zam-qcx-adp-linear" ...)
+Rules: NIL
+Time:  1.03 seconds (prove: 0.00, print: 0.00, other: 1.03)
+"/mnt/data/new-release/cert-work/zam-qcx-adp-linear.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "zar-rader-winograd-dft" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+"/mnt/data/new-release/cert-work/zar-rader-winograd-dft.lisp"
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QWB-RULES ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.01)
+Prover steps counted:  426
+QWB-RULES
+
+Summary
+Form:  ( DEFUN QWB-OUTPUT-PROGRAM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-OUTPUT-PROGRAM
+
+Summary
+Form:  ( DEFUN QWB-OUTPUT ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QAP-RULES-VALIDP-OF-QWB-RULES ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QAP-RULE-VALIDP)
+        (:DEFINITION QAP-RULES-VALIDP)
+        (:DEFINITION QAP-VALUEP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QWB-RULES)
+        (:DEFINITION RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART ADP-PREMISES-BELOWP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QAP-RULES-VALIDP)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION QWB-RULES)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION QAP-RULES-VALIDP)
+        (:TYPE-PRESCRIPTION QWB-RULES)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  805
+QAP-RULES-VALIDP-OF-QWB-RULES
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QAP-PROGRAM-VALIDP-OF-QWB-OUTPUT-PROGRAM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION QAP-ITEM-VALIDP)
+        (:DEFINITION QAP-PREFIX-VALIDP)
+        (:DEFINITION QAP-PROGRAM-VALIDP)
+        (:DEFINITION QWB-OUTPUT-PROGRAM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART QAP-VALUEP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE NTH-WHEN-ZP)
+        (:TYPE-PRESCRIPTION QAP-PREFIX-VALIDP)
+        (:TYPE-PRESCRIPTION QAP-PROGRAM-VALIDP)
+        (:TYPE-PRESCRIPTION QAP-RULES-VALIDP)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QWB-RULES)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Hint-events: ((:USE QAP-RULES-VALIDP-OF-QWB-RULES))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  287
+QAP-PROGRAM-VALIDP-OF-QWB-OUTPUT-PROGRAM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QAP-DENOTE-RULES-OF-QWB-RULES ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QAP-DENOTE-PREMISES)
+        (:DEFINITION QAP-DENOTE-RULE)
+        (:DEFINITION QAP-DENOTE-RULES)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QWB-RULES)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-LINEAR)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QAP-ONE)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION QWB-RULES)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE QAP-PLUS-COMMUTATIVE)
+        (:REWRITE QAP-TIMES-COMMUTATIVE)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-PREMISES)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-RULE)
+        (:TYPE-PRESCRIPTION QWB-RULES)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-LINEAR))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  5391
+QAP-DENOTE-RULES-OF-QWB-RULES
+Goal'
+Goal''
+Subgoal 4
+Subgoal 3
+Subgoal 3'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.64
+Subgoal *1/2.63
+Subgoal *1/2.62
+Subgoal *1/2.61
+Subgoal *1/2.60
+Subgoal *1/2.59
+Subgoal *1/2.58
+Subgoal *1/2.57
+Subgoal *1/2.56
+Subgoal *1/2.55
+Subgoal *1/2.54
+Subgoal *1/2.53
+Subgoal *1/2.52
+Subgoal *1/2.51
+Subgoal *1/2.50
+Subgoal *1/2.49
+Subgoal *1/2.48
+Subgoal *1/2.47
+Subgoal *1/2.46
+Subgoal *1/2.45
+Subgoal *1/2.44
+Subgoal *1/2.43
+Subgoal *1/2.42
+Subgoal *1/2.41
+Subgoal *1/2.40
+Subgoal *1/2.39
+Subgoal *1/2.38
+Subgoal *1/2.37
+Subgoal *1/2.36
+Subgoal *1/2.35
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.31
+Subgoal *1/2.30
+Subgoal *1/2.29
+Subgoal *1/2.28
+Subgoal *1/2.27
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QAP-DENOTE-ITEM-OF-QWB-OUTPUT-PROGRAM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NOT)
+        (:DEFINITION QAP-DENOTE-ITEM)
+        (:DEFINITION QAP-DENOTE-PREMISES)
+        (:DEFINITION QAP-DENOTE-RULE)
+        (:DEFINITION QAP-DENOTE-RULES)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QWB-OUTPUT-PROGRAM)
+        (:DEFINITION QWB-RULES)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-LINEAR)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QAP-DENOTE-ITEM)
+        (:EXECUTABLE-COUNTERPART QAP-DENOTE-RULES)
+        (:EXECUTABLE-COUNTERPART QAP-ONE)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION QCX-LIST-RATIONALP)
+        (:INDUCTION RATIONAL-LISTP)
+        (:INDUCTION WBC-LINEAR)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE QAP-DENOTE-RULES-OF-QWB-RULES)
+        (:REWRITE QAP-PLUS-COMMUTATIVE)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-PREMISES)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-RULE)
+        (:TYPE-PRESCRIPTION QAP-DENOTE-RULES)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QWB-RULES)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-LINEAR))
+Time:  0.97 seconds (prove: 0.96, print: 0.01, other: 0.00)
+Prover steps counted:  135040
+QAP-DENOTE-ITEM-OF-QWB-OUTPUT-PROGRAM
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QWB-OUTPUT-EQUALS-WBC-POST-OUTPUT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ALISTP)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION HONS-GET)
+        (:DEFINITION NOT)
+        (:DEFINITION QAP-DENOTE-ITEM)
+        (:DEFINITION QAP-FAST-CHART-REF)
+        (:DEFINITION QAP-FAST-EVAL-ITEM)
+        (:DEFINITION QAP-FAST-RUN)
+        (:DEFINITION QAP-FAST-RUN-AUX)
+        (:DEFINITION QAP-FAST-VALUE)
+        (:DEFINITION QAP-ITEM-VALIDP)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-PREFIX-VALIDP)
+        (:DEFINITION QAP-PROGRAM-VALIDP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QWB-OUTPUT)
+        (:DEFINITION QWB-OUTPUT-PROGRAM)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-POST-OUTPUT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART ALISTP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART HONS-ASSOC-EQUAL)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NATP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART QAP-FAST-RUN-AUX)
+        (:EXECUTABLE-COUNTERPART QAP-VALUEP)
+        (:EXECUTABLE-COUNTERPART QAP-ZERO)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE ADP-HONS-ASSOC-EQUAL-IS-ASSOC-EQUAL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE NTH-WHEN-ZP)
+        (:REWRITE QAP-DENOTE-RULES-OF-QWB-RULES)
+        (:REWRITE QAP-RULES-VALIDP-OF-QWB-RULES)
+        (:TYPE-PRESCRIPTION QAP-FAST-EVAL-RULES)
+        (:TYPE-PRESCRIPTION QAP-PREFIX-VALIDP)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QWB-RULES)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-LINEAR))
+Hint-events: ((:USE QAP-DENOTE-ITEM-OF-QWB-OUTPUT-PROGRAM)
+              (:USE QAP-FAST-VALUE-CORRECT)
+              (:USE QAP-PROGRAM-VALIDP-OF-QWB-OUTPUT-PROGRAM))
+Time:  0.18 seconds (prove: 0.17, print: 0.00, other: 0.00)
+Prover steps counted:  23048
+QWB-OUTPUT-EQUALS-WBC-POST-OUTPUT
+
+Summary
+Form:  ( DEFUN QWB-POSTS-RATIONALP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-POSTS-RATIONALP
+
+Summary
+Form:  ( DEFUN QWB-BANK-OUTPUTS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-BANK-OUTPUTS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QWB-BANK-OUTPUTS-EQUAL-POST-BANK-OUTPUT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QWB-BANK-OUTPUTS)
+        (:DEFINITION QWB-POSTS-RATIONALP)
+        (:DEFINITION WBC-POST-BANK-OUTPUT)
+        (:DEFINITION WBC-POST-OUTPUT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION QWB-BANK-OUTPUTS)
+        (:REWRITE QWB-OUTPUT-EQUALS-WBC-POST-OUTPUT)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1161
+QWB-BANK-OUTPUTS-EQUAL-POST-BANK-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM QCX-LIST-RATIONALP-OF-WBC-PRODUCT-BANK ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PRODUCT-BANK)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART QCX-LIST-RATIONALP)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-PRODUCT-BANK)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE QCX-RATIONALP-OF-MUL)
+        (:REWRITE QCX-RATIONALP-OF-WBC-LINEAR)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-PRODUCT-BANK))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3598
+QCX-LIST-RATIONALP-OF-WBC-PRODUCT-BANK
+
+Summary
+Form:  ( DEFUN QWB-WINOGRAD-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION QWB-BANK-OUTPUTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-WINOGRAD-OUTPUT
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM QWB-WINOGRAD-OUTPUT-EQUALS-WBC-BANK-OUTPUT ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION QWB-WINOGRAD-OUTPUT)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-BANK-OUTPUT)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QWB-POSTS-RATIONALP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Hint-events: ((:USE QCX-LIST-RATIONALP-OF-WBC-PRODUCT-BANK)
+              (:USE QWB-BANK-OUTPUTS-EQUAL-POST-BANK-OUTPUT))
+Time:  0.25 seconds (prove: 0.25, print: 0.00, other: 0.00)
+Prover steps counted:  27629
+QWB-WINOGRAD-OUTPUT-EQUALS-WBC-BANK-OUTPUT
+
+Summary
+Form:  ( DEFUN QWB-RWD-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION QWB-WINOGRAD-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QWB-RWD-RUN
+Goal'
+
+Summary
+Form:  ( DEFTHM QWB-RWD-RUN-IS-WINOGRAD-OUTPUT ...)
+Rules: ((:DEFINITION ALISTP)
+        (:DEFINITION ASSOC-EQUAL)
+        (:DEFINITION HONS-ACONS)
+        (:DEFINITION HONS-GET)
+        (:DEFINITION QAP-FAST-CHART-REF)
+        (:DEFINITION QAP-FAST-EVAL-ITEM)
+        (:DEFINITION QAP-FAST-EVAL-RULE)
+        (:DEFINITION QAP-FAST-EVAL-RULES)
+        (:DEFINITION QAP-FAST-RUN)
+        (:DEFINITION QAP-FAST-RUN-AUX)
+        (:DEFINITION QAP-FAST-VALUE)
+        (:DEFINITION QAP-PLUS)
+        (:DEFINITION QAP-TIMES)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QWB-BANK-OUTPUTS)
+        (:DEFINITION QWB-OUTPUT)
+        (:DEFINITION QWB-OUTPUT-PROGRAM)
+        (:DEFINITION QWB-RULES)
+        (:DEFINITION QWB-RWD-RUN)
+        (:DEFINITION QWB-WINOGRAD-OUTPUT)
+        (:DEFINITION RWD-BASE-TERM)
+        (:DEFINITION RWD-COMPILE-POSTS)
+        (:DEFINITION RWD-COMPILE-TERMS)
+        (:DEFINITION RWD-DC-POST)
+        (:DEFINITION RWD-DC-TERM)
+        (:DEFINITION RWD-FULL-POSTS)
+        (:DEFINITION RWD-FULL-TERMS)
+        (:DEFINITION RWD-UNIT-ROW)
+        (:DEFINITION RWD-ZERO-ROW)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PRODUCT-BANK)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART ALISTP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART QAP-FAST-EVAL-PREMISES)
+        (:EXECUTABLE-COUNTERPART QAP-FAST-EVAL-RULE)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE ADP-HONS-ASSOC-EQUAL-IS-ASSOC-EQUAL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QAP-PLUS-COMMUTATIVE)
+        (:REWRITE QAP-TIMES-COMMUTATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION QAP-FAST-EVAL-RULES)
+        (:TYPE-PRESCRIPTION QWB-RULES)
+        (:TYPE-PRESCRIPTION RWD-CONSTANT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RWD-LIFT-TERMS)
+        (:TYPE-PRESCRIPTION RWD-NONZERO-POSTS)
+        (:TYPE-PRESCRIPTION WBC-LINEAR)
+        (:TYPE-PRESCRIPTION WBC-PRODUCT-BANK))
+Time:  10.39 seconds (prove: 10.39, print: 0.00, other: 0.00)
+Prover steps counted:  1249133
+QWB-RWD-RUN-IS-WINOGRAD-OUTPUT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QWB-RWD-RUN-EQUALS-RWD-RUN ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QWB-RWD-RUN-IS-WINOGRAD-OUTPUT)
+              (:USE QWB-WINOGRAD-OUTPUT-EQUALS-WBC-BANK-OUTPUT)
+              (:USE RWD-RUN-IS-BANK-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  323
+QWB-RWD-RUN-EQUALS-RWD-RUN
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zat-adp-winograd-bank" ...)
+Rules: NIL
+Time:  13.05 seconds (prove: 11.91, print: 0.01, other: 1.13)
+Prover steps counted:  1446841
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 13.05 seconds realtime, 12.14 seconds runtime
+; (1,668,177,264 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 24854 Jun 29 00:36 zat-adp-winograd-bank.cert

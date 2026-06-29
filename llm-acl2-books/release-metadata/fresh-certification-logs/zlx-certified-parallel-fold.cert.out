@@ -1,0 +1,542 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "tools/def-functional-instance.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zlx-certified-parallel-fold" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zlx-certified-parallel-fold
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "tools/def-functional-instance" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+"/mnt/data/acl2-8.7-recovery/books/tools/def-functional-instance.lisp"
+Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.60 seconds (prove: 0.00, print: 0.00, other: 0.60)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.34 seconds (prove: 0.00, print: 0.00, other: 0.34)
+"/mnt/data/acl2-8.7-recovery/books/arithmetic-5/top.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZLX-CERTIFIED-PARALLEL-FOLD)
+
+Summary
+Form:  ( DEFUN VPF-CARRIERP ...)
+Rules: ((:COMPOUND-RECOGNIZER BOOLEANP-COMPOUND-RECOGNIZER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-CARRIERP
+
+Summary
+Form:  ( DEFUN VPF-OP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-OP
+
+Summary
+Form:  ( DEFUN VPF-ID ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-ID
+
+Summary
+Form:  ( DEFTHM VPF-CARRIERP-OF-ID ...)
+Rules: ((:EXECUTABLE-COUNTERPART VPF-CARRIERP)
+        (:EXECUTABLE-COUNTERPART VPF-ID)
+        (:TYPE-PRESCRIPTION VPF-CARRIERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+VPF-CARRIERP-OF-ID
+
+Summary
+Form:  ( DEFTHM VPF-CARRIERP-OF-OP ...)
+Rules: ((:DEFINITION VPF-CARRIERP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION VPF-CARRIERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  21
+VPF-CARRIERP-OF-OP
+Goal'
+
+Summary
+Form:  ( DEFTHM VPF-OP-ASSOCIATIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER BOOLEANP-COMPOUND-RECOGNIZER)
+        (:DEFINITION SYNP)
+        (:DEFINITION VPF-CARRIERP)
+        (:DEFINITION VPF-OP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  136
+VPF-OP-ASSOCIATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM VPF-OP-LEFT-IDENTITY ...)
+Rules: ((:COMPOUND-RECOGNIZER BOOLEANP-COMPOUND-RECOGNIZER)
+        (:DEFINITION VPF-CARRIERP)
+        (:DEFINITION VPF-OP)
+        (:EXECUTABLE-COUNTERPART VPF-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  42
+VPF-OP-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM VPF-OP-RIGHT-IDENTITY ...)
+Rules: ((:COMPOUND-RECOGNIZER BOOLEANP-COMPOUND-RECOGNIZER)
+        (:DEFINITION VPF-CARRIERP)
+        (:DEFINITION VPF-OP)
+        (:EXECUTABLE-COUNTERPART VPF-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  42
+VPF-OP-RIGHT-IDENTITY
+
+Summary
+Form:  ( ENCAPSULATE (((VPF-CARRIERP * ...) ...) ...) ...)
+Rules: NIL
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Prover steps counted:  243
+(VPF-CARRIERP VPF-OP VPF-ID)
+
+Summary
+Form:  ( DEFUN VPF-ALL-CARRIERP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-ALL-CARRIERP
+
+Summary
+Form:  ( DEFUN VPF-FOLD ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-FOLD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VPF-CARRIERP-OF-FOLD ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VPF-ALL-CARRIERP)
+        (:DEFINITION VPF-FOLD)
+        (:INDUCTION VPF-FOLD)
+        (:REWRITE VPF-CARRIERP-OF-ID)
+        (:REWRITE VPF-CARRIERP-OF-OP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  221
+VPF-CARRIERP-OF-FOLD
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM VPF-ALL-CARRIERP-OF-APPEND ...)
+Rules: ((:DEFINITION VPF-ALL-CARRIERP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION VPF-ALL-CARRIERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  308
+VPF-ALL-CARRIERP-OF-APPEND
+
+Summary
+Form:  ( DEFTHM VPF-FOLD-OF-NIL ...)
+Rules: ((:DEFINITION VPF-FOLD)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  12
+VPF-FOLD-OF-NIL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VPF-FOLD-OF-SINGLETON ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VPF-FOLD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VPF-FOLD-OF-NIL)
+        (:REWRITE VPF-OP-RIGHT-IDENTITY))
+Hint-events: ((:USE VPF-OP-RIGHT-IDENTITY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  103
+VPF-FOLD-OF-SINGLETON
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VPF-FOLD-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VPF-ALL-CARRIERP)
+        (:DEFINITION VPF-FOLD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VPF-FOLD)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE VPF-CARRIERP-OF-FOLD)
+        (:REWRITE VPF-OP-ASSOCIATIVE)
+        (:REWRITE VPF-OP-LEFT-IDENTITY)
+        (:TYPE-PRESCRIPTION VPF-ALL-CARRIERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  568
+VPF-FOLD-OF-APPEND
+
+Summary
+Form:  ( DEFUN VPF-FLATTEN-BLOCKS ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-FLATTEN-BLOCKS
+
+Summary
+Form:  ( DEFUN VPF-FOLD-BLOCKS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-FOLD-BLOCKS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VPF-FOLD-BLOCKS-CORRECT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION VPF-FLATTEN-BLOCKS)
+        (:DEFINITION VPF-FOLD-BLOCKS)
+        (:EXECUTABLE-COUNTERPART VPF-ALL-CARRIERP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VPF-FOLD-BLOCKS)
+        (:REWRITE VPF-ALL-CARRIERP-OF-APPEND)
+        (:REWRITE VPF-FOLD-OF-APPEND)
+        (:REWRITE VPF-FOLD-OF-NIL)
+        (:TYPE-PRESCRIPTION VPF-ALL-CARRIERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  472
+VPF-FOLD-BLOCKS-CORRECT
+
+Summary
+Form:  ( DEFUN VPF-NUMP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-NUMP
+
+Summary
+Form:  ( DEFUN VPF-ADD ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-ADD
+
+Summary
+Form:  ( DEFUN VPF-ZERO ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-ZERO
+
+Summary
+Form:  ( DEFUN VPF-ALL-NUMP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-ALL-NUMP
+
+Summary
+Form:  ( DEFUN VPF-SUM ...)
+Rules: ((:TYPE-PRESCRIPTION VPF-ADD)
+        (:TYPE-PRESCRIPTION VPF-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-SUM
+
+Summary
+Form:  ( DEFUN VPF-SUM-BLOCKS ...)
+Rules: ((:TYPE-PRESCRIPTION VPF-ADD)
+        (:TYPE-PRESCRIPTION VPF-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VPF-SUM-BLOCKS
+
+Summary
+Form:  ( DEFTHM VPF-NUMP-OF-ZERO ...)
+Rules: ((:EXECUTABLE-COUNTERPART VPF-NUMP)
+        (:EXECUTABLE-COUNTERPART VPF-ZERO)
+        (:TYPE-PRESCRIPTION VPF-NUMP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+VPF-NUMP-OF-ZERO
+
+Summary
+Form:  ( DEFTHM VPF-NUMP-OF-ADD ...)
+Rules: ((:DEFINITION VPF-ADD)
+        (:DEFINITION VPF-NUMP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION VPF-NUMP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  24
+VPF-NUMP-OF-ADD
+
+Summary
+Form:  ( DEFTHM VPF-ADD-ASSOCIATIVE ...)
+Rules: ((:DEFINITION VPF-ADD)
+        (:DEFINITION VPF-NUMP)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:REWRITE |(+ (+ x y) z)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  49
+VPF-ADD-ASSOCIATIVE
+
+Summary
+Form:  ( DEFTHM VPF-ADD-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION VPF-ADD)
+        (:DEFINITION VPF-NUMP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART VPF-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  17
+VPF-ADD-LEFT-IDENTITY
+
+Summary
+Form:  ( DEFTHM VPF-ADD-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION VPF-ADD)
+        (:DEFINITION VPF-NUMP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART VPF-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  17
+VPF-ADD-RIGHT-IDENTITY
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VPF-SUM-BLOCKS-CORRECT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION SYNP)
+        (:DEFINITION VPF-ADD)
+        (:DEFINITION VPF-ALL-NUMP)
+        (:DEFINITION VPF-NUMP)
+        (:DEFINITION VPF-SUM)
+        (:DEFINITION VPF-SUM-BLOCKS)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART VPF-NUMP)
+        (:EXECUTABLE-COUNTERPART VPF-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:TYPE-PRESCRIPTION VPF-SUM))
+Hint-events: ((:USE VPF-FOLD-BLOCKS-CORRECT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  677
+
+Summary
+Form:  ( MAKE-EVENT (DEF-FUNCTIONAL-INSTANCE-FN ...))
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  677
+VPF-SUM-BLOCKS-CORRECT
+:PASSED
+(DEFXDOC VPF-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zlx-certified-parallel-fold" ...)
+Rules: NIL
+Time:  1.12 seconds (prove: 0.05, print: 0.00, other: 1.07)
+Prover steps counted:  2713
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.12 seconds realtime, 1.06 seconds runtime
+; (144,922,160 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 24761 Jun 29 00:33 zlx-certified-parallel-fold.cert

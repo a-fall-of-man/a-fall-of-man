@@ -1,0 +1,4048 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zak-rational-dft-core" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zak-rational-dft-core
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.32 seconds (prove: 0.00, print: 0.00, other: 0.32)
+"/mnt/data/acl2-8.7-recovery/books/arithmetic-5/top.lisp"
+Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.64 seconds (prove: 0.00, print: 0.00, other: 0.64)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+Summary
+Form:  ( DEFUN QCX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX
+
+Summary
+Form:  ( DEFUN QCX-RE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-RE
+
+Summary
+Form:  ( DEFUN QCX-IM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-IM
+
+Summary
+Form:  ( DEFUN QCX-RATIONALP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-RATIONALP
+
+Summary
+Form:  ( DEFUN QCX-ZERO ...)
+Rules: ((:TYPE-PRESCRIPTION QCX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-ZERO
+
+Summary
+Form:  ( DEFUN QCX-ONE ...)
+Rules: ((:TYPE-PRESCRIPTION QCX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-ONE
+
+Summary
+Form:  ( DEFUN QCX-ADD ...)
+Rules: ((:TYPE-PRESCRIPTION QCX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-ADD
+
+Summary
+Form:  ( DEFUN QCX-NEG ...)
+Rules: ((:TYPE-PRESCRIPTION QCX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-NEG
+
+Summary
+Form:  ( DEFUN QCX-SUB ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-ADD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-SUB
+
+Summary
+Form:  ( DEFUN QCX-MUL ...)
+Rules: ((:TYPE-PRESCRIPTION QCX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-MUL
+
+Summary
+Form:  ( DEFUN QCX-SCALE ...)
+Rules: ((:TYPE-PRESCRIPTION QCX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-SCALE
+
+Summary
+Form:  ( DEFUN QCX-L1 ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-L1
+
+Summary
+Form:  ( DEFUN QCX-DIST ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-L1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-DIST
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-RE-OF-QCX ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  27
+QCX-RE-OF-QCX
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-IM-OF-QCX ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  27
+QCX-IM-OF-QCX
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-QCX ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  66
+QCX-RATIONALP-OF-QCX
+Subgoal 125
+Subgoal 124
+Subgoal 123
+Subgoal 122
+Subgoal 121
+Subgoal 120
+Subgoal 119
+Subgoal 118
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 110
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 13.2
+Subgoal 13.1
+Subgoal 12
+Subgoal 11
+Subgoal 11.2
+Subgoal 11.1
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-ADD-ASSOCIATIVE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL))
+Time:  0.18 seconds (prove: 0.17, print: 0.01, other: 0.00)
+Prover steps counted:  30070
+QCX-ADD-ASSOCIATIVE
+
+Summary
+Form:  ( DEFTHM QCX-ADD-COMMUTATIVE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal x (if a b c))|)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  355
+QCX-ADD-COMMUTATIVE
+Subgoal 121
+Subgoal 121'
+Subgoal 120
+Subgoal 120'
+Subgoal 119
+Subgoal 119'
+Subgoal 118
+Subgoal 118'
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 111'
+Subgoal 110
+Subgoal 110'
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 104'
+Subgoal 103
+Subgoal 102
+Subgoal 102'
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 93'
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 90'
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 84'
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 75'
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 71'
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 64'
+Subgoal 63
+Subgoal 62
+Subgoal 62'
+Subgoal 61
+Subgoal 60
+Subgoal 60'
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 57'
+Subgoal 56
+Subgoal 55
+Subgoal 55'
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 51'
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 48'
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 44'
+Subgoal 43
+Subgoal 43'
+Subgoal 42
+Subgoal 42'
+Subgoal 41
+Subgoal 41'
+Subgoal 40
+Subgoal 40'
+Subgoal 39
+Subgoal 39'
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 36'
+Subgoal 35
+Subgoal 35'
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 32'
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 30'
+Subgoal 29
+Subgoal 29'
+Subgoal 28
+Subgoal 28'
+Subgoal 27
+Subgoal 27'
+Subgoal 26
+Subgoal 26'
+Subgoal 25
+Subgoal 25'
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 21'
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 15'
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 12'
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QCX-MUL-DISTRIBUTES-OVER-ADD ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE))
+Time:  0.22 seconds (prove: 0.20, print: 0.01, other: 0.00)
+Prover steps counted:  35087
+QCX-MUL-DISTRIBUTES-OVER-ADD
+Subgoal 4
+Subgoal 3
+Subgoal 3.9
+Subgoal 3.8
+Subgoal 3.7
+Subgoal 3.6
+Subgoal 3.5
+Subgoal 3.4
+Subgoal 3.3
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QCX-L1-NONNEGATIVE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:TYPE-PRESCRIPTION ABS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1797
+QCX-L1-NONNEGATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-QCX-DIST ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  354
+RATIONALP-OF-QCX-DIST
+
+Summary
+Form:  ( DEFTHM QCX-DIST-NONNEGATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-SUB)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  34
+QCX-DIST-NONNEGATIVE
+Subgoal 31
+Subgoal 30
+Subgoal 30'
+Subgoal 29
+Subgoal 29'
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 24.12
+Subgoal 24.11
+Subgoal 24.11'
+Subgoal 24.11''
+Subgoal 24.10
+Subgoal 24.10'
+Subgoal 24.10''
+Subgoal 24.9
+Subgoal 24.9'
+Subgoal 24.9''
+Subgoal 24.8
+Subgoal 24.8'
+Subgoal 24.8''
+Subgoal 24.7
+Subgoal 24.7.3
+Subgoal 24.7.2
+Subgoal 24.7.1
+Subgoal 24.6
+Subgoal 24.5
+Subgoal 24.4
+Subgoal 24.3
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 21.15
+Subgoal 21.14
+Subgoal 21.14.4
+Subgoal 21.14.3
+Subgoal 21.14.2
+Subgoal 21.14.1
+Subgoal 21.13
+Subgoal 21.13.4
+Subgoal 21.13.3
+Subgoal 21.13.2
+Subgoal 21.13.1
+Subgoal 21.12
+Subgoal 21.11
+Subgoal 21.10
+Subgoal 21.9
+Subgoal 21.8
+Subgoal 21.7
+Subgoal 21.6
+Subgoal 21.5
+Subgoal 21.4
+Subgoal 21.3
+Subgoal 21.2
+Subgoal 21.1
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 16.3
+Subgoal 16.2
+Subgoal 16.2'
+Subgoal 16.1
+Subgoal 16.1'
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 13.4
+Subgoal 13.3
+Subgoal 13.2
+Subgoal 13.1
+Subgoal 12
+Subgoal 11
+Subgoal 11.3
+Subgoal 11.2
+Subgoal 11.2'
+Subgoal 11.1
+Subgoal 11.1'
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 8.4
+Subgoal 8.3
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QCX-L1-OF-SCALE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ x x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (* x y) 0)|)
+        (:REWRITE |(equal (* x y) 0)|)
+        (:REWRITE |(equal (- x) c)|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:REWRITE SIMPLIFY-TERMS-SUCH-AS-AX+BX-=-0)
+        (:TYPE-PRESCRIPTION ABS)
+        (:TYPE-PRESCRIPTION QCX-L1))
+Time:  0.33 seconds (prove: 0.32, print: 0.01, other: 0.00)
+Prover steps counted:  22601
+QCX-L1-OF-SCALE
+Goal'
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 47.14
+Subgoal 47.14.3
+Subgoal 47.14.2
+Subgoal 47.14.2'
+Subgoal 47.14.1
+Subgoal 47.14.1'
+Subgoal 47.13
+Subgoal 47.13.3
+Subgoal 47.13.2
+Subgoal 47.13.2'
+Subgoal 47.13.1
+Subgoal 47.13.1'
+Subgoal 47.12
+Subgoal 47.11
+Subgoal 47.11'
+Subgoal 47.10
+Subgoal 47.10'
+Subgoal 47.9
+Subgoal 47.9'
+Subgoal 47.8
+Subgoal 47.8'
+Subgoal 47.7
+Subgoal 47.7'
+Subgoal 47.6
+Subgoal 47.5
+Subgoal 47.5'
+Subgoal 47.4
+Subgoal 47.3
+Subgoal 47.3'
+Subgoal 47.2
+Subgoal 47.1
+Subgoal 46
+Subgoal 46.3
+Subgoal 46.2
+Subgoal 46.2'
+Subgoal 46.1
+Subgoal 46.1'
+Subgoal 45
+Subgoal 45.4
+Subgoal 45.3
+Subgoal 45.2
+Subgoal 45.1
+Subgoal 44
+Subgoal 44.3
+Subgoal 44.2
+Subgoal 44.2'
+Subgoal 44.1
+Subgoal 44.1'
+Subgoal 43
+Subgoal 43.15
+Subgoal 43.14
+Subgoal 43.14.4
+Subgoal 43.14.3
+Subgoal 43.14.2
+Subgoal 43.14.1
+Subgoal 43.13
+Subgoal 43.13.4
+Subgoal 43.13.3
+Subgoal 43.13.2
+Subgoal 43.13.1
+Subgoal 43.12
+Subgoal 43.11
+Subgoal 43.10
+Subgoal 43.9
+Subgoal 43.8
+Subgoal 43.7
+Subgoal 43.6
+Subgoal 43.5
+Subgoal 43.4
+Subgoal 43.3
+Subgoal 43.2
+Subgoal 43.1
+Subgoal 42
+Subgoal 41
+Subgoal 41.4
+Subgoal 41.3
+Subgoal 41.2
+Subgoal 41.1
+Subgoal 40
+Subgoal 40.12
+Subgoal 40.11
+Subgoal 40.10
+Subgoal 40.9
+Subgoal 40.8
+Subgoal 40.7
+Subgoal 40.6
+Subgoal 40.5
+Subgoal 40.4
+Subgoal 40.3
+Subgoal 40.2
+Subgoal 40.1
+Subgoal 39
+Subgoal 39.14
+Subgoal 39.13
+Subgoal 39.13.4
+Subgoal 39.13.3
+Subgoal 39.13.2
+Subgoal 39.13.1
+Subgoal 39.12
+Subgoal 39.11
+Subgoal 39.10
+Subgoal 39.9
+Subgoal 39.8
+Subgoal 39.7
+Subgoal 39.6
+Subgoal 39.5
+Subgoal 39.4
+Subgoal 39.3
+Subgoal 39.2
+Subgoal 39.1
+Subgoal 38
+Subgoal 38'
+Subgoal 38.3
+Subgoal 38.2
+Subgoal 38.2'
+Subgoal 38.1
+Subgoal 38.1'
+Subgoal 37
+Subgoal 37.3
+Subgoal 37.2
+Subgoal 37.2'
+Subgoal 37.1
+Subgoal 37.1'
+Subgoal 36
+Subgoal 36'
+Subgoal 36.15
+Subgoal 36.14
+Subgoal 36.14.4
+Subgoal 36.14.3
+Subgoal 36.14.2
+Subgoal 36.14.1
+Subgoal 36.13
+Subgoal 36.13.4
+Subgoal 36.13.3
+Subgoal 36.13.2
+Subgoal 36.13.1
+Subgoal 36.12
+Subgoal 36.11
+Subgoal 36.10
+Subgoal 36.9
+Subgoal 36.8
+Subgoal 36.7
+Subgoal 36.6
+Subgoal 36.5
+Subgoal 36.4
+Subgoal 36.3
+Subgoal 36.2
+Subgoal 36.1
+Subgoal 35
+Subgoal 35.15
+Subgoal 35.15.4
+Subgoal 35.15.3
+Subgoal 35.15.2
+Subgoal 35.15.1
+Subgoal 35.14
+Subgoal 35.13
+Subgoal 35.13.4
+Subgoal 35.13.3
+Subgoal 35.13.2
+Subgoal 35.13.1
+Subgoal 35.12
+Subgoal 35.11
+Subgoal 35.10
+Subgoal 35.9
+Subgoal 35.8
+Subgoal 35.7
+Subgoal 35.6
+Subgoal 35.5
+Subgoal 35.4
+Subgoal 35.3
+Subgoal 35.2
+Subgoal 35.1
+Subgoal 34
+Subgoal 34.2
+Subgoal 34.1
+Subgoal 33
+Subgoal 33.14
+Subgoal 33.13
+Subgoal 33.13.4
+Subgoal 33.13.3
+Subgoal 33.13.2
+Subgoal 33.13.1
+Subgoal 33.12
+Subgoal 33.11
+Subgoal 33.10
+Subgoal 33.9
+Subgoal 33.8
+Subgoal 33.7
+Subgoal 33.6
+Subgoal 33.5
+Subgoal 33.4
+Subgoal 33.3
+Subgoal 33.2
+Subgoal 33.1
+Subgoal 32
+Subgoal 32.12
+Subgoal 32.11
+Subgoal 32.10
+Subgoal 32.9
+Subgoal 32.8
+Subgoal 32.7
+Subgoal 32.7'
+Subgoal 32.6
+Subgoal 32.6'
+Subgoal 32.5
+Subgoal 32.5'
+Subgoal 32.5''
+Subgoal 32.4
+Subgoal 32.4'
+Subgoal 32.3
+Subgoal 32.3'
+Subgoal 32.2
+Subgoal 32.1
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 30.12
+Subgoal 30.11
+Subgoal 30.10
+Subgoal 30.9
+Subgoal 30.8
+Subgoal 30.7
+Subgoal 30.7'
+Subgoal 30.6
+Subgoal 30.6'
+Subgoal 30.5
+Subgoal 30.5'
+Subgoal 30.5''
+Subgoal 30.4
+Subgoal 30.4'
+Subgoal 30.3
+Subgoal 30.3'
+Subgoal 30.2
+Subgoal 30.1
+Subgoal 29
+Subgoal 29'
+Subgoal 29.4
+Subgoal 29.3
+Subgoal 29.2
+Subgoal 29.1
+Subgoal 28
+Subgoal 28.9
+Subgoal 28.8
+Subgoal 28.7
+Subgoal 28.6
+Subgoal 28.5
+Subgoal 28.4
+Subgoal 28.3
+Subgoal 28.2
+Subgoal 28.1
+Subgoal 27
+Subgoal 27.2
+Subgoal 27.1
+Subgoal 26
+Subgoal 26.4
+Subgoal 26.3
+Subgoal 26.2
+Subgoal 26.1
+Subgoal 25
+Subgoal 25.9
+Subgoal 25.8
+Subgoal 25.7
+Subgoal 25.6
+Subgoal 25.5
+Subgoal 25.4
+Subgoal 25.3
+Subgoal 25.2
+Subgoal 25.1
+Subgoal 24
+Subgoal 24.12
+Subgoal 24.11
+Subgoal 24.10
+Subgoal 24.9
+Subgoal 24.8
+Subgoal 24.8'
+Subgoal 24.7
+Subgoal 24.7'
+Subgoal 24.6
+Subgoal 24.5
+Subgoal 24.4
+Subgoal 24.4'
+Subgoal 24.4''
+Subgoal 24.3
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 23.4
+Subgoal 23.3
+Subgoal 23.2
+Subgoal 23.1
+Subgoal 22
+Subgoal 22'
+Subgoal 22.3
+Subgoal 22.2
+Subgoal 22.2'
+Subgoal 22.1
+Subgoal 22.1'
+Subgoal 21
+Subgoal 21'
+Subgoal 21.4
+Subgoal 21.3
+Subgoal 21.2
+Subgoal 21.1
+Subgoal 20
+Subgoal 20.4
+Subgoal 20.3
+Subgoal 20.2
+Subgoal 20.1
+Subgoal 19
+Subgoal 19.12
+Subgoal 19.11
+Subgoal 19.10
+Subgoal 19.9
+Subgoal 19.8
+Subgoal 19.8'
+Subgoal 19.7
+Subgoal 19.7'
+Subgoal 19.6
+Subgoal 19.5
+Subgoal 19.4
+Subgoal 19.4'
+Subgoal 19.4''
+Subgoal 19.3
+Subgoal 19.2
+Subgoal 19.1
+Subgoal 18
+Subgoal 18.2
+Subgoal 18.1
+Subgoal 17
+Subgoal 17.3
+Subgoal 17.2
+Subgoal 17.2'
+Subgoal 17.1
+Subgoal 17.1'
+Subgoal 16
+Subgoal 16.13
+Subgoal 16.13.3
+Subgoal 16.13.2
+Subgoal 16.13.2'
+Subgoal 16.13.1
+Subgoal 16.13.1'
+Subgoal 16.12
+Subgoal 16.11
+Subgoal 16.11'
+Subgoal 16.10
+Subgoal 16.10'
+Subgoal 16.9
+Subgoal 16.9'
+Subgoal 16.8
+Subgoal 16.8'
+Subgoal 16.7
+Subgoal 16.7.2
+Subgoal 16.7.1
+Subgoal 16.6
+Subgoal 16.5
+Subgoal 16.5'
+Subgoal 16.4
+Subgoal 16.3
+Subgoal 16.3'
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 15
+Subgoal 15.9
+Subgoal 15.8
+Subgoal 15.7
+Subgoal 15.6
+Subgoal 15.5
+Subgoal 15.4
+Subgoal 15.3
+Subgoal 15.2
+Subgoal 15.1
+Subgoal 14
+Subgoal 14.14
+Subgoal 14.14.3
+Subgoal 14.14.2
+Subgoal 14.14.2'
+Subgoal 14.14.1
+Subgoal 14.14.1'
+Subgoal 14.13
+Subgoal 14.13.3
+Subgoal 14.13.2
+Subgoal 14.13.2'
+Subgoal 14.13.1
+Subgoal 14.13.1'
+Subgoal 14.12
+Subgoal 14.11
+Subgoal 14.11'
+Subgoal 14.10
+Subgoal 14.10'
+Subgoal 14.9
+Subgoal 14.9'
+Subgoal 14.8
+Subgoal 14.8'
+Subgoal 14.7
+Subgoal 14.7'
+Subgoal 14.6
+Subgoal 14.5
+Subgoal 14.5'
+Subgoal 14.4
+Subgoal 14.3
+Subgoal 14.3'
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 13'
+Subgoal 12
+Subgoal 12.9
+Subgoal 12.8
+Subgoal 12.7
+Subgoal 12.6
+Subgoal 12.5
+Subgoal 12.4
+Subgoal 12.3
+Subgoal 12.2
+Subgoal 12.1
+Subgoal 11
+Subgoal 11.13
+Subgoal 11.13.3
+Subgoal 11.13.2
+Subgoal 11.13.2'
+Subgoal 11.13.1
+Subgoal 11.13.1'
+Subgoal 11.12
+Subgoal 11.11
+Subgoal 11.11'
+Subgoal 11.10
+Subgoal 11.10'
+Subgoal 11.9
+Subgoal 11.9'
+Subgoal 11.8
+Subgoal 11.8'
+Subgoal 11.7
+Subgoal 11.7.2
+Subgoal 11.7.1
+Subgoal 11.6
+Subgoal 11.5
+Subgoal 11.5'
+Subgoal 11.4
+Subgoal 11.3
+Subgoal 11.3'
+Subgoal 11.2
+Subgoal 11.1
+Subgoal 10
+Subgoal 10'
+Subgoal 10.14
+Subgoal 10.14.3
+Subgoal 10.14.2
+Subgoal 10.14.2'
+Subgoal 10.14.1
+Subgoal 10.14.1'
+Subgoal 10.13
+Subgoal 10.13.3
+Subgoal 10.13.2
+Subgoal 10.13.2'
+Subgoal 10.13.1
+Subgoal 10.13.1'
+Subgoal 10.12
+Subgoal 10.11
+Subgoal 10.11'
+Subgoal 10.10
+Subgoal 10.10'
+Subgoal 10.9
+Subgoal 10.9'
+Subgoal 10.8
+Subgoal 10.8'
+Subgoal 10.7
+Subgoal 10.7'
+Subgoal 10.6
+Subgoal 10.5
+Subgoal 10.5'
+Subgoal 10.4
+Subgoal 10.3
+Subgoal 10.3'
+Subgoal 10.2
+Subgoal 10.1
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.1
+Subgoal 8
+Subgoal 8.13
+Subgoal 8.13.3
+Subgoal 8.13.2
+Subgoal 8.13.2'
+Subgoal 8.13.1
+Subgoal 8.13.1'
+Subgoal 8.12
+Subgoal 8.11
+Subgoal 8.11'
+Subgoal 8.10
+Subgoal 8.10'
+Subgoal 8.9
+Subgoal 8.9'
+Subgoal 8.8
+Subgoal 8.8'
+Subgoal 8.7
+Subgoal 8.7.2
+Subgoal 8.7.1
+Subgoal 8.6
+Subgoal 8.5
+Subgoal 8.5'
+Subgoal 8.4
+Subgoal 8.3
+Subgoal 8.3'
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 6.4
+Subgoal 6.3
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5.3
+Subgoal 5.2
+Subgoal 5.2'
+Subgoal 5.1
+Subgoal 5.1'
+Subgoal 4
+Subgoal 4.3
+Subgoal 4.2
+Subgoal 4.2'
+Subgoal 4.1
+Subgoal 4.1'
+Subgoal 3
+Subgoal 3.14
+Subgoal 3.13
+Subgoal 3.13.4
+Subgoal 3.13.3
+Subgoal 3.13.2
+Subgoal 3.13.1
+Subgoal 3.12
+Subgoal 3.11
+Subgoal 3.10
+Subgoal 3.9
+Subgoal 3.8
+Subgoal 3.7
+Subgoal 3.6
+Subgoal 3.5
+Subgoal 3.4
+Subgoal 3.3
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1.4
+Subgoal 1.3
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM QCX-DIST-OF-SCALE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART QCX-NEG)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ x x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (* x y) 0)|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< 0 (* x y))|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(<= (/ x) y) with (< x 0)|)
+        (:REWRITE |(equal (* x y) 0)|)
+        (:REWRITE |(equal (- x) (- y))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE REDUCE-MULTIPLICATIVE-CONSTANT-EQUAL)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:REWRITE SIMPLIFY-TERMS-SUCH-AS-AX+BX-=-0))
+Time:  2.81 seconds (prove: 2.77, print: 0.04, other: 0.00)
+Prover steps counted:  215928
+QCX-DIST-OF-SCALE
+Goal'
+Subgoal 62
+Subgoal 62.61
+Subgoal 62.61.8
+Subgoal 62.61.8.7
+Subgoal 62.61.8.7.8
+Subgoal 62.61.8.7.8.7
+Subgoal 62.61.8.7.8.7.2
+Subgoal 62.61.8.7.8.7.2'
+Subgoal 62.61.8.7.8.7.1
+Subgoal 62.61.8.7.8.7.1'
+Subgoal 62.61.8.7.8.6
+Subgoal 62.61.8.7.8.5
+Subgoal 62.61.8.7.8.4
+Subgoal 62.61.8.7.8.3
+Subgoal 62.61.8.7.8.2
+Subgoal 62.61.8.7.8.1
+Subgoal 62.61.8.7.7
+Subgoal 62.61.8.7.7.7
+Subgoal 62.61.8.7.7.7.2
+Subgoal 62.61.8.7.7.7.2'
+Subgoal 62.61.8.7.7.7.1
+Subgoal 62.61.8.7.7.7.1'
+Subgoal 62.61.8.7.7.6
+Subgoal 62.61.8.7.7.5
+Subgoal 62.61.8.7.7.4
+Subgoal 62.61.8.7.7.3
+Subgoal 62.61.8.7.7.2
+Subgoal 62.61.8.7.7.1
+Subgoal 62.61.8.7.6
+Subgoal 62.61.8.7.5
+Subgoal 62.61.8.7.4
+Subgoal 62.61.8.7.3
+Subgoal 62.61.8.7.2
+Subgoal 62.61.8.7.1
+Subgoal 62.61.8.6
+Subgoal 62.61.8.5
+Subgoal 62.61.8.4
+Subgoal 62.61.8.3
+Subgoal 62.61.8.2
+Subgoal 62.61.8.1
+Subgoal 62.61.7
+Subgoal 62.61.7.7
+Subgoal 62.61.7.7.8
+Subgoal 62.61.7.7.8.7
+Subgoal 62.61.7.7.8.7.2
+Subgoal 62.61.7.7.8.7.2'
+Subgoal 62.61.7.7.8.7.1
+Subgoal 62.61.7.7.8.7.1'
+Subgoal 62.61.7.7.8.6
+Subgoal 62.61.7.7.8.5
+Subgoal 62.61.7.7.8.4
+Subgoal 62.61.7.7.8.3
+Subgoal 62.61.7.7.8.2
+Subgoal 62.61.7.7.8.1
+Subgoal 62.61.7.7.7
+Subgoal 62.61.7.7.7.7
+Subgoal 62.61.7.7.7.7.2
+Subgoal 62.61.7.7.7.7.2'
+Subgoal 62.61.7.7.7.7.1
+Subgoal 62.61.7.7.7.7.1'
+Subgoal 62.61.7.7.7.6
+Subgoal 62.61.7.7.7.5
+Subgoal 62.61.7.7.7.4
+Subgoal 62.61.7.7.7.3
+Subgoal 62.61.7.7.7.2
+Subgoal 62.61.7.7.7.1
+Subgoal 62.61.7.7.6
+Subgoal 62.61.7.7.5
+Subgoal 62.61.7.7.4
+Subgoal 62.61.7.7.3
+Subgoal 62.61.7.7.2
+Subgoal 62.61.7.7.1
+Subgoal 62.61.7.6
+Subgoal 62.61.7.5
+Subgoal 62.61.7.4
+Subgoal 62.61.7.3
+Subgoal 62.61.7.2
+Subgoal 62.61.7.1
+Subgoal 62.61.6
+Subgoal 62.61.5
+Subgoal 62.61.4
+Subgoal 62.61.3
+Subgoal 62.61.2
+Subgoal 62.61.1
+Subgoal 62.60
+Subgoal 62.59
+Subgoal 62.58
+Subgoal 62.57
+Subgoal 62.56
+Subgoal 62.55
+Subgoal 62.54
+Subgoal 62.53
+Subgoal 62.52
+Subgoal 62.51
+Subgoal 62.50
+Subgoal 62.49
+Subgoal 62.48
+Subgoal 62.47
+Subgoal 62.46
+Subgoal 62.45
+Subgoal 62.44
+Subgoal 62.43
+Subgoal 62.42
+Subgoal 62.41
+Subgoal 62.40
+Subgoal 62.39
+Subgoal 62.38
+Subgoal 62.37
+Subgoal 62.36
+Subgoal 62.35
+Subgoal 62.34
+Subgoal 62.33
+Subgoal 62.32
+Subgoal 62.31
+Subgoal 62.30
+Subgoal 62.29
+Subgoal 62.28
+Subgoal 62.27
+Subgoal 62.26
+Subgoal 62.25
+Subgoal 62.24
+Subgoal 62.23
+Subgoal 62.22
+Subgoal 62.21
+Subgoal 62.20
+Subgoal 62.19
+Subgoal 62.18
+Subgoal 62.17
+Subgoal 62.16
+Subgoal 62.15
+Subgoal 62.14
+Subgoal 62.13
+Subgoal 62.12
+Subgoal 62.11
+Subgoal 62.10
+Subgoal 62.9
+Subgoal 62.8
+Subgoal 62.7
+Subgoal 62.6
+Subgoal 62.5
+Subgoal 62.4
+Subgoal 62.3
+Subgoal 62.2
+Subgoal 62.1
+Subgoal 61
+Subgoal 61.61
+Subgoal 61.61.8
+Subgoal 61.61.8.7
+Subgoal 61.61.8.7.8
+Subgoal 61.61.8.7.8.7
+Subgoal 61.61.8.7.8.7.2
+Subgoal 61.61.8.7.8.7.2'
+Subgoal 61.61.8.7.8.7.1
+Subgoal 61.61.8.7.8.7.1'
+Subgoal 61.61.8.7.8.6
+Subgoal 61.61.8.7.8.5
+Subgoal 61.61.8.7.8.4
+Subgoal 61.61.8.7.8.3
+Subgoal 61.61.8.7.8.2
+Subgoal 61.61.8.7.8.1
+Subgoal 61.61.8.7.7
+Subgoal 61.61.8.7.7.7
+Subgoal 61.61.8.7.7.7.2
+Subgoal 61.61.8.7.7.7.2'
+Subgoal 61.61.8.7.7.7.1
+Subgoal 61.61.8.7.7.7.1'
+Subgoal 61.61.8.7.7.6
+Subgoal 61.61.8.7.7.5
+Subgoal 61.61.8.7.7.4
+Subgoal 61.61.8.7.7.3
+Subgoal 61.61.8.7.7.2
+Subgoal 61.61.8.7.7.1
+Subgoal 61.61.8.7.6
+Subgoal 61.61.8.7.5
+Subgoal 61.61.8.7.4
+Subgoal 61.61.8.7.3
+Subgoal 61.61.8.7.2
+Subgoal 61.61.8.7.1
+Subgoal 61.61.8.6
+Subgoal 61.61.8.5
+Subgoal 61.61.8.4
+Subgoal 61.61.8.3
+Subgoal 61.61.8.2
+Subgoal 61.61.8.1
+Subgoal 61.61.7
+Subgoal 61.61.7.7
+Subgoal 61.61.7.7.8
+Subgoal 61.61.7.7.8.7
+Subgoal 61.61.7.7.8.7.2
+Subgoal 61.61.7.7.8.7.2'
+Subgoal 61.61.7.7.8.7.1
+Subgoal 61.61.7.7.8.7.1'
+Subgoal 61.61.7.7.8.6
+Subgoal 61.61.7.7.8.5
+Subgoal 61.61.7.7.8.4
+Subgoal 61.61.7.7.8.3
+Subgoal 61.61.7.7.8.2
+Subgoal 61.61.7.7.8.1
+Subgoal 61.61.7.7.7
+Subgoal 61.61.7.7.7.7
+Subgoal 61.61.7.7.7.7.2
+Subgoal 61.61.7.7.7.7.2'
+Subgoal 61.61.7.7.7.7.1
+Subgoal 61.61.7.7.7.7.1'
+Subgoal 61.61.7.7.7.6
+Subgoal 61.61.7.7.7.5
+Subgoal 61.61.7.7.7.4
+Subgoal 61.61.7.7.7.3
+Subgoal 61.61.7.7.7.2
+Subgoal 61.61.7.7.7.1
+Subgoal 61.61.7.7.6
+Subgoal 61.61.7.7.5
+Subgoal 61.61.7.7.4
+Subgoal 61.61.7.7.3
+Subgoal 61.61.7.7.2
+Subgoal 61.61.7.7.1
+Subgoal 61.61.7.6
+Subgoal 61.61.7.5
+Subgoal 61.61.7.4
+Subgoal 61.61.7.3
+Subgoal 61.61.7.2
+Subgoal 61.61.7.1
+Subgoal 61.61.6
+Subgoal 61.61.5
+Subgoal 61.61.4
+Subgoal 61.61.3
+Subgoal 61.61.2
+Subgoal 61.61.1
+Subgoal 61.60
+Subgoal 61.59
+Subgoal 61.58
+Subgoal 61.57
+Subgoal 61.56
+Subgoal 61.55
+Subgoal 61.54
+Subgoal 61.53
+Subgoal 61.52
+Subgoal 61.51
+Subgoal 61.50
+Subgoal 61.49
+Subgoal 61.48
+Subgoal 61.47
+Subgoal 61.46
+Subgoal 61.45
+Subgoal 61.44
+Subgoal 61.43
+Subgoal 61.42
+Subgoal 61.41
+Subgoal 61.40
+Subgoal 61.39
+Subgoal 61.38
+Subgoal 61.37
+Subgoal 61.36
+Subgoal 61.35
+Subgoal 61.34
+Subgoal 61.33
+Subgoal 61.32
+Subgoal 61.31
+Subgoal 61.30
+Subgoal 61.29
+Subgoal 61.28
+Subgoal 61.27
+Subgoal 61.26
+Subgoal 61.25
+Subgoal 61.24
+Subgoal 61.23
+Subgoal 61.22
+Subgoal 61.21
+Subgoal 61.20
+Subgoal 61.19
+Subgoal 61.18
+Subgoal 61.17
+Subgoal 61.16
+Subgoal 61.15
+Subgoal 61.14
+Subgoal 61.13
+Subgoal 61.12
+Subgoal 61.11
+Subgoal 61.10
+Subgoal 61.9
+Subgoal 61.8
+Subgoal 61.7
+Subgoal 61.6
+Subgoal 61.5
+Subgoal 61.4
+Subgoal 61.3
+Subgoal 61.2
+Subgoal 61.1
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-DIST-OF-ADD-UPPER-BOUND ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-L1)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-L1)
+        (:EXECUTABLE-COUNTERPART QCX-NEG)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ x x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (- x) (- y))|)
+        (:REWRITE |(< (- x) c)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (/ y)) with (< 0 y)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(<= (/ x) y) with (< x 0)|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-ADD-ASSOCIATIVE)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  3.45 seconds (prove: 3.43, print: 0.02, other: 0.00)
+Prover steps counted:  255814
+QCX-DIST-OF-ADD-UPPER-BOUND
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-ADD ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  185
+QCX-RATIONALP-OF-ADD
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-SCALE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  129
+QCX-RATIONALP-OF-SCALE
+
+Summary
+Form:  ( DEFUN QCX-LIST-RATIONALP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-LIST-RATIONALP
+Goal'
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN QCX-TABLE-CLOSEP ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  4780
+QCX-TABLE-CLOSEP
+
+Summary
+Form:  ( DEFUN RATIONAL-LIST-L1 ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ABS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONAL-LIST-L1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LIST-L1-NONNEGATIVE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LIST-L1)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RATIONAL-LIST-L1)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION RATIONAL-LIST-L1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  540
+RATIONAL-LIST-L1-NONNEGATIVE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QCX-DOT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QCX-ADD)
+        (:TYPE-PRESCRIPTION QCX-ZERO))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+QCX-DOT
+Subgoal 2
+Subgoal 1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.4
+Subgoal *1/1.4'
+Subgoal *1/1.4''
+Subgoal *1/1.4'''
+Subgoal *1/1.4'4'
+Subgoal *1/1.4'5'
+Subgoal *1/1.4'6'
+Subgoal *1/1.3
+Subgoal *1/1.2
+Subgoal *1/1.2'
+Subgoal *1/1.2''
+Subgoal *1/1.2'''
+Subgoal *1/1.2'4'
+Subgoal *1/1.2'5'
+Subgoal *1/1.2'6'
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-DOT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DOT)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:INDUCTION QCX-DOT)
+        (:INDUCTION QCX-LIST-RATIONALP)
+        (:INDUCTION RATIONAL-LISTP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE REDUCE-RATIONALP-+)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-DOT)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.06 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  8187
+QCX-RATIONALP-OF-DOT
+Goal'
+
+Summary
+Form:  ( DEFTHM ABS-TIMES-MONOTONE ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (- x) (- y))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(<= (/ x) y) with (< x 0)|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  607
+ABS-TIMES-MONOTONE
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-WEIGHTED-STEP-RAW-BOUND ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-RATIONALP-OF-SCALE)
+        (:TYPE-PRESCRIPTION QCX-DIST))
+Hint-events: ((:USE QCX-DIST-OF-ADD-UPPER-BOUND)
+              (:USE QCX-DIST-OF-SCALE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1447
+QCX-WEIGHTED-STEP-RAW-BOUND
+Goal'
+Goal''
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-WEIGHTED-STEP-ERROR-BOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:LINEAR QCX-DIST-NONNEGATIVE)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE RATIONALP-OF-QCX-DIST)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ABS)
+        (:TYPE-PRESCRIPTION QCX-DIST))
+Hint-events: ((:USE ABS-TIMES-MONOTONE)
+              (:USE QCX-WEIGHTED-STEP-RAW-BOUND))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2268
+QCX-WEIGHTED-STEP-ERROR-BOUND
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QCX-DOT-INDUCT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  460
+QCX-DOT-INDUCT
+Goal'
+Goal''
+Goal'''
+Goal'4'
+Goal'5'
+
+Summary
+Form:  ( DEFTHM EQUAL-LEN-CDRS-ON-CONSES ...)
+Rules: ((:DEFINITION NOT)
+        (:ELIM CAR-CDR-ELIM)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-CONS)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  427
+EQUAL-LEN-CDRS-ON-CONSES
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QCX-DOT-ERROR-SUM ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  460
+QCX-DOT-ERROR-SUM
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QCX-DOT2 ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  460
+QCX-DOT2
+Subgoal 3
+Subgoal 2
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-DOT2-FIRST ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DOT2)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION QCX-DOT2)
+        (:INDUCTION QCX-LIST-RATIONALP)
+        (:INDUCTION RATIONAL-LISTP)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.17 seconds (prove: 0.17, print: 0.00, other: 0.00)
+Prover steps counted:  26408
+QCX-RATIONALP-OF-DOT2-FIRST
+Subgoal 3
+Subgoal 2
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-DOT2-SECOND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DOT2)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION QCX-DOT2)
+        (:INDUCTION QCX-LIST-RATIONALP)
+        (:INDUCTION RATIONAL-LISTP)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP))
+Time:  0.18 seconds (prove: 0.17, print: 0.00, other: 0.00)
+Prover steps counted:  26541
+QCX-RATIONALP-OF-DOT2-SECOND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-DOT2-DISTANCE-BOUNDED-BY-ERROR-SUM ...)
+Rules: ((:DEFINITION ABS)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-DOT-ERROR-SUM)
+        (:DEFINITION QCX-DOT2)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-DIST)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION QCX-DOT2)
+        (:LINEAR QCX-WEIGHTED-STEP-RAW-BOUND)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE QCX-RATIONALP-OF-DOT2-FIRST)
+        (:REWRITE QCX-RATIONALP-OF-DOT2-SECOND)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION QCX-DIST)
+        (:TYPE-PRESCRIPTION QCX-DOT-ERROR-SUM)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3060
+QCX-DOT2-DISTANCE-BOUNDED-BY-ERROR-SUM
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.64
+Subgoal *1/2.64'
+Subgoal *1/2.64''
+Subgoal *1/2.64'''
+Subgoal *1/2.64'4'
+Subgoal *1/2.64'5'
+Subgoal *1/2.64'6'
+Subgoal *1/2.64'7'
+Subgoal *1/2.64'8'
+Subgoal *1/2.64'9'
+Subgoal *1/2.64'10'
+Subgoal *1/2.63
+Subgoal *1/2.63'
+Subgoal *1/2.63''
+Subgoal *1/2.63'''
+Subgoal *1/2.63.2
+Subgoal *1/2.63.1
+Subgoal *1/2.63.1'
+Subgoal *1/2.62
+Subgoal *1/2.62'
+Subgoal *1/2.62''
+Subgoal *1/2.62'''
+Subgoal *1/2.62.2
+Subgoal *1/2.62.1
+Subgoal *1/2.62.1'
+Subgoal *1/2.61
+Subgoal *1/2.61'
+Subgoal *1/2.61''
+Subgoal *1/2.61'''
+Subgoal *1/2.61.2
+Subgoal *1/2.61.1
+Subgoal *1/2.61.1'
+Subgoal *1/2.60
+Subgoal *1/2.60'
+Subgoal *1/2.60''
+Subgoal *1/2.60'''
+Subgoal *1/2.60.2
+Subgoal *1/2.60.1
+Subgoal *1/2.60.1'
+Subgoal *1/2.59
+Subgoal *1/2.59'
+Subgoal *1/2.59''
+Subgoal *1/2.59'''
+Subgoal *1/2.59'4'
+Subgoal *1/2.59'5'
+Subgoal *1/2.59'6'
+Subgoal *1/2.59'7'
+Subgoal *1/2.59'8'
+Subgoal *1/2.59'9'
+Subgoal *1/2.59'10'
+Subgoal *1/2.58
+Subgoal *1/2.58'
+Subgoal *1/2.58''
+Subgoal *1/2.58'''
+Subgoal *1/2.58'4'
+Subgoal *1/2.58'5'
+Subgoal *1/2.58'6'
+Subgoal *1/2.58'7'
+Subgoal *1/2.58'8'
+Subgoal *1/2.58'9'
+Subgoal *1/2.58'10'
+Subgoal *1/2.57
+Subgoal *1/2.57'
+Subgoal *1/2.57''
+Subgoal *1/2.57'''
+Subgoal *1/2.57'4'
+Subgoal *1/2.57'5'
+Subgoal *1/2.56
+Subgoal *1/2.56'
+Subgoal *1/2.56''
+Subgoal *1/2.56'''
+Subgoal *1/2.56'4'
+Subgoal *1/2.56'5'
+Subgoal *1/2.55
+Subgoal *1/2.55'
+Subgoal *1/2.55''
+Subgoal *1/2.55'''
+Subgoal *1/2.55'4'
+Subgoal *1/2.55'5'
+Subgoal *1/2.54
+Subgoal *1/2.54'
+Subgoal *1/2.54''
+Subgoal *1/2.54'''
+Subgoal *1/2.54'4'
+Subgoal *1/2.54'5'
+Subgoal *1/2.53
+Subgoal *1/2.53'
+Subgoal *1/2.53''
+Subgoal *1/2.53'''
+Subgoal *1/2.53'4'
+Subgoal *1/2.53'5'
+Subgoal *1/2.53'6'
+Subgoal *1/2.53'7'
+Subgoal *1/2.53'8'
+Subgoal *1/2.53'9'
+Subgoal *1/2.53'10'
+Subgoal *1/2.52
+Subgoal *1/2.52'
+Subgoal *1/2.52''
+Subgoal *1/2.52'''
+Subgoal *1/2.52'4'
+Subgoal *1/2.52'5'
+Subgoal *1/2.52'6'
+Subgoal *1/2.52'7'
+Subgoal *1/2.52'8'
+Subgoal *1/2.52'9'
+Subgoal *1/2.52'10'
+Subgoal *1/2.51
+Subgoal *1/2.51'
+Subgoal *1/2.51''
+Subgoal *1/2.51'''
+Subgoal *1/2.51'4'
+Subgoal *1/2.51'5'
+Subgoal *1/2.51'6'
+Subgoal *1/2.51'7'
+Subgoal *1/2.51'8'
+Subgoal *1/2.51'9'
+Subgoal *1/2.51'10'
+Subgoal *1/2.50
+Subgoal *1/2.50'
+Subgoal *1/2.50''
+Subgoal *1/2.50'''
+Subgoal *1/2.50'4'
+Subgoal *1/2.50'5'
+Subgoal *1/2.49
+Subgoal *1/2.49'
+Subgoal *1/2.49''
+Subgoal *1/2.49'''
+Subgoal *1/2.49'4'
+Subgoal *1/2.49'5'
+Subgoal *1/2.48
+Subgoal *1/2.48'
+Subgoal *1/2.48''
+Subgoal *1/2.48'''
+Subgoal *1/2.48'4'
+Subgoal *1/2.48'5'
+Subgoal *1/2.47
+Subgoal *1/2.47'
+Subgoal *1/2.47''
+Subgoal *1/2.47'''
+Subgoal *1/2.47'4'
+Subgoal *1/2.47'5'
+Subgoal *1/2.46
+Subgoal *1/2.46'
+Subgoal *1/2.46''
+Subgoal *1/2.46'''
+Subgoal *1/2.46.2
+Subgoal *1/2.46.1
+Subgoal *1/2.46.1'
+Subgoal *1/2.45
+Subgoal *1/2.45'
+Subgoal *1/2.45''
+Subgoal *1/2.45'''
+Subgoal *1/2.45.2
+Subgoal *1/2.45.1
+Subgoal *1/2.45.1'
+Subgoal *1/2.44
+Subgoal *1/2.44'
+Subgoal *1/2.44''
+Subgoal *1/2.44'''
+Subgoal *1/2.44.2
+Subgoal *1/2.44.1
+Subgoal *1/2.44.1'
+Subgoal *1/2.43
+Subgoal *1/2.43'
+Subgoal *1/2.43''
+Subgoal *1/2.43'''
+Subgoal *1/2.43.2
+Subgoal *1/2.43.1
+Subgoal *1/2.43.1'
+Subgoal *1/2.42
+Subgoal *1/2.42'
+Subgoal *1/2.42''
+Subgoal *1/2.42'''
+Subgoal *1/2.42'4'
+Subgoal *1/2.42'5'
+Subgoal *1/2.41
+Subgoal *1/2.41'
+Subgoal *1/2.41''
+Subgoal *1/2.41'''
+Subgoal *1/2.41'4'
+Subgoal *1/2.41'5'
+Subgoal *1/2.40
+Subgoal *1/2.40'
+Subgoal *1/2.40''
+Subgoal *1/2.40'''
+Subgoal *1/2.40'4'
+Subgoal *1/2.40'5'
+Subgoal *1/2.39
+Subgoal *1/2.39'
+Subgoal *1/2.39''
+Subgoal *1/2.39'''
+Subgoal *1/2.39'4'
+Subgoal *1/2.39'5'
+Subgoal *1/2.38
+Subgoal *1/2.38'
+Subgoal *1/2.38''
+Subgoal *1/2.38'''
+Subgoal *1/2.38'4'
+Subgoal *1/2.38'5'
+Subgoal *1/2.38'6'
+Subgoal *1/2.38'7'
+Subgoal *1/2.38'8'
+Subgoal *1/2.38'9'
+Subgoal *1/2.38'10'
+Subgoal *1/2.37
+Subgoal *1/2.37'
+Subgoal *1/2.37''
+Subgoal *1/2.37'''
+Subgoal *1/2.37'4'
+Subgoal *1/2.37'5'
+Subgoal *1/2.37'6'
+Subgoal *1/2.37'7'
+Subgoal *1/2.37'8'
+Subgoal *1/2.37'9'
+Subgoal *1/2.37'10'
+Subgoal *1/2.36
+Subgoal *1/2.36'
+Subgoal *1/2.36''
+Subgoal *1/2.36'''
+Subgoal *1/2.36.2
+Subgoal *1/2.36.1
+Subgoal *1/2.36.1'
+Subgoal *1/2.35
+Subgoal *1/2.35'
+Subgoal *1/2.35''
+Subgoal *1/2.35'''
+Subgoal *1/2.35.2
+Subgoal *1/2.35.1
+Subgoal *1/2.35.1'
+Subgoal *1/2.34
+Subgoal *1/2.34'
+Subgoal *1/2.34''
+Subgoal *1/2.34'''
+Subgoal *1/2.34.2
+Subgoal *1/2.34.1
+Subgoal *1/2.34.1'
+Subgoal *1/2.33
+Subgoal *1/2.33'
+Subgoal *1/2.33''
+Subgoal *1/2.33'''
+Subgoal *1/2.33.2
+Subgoal *1/2.33.1
+Subgoal *1/2.33.1'
+Subgoal *1/2.32
+Subgoal *1/2.32'
+Subgoal *1/2.32''
+Subgoal *1/2.32'''
+Subgoal *1/2.32'4'
+Subgoal *1/2.32'5'
+Subgoal *1/2.32'6'
+Subgoal *1/2.32'7'
+Subgoal *1/2.32'8'
+Subgoal *1/2.31
+Subgoal *1/2.31'
+Subgoal *1/2.31''
+Subgoal *1/2.31'''
+Subgoal *1/2.31.2
+Subgoal *1/2.31.1
+Subgoal *1/2.31.1'
+Subgoal *1/2.31.1''
+Subgoal *1/2.31.1'''
+Subgoal *1/2.31.1'4'
+Subgoal *1/2.30
+Subgoal *1/2.30'
+Subgoal *1/2.30''
+Subgoal *1/2.30'''
+Subgoal *1/2.30.2
+Subgoal *1/2.30.1
+Subgoal *1/2.30.1'
+Subgoal *1/2.30.1''
+Subgoal *1/2.30.1'''
+Subgoal *1/2.30.1'4'
+Subgoal *1/2.29
+Subgoal *1/2.29'
+Subgoal *1/2.29''
+Subgoal *1/2.29'''
+Subgoal *1/2.29.2
+Subgoal *1/2.29.1
+Subgoal *1/2.29.1'
+Subgoal *1/2.29.1''
+Subgoal *1/2.29.1'''
+Subgoal *1/2.29.1'4'
+Subgoal *1/2.28
+Subgoal *1/2.28'
+Subgoal *1/2.28''
+Subgoal *1/2.28'''
+Subgoal *1/2.28.2
+Subgoal *1/2.28.1
+Subgoal *1/2.28.1'
+Subgoal *1/2.28.1''
+Subgoal *1/2.28.1'''
+Subgoal *1/2.28.1'4'
+Subgoal *1/2.27
+Subgoal *1/2.27'
+Subgoal *1/2.27''
+Subgoal *1/2.27'''
+Subgoal *1/2.27'4'
+Subgoal *1/2.27'5'
+Subgoal *1/2.27'6'
+Subgoal *1/2.27'7'
+Subgoal *1/2.27'8'
+Subgoal *1/2.26
+Subgoal *1/2.26'
+Subgoal *1/2.26''
+Subgoal *1/2.26'''
+Subgoal *1/2.26'4'
+Subgoal *1/2.26'5'
+Subgoal *1/2.26'6'
+Subgoal *1/2.26'7'
+Subgoal *1/2.26'8'
+Subgoal *1/2.25
+Subgoal *1/2.25'
+Subgoal *1/2.25''
+Subgoal *1/2.25'''
+Subgoal *1/2.25'4'
+Subgoal *1/2.25'5'
+Subgoal *1/2.25'6'
+Subgoal *1/2.25'7'
+Subgoal *1/2.25'8'
+Subgoal *1/2.24
+Subgoal *1/2.24'
+Subgoal *1/2.24''
+Subgoal *1/2.24'''
+Subgoal *1/2.24'4'
+Subgoal *1/2.24'5'
+Subgoal *1/2.24'6'
+Subgoal *1/2.24'7'
+Subgoal *1/2.24'8'
+Subgoal *1/2.23
+Subgoal *1/2.23'
+Subgoal *1/2.23''
+Subgoal *1/2.23'''
+Subgoal *1/2.23'4'
+Subgoal *1/2.23'5'
+Subgoal *1/2.23'6'
+Subgoal *1/2.23'7'
+Subgoal *1/2.23'8'
+Subgoal *1/2.22
+Subgoal *1/2.22'
+Subgoal *1/2.22''
+Subgoal *1/2.22'''
+Subgoal *1/2.22'4'
+Subgoal *1/2.22'5'
+Subgoal *1/2.22'6'
+Subgoal *1/2.22'7'
+Subgoal *1/2.22'8'
+Subgoal *1/2.21
+Subgoal *1/2.21'
+Subgoal *1/2.21''
+Subgoal *1/2.21'''
+Subgoal *1/2.21'4'
+Subgoal *1/2.21'5'
+Subgoal *1/2.21'6'
+Subgoal *1/2.21'7'
+Subgoal *1/2.21'8'
+Subgoal *1/2.20
+Subgoal *1/2.20'
+Subgoal *1/2.20''
+Subgoal *1/2.20'''
+Subgoal *1/2.20'4'
+Subgoal *1/2.20'5'
+Subgoal *1/2.20'6'
+Subgoal *1/2.20'7'
+Subgoal *1/2.20'8'
+Subgoal *1/2.19
+Subgoal *1/2.19'
+Subgoal *1/2.19''
+Subgoal *1/2.19'''
+Subgoal *1/2.19'4'
+Subgoal *1/2.19'5'
+Subgoal *1/2.19'6'
+Subgoal *1/2.19'7'
+Subgoal *1/2.19'8'
+Subgoal *1/2.18
+Subgoal *1/2.18'
+Subgoal *1/2.18''
+Subgoal *1/2.18'''
+Subgoal *1/2.18'4'
+Subgoal *1/2.18'5'
+Subgoal *1/2.18'6'
+Subgoal *1/2.18'7'
+Subgoal *1/2.18'8'
+Subgoal *1/2.17
+Subgoal *1/2.17'
+Subgoal *1/2.17''
+Subgoal *1/2.17'''
+Subgoal *1/2.17'4'
+Subgoal *1/2.17'5'
+Subgoal *1/2.17'6'
+Subgoal *1/2.17'7'
+Subgoal *1/2.17'8'
+Subgoal *1/2.16
+Subgoal *1/2.16'
+Subgoal *1/2.16''
+Subgoal *1/2.16'''
+Subgoal *1/2.16'4'
+Subgoal *1/2.16'5'
+Subgoal *1/2.16'6'
+Subgoal *1/2.16'7'
+Subgoal *1/2.16'8'
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.15''
+Subgoal *1/2.15'''
+Subgoal *1/2.15'4'
+Subgoal *1/2.15'5'
+Subgoal *1/2.15'6'
+Subgoal *1/2.15'7'
+Subgoal *1/2.15'8'
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.14''
+Subgoal *1/2.14'''
+Subgoal *1/2.14.2
+Subgoal *1/2.14.1
+Subgoal *1/2.14.1'
+Subgoal *1/2.14.1''
+Subgoal *1/2.14.1'''
+Subgoal *1/2.14.1'4'
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.13''
+Subgoal *1/2.13'''
+Subgoal *1/2.13.2
+Subgoal *1/2.13.1
+Subgoal *1/2.13.1'
+Subgoal *1/2.13.1''
+Subgoal *1/2.13.1'''
+Subgoal *1/2.13.1'4'
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.12''
+Subgoal *1/2.12'''
+Subgoal *1/2.12.2
+Subgoal *1/2.12.1
+Subgoal *1/2.12.1'
+Subgoal *1/2.12.1''
+Subgoal *1/2.12.1'''
+Subgoal *1/2.12.1'4'
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.11''
+Subgoal *1/2.11'''
+Subgoal *1/2.11.2
+Subgoal *1/2.11.1
+Subgoal *1/2.11.1'
+Subgoal *1/2.11.1''
+Subgoal *1/2.11.1'''
+Subgoal *1/2.11.1'4'
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.10'''
+Subgoal *1/2.10'4'
+Subgoal *1/2.10'5'
+Subgoal *1/2.10'6'
+Subgoal *1/2.10'7'
+Subgoal *1/2.10'8'
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.9''
+Subgoal *1/2.9'''
+Subgoal *1/2.9'4'
+Subgoal *1/2.9'5'
+Subgoal *1/2.9'6'
+Subgoal *1/2.9'7'
+Subgoal *1/2.9'8'
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.8''
+Subgoal *1/2.8'''
+Subgoal *1/2.8'4'
+Subgoal *1/2.8'5'
+Subgoal *1/2.8'6'
+Subgoal *1/2.8'7'
+Subgoal *1/2.8'8'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.7''
+Subgoal *1/2.7'''
+Subgoal *1/2.7'4'
+Subgoal *1/2.7'5'
+Subgoal *1/2.7'6'
+Subgoal *1/2.7'7'
+Subgoal *1/2.7'8'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.6''
+Subgoal *1/2.6'''
+Subgoal *1/2.6'4'
+Subgoal *1/2.6'5'
+Subgoal *1/2.6'6'
+Subgoal *1/2.6'7'
+Subgoal *1/2.6'8'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.5'5'
+Subgoal *1/2.5'6'
+Subgoal *1/2.5'7'
+Subgoal *1/2.5'8'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4.2
+Subgoal *1/2.4.1
+Subgoal *1/2.4.1'
+Subgoal *1/2.4.1''
+Subgoal *1/2.4.1'''
+Subgoal *1/2.4.1'4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3.2
+Subgoal *1/2.3.1
+Subgoal *1/2.3.1'
+Subgoal *1/2.3.1''
+Subgoal *1/2.3.1'''
+Subgoal *1/2.3.1'4'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2.2
+Subgoal *1/2.2.1
+Subgoal *1/2.2.1'
+Subgoal *1/2.2.1''
+Subgoal *1/2.2.1'''
+Subgoal *1/2.2.1'4'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1.2
+Subgoal *1/2.1.1
+Subgoal *1/2.1.1'
+Subgoal *1/2.1.1''
+Subgoal *1/2.1.1'''
+Subgoal *1/2.1.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM QCX-DOT2-FIRST-IS-QCX-DOT ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DOT)
+        (:DEFINITION QCX-DOT2)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION QCX-DOT2)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE |(equal x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-DOT))
+Time:  4.00 seconds (prove: 3.96, print: 0.04, other: 0.00)
+Prover steps counted:  588610
+QCX-DOT2-FIRST-IS-QCX-DOT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2.64
+Subgoal *1/2.64'
+Subgoal *1/2.64''
+Subgoal *1/2.64'''
+Subgoal *1/2.64'4'
+Subgoal *1/2.64'5'
+Subgoal *1/2.64'6'
+Subgoal *1/2.64'7'
+Subgoal *1/2.64'8'
+Subgoal *1/2.64'9'
+Subgoal *1/2.64'10'
+Subgoal *1/2.63
+Subgoal *1/2.63'
+Subgoal *1/2.63''
+Subgoal *1/2.63'''
+Subgoal *1/2.63.2
+Subgoal *1/2.63.1
+Subgoal *1/2.63.1'
+Subgoal *1/2.63.1''
+Subgoal *1/2.63.1'''
+Subgoal *1/2.63.1'4'
+Subgoal *1/2.62
+Subgoal *1/2.62'
+Subgoal *1/2.62''
+Subgoal *1/2.62'''
+Subgoal *1/2.62.2
+Subgoal *1/2.62.1
+Subgoal *1/2.62.1'
+Subgoal *1/2.62.1''
+Subgoal *1/2.62.1'''
+Subgoal *1/2.62.1'4'
+Subgoal *1/2.61
+Subgoal *1/2.61'
+Subgoal *1/2.61''
+Subgoal *1/2.61'''
+Subgoal *1/2.61.2
+Subgoal *1/2.61.1
+Subgoal *1/2.61.1'
+Subgoal *1/2.61.1''
+Subgoal *1/2.61.1'''
+Subgoal *1/2.61.1'4'
+Subgoal *1/2.60
+Subgoal *1/2.60'
+Subgoal *1/2.60''
+Subgoal *1/2.60'''
+Subgoal *1/2.60.2
+Subgoal *1/2.60.1
+Subgoal *1/2.60.1'
+Subgoal *1/2.60.1''
+Subgoal *1/2.60.1'''
+Subgoal *1/2.60.1'4'
+Subgoal *1/2.59
+Subgoal *1/2.59'
+Subgoal *1/2.59''
+Subgoal *1/2.59'''
+Subgoal *1/2.59'4'
+Subgoal *1/2.59'5'
+Subgoal *1/2.59'6'
+Subgoal *1/2.59'7'
+Subgoal *1/2.59'8'
+Subgoal *1/2.59'9'
+Subgoal *1/2.59'10'
+Subgoal *1/2.58
+Subgoal *1/2.58'
+Subgoal *1/2.58''
+Subgoal *1/2.58'''
+Subgoal *1/2.58'4'
+Subgoal *1/2.58'5'
+Subgoal *1/2.58'6'
+Subgoal *1/2.58'7'
+Subgoal *1/2.58'8'
+Subgoal *1/2.58'9'
+Subgoal *1/2.58'10'
+Subgoal *1/2.57
+Subgoal *1/2.57'
+Subgoal *1/2.57''
+Subgoal *1/2.57'''
+Subgoal *1/2.57'4'
+Subgoal *1/2.57'5'
+Subgoal *1/2.57'6'
+Subgoal *1/2.57'7'
+Subgoal *1/2.57'8'
+Subgoal *1/2.56
+Subgoal *1/2.56'
+Subgoal *1/2.56''
+Subgoal *1/2.56'''
+Subgoal *1/2.56'4'
+Subgoal *1/2.56'5'
+Subgoal *1/2.56'6'
+Subgoal *1/2.56'7'
+Subgoal *1/2.56'8'
+Subgoal *1/2.55
+Subgoal *1/2.55'
+Subgoal *1/2.55''
+Subgoal *1/2.55'''
+Subgoal *1/2.55'4'
+Subgoal *1/2.55'5'
+Subgoal *1/2.55'6'
+Subgoal *1/2.55'7'
+Subgoal *1/2.55'8'
+Subgoal *1/2.54
+Subgoal *1/2.54'
+Subgoal *1/2.54''
+Subgoal *1/2.54'''
+Subgoal *1/2.54'4'
+Subgoal *1/2.54'5'
+Subgoal *1/2.54'6'
+Subgoal *1/2.54'7'
+Subgoal *1/2.54'8'
+Subgoal *1/2.53
+Subgoal *1/2.53'
+Subgoal *1/2.53''
+Subgoal *1/2.53'''
+Subgoal *1/2.53'4'
+Subgoal *1/2.53'5'
+Subgoal *1/2.53'6'
+Subgoal *1/2.53'7'
+Subgoal *1/2.53'8'
+Subgoal *1/2.53'9'
+Subgoal *1/2.53'10'
+Subgoal *1/2.52
+Subgoal *1/2.52'
+Subgoal *1/2.52''
+Subgoal *1/2.52'''
+Subgoal *1/2.52'4'
+Subgoal *1/2.52'5'
+Subgoal *1/2.52'6'
+Subgoal *1/2.52'7'
+Subgoal *1/2.52'8'
+Subgoal *1/2.52'9'
+Subgoal *1/2.52'10'
+Subgoal *1/2.51
+Subgoal *1/2.51'
+Subgoal *1/2.51''
+Subgoal *1/2.51'''
+Subgoal *1/2.51'4'
+Subgoal *1/2.51'5'
+Subgoal *1/2.51'6'
+Subgoal *1/2.51'7'
+Subgoal *1/2.51'8'
+Subgoal *1/2.51'9'
+Subgoal *1/2.51'10'
+Subgoal *1/2.50
+Subgoal *1/2.50'
+Subgoal *1/2.50''
+Subgoal *1/2.50'''
+Subgoal *1/2.50'4'
+Subgoal *1/2.50'5'
+Subgoal *1/2.50'6'
+Subgoal *1/2.50'7'
+Subgoal *1/2.50'8'
+Subgoal *1/2.49
+Subgoal *1/2.49'
+Subgoal *1/2.49''
+Subgoal *1/2.49'''
+Subgoal *1/2.49'4'
+Subgoal *1/2.49'5'
+Subgoal *1/2.49'6'
+Subgoal *1/2.49'7'
+Subgoal *1/2.49'8'
+Subgoal *1/2.48
+Subgoal *1/2.48'
+Subgoal *1/2.48''
+Subgoal *1/2.48'''
+Subgoal *1/2.48'4'
+Subgoal *1/2.48'5'
+Subgoal *1/2.48'6'
+Subgoal *1/2.48'7'
+Subgoal *1/2.48'8'
+Subgoal *1/2.47
+Subgoal *1/2.47'
+Subgoal *1/2.47''
+Subgoal *1/2.47'''
+Subgoal *1/2.47'4'
+Subgoal *1/2.47'5'
+Subgoal *1/2.47'6'
+Subgoal *1/2.47'7'
+Subgoal *1/2.47'8'
+Subgoal *1/2.46
+Subgoal *1/2.46'
+Subgoal *1/2.46''
+Subgoal *1/2.46'''
+Subgoal *1/2.46.2
+Subgoal *1/2.46.1
+Subgoal *1/2.46.1'
+Subgoal *1/2.46.1''
+Subgoal *1/2.46.1'''
+Subgoal *1/2.46.1'4'
+Subgoal *1/2.45
+Subgoal *1/2.45'
+Subgoal *1/2.45''
+Subgoal *1/2.45'''
+Subgoal *1/2.45.2
+Subgoal *1/2.45.1
+Subgoal *1/2.45.1'
+Subgoal *1/2.45.1''
+Subgoal *1/2.45.1'''
+Subgoal *1/2.45.1'4'
+Subgoal *1/2.44
+Subgoal *1/2.44'
+Subgoal *1/2.44''
+Subgoal *1/2.44'''
+Subgoal *1/2.44.2
+Subgoal *1/2.44.1
+Subgoal *1/2.44.1'
+Subgoal *1/2.44.1''
+Subgoal *1/2.44.1'''
+Subgoal *1/2.44.1'4'
+Subgoal *1/2.43
+Subgoal *1/2.43'
+Subgoal *1/2.43''
+Subgoal *1/2.43'''
+Subgoal *1/2.43.2
+Subgoal *1/2.43.1
+Subgoal *1/2.43.1'
+Subgoal *1/2.43.1''
+Subgoal *1/2.43.1'''
+Subgoal *1/2.43.1'4'
+Subgoal *1/2.42
+Subgoal *1/2.42'
+Subgoal *1/2.42''
+Subgoal *1/2.42'''
+Subgoal *1/2.42'4'
+Subgoal *1/2.42'5'
+Subgoal *1/2.42'6'
+Subgoal *1/2.42'7'
+Subgoal *1/2.42'8'
+Subgoal *1/2.41
+Subgoal *1/2.41'
+Subgoal *1/2.41''
+Subgoal *1/2.41'''
+Subgoal *1/2.41'4'
+Subgoal *1/2.41'5'
+Subgoal *1/2.41'6'
+Subgoal *1/2.41'7'
+Subgoal *1/2.41'8'
+Subgoal *1/2.40
+Subgoal *1/2.40'
+Subgoal *1/2.40''
+Subgoal *1/2.40'''
+Subgoal *1/2.40'4'
+Subgoal *1/2.40'5'
+Subgoal *1/2.40'6'
+Subgoal *1/2.40'7'
+Subgoal *1/2.40'8'
+Subgoal *1/2.39
+Subgoal *1/2.39'
+Subgoal *1/2.39''
+Subgoal *1/2.39'''
+Subgoal *1/2.39'4'
+Subgoal *1/2.39'5'
+Subgoal *1/2.39'6'
+Subgoal *1/2.39'7'
+Subgoal *1/2.39'8'
+Subgoal *1/2.38
+Subgoal *1/2.38'
+Subgoal *1/2.38''
+Subgoal *1/2.38'''
+Subgoal *1/2.38'4'
+Subgoal *1/2.38'5'
+Subgoal *1/2.38'6'
+Subgoal *1/2.38'7'
+Subgoal *1/2.38'8'
+Subgoal *1/2.38'9'
+Subgoal *1/2.38'10'
+Subgoal *1/2.37
+Subgoal *1/2.37'
+Subgoal *1/2.37''
+Subgoal *1/2.37'''
+Subgoal *1/2.37'4'
+Subgoal *1/2.37'5'
+Subgoal *1/2.37'6'
+Subgoal *1/2.37'7'
+Subgoal *1/2.37'8'
+Subgoal *1/2.37'9'
+Subgoal *1/2.37'10'
+Subgoal *1/2.36
+Subgoal *1/2.36'
+Subgoal *1/2.36''
+Subgoal *1/2.36'''
+Subgoal *1/2.36.2
+Subgoal *1/2.36.1
+Subgoal *1/2.36.1'
+Subgoal *1/2.36.1''
+Subgoal *1/2.36.1'''
+Subgoal *1/2.36.1'4'
+Subgoal *1/2.35
+Subgoal *1/2.35'
+Subgoal *1/2.35''
+Subgoal *1/2.35'''
+Subgoal *1/2.35.2
+Subgoal *1/2.35.1
+Subgoal *1/2.35.1'
+Subgoal *1/2.35.1''
+Subgoal *1/2.35.1'''
+Subgoal *1/2.35.1'4'
+Subgoal *1/2.34
+Subgoal *1/2.34'
+Subgoal *1/2.34''
+Subgoal *1/2.34'''
+Subgoal *1/2.34.2
+Subgoal *1/2.34.1
+Subgoal *1/2.34.1'
+Subgoal *1/2.34.1''
+Subgoal *1/2.34.1'''
+Subgoal *1/2.34.1'4'
+Subgoal *1/2.33
+Subgoal *1/2.33'
+Subgoal *1/2.33''
+Subgoal *1/2.33'''
+Subgoal *1/2.33.2
+Subgoal *1/2.33.1
+Subgoal *1/2.33.1'
+Subgoal *1/2.33.1''
+Subgoal *1/2.33.1'''
+Subgoal *1/2.33.1'4'
+Subgoal *1/2.32
+Subgoal *1/2.32'
+Subgoal *1/2.32''
+Subgoal *1/2.32'''
+Subgoal *1/2.32'4'
+Subgoal *1/2.32'5'
+Subgoal *1/2.32'6'
+Subgoal *1/2.32'7'
+Subgoal *1/2.32'8'
+Subgoal *1/2.31
+Subgoal *1/2.31'
+Subgoal *1/2.31''
+Subgoal *1/2.31'''
+Subgoal *1/2.31.2
+Subgoal *1/2.31.1
+Subgoal *1/2.31.1'
+Subgoal *1/2.31.1''
+Subgoal *1/2.31.1'''
+Subgoal *1/2.31.1'4'
+Subgoal *1/2.30
+Subgoal *1/2.30'
+Subgoal *1/2.30''
+Subgoal *1/2.30'''
+Subgoal *1/2.30.2
+Subgoal *1/2.30.1
+Subgoal *1/2.30.1'
+Subgoal *1/2.30.1''
+Subgoal *1/2.30.1'''
+Subgoal *1/2.30.1'4'
+Subgoal *1/2.29
+Subgoal *1/2.29'
+Subgoal *1/2.29''
+Subgoal *1/2.29'''
+Subgoal *1/2.29.2
+Subgoal *1/2.29.1
+Subgoal *1/2.29.1'
+Subgoal *1/2.29.1''
+Subgoal *1/2.29.1'''
+Subgoal *1/2.29.1'4'
+Subgoal *1/2.28
+Subgoal *1/2.28'
+Subgoal *1/2.28''
+Subgoal *1/2.28'''
+Subgoal *1/2.28.2
+Subgoal *1/2.28.1
+Subgoal *1/2.28.1'
+Subgoal *1/2.28.1''
+Subgoal *1/2.28.1'''
+Subgoal *1/2.28.1'4'
+Subgoal *1/2.27
+Subgoal *1/2.27'
+Subgoal *1/2.27''
+Subgoal *1/2.27'''
+Subgoal *1/2.27'4'
+Subgoal *1/2.27'5'
+Subgoal *1/2.27'6'
+Subgoal *1/2.27'7'
+Subgoal *1/2.27'8'
+Subgoal *1/2.26
+Subgoal *1/2.26'
+Subgoal *1/2.26''
+Subgoal *1/2.26'''
+Subgoal *1/2.26'4'
+Subgoal *1/2.26'5'
+Subgoal *1/2.26'6'
+Subgoal *1/2.26'7'
+Subgoal *1/2.26'8'
+Subgoal *1/2.25
+Subgoal *1/2.25'
+Subgoal *1/2.25''
+Subgoal *1/2.25'''
+Subgoal *1/2.25'4'
+Subgoal *1/2.25'5'
+Subgoal *1/2.25'6'
+Subgoal *1/2.25'7'
+Subgoal *1/2.25'8'
+Subgoal *1/2.24
+Subgoal *1/2.24'
+Subgoal *1/2.24''
+Subgoal *1/2.24'''
+Subgoal *1/2.24'4'
+Subgoal *1/2.24'5'
+Subgoal *1/2.24'6'
+Subgoal *1/2.24'7'
+Subgoal *1/2.24'8'
+Subgoal *1/2.23
+Subgoal *1/2.23'
+Subgoal *1/2.23''
+Subgoal *1/2.23'''
+Subgoal *1/2.23'4'
+Subgoal *1/2.23'5'
+Subgoal *1/2.23'6'
+Subgoal *1/2.23'7'
+Subgoal *1/2.23'8'
+Subgoal *1/2.22
+Subgoal *1/2.22'
+Subgoal *1/2.22''
+Subgoal *1/2.22'''
+Subgoal *1/2.22'4'
+Subgoal *1/2.22'5'
+Subgoal *1/2.22'6'
+Subgoal *1/2.22'7'
+Subgoal *1/2.22'8'
+Subgoal *1/2.21
+Subgoal *1/2.21'
+Subgoal *1/2.21''
+Subgoal *1/2.21'''
+Subgoal *1/2.21'4'
+Subgoal *1/2.21'5'
+Subgoal *1/2.21'6'
+Subgoal *1/2.21'7'
+Subgoal *1/2.21'8'
+Subgoal *1/2.20
+Subgoal *1/2.20'
+Subgoal *1/2.20''
+Subgoal *1/2.20'''
+Subgoal *1/2.20'4'
+Subgoal *1/2.20'5'
+Subgoal *1/2.20'6'
+Subgoal *1/2.20'7'
+Subgoal *1/2.20'8'
+Subgoal *1/2.19
+Subgoal *1/2.19'
+Subgoal *1/2.19''
+Subgoal *1/2.19'''
+Subgoal *1/2.19'4'
+Subgoal *1/2.19'5'
+Subgoal *1/2.19'6'
+Subgoal *1/2.19'7'
+Subgoal *1/2.19'8'
+Subgoal *1/2.18
+Subgoal *1/2.18'
+Subgoal *1/2.18''
+Subgoal *1/2.18'''
+Subgoal *1/2.18'4'
+Subgoal *1/2.18'5'
+Subgoal *1/2.18'6'
+Subgoal *1/2.18'7'
+Subgoal *1/2.18'8'
+Subgoal *1/2.17
+Subgoal *1/2.17'
+Subgoal *1/2.17''
+Subgoal *1/2.17'''
+Subgoal *1/2.17'4'
+Subgoal *1/2.17'5'
+Subgoal *1/2.17'6'
+Subgoal *1/2.17'7'
+Subgoal *1/2.17'8'
+Subgoal *1/2.16
+Subgoal *1/2.16'
+Subgoal *1/2.16''
+Subgoal *1/2.16'''
+Subgoal *1/2.16'4'
+Subgoal *1/2.16'5'
+Subgoal *1/2.16'6'
+Subgoal *1/2.16'7'
+Subgoal *1/2.16'8'
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.15''
+Subgoal *1/2.15'''
+Subgoal *1/2.15'4'
+Subgoal *1/2.15'5'
+Subgoal *1/2.15'6'
+Subgoal *1/2.15'7'
+Subgoal *1/2.15'8'
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.14''
+Subgoal *1/2.14'''
+Subgoal *1/2.14.2
+Subgoal *1/2.14.1
+Subgoal *1/2.14.1'
+Subgoal *1/2.14.1''
+Subgoal *1/2.14.1'''
+Subgoal *1/2.14.1'4'
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.13''
+Subgoal *1/2.13'''
+Subgoal *1/2.13.2
+Subgoal *1/2.13.1
+Subgoal *1/2.13.1'
+Subgoal *1/2.13.1''
+Subgoal *1/2.13.1'''
+Subgoal *1/2.13.1'4'
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.12''
+Subgoal *1/2.12'''
+Subgoal *1/2.12.2
+Subgoal *1/2.12.1
+Subgoal *1/2.12.1'
+Subgoal *1/2.12.1''
+Subgoal *1/2.12.1'''
+Subgoal *1/2.12.1'4'
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.11''
+Subgoal *1/2.11'''
+Subgoal *1/2.11.2
+Subgoal *1/2.11.1
+Subgoal *1/2.11.1'
+Subgoal *1/2.11.1''
+Subgoal *1/2.11.1'''
+Subgoal *1/2.11.1'4'
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.10''
+Subgoal *1/2.10'''
+Subgoal *1/2.10'4'
+Subgoal *1/2.10'5'
+Subgoal *1/2.10'6'
+Subgoal *1/2.10'7'
+Subgoal *1/2.10'8'
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.9''
+Subgoal *1/2.9'''
+Subgoal *1/2.9'4'
+Subgoal *1/2.9'5'
+Subgoal *1/2.9'6'
+Subgoal *1/2.9'7'
+Subgoal *1/2.9'8'
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.8''
+Subgoal *1/2.8'''
+Subgoal *1/2.8'4'
+Subgoal *1/2.8'5'
+Subgoal *1/2.8'6'
+Subgoal *1/2.8'7'
+Subgoal *1/2.8'8'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.7''
+Subgoal *1/2.7'''
+Subgoal *1/2.7'4'
+Subgoal *1/2.7'5'
+Subgoal *1/2.7'6'
+Subgoal *1/2.7'7'
+Subgoal *1/2.7'8'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.6''
+Subgoal *1/2.6'''
+Subgoal *1/2.6'4'
+Subgoal *1/2.6'5'
+Subgoal *1/2.6'6'
+Subgoal *1/2.6'7'
+Subgoal *1/2.6'8'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.5'5'
+Subgoal *1/2.5'6'
+Subgoal *1/2.5'7'
+Subgoal *1/2.5'8'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4.2
+Subgoal *1/2.4.1
+Subgoal *1/2.4.1'
+Subgoal *1/2.4.1''
+Subgoal *1/2.4.1'''
+Subgoal *1/2.4.1'4'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3.2
+Subgoal *1/2.3.1
+Subgoal *1/2.3.1'
+Subgoal *1/2.3.1''
+Subgoal *1/2.3.1'''
+Subgoal *1/2.3.1'4'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2.2
+Subgoal *1/2.2.1
+Subgoal *1/2.2.1'
+Subgoal *1/2.2.1''
+Subgoal *1/2.2.1'''
+Subgoal *1/2.2.1'4'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1.2
+Subgoal *1/2.1.1
+Subgoal *1/2.1.1'
+Subgoal *1/2.1.1''
+Subgoal *1/2.1.1'''
+Subgoal *1/2.1.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM QCX-DOT2-SECOND-IS-QCX-DOT ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-DOT)
+        (:DEFINITION QCX-DOT2)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION QCX-DOT2)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE |(equal x (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-DOT))
+Time:  4.38 seconds (prove: 4.34, print: 0.04, other: 0.00)
+Prover steps counted:  680553
+QCX-DOT2-SECOND-IS-QCX-DOT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-DOT-DISTANCE-IS-DOT2-DISTANCE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QCX-DOT2-FIRST-IS-QCX-DOT)
+              (:USE QCX-DOT2-SECOND-IS-QCX-DOT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  248
+QCX-DOT-DISTANCE-IS-DOT2-DISTANCE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.2
+Subgoal *1/1.2'
+Subgoal *1/1.1
+Subgoal *1/1.1'
+
+Summary
+Form:  ( DEFTHM QCX-DOT-ERROR-SUM-UNIFORM-BOUND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-DOT-ERROR-SUM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-TABLE-CLOSEP)
+        (:DEFINITION RATIONAL-LIST-L1)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LIST-L1)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION QCX-DOT2)
+        (:LINEAR ABS-TIMES-MONOTONE)
+        (:LINEAR QCX-DIST-NONNEGATIVE)
+        (:LINEAR RATIONAL-LIST-L1-NONNEGATIVE)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (* x y) 0)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE RATIONALP-OF-QCX-DIST)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ABS)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION QCX-DOT-ERROR-SUM)
+        (:TYPE-PRESCRIPTION QCX-TABLE-CLOSEP)
+        (:TYPE-PRESCRIPTION RATIONAL-LIST-L1)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3140
+QCX-DOT-ERROR-SUM-UNIFORM-BOUND
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM QCX-DOT-ERROR-BOUND ...)
+Rules: ((:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QCX-DOT-DISTANCE-IS-DOT2-DISTANCE)
+              (:USE QCX-DOT-ERROR-SUM-UNIFORM-BOUND)
+              (:USE QCX-DOT2-DISTANCE-BOUNDED-BY-ERROR-SUM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  572
+QCX-DOT-ERROR-BOUND
+
+Summary
+Form:  ( DEFUN QCX-MATRIX-RATIONALP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-MATRIX-RATIONALP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QCX-MATRIX-CLOSEP ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  2786
+QCX-MATRIX-CLOSEP
+
+Summary
+Form:  ( DEFUN QCX-MATRIX-WIDTHP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-MATRIX-WIDTHP
+
+Summary
+Form:  ( DEFUN RATIONAL-DFT-MATRIX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONAL-DFT-MATRIX
+Goal'
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN DFT-OUTPUT-CLOSEP ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  4780
+DFT-OUTPUT-CLOSEP
+Goal'
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RATIONAL-DFT-MATRIX-CLOSEP ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-DIST)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-NEG)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SUB)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QCX-DOT))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  4352
+RATIONAL-DFT-MATRIX-CLOSEP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN QCX-MATRIX-APPROX-P ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.01)
+Prover steps counted:  3015
+QCX-MATRIX-APPROX-P
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zak-rational-dft-core" ...)
+Rules: NIL
+Time:  17.22 seconds (prove: 15.93, print: 0.16, other: 1.13)
+Prover steps counted:  1926601
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 17.22 seconds realtime, 16.04 seconds runtime
+; (2,564,305,280 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 31380 Jun 29 00:35 zak-rational-dft-core.cert

@@ -1,0 +1,1859 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "centaur/fty/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/stobjs/def-hash.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/stobjs/updater-independence.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/alists/hons-put-assoc.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/alists/hons-remove-assoc.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/omaps/update.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "znr-epochal-dependency-cache" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: znr-epochal-dependency-cache
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "portcullis" ...)
+Rules: NIL
+Time:  0.25 seconds (prove: 0.00, print: 0.00, other: 0.25)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/portcullis" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ "/mnt/data/acl2-8.7-recovery/books/std/omaps/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "../portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "data-structures/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "centaur/fty/portcullis" ...) is redundant.
+See :DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/top" ...)
+Rules: NIL
+Time:  1.37 seconds (prove: 0.00, print: 0.00, other: 1.37)
+"/mnt/data/acl2-8.7-recovery/books/centaur/fty/top.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/stobjs/def-hash" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+"/mnt/data/acl2-8.7-recovery/books/std/stobjs/def-hash.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/stobjs/updater-independence" ...)
+Rules: NIL
+Time:  0.13 seconds (prove: 0.00, print: 0.00, other: 0.13)
+"/mnt/data/acl2-8.7-recovery/books/std/stobjs/updater-independence.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/alists/hons-put-assoc" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/std/alists/hons-put-assoc.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/alists/hons-remove-assoc" ...)
+Rules: NIL
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+"/mnt/data/acl2-8.7-recovery/books/std/alists/hons-remove-assoc.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "std/omaps/update" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+"/mnt/data/acl2-8.7-recovery/books/std/omaps/update.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZNR-EPOCHAL-DEPENDENCY-CACHE)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TMP-DEFTYPES-SYMBOLP-OF-SYMBOL-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TMP-DEFTYPES-NATP-OF-NFIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM TMP-DEFTYPES-NFIX-WHEN-NATP ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VDC-STAMP-ALIST-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VDC-STAMP-ALIST-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VDC-STAMP-ALIST-FIX$INLINE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Goal'
+Subgoal 3
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VDC-STAMP-ALIST-P-OF-VDC-STAMP-ALIST-FIX ...)
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VDC-STAMP-ALIST-P-OF-VDC-STAMP-ALIST-FIX ...)
+...)
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Goal'''
+Goal'4'
+Goal'5'
+Goal'6'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VDC-STAMP-ALIST-FIX-WHEN-VDC-STAMP-ALIST-P ...)
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VDC-STAMP-ALIST-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM CONS-OF-SYMBOL-FIX-K-UNDER-VDC-STAMP-ALIST-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-NFIX-V-UNDER-VDC-STAMP-ALIST-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VDC-STAMP-ALIST-FIX-Y-UNDER-VDC-STAMP-ALIST-EQUIV
+...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-STAMP-ALIST-FIX-OF-ACONS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Form:  ( DEFTHM VDC-STAMP-ALIST-FIX-OF-APPEND ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Form:  ( DEFTHM CONSP-CAR-OF-VDC-STAMP-ALIST-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.07 seconds (prove: 0.05, print: 0.00, other: 0.03)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VDC-STAMP-ALIST ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VDC-STAMP-ALIST ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.25 seconds (prove: 0.08, print: 0.00, other: 0.16)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.28 seconds (prove: 0.08, print: 0.00, other: 0.19)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFALIST-FN ...))
+Rules: NIL
+Time:  0.28 seconds (prove: 0.08, print: 0.00, other: 0.19)
+Prover steps counted:  5150
+T
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VDC-ENTRY-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM CONSP-WHEN-VDC-ENTRY-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (MAKE-EVENT ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TAG-WHEN-VDC-ENTRY-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY-P-WHEN-WRONG-TAG ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VDC-ENTRY-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VDC-ENTRY-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Goal'''
+Form:  ( DEFTHM VDC-ENTRY-P-OF-VDC-ENTRY-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VDC-ENTRY-P-OF-VDC-ENTRY-FIX ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM VDC-ENTRY-FIX-WHEN-VDC-ENTRY-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VDC-ENTRY-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM TAG-OF-VDC-ENTRY-FIX ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VDC-ENTRY->VALUE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VDC-ENTRY->VALUE$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY->VALUE$INLINE-OF-VDC-ENTRY-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VDC-ENTRY->VALUE ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VDC-ENTRY->STAMPS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VDC-ENTRY->STAMPS$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM VDC-STAMP-ALIST-P-OF-VDC-ENTRY->STAMPS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VDC-STAMP-ALIST-P-OF-VDC-ENTRY->STAMPS ...)
+...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY->STAMPS$INLINE-OF-VDC-ENTRY-FIX-X ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( PROGN (FTY::DEFFIXEQUIV VDC-ENTRY->STAMPS ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM VDC-ENTRY-P-OF-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VDC-ENTRY-P-OF-VDC-ENTRY ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY->VALUE-OF-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Form:  ( DEFTHM VDC-ENTRY->STAMPS-OF-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY-OF-FIELDS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY-FIX-WHEN-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Subgoal 4
+Subgoal 4'
+Subgoal 4''
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Form:  ( DEFTHM EQUAL-OF-VDC-ENTRY ...)
+Time:  0.05 seconds (prove: 0.03, print: 0.00, other: 0.02)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY-OF-VDC-STAMP-ALIST-FIX-STAMPS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFMACRO PATBIND-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE B*-BINDER-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFMACRO PATBIND-VDC-ENTRY ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO MAKE-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO CHANGE-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VDC-ENTRY->VALUE-OF-VDC-ENTRY ...) ...)
+Time:  0.06 seconds (prove: 0.03, print: 0.00, other: 0.03)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFUN REMAKE-VDC-ENTRY ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFTHM VDC-ENTRY-FIX-REDEF ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( DEFTHM TAG-OF-VDC-ENTRY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE RULESET-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VDC-ENTRY ...) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VDC-ENTRY ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.28 seconds (prove: 0.06, print: 0.00, other: 0.22)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.31 seconds (prove: 0.06, print: 0.00, other: 0.25)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFPROD-FN ...))
+Rules: NIL
+Time:  0.31 seconds (prove: 0.06, print: 0.00, other: 0.25)
+Prover steps counted:  2467
+T
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE STD::DEFAULT-HINTS-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-ORIG-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TYPE-THEORY ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (CONS ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( DEFLABEL FTY::DEFTYPES-BEFORE-TEMP-THMS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM TMP-DEFTYPES-SYMBOLP-OF-SYMBOL-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (QUOTE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHEORY FTY::DEFTYPES-TEMP-THMS ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.02 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE DEFINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VDC-ENTRY-ALIST-P ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.02)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFMACRO VDC-ENTRY-ALIST-FIX ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFUN VDC-ENTRY-ALIST-FIX$INLINE ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Goal'
+Subgoal 3
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VDC-ENTRY-ALIST-P-OF-VDC-ENTRY-ALIST-FIX ...)
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFTHM VDC-ENTRY-ALIST-P-OF-VDC-ENTRY-ALIST-FIX ...)
+...)
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal''
+Goal'''
+Goal'4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Form:  ( DEFTHM VDC-ENTRY-ALIST-FIX-WHEN-VDC-ENTRY-ALIST-P ...)
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Goal'
+Form:  ( VERIFY-GUARDS VDC-ENTRY-ALIST-FIX$INLINE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (LET* ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( DEFTHM FTY::TMP-DEFFIXTYPE-IDEMPOTENT ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal 2
+Subgoal 1
+Goal'
+Form:  ( ENCAPSULATE NIL (FTY::DEFFIXTYPE ... T) ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM CONS-OF-SYMBOL-FIX-K-UNDER-VDC-ENTRY-ALIST-EQUIV ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VDC-ENTRY-FIX-V-UNDER-VDC-ENTRY-ALIST-EQUIV
+...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Goal'
+Form:  ( DEFTHM CONS-OF-VDC-ENTRY-ALIST-FIX-Y-UNDER-VDC-ENTRY-ALIST-EQUIV
+...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Goal'
+Form:  ( DEFTHM VDC-ENTRY-ALIST-FIX-OF-ACONS ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Form:  ( DEFTHM VDC-ENTRY-ALIST-FIX-OF-APPEND ...)
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Form:  ( DEFTHM CONSP-CAR-OF-VDC-ENTRY-ALIST-FIX ...)
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.09 seconds (prove: 0.07, print: 0.00, other: 0.03)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (DISABLE ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( IN-THEORY (ENABLE ...))
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+Form:  ( TABLE FTY::FLEXTYPES-TABLE ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VDC-ENTRY-ALIST ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( TABLE XDOC ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (DEFXDOC VDC-ENTRY-ALIST ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (B* ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (TABLE XDOC ...) ...)
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( MAKE-EVENT (FTY::FLEXTYPES-FINAL-XDOC-FN ...))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Form:  ( PROGN (LOCAL ...) ...)
+Time:  0.28 seconds (prove: 0.12, print: 0.00, other: 0.16)
+Form:  ( ENCAPSULATE NIL (WITH-OUTPUT :SUMMARY-OFF ...) ...)
+Time:  0.31 seconds (prove: 0.12, print: 0.00, other: 0.19)
+
+Summary
+Form:  ( MAKE-EVENT (FTY::DEFALIST-FN ...))
+Rules: NIL
+Time:  0.31 seconds (prove: 0.12, print: 0.00, other: 0.19)
+Prover steps counted:  4822
+T
+
+Summary
+Form:  ( INCLUDE-BOOK "std/stobjs/def-hash-theory" ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+"/mnt/data/acl2-8.7-recovery/books/std/stobjs/def-hash-theory.lisp"
+
+Summary
+Form:  ( DEFSTOBJ VDC-CACHE$C ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+
+Summary
+Form:  ( MAKE-EVENT (CONS ...))
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+VDC-CACHE$C
+
+Summary
+Form:  ( DEFUN VDC-CACHE$AP ...)
+Rules: ((:TYPE-PRESCRIPTION ALIST-KEYS)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-CACHE$AP
+
+Summary
+Form:  ( DEFUN CREATE-VDC-CACHE$A ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+CREATE-VDC-CACHE$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-PUT$A ...)
+Rules: ((:TYPE-PRESCRIPTION HONS-PUT-ASSOC))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-CACHE-PUT$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-BOUNDP$A ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VDC-CACHE-BOUNDP$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-GET$A ...)
+Rules: ((:EXECUTABLE-COUNTERPART VDC-STAMP-ALIST-P)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-CACHE-GET$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-GET?$A ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION VDC-CACHE$AP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-CACHE-GET?$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-REM$A ...)
+Rules: ((:TYPE-PRESCRIPTION HONS-REMOVE-ASSOC))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-CACHE-REM$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-CLEAR$A ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-CACHE-CLEAR$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-INIT$A ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VDC-CACHE-INIT$A
+
+Summary
+Form:  ( DEFUN VDC-CACHE-CORR ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE$CP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  39
+VDC-CACHE-CORR
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM VDC-ENTRY-ALIST-P-OF-HONS-REMOVE-ASSOC-FOR-DEF-HASH
+...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-ENTRY-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION HONS-REMOVE-ASSOC)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION HONS-REMOVE-ASSOC)
+        (:REWRITE SYMBOLP-OF-CAAR-WHEN-VDC-ENTRY-ALIST-P)
+        (:REWRITE VDC-ENTRY-ALIST-P-OF-CDR-WHEN-VDC-ENTRY-ALIST-P)
+        (:REWRITE VDC-ENTRY-ALIST-P-OF-CONS)
+        (:REWRITE VDC-ENTRY-P-OF-CDAR-WHEN-VDC-ENTRY-ALIST-P)
+        (:TYPE-PRESCRIPTION VDC-ENTRY-ALIST-P))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1183
+VDC-ENTRY-ALIST-P-OF-HONS-REMOVE-ASSOC-FOR-DEF-HASH
+Subgoal *1/6
+Subgoal *1/6'
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM DEFHASH-VDC-ENTRY-ALIST-P-OF-HONS-PUT-ASSOC ...)
+Rules: ((:COMPOUND-RECOGNIZER CONSP-WHEN-VDC-ENTRY-P)
+        (:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-ENTRY-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION HONS-PUT-ASSOC)
+        (:DEFINITION NOT)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART VDC-ENTRY-ALIST-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION HONS-PUT-ASSOC)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE SYMBOLP-OF-CAAR-WHEN-VDC-ENTRY-ALIST-P)
+        (:REWRITE VDC-ENTRY-ALIST-P-OF-CDR-WHEN-VDC-ENTRY-ALIST-P)
+        (:REWRITE VDC-ENTRY-ALIST-P-OF-CONS)
+        (:REWRITE VDC-ENTRY-ALIST-P-WHEN-NOT-CONSP)
+        (:REWRITE VDC-ENTRY-P-OF-CDAR-WHEN-VDC-ENTRY-ALIST-P)
+        (:TYPE-PRESCRIPTION VDC-ENTRY-ALIST-P))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2108
+DEFHASH-VDC-ENTRY-ALIST-P-OF-HONS-PUT-ASSOC
+
+Summary
+Form:  ( DEFTHM CREATE-VDC-CACHE{CORRESPONDENCE} ...)
+Rules: ((:DEFINITION CREATE-VDC-CACHE$C)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:EXECUTABLE-COUNTERPART ALIST-EQUIV)
+        (:EXECUTABLE-COUNTERPART ALIST-KEYS)
+        (:EXECUTABLE-COUNTERPART CREATE-VDC-CACHE$A)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NO-DUPLICATESP-EQUAL)
+        (:EXECUTABLE-COUNTERPART NTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  18
+CREATE-VDC-CACHE{CORRESPONDENCE}
+
+Summary
+Form:  ( DEFTHM CREATE-VDC-CACHE{PRESERVED} ...)
+Rules: ((:EXECUTABLE-COUNTERPART CREATE-VDC-CACHE$A)
+        (:EXECUTABLE-COUNTERPART VDC-CACHE$AP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+CREATE-VDC-CACHE{PRESERVED}
+Goal'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-PUT{CORRESPONDENCE} ...)
+Rules: ((:CONGRUENCE
+             STOBJS::ALIST-EQUIV-IMPLIES-ALIST-EQUIV-HONS-PUT-ASSOC-3)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION UPDATE-NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-HT$C-PUT)
+        (:DEFINITION VDC-CACHE-PUT$A)
+        (:EQUIVALENCE ALIST-EQUIV-IS-AN-EQUIVALENCE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE STOBJS::DEFHASH-ALIST-EQUIV-OF-HONS-PUT-ASSOC)
+        (:REWRITE STOBJS::DEFHASH-DUPLICATE-KEYS-OF-HONS-PUT-ASSOC)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION ALIST-EQUIV)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  747
+VDC-CACHE-PUT{CORRESPONDENCE}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-PUT{PRESERVED} ...)
+Rules: ((:COMPOUND-RECOGNIZER CONSP-WHEN-VDC-ENTRY-P)
+        (:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-ENTRY-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-PUT$A)
+        (:REWRITE STOBJS::DEFHASH-DUPLICATE-KEYS-OF-HONS-PUT-ASSOC)
+        (:REWRITE DEFHASH-VDC-ENTRY-ALIST-P-OF-HONS-PUT-ASSOC)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  216
+VDC-CACHE-PUT{PRESERVED}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-GET{CORRESPONDENCE} ...)
+Rules: ((:CONGRUENCE STOBJS::ALIST-EQUIV-IMPLIES-EQUAL-HONS-ASSOC-EQUAL-2)
+        (:DEFINITION HONS-ASSOC-EQUAL)
+        (:DEFINITION NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-HT$C-GET)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART VDC-ENTRY)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  365
+VDC-CACHE-GET{CORRESPONDENCE}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-BOUNDP{CORRESPONDENCE} ...)
+Rules: ((:CONGRUENCE STOBJS::ALIST-EQUIV-IMPLIES-EQUAL-HONS-ASSOC-EQUAL-2)
+        (:DEFINITION HONS-ASSOC-EQUAL)
+        (:DEFINITION NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-HT$C-BOUNDP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  327
+VDC-CACHE-BOUNDP{CORRESPONDENCE}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-GET?{CORRESPONDENCE} ...)
+Rules: ((:CONGRUENCE STOBJS::ALIST-EQUIV-IMPLIES-EQUAL-HONS-ASSOC-EQUAL-2)
+        (:DEFINITION HONS-ASSOC-EQUAL)
+        (:DEFINITION MV-NTH)
+        (:DEFINITION NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-GET?$A)
+        (:DEFINITION VDC-CACHE-HT$C-BOUNDP)
+        (:DEFINITION VDC-CACHE-HT$C-GET)
+        (:DEFINITION VDC-CACHE-HT$C-GET?)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART VDC-ENTRY)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  554
+VDC-CACHE-GET?{CORRESPONDENCE}
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-REM{CORRESPONDENCE} ...)
+Rules: ((:CONGRUENCE
+             STOBJS::ALIST-EQUIV-IMPLIES-ALIST-EQUIV-HONS-REMOVE-ASSOC-2)
+        (:CONGRUENCE STOBJS::ALIST-EQUIV-IMPLIES-EQUAL-HONS-ASSOC-EQUAL-2)
+        (:DEFINITION HONS-ASSOC-EQUAL)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION UPDATE-NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-HT$C-REM)
+        (:DEFINITION VDC-CACHE-REM$A)
+        (:EQUIVALENCE ALIST-EQUIV-IS-AN-EQUIVALENCE)
+        (:EXECUTABLE-COUNTERPART ALIST-FIX)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE STOBJS::DEFHASH-ALIST-FIX-UNDER-ALIST-EQUIV)
+        (:REWRITE STOBJS::DEFHASH-ALIST-KEYS-OF-ALIST-FIX)
+        (:REWRITE STOBJS::DEFHASH-ALIST-KEYS-OF-HONS-REMOVE-ASSOC)
+        (:REWRITE STOBJS::DEFHASH-NO-DUPLICATES-OF-REMOVE)
+        (:REWRITE HONS-REMOVE-ASSOC-WHEN-NOT-HONS-ASSOC-EQUAL)
+        (:REWRITE NTH-0-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION ALIST-EQUIV)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  672
+VDC-CACHE-REM{CORRESPONDENCE}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-REM{PRESERVED} ...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-ENTRY-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-REM$A)
+        (:REWRITE STOBJS::DEFHASH-ALIST-KEYS-OF-HONS-REMOVE-ASSOC)
+        (:REWRITE STOBJS::DEFHASH-NO-DUPLICATES-OF-REMOVE)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VDC-ENTRY-ALIST-P-OF-HONS-REMOVE-ASSOC-FOR-DEF-HASH)
+        (:TYPE-PRESCRIPTION NO-DUPLICATESP-EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  201
+VDC-CACHE-REM{PRESERVED}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-CLEAR{CORRESPONDENCE} ...)
+Rules: ((:DEFINITION NTH)
+        (:DEFINITION UPDATE-NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CLEAR$A)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-HT$C-CLEAR)
+        (:EXECUTABLE-COUNTERPART ALIST-EQUIV)
+        (:EXECUTABLE-COUNTERPART ALIST-KEYS)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART NO-DUPLICATESP-EQUAL)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NTH-0-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  266
+VDC-CACHE-CLEAR{CORRESPONDENCE}
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-CLEAR{PRESERVED} ...)
+Rules: ((:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CLEAR$A)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART VDC-CACHE$AP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  23
+VDC-CACHE-CLEAR{PRESERVED}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-INIT{CORRESPONDENCE} ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION UPDATE-NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:DEFINITION VDC-CACHE-HT$C-INIT)
+        (:DEFINITION VDC-CACHE-INIT$A)
+        (:EXECUTABLE-COUNTERPART ALIST-EQUIV)
+        (:EXECUTABLE-COUNTERPART ALIST-KEYS)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART NO-DUPLICATESP-EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART NTH)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NTH-0-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  736
+VDC-CACHE-INIT{CORRESPONDENCE}
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-INIT{GUARD-THM} ...)
+Rules: ((:COMPOUND-RECOGNIZER MAYBE-NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION NTH)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-CORR)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART ZP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  493
+VDC-CACHE-INIT{GUARD-THM}
+
+Summary
+Form:  ( DEFTHM VDC-CACHE-INIT{PRESERVED} ...)
+Rules: ((:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-INIT$A)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART VDC-CACHE$AP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  66
+VDC-CACHE-INIT{PRESERVED}
+
+Summary
+Form:  ( PROGN (DEFTHM CREATE-VDC-CACHE{CORRESPONDENCE} ...) ...)
+Rules: NIL
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.01)
+Prover steps counted:  4686
+
+Summary
+Form:  ( MAKE-EVENT (ER-LET* ...))
+Rules: NIL
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.01)
+Prover steps counted:  4686
+VDC-CACHE-INIT{PRESERVED}
+
+Summary
+Form:  ( DEFABSSTOBJ VDC-CACHE ...)
+Rules: NIL
+Time:  0.04 seconds (prove: 0.00, print: 0.00, other: 0.04)
+VDC-CACHE
+
+Summary
+Form:  ( PROGN (LOCAL ...) ...)
+Rules: NIL
+Time:  0.08 seconds (prove: 0.03, print: 0.00, other: 0.05)
+Prover steps counted:  4686
+VDC-CACHE
+(DEFXDOC VDC-CACHE)
+
+Summary
+Form:  ( ENCAPSULATE NIL (LOCAL ...) ...)
+Rules: NIL
+Time:  0.31 seconds (prove: 0.07, print: 0.00, other: 0.24)
+Prover steps counted:  8016
+T
+
+Summary
+Form:  ( DEFUN VDC-REVISION ...)
+Rules: ((:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-REVISION
+
+Summary
+Form:  ( DEFUN VDC-BUMP ...)
+Rules: ((:TYPE-PRESCRIPTION OMAP::UPDATE-TYPE-PRESCRIPTION)
+        (:TYPE-PRESCRIPTION VDC-REVISION))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+VDC-BUMP
+Goal'
+
+Summary
+Form:  ( DEFUN VDC-CAPTURE ...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-SYMBOL-LISTP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYMBOL-LISTP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  128
+VDC-CAPTURE
+Subgoal 3
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+
+Summary
+Form:  ( DEFUN VDC-STAMPS-VALIDP ...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-STAMP-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION ENDP)
+        (:DEFINITION NATP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-REVISION)
+        (:ELIM CAR-CDR-ELIM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE SYMBOLP-OF-CAAR-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CDR-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CONS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.01)
+Prover steps counted:  754
+VDC-STAMPS-VALIDP
+
+Summary
+Form:  ( DEFUN VDC-ENTRY-LIVEP ...)
+Rules: ((:REWRITE VDC-STAMP-ALIST-P-OF-VDC-ENTRY->STAMPS)
+        (:TYPE-PRESCRIPTION VDC-STAMPS-VALIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  14
+VDC-ENTRY-LIVEP
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-REVISION-OF-BUMP-SAME ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION VDC-BUMP)
+        (:DEFINITION VDC-REVISION)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE OMAP::ASSOC-OF-UPDATE)
+        (:REWRITE CDR-CONS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  150
+VDC-REVISION-OF-BUMP-SAME
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-REVISION-OF-BUMP-DIFFERENT ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-BUMP)
+        (:DEFINITION VDC-REVISION)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE OMAP::ASSOC-OF-UPDATE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  183
+VDC-REVISION-OF-BUMP-DIFFERENT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VDC-STAMP-ALIST-P-OF-CAPTURE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-STAMP-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CAPTURE)
+        (:DEFINITION VDC-REVISION)
+        (:EXECUTABLE-COUNTERPART VDC-STAMP-ALIST-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VDC-CAPTURE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CONS)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-STAMP-ALIST-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  202
+VDC-STAMP-ALIST-P-OF-CAPTURE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM STRIP-CARS-OF-VDC-CAPTURE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION STRIP-CARS)
+        (:DEFINITION SYMBOL-LIST-FIX$INLINE)
+        (:DEFINITION VDC-CAPTURE)
+        (:DEFINITION VDC-REVISION)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART STRIP-CARS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VDC-CAPTURE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION VDC-CAPTURE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  808
+STRIP-CARS-OF-VDC-CAPTURE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VDC-CAPTURE-IS-VALID ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CAPTURE)
+        (:DEFINITION VDC-REVISION)
+        (:DEFINITION VDC-STAMPS-VALIDP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VDC-CAPTURE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-CAPTURE)
+        (:TYPE-PRESCRIPTION VDC-STAMPS-VALIDP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  321
+VDC-CAPTURE-IS-VALID
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VDC-VALIDITY-PRESERVED-BY-UNMENTIONED-BUMP ...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-STAMP-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION ENDP)
+        (:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION STRIP-CARS)
+        (:DEFINITION VDC-BUMP)
+        (:DEFINITION VDC-REVISION)
+        (:DEFINITION VDC-STAMPS-VALIDP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART STRIP-CARS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VDC-STAMPS-VALIDP)
+        (:REWRITE OMAP::ASSOC-OF-UPDATE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE SYMBOLP-OF-CAAR-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CDR-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-WHEN-NOT-CONSP)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION STRIP-CARS)
+        (:TYPE-PRESCRIPTION VDC-STAMPS-VALIDP))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  18028
+VDC-VALIDITY-PRESERVED-BY-UNMENTIONED-BUMP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM VDC-VALIDITY-DESTROYED-BY-MENTIONED-BUMP ...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-STAMP-ALIST-P-COMPOUND-RECOGNIZER)
+        (:DEFINITION DOUBLE-REWRITE)
+        (:DEFINITION ENDP)
+        (:DEFINITION MEMBER-EQUAL)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION STRIP-CARS)
+        (:DEFINITION VDC-BUMP)
+        (:DEFINITION VDC-REVISION)
+        (:DEFINITION VDC-STAMPS-VALIDP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART STRIP-CARS)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION VDC-STAMPS-VALIDP)
+        (:REWRITE OMAP::ASSOC-OF-UPDATE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE SYMBOLP-OF-CAAR-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE OMAP::UPDATE-REDUNDANT-CHEAP)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CDR-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-WHEN-NOT-CONSP)
+        (:TYPE-PRESCRIPTION OMAP::ASSOC)
+        (:TYPE-PRESCRIPTION STRIP-CARS)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-STAMPS-VALIDP))
+Time:  0.12 seconds (prove: 0.12, print: 0.00, other: 0.00)
+Prover steps counted:  25214
+VDC-VALIDITY-DESTROYED-BY-MENTIONED-BUMP
+
+Summary
+Form:  ( DEFUN VDC-INSTALL ...)
+Rules: ((:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHEP)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:REWRITE VDC-ENTRY-P-OF-VDC-ENTRY)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CAPTURE)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-CACHE-PUT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  68
+VDC-INSTALL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN VDC-PROBE ...)
+Rules: ((:COMPOUND-RECOGNIZER
+             TRUE-LISTP-WHEN-VDC-ENTRY-ALIST-P-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE$AP)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHEP)
+        (:DEFINITION VDC-ENTRY-LIVEP)
+        (:EXECUTABLE-COUNTERPART VDC-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE
+             VDC-ENTRY-P-OF-CDR-OF-HONS-ASSOC-EQUAL-WHEN-VDC-ENTRY-ALIST-P)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION OMAP::MAPP)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  580
+VDC-PROBE
+
+Summary
+Form:  ( DEFUN VDC-FORGET ...)
+Rules: ((:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-CACHE-REM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+VDC-FORGET
+Goal'
+
+Summary
+Form:  ( DEFTHM VDC-ENTRY-LIVEP-OF-CAPTURED-ENTRY ...)
+Rules: ((:DEFINITION VDC-ENTRY-LIVEP)
+        (:REWRITE VDC-CAPTURE-IS-VALID)
+        (:REWRITE VDC-ENTRY->STAMPS-OF-VDC-ENTRY)
+        (:REWRITE VDC-ENTRY-P-OF-VDC-ENTRY)
+        (:REWRITE VDC-STAMP-ALIST-FIX-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CAPTURE)
+        (:TYPE-PRESCRIPTION VDC-ENTRY-LIVEP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  98
+VDC-ENTRY-LIVEP-OF-CAPTURED-ENTRY
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VDC-PROBE-AFTER-INSTALL ...)
+Rules: ((:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-PUT)
+        (:DEFINITION VDC-CACHE-PUT$A)
+        (:DEFINITION VDC-INSTALL)
+        (:DEFINITION VDC-PROBE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE HONS-ASSOC-EQUAL-OF-HONS-PUT-ASSOC)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VDC-ENTRY->VALUE-OF-VDC-ENTRY)
+        (:REWRITE VDC-ENTRY-LIVEP-OF-CAPTURED-ENTRY)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  249
+VDC-PROBE-AFTER-INSTALL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VDC-PROBE-AFTER-UNRELATED-INSTALL ...)
+Rules: ((:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-PUT)
+        (:DEFINITION VDC-CACHE-PUT$A)
+        (:DEFINITION VDC-ENTRY-LIVEP)
+        (:DEFINITION VDC-INSTALL)
+        (:DEFINITION VDC-PROBE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE HONS-ASSOC-EQUAL-OF-HONS-PUT-ASSOC)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  615
+VDC-PROBE-AFTER-UNRELATED-INSTALL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VDC-PROBE-AFTER-UNRELATED-FORGET ...)
+Rules: ((:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-REM)
+        (:DEFINITION VDC-CACHE-REM$A)
+        (:DEFINITION VDC-ENTRY-LIVEP)
+        (:DEFINITION VDC-FORGET)
+        (:DEFINITION VDC-PROBE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE HONS-ASSOC-EQUAL-REMOVE-ASSOC)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  536
+VDC-PROBE-AFTER-UNRELATED-FORGET
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM VDC-INSTALLED-ENTRY-SURVIVES-UNMENTIONED-BUMP ...)
+Rules: ((:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-PUT)
+        (:DEFINITION VDC-CACHE-PUT$A)
+        (:DEFINITION VDC-ENTRY-LIVEP)
+        (:DEFINITION VDC-INSTALL)
+        (:DEFINITION VDC-PROBE)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE HONS-ASSOC-EQUAL-OF-HONS-PUT-ASSOC)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VDC-ENTRY->STAMPS-OF-VDC-ENTRY)
+        (:REWRITE VDC-ENTRY->VALUE-OF-VDC-ENTRY)
+        (:REWRITE VDC-ENTRY-P-OF-VDC-ENTRY)
+        (:REWRITE VDC-STAMP-ALIST-FIX-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CAPTURE)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-STAMPS-VALIDP))
+Hint-events: ((:USE STRIP-CARS-OF-VDC-CAPTURE)
+              (:USE VDC-CAPTURE-IS-VALID)
+              (:USE VDC-STAMP-ALIST-P-OF-CAPTURE)
+              (:USE VDC-VALIDITY-PRESERVED-BY-UNMENTIONED-BUMP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  780
+VDC-INSTALLED-ENTRY-SURVIVES-UNMENTIONED-BUMP
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM VDC-INSTALLED-ENTRY-DIES-AFTER-MENTIONED-BUMP ...)
+Rules: ((:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-CACHE-PUT)
+        (:DEFINITION VDC-CACHE-PUT$A)
+        (:DEFINITION VDC-ENTRY-LIVEP)
+        (:DEFINITION VDC-INSTALL)
+        (:DEFINITION VDC-PROBE)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE HONS-ASSOC-EQUAL-OF-HONS-PUT-ASSOC)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:REWRITE VDC-ENTRY->STAMPS-OF-VDC-ENTRY)
+        (:REWRITE VDC-ENTRY-P-OF-VDC-ENTRY)
+        (:REWRITE VDC-STAMP-ALIST-FIX-WHEN-VDC-STAMP-ALIST-P)
+        (:REWRITE VDC-STAMP-ALIST-P-OF-CAPTURE)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX)
+        (:TYPE-PRESCRIPTION VDC-STAMPS-VALIDP))
+Hint-events: ((:USE STRIP-CARS-OF-VDC-CAPTURE)
+              (:USE VDC-CAPTURE-IS-VALID)
+              (:USE VDC-STAMP-ALIST-P-OF-CAPTURE)
+              (:USE VDC-VALIDITY-DESTROYED-BY-MENTIONED-BUMP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  771
+VDC-INSTALLED-ENTRY-DIES-AFTER-MENTIONED-BUMP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM VDC-PROBE-UPDATER-INDEPENDENCE ...)
+Rules: ((:CONGRUENCE SYMBOL-EQUIV-IMPLIES-EQUAL-SYMBOL-FIX-1)
+        (:DEFINITION NOT)
+        (:DEFINITION VDC-CACHE-BOUNDP)
+        (:DEFINITION VDC-CACHE-BOUNDP$A)
+        (:DEFINITION VDC-CACHE-GET)
+        (:DEFINITION VDC-CACHE-GET$A)
+        (:DEFINITION VDC-ENTRY-LIVEP)
+        (:DEFINITION VDC-PROBE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART SYNP)
+        (:EXECUTABLE-COUNTERPART VDC-ENTRY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE SYMBOL-FIX-UNDER-SYMBOL-EQUIV)
+        (:REWRITE SYMBOL-FIX-WHEN-SYMBOLP)
+        (:TYPE-PRESCRIPTION HONS-ASSOC-EQUAL)
+        (:TYPE-PRESCRIPTION SYMBOLP-OF-SYMBOL-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1133
+VDC-PROBE-UPDATER-INDEPENDENCE
+:PASSED
+(DEFXDOC VDC-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "znr-epochal-dependency-cache" ...)
+Rules: NIL
+Time:  3.53 seconds (prove: 0.66, print: 0.03, other: 2.85)
+Prover steps counted:  71087
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 3.53 seconds realtime, 3.29 seconds runtime
+; (407,325,232 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 119495 Jun 29 00:40 znr-epochal-dependency-cache.cert

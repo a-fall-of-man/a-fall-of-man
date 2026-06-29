@@ -1,0 +1,704 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zvu-rope-local-patch.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zux-structural-rope-split" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zux-structural-rope-split
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.05 seconds (prove: 0.00, print: 0.00, other: 0.05)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zvu-rope-local-patch" ...)
+Rules: NIL
+Time:  1.16 seconds (prove: 0.00, print: 0.00, other: 1.16)
+"/mnt/data/new-release/cert-work/zvu-rope-local-patch.lisp"
+(DEFXDOC ZUX-STRUCTURAL-ROPE-SPLIT)
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.2''
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN ZRS-ROPE-LENGTH ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.01)
+Prover steps counted:  3891
+ZRS-ROPE-LENGTH
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZRS-ROPE-LENGTH-REFINES-FLATTENING ...)
+Rules: ((:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-LEN-1)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZRS-ROPE-LENGTH)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZRS-ROPE-LENGTH)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1403
+ZRS-ROPE-LENGTH-REFINES-FLATTENING
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-ENOUGHP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-ENOUGHP)
+        (:REWRITE |(< y (+ (- c) x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZYP-ENOUGHP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1031
+ZRS-ENOUGHP-IFF-COUNT-AT-MOST-LEN
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZRS-TAKE-WHEN-COUNT-COVERS-LIST ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION TRUE-LIST-FIX)
+        (:DEFINITION ZYP-TAKE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-TAKE)
+        (:REWRITE |(< (+ (- c) x) y)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1191
+ZRS-TAKE-WHEN-COUNT-COVERS-LIST
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM ZRS-TAKE-OF-APPEND ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-APPEND-1)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-TAKE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-TAKE)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE ZRS-TAKE-WHEN-COUNT-COVERS-LIST)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.11 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  6200
+ZRS-TAKE-OF-APPEND
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.3
+Subgoal *1/3.3'
+Subgoal *1/3.3''
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/3.1'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZRS-DROP-PREFIX-OF-APPEND ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZYP-DROP-PREFIX)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(< (+ (- c) x) y)|)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.08 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  5065
+ZRS-DROP-PREFIX-OF-APPEND
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN ZRS-ROPE-TAKE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE ZRS-ROPE-LENGTH-REFINES-FLATTENING)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION XEF-ROPE-CAT)
+        (:TYPE-PRESCRIPTION XEF-ROPE-LEAF))
+Time:  0.06 seconds (prove: 0.05, print: 0.00, other: 0.01)
+Prover steps counted:  5468
+ZRS-ROPE-TAKE
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN ZRS-ROPE-DROP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ACL2-COUNT)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE ZRS-ROPE-LENGTH-REFINES-FLATTENING)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION XEF-ROPE-CAT)
+        (:TYPE-PRESCRIPTION XEF-ROPE-LEAF))
+Time:  0.06 seconds (prove: 0.05, print: 0.00, other: 0.01)
+Prover steps counted:  5434
+ZRS-ROPE-DROP
+
+Summary
+Form:  ( DEFUN ZRS-ROPE-SPLIT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZRS-ROPE-SPLIT
+
+Summary
+Form:  ( DEFUN ZRS-SPLIT-PREFIX ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZRS-SPLIT-PREFIX
+
+Summary
+Form:  ( DEFUN ZRS-SPLIT-SUFFIX ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZRS-SPLIT-SUFFIX
+Subgoal *1/5
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4''
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZRS-FLATTEN-OF-ROPE-TAKE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZRS-ROPE-TAKE)
+        (:DEFINITION ZYP-TAKE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-LEAF)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZRS-ROPE-TAKE)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE EQUAL-OF-APPEND-AND-APPEND-SAME-ARG2)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZRS-ROPE-LENGTH-REFINES-FLATTENING)
+        (:REWRITE ZRS-TAKE-OF-APPEND)
+        (:REWRITE ZRS-TAKE-WHEN-COUNT-COVERS-LIST)
+        (:REWRITE ZYP-TAKE-OF-TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN)
+        (:TYPE-PRESCRIPTION ZYP-TAKE))
+Time:  0.17 seconds (prove: 0.16, print: 0.00, other: 0.00)
+Prover steps counted:  13567
+ZRS-FLATTEN-OF-ROPE-TAKE
+Subgoal *1/5
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZRS-FLATTEN-OF-ROPE-DROP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-LIST-FIX-1)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-ROPE-CAT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION ZRS-ROPE-DROP)
+        (:DEFINITION ZYP-DROP-PREFIX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-FLATTEN)
+        (:EXECUTABLE-COUNTERPART XEF-ROPE-LEAF)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZRS-ROPE-DROP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE EQUAL-OF-APPEND-AND-APPEND-SAME-ARG2)
+        (:REWRITE LIST-FIX-OF-APPEND)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZRS-DROP-PREFIX-OF-APPEND)
+        (:REWRITE ZRS-ROPE-LENGTH-REFINES-FLATTENING)
+        (:REWRITE ZYP-DROP-PREFIX-OF-TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.08 seconds (prove: 0.07, print: 0.00, other: 0.00)
+Prover steps counted:  6777
+ZRS-FLATTEN-OF-ROPE-DROP
+Goal'
+
+Summary
+Form:  ( DEFTHM ZRS-FLATTEN-OF-SPLIT-PREFIX ...)
+Rules: ((:DEFINITION ZRS-ROPE-SPLIT)
+        (:DEFINITION ZRS-SPLIT-PREFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-TAKE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1130
+ZRS-FLATTEN-OF-SPLIT-PREFIX
+Goal'
+
+Summary
+Form:  ( DEFTHM ZRS-FLATTEN-OF-SPLIT-SUFFIX ...)
+Rules: ((:DEFINITION ZRS-ROPE-SPLIT)
+        (:DEFINITION ZRS-SPLIT-SUFFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-DROP))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  949
+ZRS-FLATTEN-OF-SPLIT-SUFFIX
+Goal'
+
+Summary
+Form:  ( DEFTHM ZRS-SPLIT-RECONSTRUCTS-WORD ...)
+Rules: ((:DEFINITION ZRS-ROPE-SPLIT)
+        (:DEFINITION ZRS-SPLIT-PREFIX)
+        (:DEFINITION ZRS-SPLIT-SUFFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-DROP)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-TAKE)
+        (:REWRITE ZYP-APPEND-TAKE-AND-DROP)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1845
+ZRS-SPLIT-RECONSTRUCTS-WORD
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM ZRS-SUMMARY-OF-SPLIT-RECONSTRUCTION ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZRS-ROPE-SPLIT)
+        (:DEFINITION ZRS-SPLIT-PREFIX)
+        (:DEFINITION ZRS-SPLIT-SUFFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-DROP)
+        (:REWRITE ZRS-FLATTEN-OF-ROPE-TAKE)
+        (:REWRITE ZVR-WORD-BI-SUMMARY-OF-TRUE-LIST-FIX)
+        (:REWRITE ZYP-APPEND-TAKE-AND-DROP)
+        (:TYPE-PRESCRIPTION XEF-ROPE-FLATTEN))
+Hint-events: ((:USE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+              (:USE XEF-WORD-BI-SUMMARY-OF-APPEND)
+              (:USE ZRS-SPLIT-RECONSTRUCTS-WORD))
+Time:  0.11 seconds (prove: 0.11, print: 0.00, other: 0.00)
+Prover steps counted:  10954
+ZRS-SUMMARY-OF-SPLIT-RECONSTRUCTION
+
+Summary
+Form:  ( DEFCONST *ZRS-DEMO-ROPE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZRS-DEMO-ROPE*
+:PASSED
+(DEFXDOC ZRS-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zux-structural-rope-split" ...)
+Rules: NIL
+Time:  2.07 seconds (prove: 0.78, print: 0.01, other: 1.27)
+Prover steps counted:  64905
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 2.07 seconds realtime, 1.89 seconds runtime
+; (224,841,344 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 24781 Jun 29 00:41 zux-structural-rope-split.cert

@@ -1,0 +1,796 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zaq-winograd-bilinear-bank.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zar-rader-winograd-dft" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zar-rader-winograd-dft
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zaq-winograd-bilinear-bank" ...)
+Rules: NIL
+Time:  1.23 seconds (prove: 0.00, print: 0.00, other: 1.23)
+"/mnt/data/new-release/cert-work/zaq-winograd-bilinear-bank.lisp"
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RWD-FOURIER-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+RWD-FOURIER-ROW-AUX
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RWD-FOURIER-MATRIX-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RWD-FOURIER-MATRIX-AUX
+
+Summary
+Form:  ( DEFUN RWD-FOURIER-MATRIX ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-FOURIER-MATRIX-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-FOURIER-MATRIX
+
+Summary
+Form:  ( DEFUN RWD-DIRECT-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-MATRIX-EVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-DIRECT-OUTPUT
+
+Summary
+Form:  ( DEFUN RWD-DIRECT-OUTPUTS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-DIRECT-OUTPUTS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.31
+Subgoal *1/2.30
+Subgoal *1/2.29
+Subgoal *1/2.28
+Subgoal *1/2.27
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-RWD-FOURIER-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-FOURIER-ROW-AUX)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART MOD)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-FOURIER-ROW-AUX)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(< (* x y) 0) rationalp (* x y)|)
+        (:REWRITE |(<= x (/ y)) with (< 0 y)|)
+        (:REWRITE |(equal (* x y) 0)|)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(mod (if a b c) x)|)
+        (:REWRITE |(mod 0 y)|)
+        (:REWRITE |(mod x 0)|)
+        (:REWRITE |(mod y (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-MOD-RATIO)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE MOD-NEGATIVE . 1)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION MOD)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP)
+        (:TYPE-PRESCRIPTION RWD-FOURIER-ROW-AUX))
+Time:  0.71 seconds (prove: 0.71, print: 0.00, other: 0.00)
+Prover steps counted:  41020
+RATIONAL-ROWP-OF-RWD-FOURIER-ROW-AUX
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-RWD-FOURIER-MATRIX-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RWD-FOURIER-MATRIX-AUX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-FOURIER-MATRIX-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RATIONAL-ROWP-OF-RWD-FOURIER-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION RWD-FOURIER-MATRIX-AUX))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  521
+RATIONAL-MATRIXP-OF-RWD-FOURIER-MATRIX-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-RWD-FOURIER-MATRIX ...)
+Rules: ((:DEFINITION RWD-FOURIER-MATRIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE RATIONAL-MATRIXP-OF-RWD-FOURIER-MATRIX-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-RWD-FOURIER-MATRIX-AUX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  121
+RATIONAL-MATRIXP-OF-RWD-FOURIER-MATRIX
+Goal'
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RWD-COEFFICIENT-AT ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION INTEGER-ABS)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2053
+RWD-COEFFICIENT-AT
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RWD-LIFT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RWD-LIFT-ROW-AUX
+
+Summary
+Form:  ( DEFUN RWD-LIFT-ROW ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-LIFT-ROW-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-LIFT-ROW
+
+Summary
+Form:  ( DEFUN RWD-LIFT-TERMS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-LIFT-TERMS
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RWD-CONSTANT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RWD-CONSTANT-ROW-AUX
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RWD-UNIT-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RWD-UNIT-ROW-AUX
+
+Summary
+Form:  ( DEFUN RWD-UNIT-ROW ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-UNIT-ROW-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-UNIT-ROW
+
+Summary
+Form:  ( DEFUN RWD-DC-TERM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-UNIT-ROW))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-DC-TERM
+
+Summary
+Form:  ( DEFUN RWD-BASE-TERM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-UNIT-ROW))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-BASE-TERM
+
+Summary
+Form:  ( DEFUN RWD-FULL-TERMS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-LIFT-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-FULL-TERMS
+
+Summary
+Form:  ( DEFUN RWD-ZERO-ROW ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-CONSTANT-ROW-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-ZERO-ROW
+
+Summary
+Form:  ( DEFUN RWD-DC-POST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-ZERO-ROW))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-DC-POST
+
+Summary
+Form:  ( DEFUN RWD-NONZERO-POST ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-NONZERO-POST
+
+Summary
+Form:  ( DEFUN RWD-NONZERO-POSTS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-NONZERO-POSTS
+
+Summary
+Form:  ( DEFUN RWD-FULL-POSTS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RWD-NONZERO-POSTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-FULL-POSTS
+
+Summary
+Form:  ( DEFUN RWD-OUTPUT-ORDER ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-OUTPUT-ORDER
+
+Summary
+Form:  ( DEFUN RWD-PLAN-CERTIFIES-OUTPUTP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-PLAN-CERTIFIES-OUTPUTP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN RWD-BANK-CERTIFIES-AUX ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION POSP)
+        (:DEFINITION RWD-FOURIER-MATRIX)
+        (:DEFINITION RWD-PLAN-CERTIFIES-OUTPUTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1163
+RWD-BANK-CERTIFIES-AUX
+
+Summary
+Form:  ( DEFUN RWD-BANK-CERTIFIESP ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-BANK-CERTIFIES-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-BANK-CERTIFIESP
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RWD-CERTIFIED-HEAD-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RWD-DIRECT-OUTPUT)
+        (:DEFINITION RWD-FOURIER-MATRIX)
+        (:DEFINITION RWD-PLAN-CERTIFIES-OUTPUTP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE WBC-POST-OUTPUT-OF-PRODUCT-BANK)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Hint-events: ((:USE WBC-PLAN-OUTPUT-IS-MATRIX-EVAL)
+              (:USE WBC-POST-OUTPUT-OF-PRODUCT-BANK))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  3808
+RWD-CERTIFIED-HEAD-CORRECT
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RWD-BANK-CERTIFIES-AUX-CORRECT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RWD-BANK-CERTIFIES-AUX)
+        (:DEFINITION RWD-DIRECT-OUTPUTS)
+        (:DEFINITION WBC-POST-BANK-OUTPUT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RWD-BANK-CERTIFIES-AUX)
+        (:REWRITE RWD-CERTIFIED-HEAD-CORRECT)
+        (:TYPE-PRESCRIPTION QCX-VECTORP)
+        (:TYPE-PRESCRIPTION RWD-BANK-CERTIFIES-AUX)
+        (:TYPE-PRESCRIPTION RWD-PLAN-CERTIFIES-OUTPUTP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2282
+RWD-BANK-CERTIFIES-AUX-CORRECT
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RWD-CERTIFIED-BANK-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RWD-BANK-CERTIFIES-AUX)
+        (:DEFINITION RWD-BANK-CERTIFIESP)
+        (:DEFINITION RWD-PLAN-CERTIFIES-OUTPUTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-BANK-OUTPUT)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RWD-BANK-CERTIFIES-AUX))
+Hint-events: ((:USE RWD-BANK-CERTIFIES-AUX-CORRECT))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  5054
+RWD-CERTIFIED-BANK-CORRECT
+
+Summary
+Form:  ( DEFUN RWD-COMPILE-TERMS ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-FULL-TERMS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-COMPILE-TERMS
+
+Summary
+Form:  ( DEFUN RWD-COMPILE-POSTS ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-FULL-POSTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-COMPILE-POSTS
+
+Summary
+Form:  ( DEFUN RWD-COMPILE-OUTPUTS ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-OUTPUT-ORDER))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-COMPILE-OUTPUTS
+
+Summary
+Form:  ( DEFUN RWD-COMPILED-CERTIFIESP ...)
+Rules: ((:TYPE-PRESCRIPTION RWD-BANK-CERTIFIESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-COMPILED-CERTIFIESP
+
+Summary
+Form:  ( DEFUN RWD-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-BANK-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-RUN
+Goal'
+
+Summary
+Form:  ( DEFTHM RWD-COMPILED-CERTIFIESP-IS-BANK-CERTIFIESP ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION RWD-BANK-CERTIFIES-AUX)
+        (:DEFINITION RWD-BANK-CERTIFIESP)
+        (:DEFINITION RWD-BASE-TERM)
+        (:DEFINITION RWD-COMPILE-OUTPUTS)
+        (:DEFINITION RWD-COMPILE-POSTS)
+        (:DEFINITION RWD-COMPILE-TERMS)
+        (:DEFINITION RWD-COMPILED-CERTIFIESP)
+        (:DEFINITION RWD-DC-POST)
+        (:DEFINITION RWD-DC-TERM)
+        (:DEFINITION RWD-FOURIER-MATRIX)
+        (:DEFINITION RWD-FULL-POSTS)
+        (:DEFINITION RWD-FULL-TERMS)
+        (:DEFINITION RWD-OUTPUT-ORDER)
+        (:DEFINITION RWD-PLAN-CERTIFIES-OUTPUTP)
+        (:DEFINITION RWD-UNIT-ROW)
+        (:DEFINITION RWD-ZERO-ROW)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RWD-CONSTANT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RWD-LIFT-TERMS)
+        (:TYPE-PRESCRIPTION RWD-NONZERO-POSTS)
+        (:TYPE-PRESCRIPTION RWD-UNIT-ROW-AUX)
+        (:TYPE-PRESCRIPTION WBC-PLAN-MATRIX))
+Time:  0.17 seconds (prove: 0.17, print: 0.00, other: 0.00)
+Prover steps counted:  28936
+RWD-COMPILED-CERTIFIESP-IS-BANK-CERTIFIESP
+Goal'
+
+Summary
+Form:  ( DEFTHM RWD-RUN-IS-BANK-OUTPUT ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RWD-BASE-TERM)
+        (:DEFINITION RWD-COMPILE-POSTS)
+        (:DEFINITION RWD-COMPILE-TERMS)
+        (:DEFINITION RWD-DC-POST)
+        (:DEFINITION RWD-DC-TERM)
+        (:DEFINITION RWD-FULL-POSTS)
+        (:DEFINITION RWD-FULL-TERMS)
+        (:DEFINITION RWD-RUN)
+        (:DEFINITION RWD-UNIT-ROW)
+        (:DEFINITION RWD-ZERO-ROW)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-BANK-OUTPUT)
+        (:DEFINITION WBC-LINEAR)
+        (:DEFINITION WBC-POST-BANK-OUTPUT)
+        (:DEFINITION WBC-POST-OUTPUT)
+        (:DEFINITION WBC-PRODUCT-BANK)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-SCALE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION RWD-CONSTANT-ROW-AUX)
+        (:TYPE-PRESCRIPTION RWD-LIFT-TERMS)
+        (:TYPE-PRESCRIPTION RWD-NONZERO-POSTS)
+        (:TYPE-PRESCRIPTION WBC-LINEAR)
+        (:TYPE-PRESCRIPTION WBC-PRODUCT-BANK))
+Time:  4.59 seconds (prove: 4.59, print: 0.00, other: 0.00)
+Prover steps counted:  676107
+RWD-RUN-IS-BANK-OUTPUT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RWD-COMPILED-TRANSFORM-CORRECT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE RWD-CERTIFIED-BANK-CORRECT)
+              (:USE RWD-COMPILED-CERTIFIESP-IS-BANK-CERTIFIESP)
+              (:USE RWD-RUN-IS-BANK-OUTPUT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  294
+RWD-COMPILED-TRANSFORM-CORRECT
+
+Summary
+Form:  ( DEFUN RWD-COMPLEX-PRODUCT-COUNT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RWD-COMPLEX-PRODUCT-COUNT
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zar-rader-winograd-dft" ...)
+Rules: NIL
+Time:  7.07 seconds (prove: 5.66, print: 0.01, other: 1.40)
+Prover steps counted:  762009
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 7.07 seconds realtime, 6.58 seconds runtime
+; (982,453,152 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 29259 Jun 29 00:36 zar-rader-winograd-dft.cert

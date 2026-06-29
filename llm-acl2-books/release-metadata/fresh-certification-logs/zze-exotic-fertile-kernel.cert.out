@@ -1,0 +1,5832 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zze-exotic-fertile-kernel" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zze-exotic-fertile-kernel
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.32 seconds (prove: 0.00, print: 0.00, other: 0.32)
+"/mnt/data/acl2-8.7-recovery/books/arithmetic-5/top.lisp"
+Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.65 seconds (prove: 0.00, print: 0.00, other: 0.65)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC XEF-EXOTIC-FERTILE-KERNEL)
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN XEF-REPEAT ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+XEF-REPEAT
+
+Summary
+Form:  ( DEFUN XEF-REV ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-REV
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM XEF-LEN-OF-REPEAT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-REPEAT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REPEAT)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION XEF-REPEAT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  516
+XEF-LEN-OF-REPEAT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-REV-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-REV)
+        (:ELIM CAR-CDR-ELIM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REV)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION XEF-REV))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2292
+XEF-REV-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-REV-OF-REV ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-REV)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-REV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REV)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-OF-CONS)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE XEF-REV-OF-APPEND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  669
+XEF-REV-OF-REV
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-A ...)
+Rules: ((:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-A
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-B ...)
+Rules: ((:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-B
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-P ...)
+Rules: ((:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-P
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-Q ...)
+Rules: ((:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-Q
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-FIX ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-FIX
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-ID ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-ID
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-EVAL ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-P)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-Q))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-EVAL
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-INTEGERP-OF-COCYCLE-EVAL-STATE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  406
+XEF-INTEGERP-OF-COCYCLE-EVAL-STATE
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-INTEGERP-OF-COCYCLE-EVAL-COST ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CDR-CONS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  406
+XEF-INTEGERP-OF-COCYCLE-EVAL-COST
+
+Summary
+Form:  ( DEFTHM XEF-IFIX-WHEN-INTEGERP ...)
+Rules: ((:DEFINITION IFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  35
+XEF-IFIX-WHEN-INTEGERP
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-COMPOSE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-COMPOSE
+
+Summary
+Form:  ( DEFUN XEF-CHAIN-RESULTS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-CHAIN-RESULTS
+
+Summary
+Form:  ( DEFTHM XEF-CAR-OF-CHAIN-RESULTS ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  76
+XEF-CAR-OF-CHAIN-RESULTS
+
+Summary
+Form:  ( DEFTHM XEF-CDR-OF-CHAIN-RESULTS ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  131
+XEF-CDR-OF-CHAIN-RESULTS
+
+Summary
+Form:  ( DEFTHM XEF-CHAIN-RESULTS-ASSOCIATIVE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-CAR-OF-CHAIN-RESULTS)
+        (:REWRITE XEF-CDR-OF-CHAIN-RESULTS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-CHAIN-RESULTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  336
+XEF-CHAIN-RESULTS-ASSOCIATIVE
+Subgoal 16
+Subgoal 16.4
+Subgoal 16.4.2
+Subgoal 16.4.1
+Subgoal 16.4.1'
+Subgoal 16.3
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 15
+Subgoal 15.2
+Subgoal 15.1
+Subgoal 14
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 13.2
+Subgoal 13.1
+Subgoal 12
+Subgoal 12.2
+Subgoal 12.1
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 4.2
+Subgoal 4.1
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-IDEMPOTENT ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-FIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  4718
+XEF-COCYCLE-FIX-IDEMPOTENT
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-A-OF-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  128
+XEF-COCYCLE-A-OF-FIX
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-B-OF-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  128
+XEF-COCYCLE-B-OF-FIX
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-P-OF-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  128
+XEF-COCYCLE-P-OF-FIX
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-Q-OF-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  128
+XEF-COCYCLE-Q-OF-FIX
+Goal'
+Subgoal 32
+Subgoal 32.4
+Subgoal 32.4.2
+Subgoal 32.4.1
+Subgoal 32.3
+Subgoal 32.2
+Subgoal 32.1
+Subgoal 31
+Subgoal 31.4
+Subgoal 31.4.2
+Subgoal 31.4.1
+Subgoal 31.4.1'
+Subgoal 31.3
+Subgoal 31.2
+Subgoal 31.1
+Subgoal 31.1'
+Subgoal 30
+Subgoal 30.2
+Subgoal 30.1
+Subgoal 29
+Subgoal 29.2
+Subgoal 29.1
+Subgoal 28
+Subgoal 28.2
+Subgoal 28.1
+Subgoal 27
+Subgoal 27.2
+Subgoal 27.1
+Subgoal 26
+Subgoal 26.2
+Subgoal 26.1
+Subgoal 25
+Subgoal 25.2
+Subgoal 25.1
+Subgoal 25.1'
+Subgoal 24
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 23.2
+Subgoal 23.1
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 15
+Subgoal 15.2
+Subgoal 15.1
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 7.2
+Subgoal 7.1
+Subgoal 7.1'
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-EVAL-OF-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.12 seconds (prove: 0.12, print: 0.00, other: 0.00)
+Prover steps counted:  13313
+XEF-COCYCLE-EVAL-OF-FIX
+Subgoal 192
+Subgoal 191
+Subgoal 190
+Subgoal 189
+Subgoal 188
+Subgoal 188.2
+Subgoal 188.1
+Subgoal 187
+Subgoal 187.2
+Subgoal 187.1
+Subgoal 186
+Subgoal 185
+Subgoal 184
+Subgoal 183
+Subgoal 182
+Subgoal 181
+Subgoal 180
+Subgoal 179
+Subgoal 178
+Subgoal 177
+Subgoal 176
+Subgoal 175
+Subgoal 174
+Subgoal 173
+Subgoal 172
+Subgoal 171
+Subgoal 170
+Subgoal 169
+Subgoal 168
+Subgoal 167
+Subgoal 166
+Subgoal 165
+Subgoal 164
+Subgoal 163
+Subgoal 162
+Subgoal 161
+Subgoal 160
+Subgoal 159
+Subgoal 158
+Subgoal 157
+Subgoal 156
+Subgoal 155
+Subgoal 154
+Subgoal 153
+Subgoal 152
+Subgoal 151
+Subgoal 150
+Subgoal 149
+Subgoal 148
+Subgoal 147
+Subgoal 146
+Subgoal 145
+Subgoal 144
+Subgoal 143
+Subgoal 142
+Subgoal 141
+Subgoal 140
+Subgoal 139
+Subgoal 138
+Subgoal 137
+Subgoal 136
+Subgoal 135
+Subgoal 134
+Subgoal 133
+Subgoal 132
+Subgoal 131
+Subgoal 130
+Subgoal 129
+Subgoal 128
+Subgoal 127
+Subgoal 126
+Subgoal 126.2
+Subgoal 126.1
+Subgoal 125
+Subgoal 124
+Subgoal 124.2
+Subgoal 124.1
+Subgoal 123
+Subgoal 122
+Subgoal 122.2
+Subgoal 122.1
+Subgoal 121
+Subgoal 121.2
+Subgoal 121.1
+Subgoal 120
+Subgoal 119
+Subgoal 119.2
+Subgoal 119.1
+Subgoal 118
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 110
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 107.2
+Subgoal 107.1
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 28.2
+Subgoal 28.1
+Subgoal 27
+Subgoal 27.2
+Subgoal 27.1
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 11.2
+Subgoal 11.1
+Subgoal 10
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.1
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-COMPOSE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-FIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.55 seconds (prove: 0.54, print: 0.01, other: 0.00)
+Prover steps counted:  59888
+XEF-COCYCLE-FIX-OF-COMPOSE
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-EVAL-OF-ID ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  216
+XEF-COCYCLE-EVAL-OF-ID
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-COMPOSE-LEFT-IDENTITY ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-A)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-B)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  292
+XEF-COCYCLE-COMPOSE-LEFT-IDENTITY
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-COMPOSE-RIGHT-IDENTITY ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-A)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-B)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  304
+XEF-COCYCLE-COMPOSE-RIGHT-IDENTITY
+Goal'
+Subgoal 384
+Subgoal 383
+Subgoal 382
+Subgoal 381
+Subgoal 380
+Subgoal 379
+Subgoal 378
+Subgoal 377
+Subgoal 376
+Subgoal 376.2
+Subgoal 376.1
+Subgoal 375
+Subgoal 375.2
+Subgoal 375.1
+Subgoal 374
+Subgoal 374.2
+Subgoal 374.1
+Subgoal 373
+Subgoal 373.2
+Subgoal 373.1
+Subgoal 373.1'
+Subgoal 372
+Subgoal 371
+Subgoal 370
+Subgoal 369
+Subgoal 368
+Subgoal 367
+Subgoal 366
+Subgoal 365
+Subgoal 364
+Subgoal 363
+Subgoal 362
+Subgoal 361
+Subgoal 360
+Subgoal 359
+Subgoal 358
+Subgoal 357
+Subgoal 356
+Subgoal 355
+Subgoal 354
+Subgoal 353
+Subgoal 353'
+Subgoal 352
+Subgoal 351
+Subgoal 350
+Subgoal 349
+Subgoal 348
+Subgoal 347
+Subgoal 346
+Subgoal 345
+Subgoal 344
+Subgoal 343
+Subgoal 342
+Subgoal 341
+Subgoal 340
+Subgoal 339
+Subgoal 338
+Subgoal 337
+Subgoal 336
+Subgoal 335
+Subgoal 334
+Subgoal 333
+Subgoal 332
+Subgoal 331
+Subgoal 330
+Subgoal 329
+Subgoal 328
+Subgoal 327
+Subgoal 326
+Subgoal 325
+Subgoal 324
+Subgoal 323
+Subgoal 322
+Subgoal 321
+Subgoal 320
+Subgoal 319
+Subgoal 318
+Subgoal 317
+Subgoal 316
+Subgoal 315
+Subgoal 314
+Subgoal 313
+Subgoal 312
+Subgoal 311
+Subgoal 310
+Subgoal 309
+Subgoal 308
+Subgoal 307
+Subgoal 306
+Subgoal 305
+Subgoal 304
+Subgoal 303
+Subgoal 302
+Subgoal 301
+Subgoal 300
+Subgoal 299
+Subgoal 298
+Subgoal 297
+Subgoal 296
+Subgoal 295
+Subgoal 294
+Subgoal 293
+Subgoal 292
+Subgoal 291
+Subgoal 290
+Subgoal 289
+Subgoal 288
+Subgoal 287
+Subgoal 286
+Subgoal 285
+Subgoal 284
+Subgoal 283
+Subgoal 282
+Subgoal 281
+Subgoal 280
+Subgoal 279
+Subgoal 278
+Subgoal 277
+Subgoal 276
+Subgoal 275
+Subgoal 274
+Subgoal 273
+Subgoal 272
+Subgoal 271
+Subgoal 270
+Subgoal 269
+Subgoal 268
+Subgoal 267
+Subgoal 266
+Subgoal 265
+Subgoal 264
+Subgoal 263
+Subgoal 262
+Subgoal 261
+Subgoal 260
+Subgoal 259
+Subgoal 258
+Subgoal 257
+Subgoal 256
+Subgoal 255
+Subgoal 254
+Subgoal 253
+Subgoal 252
+Subgoal 252.2
+Subgoal 252.1
+Subgoal 251
+Subgoal 251.2
+Subgoal 251.1
+Subgoal 250
+Subgoal 249
+Subgoal 249.2
+Subgoal 249.1
+Subgoal 248
+Subgoal 247
+Subgoal 247.2
+Subgoal 247.1
+Subgoal 246
+Subgoal 246.2
+Subgoal 246.1
+Subgoal 245
+Subgoal 244
+Subgoal 244.2
+Subgoal 244.1
+Subgoal 243
+Subgoal 243.2
+Subgoal 243.1
+Subgoal 242
+Subgoal 241
+Subgoal 241.2
+Subgoal 241.1
+Subgoal 240
+Subgoal 239
+Subgoal 238
+Subgoal 238.2
+Subgoal 238.1
+Subgoal 237
+Subgoal 236
+Subgoal 235
+Subgoal 234
+Subgoal 233
+Subgoal 232
+Subgoal 231
+Subgoal 230
+Subgoal 229
+Subgoal 228
+Subgoal 227
+Subgoal 227.2
+Subgoal 227.1
+Subgoal 226
+Subgoal 225
+Subgoal 224
+Subgoal 223
+Subgoal 222
+Subgoal 221
+Subgoal 220
+Subgoal 219
+Subgoal 218
+Subgoal 217
+Subgoal 216
+Subgoal 216.2
+Subgoal 216.1
+Subgoal 215
+Subgoal 214
+Subgoal 213
+Subgoal 212
+Subgoal 211
+Subgoal 210
+Subgoal 210.2
+Subgoal 210.1
+Subgoal 209
+Subgoal 208
+Subgoal 207
+Subgoal 206
+Subgoal 205
+Subgoal 204
+Subgoal 203
+Subgoal 202
+Subgoal 201
+Subgoal 200
+Subgoal 199
+Subgoal 198
+Subgoal 197
+Subgoal 196
+Subgoal 195
+Subgoal 194
+Subgoal 193
+Subgoal 192
+Subgoal 191
+Subgoal 190
+Subgoal 189
+Subgoal 188
+Subgoal 187
+Subgoal 186
+Subgoal 185
+Subgoal 184
+Subgoal 183
+Subgoal 182
+Subgoal 181
+Subgoal 180
+Subgoal 179
+Subgoal 178
+Subgoal 177
+Subgoal 176
+Subgoal 175
+Subgoal 174
+Subgoal 173
+Subgoal 172
+Subgoal 171
+Subgoal 170
+Subgoal 169
+Subgoal 168
+Subgoal 167
+Subgoal 166
+Subgoal 165
+Subgoal 164
+Subgoal 163
+Subgoal 162
+Subgoal 161
+Subgoal 160
+Subgoal 159
+Subgoal 158
+Subgoal 157
+Subgoal 156
+Subgoal 155
+Subgoal 154
+Subgoal 153
+Subgoal 152
+Subgoal 151
+Subgoal 150
+Subgoal 149
+Subgoal 148
+Subgoal 147
+Subgoal 146
+Subgoal 145
+Subgoal 144
+Subgoal 143
+Subgoal 142
+Subgoal 141
+Subgoal 140
+Subgoal 139
+Subgoal 138
+Subgoal 137
+Subgoal 136
+Subgoal 135
+Subgoal 134
+Subgoal 133
+Subgoal 132
+Subgoal 131
+Subgoal 130
+Subgoal 129
+Subgoal 128
+Subgoal 127
+Subgoal 126
+Subgoal 125
+Subgoal 124
+Subgoal 123
+Subgoal 122
+Subgoal 121
+Subgoal 120
+Subgoal 119
+Subgoal 118
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 110
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 64.2
+Subgoal 64.1
+Subgoal 63
+Subgoal 63.2
+Subgoal 63.1
+Subgoal 62
+Subgoal 62.2
+Subgoal 62.1
+Subgoal 61
+Subgoal 61.2
+Subgoal 61.1
+Subgoal 60
+Subgoal 60.2
+Subgoal 60.1
+Subgoal 59
+Subgoal 59.2
+Subgoal 59.1
+Subgoal 58
+Subgoal 58.2
+Subgoal 58.1
+Subgoal 57
+Subgoal 57.2
+Subgoal 57.1
+Subgoal 56
+Subgoal 56.4
+Subgoal 56.3
+Subgoal 56.3'
+Subgoal 56.2
+Subgoal 56.1
+Subgoal 56.1'
+Subgoal 55
+Subgoal 55.4
+Subgoal 55.3
+Subgoal 55.2
+Subgoal 55.1
+Subgoal 54
+Subgoal 54.4
+Subgoal 54.3
+Subgoal 54.2
+Subgoal 54.1
+Subgoal 53
+Subgoal 53.4
+Subgoal 53.3
+Subgoal 53.2
+Subgoal 53.1
+Subgoal 52
+Subgoal 52.2
+Subgoal 52.1
+Subgoal 51
+Subgoal 51.2
+Subgoal 51.1
+Subgoal 50
+Subgoal 50.2
+Subgoal 50.1
+Subgoal 49
+Subgoal 49.2
+Subgoal 49.1
+Subgoal 48
+Subgoal 48.2
+Subgoal 48.1
+Subgoal 47
+Subgoal 47.2
+Subgoal 47.1
+Subgoal 46
+Subgoal 46.2
+Subgoal 46.1
+Subgoal 45
+Subgoal 45.2
+Subgoal 45.1
+Subgoal 44
+Subgoal 44.2
+Subgoal 44.1
+Subgoal 43
+Subgoal 43.2
+Subgoal 43.1
+Subgoal 42
+Subgoal 42.2
+Subgoal 42.1
+Subgoal 41
+Subgoal 41.2
+Subgoal 41.1
+Subgoal 40
+Subgoal 40.2
+Subgoal 40.1
+Subgoal 39
+Subgoal 39.2
+Subgoal 39.1
+Subgoal 38
+Subgoal 38.2
+Subgoal 38.1
+Subgoal 37
+Subgoal 37.2
+Subgoal 37.1
+Subgoal 36
+Subgoal 36'
+Subgoal 36.2
+Subgoal 36.1
+Subgoal 35
+Subgoal 35.2
+Subgoal 35.1
+Subgoal 34
+Subgoal 34.2
+Subgoal 34.1
+Subgoal 33
+Subgoal 33.2
+Subgoal 33.1
+Subgoal 32
+Subgoal 32.2
+Subgoal 32.1
+Subgoal 31
+Subgoal 30
+Subgoal 30.2
+Subgoal 30.1
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 26.2
+Subgoal 26.1
+Subgoal 25
+Subgoal 25.2
+Subgoal 25.1
+Subgoal 24
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 23.2
+Subgoal 23.1
+Subgoal 22
+Subgoal 22.4
+Subgoal 22.3
+Subgoal 22.2
+Subgoal 22.1
+Subgoal 21
+Subgoal 20
+Subgoal 20.2
+Subgoal 20.1
+Subgoal 20.1'
+Subgoal 19
+Subgoal 18
+Subgoal 18.2
+Subgoal 18.1
+Subgoal 17
+Subgoal 17.4
+Subgoal 17.3
+Subgoal 17.2
+Subgoal 17.1
+Subgoal 16
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 15
+Subgoal 14
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 10.2
+Subgoal 10.1
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.1
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-EVAL-OF-COMPOSE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-CHAIN-RESULTS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  2.38 seconds (prove: 2.34, print: 0.04, other: 0.00)
+Prover steps counted:  215531
+XEF-COCYCLE-EVAL-OF-COMPOSE
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-TWO-PROBE-EXTENSIONALITY ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.14 seconds (prove: 0.14, print: 0.00, other: 0.00)
+Prover steps counted:  35626
+XEF-COCYCLE-TWO-PROBE-EXTENSIONALITY
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-COMPOSE-ASSOCIATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-CAR-OF-CHAIN-RESULTS)
+        (:REWRITE XEF-CHAIN-RESULTS-ASSOCIATIVE)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE))
+Hint-events: ((:USE XEF-COCYCLE-TWO-PROBE-EXTENSIONALITY))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  531
+XEF-COCYCLE-COMPOSE-ASSOCIATIVE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-POWER ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-COMPOSE)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-ID))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+XEF-COCYCLE-POWER
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-ITERATE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION XEF-CHAIN-RESULTS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+XEF-COCYCLE-ITERATE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN XEF-ORBIT-STATES ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+XEF-ORBIT-STATES
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-POWER-ZERO ...)
+Rules: ((:DEFINITION XEF-COCYCLE-POWER)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:EXECUTABLE-COUNTERPART ZP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  19
+XEF-COCYCLE-POWER-ZERO
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-POWER-SUCCESSOR ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION IFIX)
+        (:DEFINITION NATP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-POWER)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-POWER))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  14031
+XEF-COCYCLE-POWER-SUCCESSOR
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-ITERATE-IS-POWER-EVALUATION ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE-ITERATE)
+        (:DEFINITION XEF-COCYCLE-POWER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-COCYCLE-ITERATE)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-ID))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  253
+XEF-COCYCLE-ITERATE-IS-POWER-EVALUATION
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.2
+Subgoal *1/4.2'
+Subgoal *1/4.1
+Subgoal *1/4.1'
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-LEN-OF-ORBIT-STATES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION IFIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-ORBIT-STATES)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-ORBIT-STATES)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  5000
+XEF-LEN-OF-ORBIT-STATES
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-ID ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-FIX)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  4
+XEF-COCYCLE-FIX-OF-ID
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-POWER ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION XEF-COCYCLE-POWER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-COCYCLE-POWER)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-ID))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  116
+XEF-COCYCLE-FIX-OF-POWER
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-POWER-ADDITIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-POWER)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-COCYCLE-POWER)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE XEF-COCYCLE-COMPOSE-ASSOCIATIVE)
+        (:REWRITE XEF-COCYCLE-COMPOSE-RIGHT-IDENTITY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-POWER)
+        (:REWRITE XEF-COCYCLE-POWER-ZERO))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  813
+XEF-COCYCLE-POWER-ADDITIVE
+
+Summary
+Form:  ( DEFUN XEF-LOOKUP-COCYCLE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-FIX)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-ID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-LOOKUP-COCYCLE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-LOOKUP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-LOOKUP-COCYCLE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-LOOKUP-COCYCLE)
+        (:REWRITE XEF-COCYCLE-FIX-IDEMPOTENT)
+        (:REWRITE XEF-COCYCLE-FIX-OF-ID))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  333
+XEF-COCYCLE-FIX-OF-LOOKUP
+
+Summary
+Form:  ( DEFUN XEF-WORD-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-COMPOSE)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-ID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-WORD-SUMMARY
+
+Summary
+Form:  ( DEFUN XEF-WORD-RUN ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION XEF-CHAIN-RESULTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-WORD-RUN
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-OF-NIL ...)
+Rules: ((:DEFINITION XEF-WORD-SUMMARY)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  14
+XEF-WORD-SUMMARY-OF-NIL
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-WORD-SUMMARY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-WORD-SUMMARY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-ID))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  248
+XEF-COCYCLE-FIX-OF-WORD-SUMMARY
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-WORD-SUMMARY)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE XEF-COCYCLE-COMPOSE-ASSOCIATIVE)
+        (:REWRITE XEF-COCYCLE-COMPOSE-RIGHT-IDENTITY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  734
+XEF-WORD-SUMMARY-OF-APPEND
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-OF-SINGLETON ...)
+Rules: ((:DEFINITION XEF-WORD-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-COCYCLE-COMPOSE-LEFT-IDENTITY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-LOOKUP)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  38
+XEF-WORD-SUMMARY-OF-SINGLETON
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-RUN-IS-SUMMARY-EVALUATION ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-RUN)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-WORD-RUN)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-ID))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  532
+XEF-WORD-RUN-IS-SUMMARY-EVALUATION
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-RUN-OF-APPEND ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  110
+XEF-WORD-RUN-OF-APPEND
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-OF-REPEAT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-POWER)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-REPEAT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-COCYCLE-POWER)
+        (:INDUCTION XEF-REPEAT)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-POWER)
+        (:TYPE-PRESCRIPTION XEF-LOOKUP-COCYCLE)
+        (:TYPE-PRESCRIPTION XEF-REPEAT))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  5111
+XEF-WORD-SUMMARY-OF-REPEAT
+
+Summary
+Form:  ( DEFUN XEF-RLE-DECODE ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-DECODE
+
+Summary
+Form:  ( DEFUN XEF-RLE-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-COMPOSE)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-ID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-SUMMARY
+
+Summary
+Form:  ( DEFUN XEF-RLE-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-EVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-RUN
+
+Summary
+Form:  ( DEFUN XEF-RLE-SYMBOL-COUNT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-SYMBOL-COUNT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-LEN-OF-RLE-DECODE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION XEF-RLE-SYMBOL-COUNT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-RLE-DECODE)
+        (:INDUCTION XEF-RLE-SYMBOL-COUNT)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE XEF-LEN-OF-REPEAT)
+        (:TYPE-PRESCRIPTION XEF-RLE-SYMBOL-COUNT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  997
+XEF-LEN-OF-RLE-DECODE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-RLE-SUMMARY-REFINES-DECODING ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION XEF-RLE-SUMMARY)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-RLE-DECODE)
+        (:INDUCTION XEF-RLE-SUMMARY)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL)
+        (:REWRITE XEF-WORD-SUMMARY-OF-REPEAT)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-POWER)
+        (:TYPE-PRESCRIPTION XEF-RLE-SUMMARY))
+Time:  0.06 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  8259
+XEF-RLE-SUMMARY-REFINES-DECODING
+
+Summary
+Form:  ( DEFTHM XEF-RLE-RUN-REFINES-DECODING ...)
+Rules: ((:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-RLE-RUN)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  94
+XEF-RLE-RUN-REFINES-DECODING
+
+Summary
+Form:  ( DEFUN XEF-BI-SUMMARY ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-BI-SUMMARY
+
+Summary
+Form:  ( DEFUN XEF-BI-LENGTH ...)
+Rules: ((:TYPE-PRESCRIPTION NFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-BI-LENGTH
+
+Summary
+Form:  ( DEFUN XEF-BI-FORWARD ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-BI-FORWARD
+
+Summary
+Form:  ( DEFUN XEF-BI-REVERSE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-BI-REVERSE
+
+Summary
+Form:  ( DEFUN XEF-BI-EMPTY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-BI-EMPTY
+
+Summary
+Form:  ( DEFUN XEF-WORD-BI-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-WORD-BI-SUMMARY
+
+Summary
+Form:  ( DEFUN XEF-BI-JOIN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-BI-JOIN
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-BI-LENGTH-OF-SUMMARY ...)
+Rules: ((:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  29
+XEF-BI-LENGTH-OF-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-FORWARD-OF-SUMMARY ...)
+Rules: ((:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-COCYCLE-FIX-IDEMPOTENT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  26
+XEF-BI-FORWARD-OF-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-REVERSE-OF-SUMMARY ...)
+Rules: ((:DEFINITION XEF-BI-REVERSE)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-COCYCLE-FIX-IDEMPOTENT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  28
+XEF-BI-REVERSE-OF-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-LENGTH-OF-JOIN ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-REVERSE)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-BI-LENGTH-OF-SUMMARY)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-BI-LENGTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  400
+XEF-BI-LENGTH-OF-JOIN
+
+Summary
+Form:  ( DEFTHM XEF-BI-FORWARD-OF-JOIN ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:DEFINITION XEF-BI-REVERSE)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-BI-FORWARD-OF-SUMMARY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  167
+XEF-BI-FORWARD-OF-JOIN
+
+Summary
+Form:  ( DEFTHM XEF-BI-REVERSE-OF-JOIN ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-BI-REVERSE-OF-SUMMARY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  161
+XEF-BI-REVERSE-OF-JOIN
+Goal'
+Goal''
+Subgoal 32
+Subgoal 32.4
+Subgoal 32.4.2
+Subgoal 32.4.1
+Subgoal 32.4.1'
+Subgoal 32.3
+Subgoal 32.2
+Subgoal 32.1
+Subgoal 32.1'
+Subgoal 31
+Subgoal 31.2
+Subgoal 31.1
+Subgoal 30
+Subgoal 30.2
+Subgoal 30.1
+Subgoal 29
+Subgoal 29.2
+Subgoal 29.1
+Subgoal 29.1'
+Subgoal 28
+Subgoal 28.2
+Subgoal 28.1
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 20.2
+Subgoal 20.1
+Subgoal 20.1'
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 16.4
+Subgoal 16.4.2
+Subgoal 16.4.1
+Subgoal 16.4.1'
+Subgoal 16.3
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 16.1'
+Subgoal 15
+Subgoal 15.2
+Subgoal 15.1
+Subgoal 14
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 13.2
+Subgoal 13.1
+Subgoal 13.1'
+Subgoal 12
+Subgoal 12.2
+Subgoal 12.1
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 4.2
+Subgoal 4.1
+Subgoal 4.1'
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-BI-JOIN-LEFT-IDENTITY ...)
+Rules: ((:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION IFIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:DEFINITION XEF-BI-REVERSE)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-BI-EMPTY)
+        (:EXECUTABLE-COUNTERPART XEF-BI-FORWARD)
+        (:EXECUTABLE-COUNTERPART XEF-BI-LENGTH)
+        (:EXECUTABLE-COUNTERPART XEF-BI-REVERSE)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-A)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-B)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-COMPOSE)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE XEF-COCYCLE-FIX-IDEMPOTENT)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  15323
+XEF-BI-JOIN-LEFT-IDENTITY
+Goal'
+Goal''
+Subgoal 32
+Subgoal 32.4
+Subgoal 32.4.2
+Subgoal 32.4.1
+Subgoal 32.4.1'
+Subgoal 32.3
+Subgoal 32.2
+Subgoal 32.1
+Subgoal 32.1'
+Subgoal 31
+Subgoal 31.2
+Subgoal 31.1
+Subgoal 30
+Subgoal 30.2
+Subgoal 30.1
+Subgoal 29
+Subgoal 29.2
+Subgoal 29.1
+Subgoal 29.1'
+Subgoal 28
+Subgoal 28.2
+Subgoal 28.1
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 20.2
+Subgoal 20.1
+Subgoal 20.1'
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 16.4
+Subgoal 16.4.2
+Subgoal 16.4.1
+Subgoal 16.4.1'
+Subgoal 16.3
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 16.1'
+Subgoal 15
+Subgoal 15.2
+Subgoal 15.1
+Subgoal 14
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 13.2
+Subgoal 13.1
+Subgoal 13.1'
+Subgoal 12
+Subgoal 12.2
+Subgoal 12.1
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 4.2
+Subgoal 4.1
+Subgoal 4.1'
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-BI-JOIN-RIGHT-IDENTITY ...)
+Rules: ((:CONGRUENCE NAT-EQUIV-IMPLIES-EQUAL-NFIX-1)
+        (:DEFINITION IFIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:DEFINITION XEF-BI-REVERSE)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-BI-EMPTY)
+        (:EXECUTABLE-COUNTERPART XEF-BI-FORWARD)
+        (:EXECUTABLE-COUNTERPART XEF-BI-LENGTH)
+        (:EXECUTABLE-COUNTERPART XEF-BI-REVERSE)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-A)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-B)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-COMPOSE)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE NFIX-UNDER-NAT-EQUIV)
+        (:REWRITE XEF-COCYCLE-FIX-IDEMPOTENT)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  15326
+XEF-BI-JOIN-RIGHT-IDENTITY
+
+Summary
+Form:  ( DEFTHM XEF-BI-JOIN-ASSOCIATIVE ...)
+Rules: ((:DEFINITION XEF-BI-JOIN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE XEF-BI-FORWARD-OF-JOIN)
+        (:REWRITE XEF-BI-LENGTH-OF-JOIN)
+        (:REWRITE XEF-BI-REVERSE-OF-JOIN)
+        (:REWRITE XEF-COCYCLE-COMPOSE-ASSOCIATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  99
+XEF-BI-JOIN-ASSOCIATIVE
+
+Summary
+Form:  ( DEFTHM XEF-WORD-BI-SUMMARY-OF-APPEND ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-BI-FORWARD)
+        (:DEFINITION XEF-BI-JOIN)
+        (:DEFINITION XEF-BI-LENGTH)
+        (:DEFINITION XEF-BI-REVERSE)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-REV-OF-APPEND)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION XEF-WORD-SUMMARY))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  13505
+XEF-WORD-BI-SUMMARY-OF-APPEND
+
+Summary
+Form:  ( DEFUN XEF-ROPE-LEAF ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-LEAF
+
+Summary
+Form:  ( DEFUN XEF-ROPE-CAT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-CAT
+
+Summary
+Form:  ( DEFUN XEF-ROPE-LEAF-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-LEAF-P
+
+Summary
+Form:  ( DEFUN XEF-ROPE-CAT-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-CAT-P
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.2''
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN XEF-ROPE-FLATTEN ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3891
+XEF-ROPE-FLATTEN
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.2''
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN XEF-ROPE-SUMMARY ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION XEF-BI-EMPTY)
+        (:TYPE-PRESCRIPTION XEF-BI-JOIN)
+        (:TYPE-PRESCRIPTION XEF-WORD-BI-SUMMARY))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3891
+XEF-ROPE-SUMMARY
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.2''
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN XEF-ROPE-LEAF-COUNT ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3891
+XEF-ROPE-LEAF-COUNT
+Subgoal 2
+Subgoal 2'
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3''
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal 2.1
+Subgoal 2.1'
+Subgoal 2.1''
+Subgoal 1
+Subgoal 1'
+Subgoal 1.2
+Subgoal 1.2'
+Subgoal 1.2''
+Subgoal 1.1
+Subgoal 1.1'
+Subgoal 1.1''
+
+Summary
+Form:  ( DEFUN XEF-ROPE-HEIGHT ...)
+Rules: ((:DEFINITION ACL2-COUNT)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART ACL2-COUNT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART SYMBOLP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION MAX))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3891
+XEF-ROPE-HEIGHT
+
+Summary
+Form:  ( DEFUN XEF-ROPE-FORWARD-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-EVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-FORWARD-RUN
+
+Summary
+Form:  ( DEFUN XEF-ROPE-REVERSE-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-EVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-REVERSE-RUN
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-FLATTEN-OF-LEAF ...)
+Rules: ((:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  76
+XEF-ROPE-FLATTEN-OF-LEAF
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-FLATTEN-OF-CAT ...)
+Rules: ((:DEFINITION XEF-ROPE-CAT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  516
+XEF-ROPE-FLATTEN-OF-CAT
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-SUMMARY-OF-LEAF ...)
+Rules: ((:DEFINITION XEF-ROPE-LEAF)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION XEF-ROPE-SUMMARY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  87
+XEF-ROPE-SUMMARY-OF-LEAF
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-SUMMARY-OF-CAT ...)
+Rules: ((:DEFINITION XEF-ROPE-CAT)
+        (:DEFINITION XEF-ROPE-CAT-P)
+        (:DEFINITION XEF-ROPE-LEAF-P)
+        (:DEFINITION XEF-ROPE-SUMMARY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS))
+Time:  0.08 seconds (prove: 0.08, print: 0.00, other: 0.00)
+Prover steps counted:  11964
+XEF-ROPE-SUMMARY-OF-CAT
+
+Summary
+Form:  ( DEFTHM XEF-WORD-BI-SUMMARY-OF-NIL ...)
+Rules: ((:DEFINITION XEF-BI-EMPTY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART XEF-REV)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  26
+XEF-WORD-BI-SUMMARY-OF-NIL
+
+Summary
+Form:  ( DEFTHM XEF-BI-LENGTH-OF-WORD-BI-SUMMARY ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-BI-LENGTH-OF-SUMMARY)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  36
+XEF-BI-LENGTH-OF-WORD-BI-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-FORWARD-OF-WORD-BI-SUMMARY ...)
+Rules: ((:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-BI-FORWARD-OF-SUMMARY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  33
+XEF-BI-FORWARD-OF-WORD-BI-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-REVERSE-OF-WORD-BI-SUMMARY ...)
+Rules: ((:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-BI-REVERSE-OF-SUMMARY)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  35
+XEF-BI-REVERSE-OF-WORD-BI-SUMMARY
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-SUMMARY-REFINES-FLATTENING ...)
+Rules: ((:DEFINITION XEF-ROPE-FLATTEN)
+        (:DEFINITION XEF-ROPE-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-ROPE-SUMMARY)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-NIL)
+        (:TYPE-PRESCRIPTION XEF-ROPE-CAT-P)
+        (:TYPE-PRESCRIPTION XEF-ROPE-LEAF-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  562
+XEF-ROPE-SUMMARY-REFINES-FLATTENING
+
+Summary
+Form:  ( DEFTHM XEF-BI-LENGTH-OF-ROPE-SUMMARY ...)
+Rules: ((:REWRITE XEF-BI-LENGTH-OF-WORD-BI-SUMMARY)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  14
+XEF-BI-LENGTH-OF-ROPE-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-FORWARD-OF-ROPE-SUMMARY ...)
+Rules: ((:REWRITE XEF-BI-FORWARD-OF-WORD-BI-SUMMARY)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  16
+XEF-BI-FORWARD-OF-ROPE-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-BI-REVERSE-OF-ROPE-SUMMARY ...)
+Rules: ((:REWRITE XEF-BI-REVERSE-OF-WORD-BI-SUMMARY)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  18
+XEF-BI-REVERSE-OF-ROPE-SUMMARY
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-FORWARD-RUN-REFINES-FLATTENING ...)
+Rules: ((:DEFINITION XEF-ROPE-FORWARD-RUN)
+        (:REWRITE XEF-BI-FORWARD-OF-WORD-BI-SUMMARY)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  28
+XEF-ROPE-FORWARD-RUN-REFINES-FLATTENING
+
+Summary
+Form:  ( DEFTHM XEF-ROPE-REVERSE-RUN-REFINES-FLATTENING ...)
+Rules: ((:DEFINITION XEF-ROPE-REVERSE-RUN)
+        (:REWRITE XEF-BI-REVERSE-OF-WORD-BI-SUMMARY)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  30
+XEF-ROPE-REVERSE-RUN-REFINES-FLATTENING
+
+Summary
+Form:  ( DEFUN XEF-LEFT-FRAME ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-LEFT-FRAME
+
+Summary
+Form:  ( DEFUN XEF-RIGHT-FRAME ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RIGHT-FRAME
+
+Summary
+Form:  ( DEFUN XEF-PLUG-ROPE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-ROPE-CAT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-PLUG-ROPE
+
+Summary
+Form:  ( DEFUN XEF-PLUG-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-BI-JOIN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-PLUG-SUMMARY
+
+Summary
+Form:  ( DEFUN XEF-PLUG-WORD ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-PLUG-WORD
+
+Summary
+Form:  ( DEFUN XEF-REPLACE-FOCUS ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-PLUG-ROPE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-REPLACE-FOCUS
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-FLATTEN-OF-PLUG-ROPE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-PLUG-ROPE)
+        (:DEFINITION XEF-PLUG-WORD)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-PLUG-ROPE)
+        (:REWRITE XEF-ROPE-FLATTEN-OF-CAT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  700
+XEF-FLATTEN-OF-PLUG-ROPE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-SUMMARY-OF-PLUG-ROPE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-PLUG-SUMMARY)
+        (:DEFINITION XEF-PLUG-WORD)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-PLUG-ROPE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-FLATTEN-OF-PLUG-ROPE)
+        (:REWRITE XEF-ROPE-FLATTEN-OF-CAT)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.37 seconds (prove: 0.37, print: 0.00, other: 0.00)
+Prover steps counted:  56000
+XEF-SUMMARY-OF-PLUG-ROPE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-PLUG-SUMMARY-REFINES-PLUG-WORD ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-PLUG-SUMMARY)
+        (:DEFINITION XEF-PLUG-WORD)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-PLUG-WORD)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-BI-SUMMARY-OF-APPEND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  802
+XEF-PLUG-SUMMARY-REFINES-PLUG-WORD
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-PLUG-ROPE-OF-APPEND-CONTEXTS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-PLUG-ROPE)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-PLUG-ROPE)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1173
+XEF-PLUG-ROPE-OF-APPEND-CONTEXTS
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/3'''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-PLUG-SUMMARY-OF-APPEND-CONTEXTS ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-BI-SUMMARY)
+        (:DEFINITION XEF-PLUG-SUMMARY)
+        (:DEFINITION XEF-WORD-BI-SUMMARY)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-PLUG-SUMMARY)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE XEF-COCYCLE-FIX-OF-WORD-SUMMARY)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  1.24 seconds (prove: 1.23, print: 0.00, other: 0.00)
+Prover steps counted:  171792
+XEF-PLUG-SUMMARY-OF-APPEND-CONTEXTS
+
+Summary
+Form:  ( DEFTHM XEF-SUMMARY-AFTER-FOCUS-REPLACEMENT ...)
+Rules: ((:DEFINITION XEF-REPLACE-FOCUS)
+        (:REWRITE XEF-FLATTEN-OF-PLUG-ROPE)
+        (:REWRITE XEF-PLUG-SUMMARY-REFINES-PLUG-WORD)
+        (:REWRITE XEF-ROPE-SUMMARY-REFINES-FLATTENING))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  32
+XEF-SUMMARY-AFTER-FOCUS-REPLACEMENT
+
+Summary
+Form:  ( DEFUN XEF-COCYCLE-RECENTER ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-COCYCLE-RECENTER
+
+Summary
+Form:  ( DEFUN XEF-RECENTER-TABLE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RECENTER-TABLE
+Goal'
+Goal''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-RECENTER-OF-IDENTITY ...)
+Rules: ((:CONGRUENCE INT-EQUIV-IMPLIES-EQUAL-IFIX-1)
+        (:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-COCYCLE-RECENTER)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE IFIX-UNDER-INT-EQUIV)
+        (:REWRITE NORMALIZE-ADDENDS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  338
+XEF-RECENTER-OF-IDENTITY
+Goal'
+Goal''
+Subgoal 4
+Subgoal 4.16
+Subgoal 4.15
+Subgoal 4.14
+Subgoal 4.13
+Subgoal 4.12
+Subgoal 4.11
+Subgoal 4.10
+Subgoal 4.9
+Subgoal 4.8
+Subgoal 4.7
+Subgoal 4.6
+Subgoal 4.5
+Subgoal 4.4
+Subgoal 4.3
+Subgoal 4.2
+Subgoal 4.1
+Subgoal 3
+Subgoal 3.16
+Subgoal 3.15
+Subgoal 3.14
+Subgoal 3.13
+Subgoal 3.12
+Subgoal 3.11
+Subgoal 3.10
+Subgoal 3.9
+Subgoal 3.8
+Subgoal 3.7
+Subgoal 3.6
+Subgoal 3.5
+Subgoal 3.4
+Subgoal 3.3
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 2
+Subgoal 2.16
+Subgoal 2.16.4
+Subgoal 2.16.4.2
+Subgoal 2.16.4.1
+Subgoal 2.16.3
+Subgoal 2.16.2
+Subgoal 2.16.1
+Subgoal 2.15
+Subgoal 2.15.2
+Subgoal 2.15.1
+Subgoal 2.14
+Subgoal 2.14.2
+Subgoal 2.14.1
+Subgoal 2.13
+Subgoal 2.13.2
+Subgoal 2.13.1
+Subgoal 2.12
+Subgoal 2.12.2
+Subgoal 2.12.1
+Subgoal 2.11
+Subgoal 2.10
+Subgoal 2.9
+Subgoal 2.8
+Subgoal 2.8.2
+Subgoal 2.8.1
+Subgoal 2.7
+Subgoal 2.6
+Subgoal 2.5
+Subgoal 2.4
+Subgoal 2.4.2
+Subgoal 2.4.1
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1.16
+Subgoal 1.16.4
+Subgoal 1.16.4.2
+Subgoal 1.16.4.1
+Subgoal 1.16.4.1'
+Subgoal 1.16.3
+Subgoal 1.16.2
+Subgoal 1.16.1
+Subgoal 1.16.1'
+Subgoal 1.15
+Subgoal 1.15.2
+Subgoal 1.15.1
+Subgoal 1.14
+Subgoal 1.14.2
+Subgoal 1.14.1
+Subgoal 1.13
+Subgoal 1.13.2
+Subgoal 1.13.1
+Subgoal 1.13.1'
+Subgoal 1.12
+Subgoal 1.12.2
+Subgoal 1.12.1
+Subgoal 1.11
+Subgoal 1.10
+Subgoal 1.9
+Subgoal 1.8
+Subgoal 1.8.2
+Subgoal 1.8.1
+Subgoal 1.7
+Subgoal 1.6
+Subgoal 1.5
+Subgoal 1.4
+Subgoal 1.4.2
+Subgoal 1.4.1
+Subgoal 1.4.1'
+Subgoal 1.3
+Subgoal 1.2
+Subgoal 1.1
+Subgoal 1.1'
+
+Summary
+Form:  ( DEFTHM XEF-EVAL-OF-RECENTER ...)
+Rules: ((:CONGRUENCE INT-EQUIV-IMPLIES-EQUAL-IFIX-1)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-COCYCLE-RECENTER)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE IFIX-UNDER-INT-EQUIV)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.18 seconds (prove: 0.17, print: 0.01, other: 0.00)
+Prover steps counted:  23259
+XEF-EVAL-OF-RECENTER
+Goal'
+Goal''
+Subgoal 2
+Subgoal 2.16
+Subgoal 2.15
+Subgoal 2.14
+Subgoal 2.13
+Subgoal 2.12
+Subgoal 2.11
+Subgoal 2.10
+Subgoal 2.9
+Subgoal 2.8
+Subgoal 2.7
+Subgoal 2.6
+Subgoal 2.5
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1.16
+Subgoal 1.16.4
+Subgoal 1.16.4.2
+Subgoal 1.16.4.1
+Subgoal 1.16.4.1'
+Subgoal 1.16.3
+Subgoal 1.16.2
+Subgoal 1.16.1
+Subgoal 1.16.1'
+Subgoal 1.15
+Subgoal 1.15.2
+Subgoal 1.15.1
+Subgoal 1.14
+Subgoal 1.14.2
+Subgoal 1.14.1
+Subgoal 1.13
+Subgoal 1.13.2
+Subgoal 1.13.1
+Subgoal 1.13.1'
+Subgoal 1.12
+Subgoal 1.12.2
+Subgoal 1.12.1
+Subgoal 1.11
+Subgoal 1.10
+Subgoal 1.9
+Subgoal 1.8
+Subgoal 1.8.2
+Subgoal 1.8.1
+Subgoal 1.7
+Subgoal 1.6
+Subgoal 1.5
+Subgoal 1.4
+Subgoal 1.4.2
+Subgoal 1.4.1
+Subgoal 1.4.1'
+Subgoal 1.3
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-RECENTER ...)
+Rules: ((:CONGRUENCE INT-EQUIV-IMPLIES-EQUAL-IFIX-1)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-COCYCLE-RECENTER)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-FIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE IFIX-UNDER-INT-EQUIV)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  9374
+XEF-COCYCLE-FIX-OF-RECENTER
+Goal'
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-RECENTER-OF-FIX ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION XEF-COCYCLE-RECENTER)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-COCYCLE-A-OF-FIX)
+        (:REWRITE XEF-COCYCLE-B-OF-FIX)
+        (:REWRITE XEF-COCYCLE-P-OF-FIX)
+        (:REWRITE XEF-COCYCLE-Q-OF-FIX)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-B)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-Q))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  462
+XEF-COCYCLE-RECENTER-OF-FIX
+Goal'
+Goal''
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM XEF-RECENTER-PRESERVES-COMPOSITION ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-RECENTER)
+        (:REWRITE XEF-EVAL-OF-RECENTER)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-EVAL)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-COST)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-STATE))
+Hint-events: ((:USE XEF-COCYCLE-TWO-PROBE-EXTENSIONALITY))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1680
+XEF-RECENTER-PRESERVES-COMPOSITION
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-LOOKUP-IN-RECENTERED-TABLE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-LOOKUP-COCYCLE)
+        (:DEFINITION XEF-RECENTER-TABLE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-RECENTER-TABLE)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-COCYCLE-FIX-OF-RECENTER)
+        (:REWRITE XEF-COCYCLE-RECENTER-OF-FIX)
+        (:REWRITE XEF-RECENTER-OF-IDENTITY)
+        (:TYPE-PRESCRIPTION XEF-RECENTER-TABLE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  551
+XEF-LOOKUP-IN-RECENTERED-TABLE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-IN-RECENTERED-COORDINATES ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-WORD-SUMMARY)
+        (:REWRITE XEF-LOOKUP-IN-RECENTERED-TABLE)
+        (:REWRITE XEF-RECENTER-OF-IDENTITY)
+        (:REWRITE XEF-RECENTER-PRESERVES-COMPOSITION))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  250
+XEF-WORD-SUMMARY-IN-RECENTERED-COORDINATES
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-POWER-IN-RECENTERED-COORDINATES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION XEF-COCYCLE-POWER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-COCYCLE-POWER)
+        (:REWRITE XEF-RECENTER-OF-IDENTITY)
+        (:REWRITE XEF-RECENTER-PRESERVES-COMPOSITION))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  214
+XEF-COCYCLE-POWER-IN-RECENTERED-COORDINATES
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-RLE-SUMMARY-IN-RECENTERED-COORDINATES ...)
+Rules: ((:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:INDUCTION XEF-RLE-SUMMARY)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING)
+        (:REWRITE XEF-WORD-SUMMARY-IN-RECENTERED-COORDINATES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  86
+XEF-RLE-SUMMARY-IN-RECENTERED-COORDINATES
+
+Summary
+Form:  ( DEFUN XEF-LINEAR-COBOUNDARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-LINEAR-COBOUNDARY
+
+Summary
+Form:  ( DEFUN XEF-HAS-LINEAR-POTENTIAL-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-HAS-LINEAR-POTENTIAL-P
+
+Summary
+Form:  ( DEFUN XEF-TABLE-HAS-LINEAR-POTENTIAL-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-TABLE-HAS-LINEAR-POTENTIAL-P
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-LINEAR-COBOUNDARY-HAS-ITS-POTENTIAL ...)
+Rules: ((:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:DEFINITION XEF-LINEAR-COBOUNDARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-HAS-LINEAR-POTENTIAL-P))
+Hint-events: ((:USE XEF-IFIX-WHEN-INTEGERP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  303
+XEF-LINEAR-COBOUNDARY-HAS-ITS-POTENTIAL
+
+Summary
+Form:  ( DEFTHM XEF-IDENTITY-HAS-EVERY-LINEAR-POTENTIAL ...)
+Rules: ((:DEFINITION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-A)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-B)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-Q)
+        (:TYPE-PRESCRIPTION XEF-HAS-LINEAR-POTENTIAL-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  23
+XEF-IDENTITY-HAS-EVERY-LINEAR-POTENTIAL
+
+Summary
+Form:  ( DEFTHM XEF-LINEAR-POTENTIAL-OF-COCYCLE-FIX ...)
+Rules: ((:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  254
+XEF-LINEAR-POTENTIAL-OF-COCYCLE-FIX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-LINEAR-POTENTIAL-TELESCOPES-IN-ONE-STEP ...)
+Rules: ((:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-A)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-B)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-P)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-Q))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  766
+XEF-LINEAR-POTENTIAL-TELESCOPES-IN-ONE-STEP
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-LINEAR-POTENTIAL-FROM-TWO-PROBES ...)
+Rules: ((:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE SIMPLIFY-SUMS-EQUAL)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  820
+XEF-LINEAR-POTENTIAL-FROM-TWO-PROBES
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM XEF-LINEAR-POTENTIAL-TELESCOPES-THROUGH-COMPOSITION
+...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE XEF-CAR-OF-CHAIN-RESULTS)
+        (:REWRITE XEF-CDR-OF-CHAIN-RESULTS)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-COST)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-STATE))
+Hint-events: ((:USE XEF-LINEAR-POTENTIAL-TELESCOPES-IN-ONE-STEP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  706
+XEF-LINEAR-POTENTIAL-TELESCOPES-THROUGH-COMPOSITION
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-LINEAR-POTENTIAL-CLOSED-UNDER-COMPOSITION ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-COMPOSE)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-COST)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-STATE))
+Hint-events: ((:USE XEF-LINEAR-POTENTIAL-FROM-TWO-PROBES)
+              (:USE XEF-LINEAR-POTENTIAL-TELESCOPES-THROUGH-COMPOSITION))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1131
+XEF-LINEAR-POTENTIAL-CLOSED-UNDER-COMPOSITION
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-LOOKUP-PRESERVES-TABLE-POTENTIAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-LOOKUP-COCYCLE)
+        (:DEFINITION XEF-TABLE-HAS-LINEAR-POTENTIAL-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-LOOKUP-COCYCLE)
+        (:REWRITE XEF-IDENTITY-HAS-EVERY-LINEAR-POTENTIAL)
+        (:REWRITE XEF-LINEAR-POTENTIAL-OF-COCYCLE-FIX)
+        (:TYPE-PRESCRIPTION XEF-HAS-LINEAR-POTENTIAL-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  489
+XEF-LOOKUP-PRESERVES-TABLE-POTENTIAL
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-PRESERVES-TABLE-POTENTIAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:INDUCTION XEF-WORD-SUMMARY)
+        (:REWRITE XEF-IDENTITY-HAS-EVERY-LINEAR-POTENTIAL)
+        (:REWRITE XEF-LINEAR-POTENTIAL-CLOSED-UNDER-COMPOSITION)
+        (:REWRITE XEF-LOOKUP-PRESERVES-TABLE-POTENTIAL)
+        (:TYPE-PRESCRIPTION XEF-HAS-LINEAR-POTENTIAL-P)
+        (:TYPE-PRESCRIPTION XEF-TABLE-HAS-LINEAR-POTENTIAL-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  196
+XEF-WORD-SUMMARY-PRESERVES-TABLE-POTENTIAL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-WORD-COST-TELESCOPES ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION)
+        (:REWRITE XEF-WORD-SUMMARY-PRESERVES-TABLE-POTENTIAL)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-COST)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-STATE)
+        (:TYPE-PRESCRIPTION XEF-TABLE-HAS-LINEAR-POTENTIAL-P))
+Hint-events: ((:USE XEF-LINEAR-POTENTIAL-TELESCOPES-IN-ONE-STEP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  476
+XEF-WORD-COST-TELESCOPES
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-COST-TELESCOPES ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:REWRITE XEF-RLE-RUN-REFINES-DECODING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Hint-events: ((:USE XEF-WORD-COST-TELESCOPES))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  300
+XEF-RLE-COST-TELESCOPES
+
+Summary
+Form:  ( DEFUN XEF-UNIT-COCYCLE-P ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-A))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-UNIT-COCYCLE-P
+
+Summary
+Form:  ( DEFUN XEF-UNIT-COCYCLE-INVERSE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-UNIT-COCYCLE-INVERSE
+
+Summary
+Form:  ( DEFUN XEF-UNIT-TABLE-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-UNIT-TABLE-P
+
+Summary
+Form:  ( DEFUN XEF-INVERT-TABLE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-INVERT-TABLE
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-COCYCLE-P-OF-ID ...)
+Rules: ((:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:EXECUTABLE-COUNTERPART XEF-UNIT-COCYCLE-P)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  2
+XEF-UNIT-COCYCLE-P-OF-ID
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-COCYCLE-P-OF-FIX ...)
+Rules: ((:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-COCYCLE-A-OF-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  36
+XEF-UNIT-COCYCLE-P-OF-FIX
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-OF-ID ...)
+Rules: ((:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:EXECUTABLE-COUNTERPART XEF-UNIT-COCYCLE-INVERSE))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  4
+XEF-UNIT-INVERSE-OF-ID
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-OF-FIX ...)
+Rules: ((:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-COCYCLE-A-OF-FIX)
+        (:REWRITE XEF-COCYCLE-B-OF-FIX)
+        (:REWRITE XEF-COCYCLE-P-OF-FIX)
+        (:REWRITE XEF-COCYCLE-Q-OF-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  80
+XEF-UNIT-INVERSE-OF-FIX
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-UNIT-INVERSE ...)
+Rules: ((:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-FIX)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  232
+XEF-COCYCLE-FIX-OF-UNIT-INVERSE
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-IS-UNIT ...)
+Rules: ((:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  383
+XEF-UNIT-INVERSE-IS-UNIT
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-COCYCLE-P-OF-COMPOSE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1630
+XEF-UNIT-COCYCLE-P-OF-COMPOSE
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-LEFT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  720
+XEF-UNIT-INVERSE-LEFT
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-RIGHT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  748
+XEF-UNIT-INVERSE-RIGHT
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-OF-COMPOSE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (- x) y)|)
+        (:REWRITE |(* -1 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  4182
+XEF-UNIT-INVERSE-OF-COMPOSE
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-LOOKUP-PRESERVES-UNIT-TABLE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-LOOKUP-COCYCLE)
+        (:DEFINITION XEF-UNIT-TABLE-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-LOOKUP-COCYCLE)
+        (:REWRITE XEF-UNIT-COCYCLE-P-OF-FIX)
+        (:REWRITE XEF-UNIT-COCYCLE-P-OF-ID)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  439
+XEF-LOOKUP-PRESERVES-UNIT-TABLE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-PRESERVES-UNIT-TABLE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:INDUCTION XEF-WORD-SUMMARY)
+        (:REWRITE XEF-LOOKUP-PRESERVES-UNIT-TABLE)
+        (:REWRITE XEF-UNIT-COCYCLE-P-OF-COMPOSE)
+        (:REWRITE XEF-UNIT-COCYCLE-P-OF-ID)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P)
+        (:TYPE-PRESCRIPTION XEF-UNIT-TABLE-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  171
+XEF-WORD-SUMMARY-PRESERVES-UNIT-TABLE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-LOOKUP-IN-INVERTED-TABLE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-INVERT-TABLE)
+        (:DEFINITION XEF-LOOKUP-COCYCLE)
+        (:DEFINITION XEF-UNIT-COCYCLE-P)
+        (:DEFINITION XEF-UNIT-TABLE-P)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-INVERT-TABLE)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-COCYCLE-FIX-OF-UNIT-INVERSE)
+        (:REWRITE XEF-UNIT-INVERSE-OF-FIX)
+        (:REWRITE XEF-UNIT-INVERSE-OF-ID)
+        (:TYPE-PRESCRIPTION XEF-INVERT-TABLE))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1241
+XEF-LOOKUP-IN-INVERTED-TABLE
+
+Summary
+Form:  ( DEFUN XEF-WORD-UNDO-SUMMARY ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-COCYCLE-COMPOSE)
+        (:TYPE-PRESCRIPTION XEF-COCYCLE-ID))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-WORD-UNDO-SUMMARY
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-COCYCLE-FIX-OF-WORD-UNDO-SUMMARY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-UNIT-COCYCLE-INVERSE)
+        (:DEFINITION XEF-WORD-UNDO-SUMMARY)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-WORD-UNDO-SUMMARY)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE XEF-COCYCLE-FIX-OF-COMPOSE)
+        (:REWRITE XEF-COCYCLE-FIX-OF-ID)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-LOOKUP-COCYCLE))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  908
+XEF-COCYCLE-FIX-OF-WORD-UNDO-SUMMARY
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-UNDO-SUMMARY-IS-INVERSE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-WORD-SUMMARY)
+        (:DEFINITION XEF-WORD-UNDO-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-WORD-SUMMARY)
+        (:REWRITE XEF-LOOKUP-PRESERVES-UNIT-TABLE)
+        (:REWRITE XEF-UNIT-INVERSE-OF-COMPOSE)
+        (:REWRITE XEF-UNIT-INVERSE-OF-ID)
+        (:REWRITE XEF-WORD-SUMMARY-PRESERVES-UNIT-TABLE)
+        (:TYPE-PRESCRIPTION XEF-UNIT-TABLE-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  290
+XEF-WORD-UNDO-SUMMARY-IS-INVERSE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-WORD-UNDO-SUMMARY-REFINES-REVERSED-PROGRAM ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-REV)
+        (:DEFINITION XEF-WORD-UNDO-SUMMARY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REV)
+        (:REWRITE XEF-LOOKUP-IN-INVERTED-TABLE)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND)
+        (:REWRITE XEF-WORD-SUMMARY-OF-NIL)
+        (:REWRITE XEF-WORD-SUMMARY-OF-SINGLETON)
+        (:TYPE-PRESCRIPTION XEF-UNIT-TABLE-P))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  521
+XEF-WORD-UNDO-SUMMARY-REFINES-REVERSED-PROGRAM
+
+Summary
+Form:  ( DEFTHM XEF-WORD-SUMMARY-OF-REVERSED-INVERSE-PROGRAM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-WORD-UNDO-SUMMARY-IS-INVERSE)
+        (:REWRITE XEF-WORD-UNDO-SUMMARY-REFINES-REVERSED-PROGRAM)
+        (:TYPE-PRESCRIPTION XEF-UNIT-TABLE-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  127
+XEF-WORD-SUMMARY-OF-REVERSED-INVERSE-PROGRAM
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-EVAL-OF-UNIT-INVERSE-LEFT-COMPOSE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-COCYCLE-EVAL-OF-ID)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Hint-events: ((:USE XEF-UNIT-INVERSE-LEFT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  133
+XEF-EVAL-OF-UNIT-INVERSE-LEFT-COMPOSE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-EVALUATION-CHAIN-CANCELS ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-COCYCLE-ID)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-UNIT-INVERSE-LEFT)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Hint-events: ((:USE XEF-COCYCLE-EVAL-OF-COMPOSE)
+              (:USE XEF-EVAL-OF-UNIT-INVERSE-LEFT-COMPOSE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  310
+XEF-UNIT-INVERSE-EVALUATION-CHAIN-CANCELS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-EVALUATION-RESTORES-STATE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-COST)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Hint-events: ((:USE XEF-UNIT-INVERSE-EVALUATION-CHAIN-CANCELS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  217
+XEF-UNIT-INVERSE-EVALUATION-RESTORES-STATE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-EVALUATION-NEGATES-COST ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CDR-CONS)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:TYPE-PRESCRIPTION XEF-INTEGERP-OF-COCYCLE-EVAL-COST)
+        (:TYPE-PRESCRIPTION XEF-UNIT-COCYCLE-P))
+Hint-events: ((:USE XEF-UNIT-INVERSE-EVALUATION-CHAIN-CANCELS))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  185
+XEF-UNIT-INVERSE-EVALUATION-NEGATES-COST
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-UNIT-INVERSE-EVALUATION-CANCELS ...)
+Rules: NIL
+Hint-events: ((:USE XEF-UNIT-INVERSE-EVALUATION-NEGATES-COST)
+              (:USE XEF-UNIT-INVERSE-EVALUATION-RESTORES-STATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-UNIT-INVERSE-EVALUATION-CANCELS
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RUN-FORWARD-THEN-BACKWARD ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION)
+        (:REWRITE XEF-WORD-SUMMARY-OF-REVERSED-INVERSE-PROGRAM)
+        (:REWRITE XEF-WORD-SUMMARY-PRESERVES-UNIT-TABLE)
+        (:TYPE-PRESCRIPTION XEF-UNIT-TABLE-P))
+Hint-events: ((:USE XEF-UNIT-INVERSE-EVALUATION-CANCELS))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  389
+XEF-RUN-FORWARD-THEN-BACKWARD
+
+Summary
+Form:  ( DEFUN XEF-ROPE-BACKWARD-RUN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-WORD-RUN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-ROPE-BACKWARD-RUN
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-REPLACED-ROPE-FORWARD-THEN-BACKWARD ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-ROPE-BACKWARD-RUN)
+        (:REWRITE XEF-ROPE-FORWARD-RUN-REFINES-FLATTENING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Hint-events: ((:USE XEF-RUN-FORWARD-THEN-BACKWARD))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  353
+XEF-REPLACED-ROPE-FORWARD-THEN-BACKWARD
+
+Summary
+Form:  ( DEFUN XEF-RLE-EMIT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-EMIT
+
+Summary
+Form:  ( DEFUN XEF-RLE-CANONICAL-P ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-CANONICAL-P
+
+Summary
+Form:  ( DEFUN XEF-RLE-CANONICALIZE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-RLE-EMIT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-CANONICALIZE
+
+Summary
+Form:  ( DEFUN XEF-RLE-ENCODE ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-RLE-EMIT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-ENCODE
+
+Summary
+Form:  ( DEFUN XEF-RLE-JOIN ...)
+Rules: ((:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+XEF-RLE-JOIN
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM XEF-REPEAT-OF-SUM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-REPEAT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REPEAT)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION XEF-REPEAT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1010
+XEF-REPEAT-OF-SUM
+Goal'
+Subgoal 3
+Subgoal 2
+Subgoal 2.6
+Subgoal 2.6'
+Subgoal 2.5
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.3'
+Subgoal 2.3.2
+Subgoal 2.3.1
+Subgoal 2.3.1'
+Subgoal 2.3.1''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-EMIT ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-REPEAT)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REPEAT)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE EQUAL-WHEN-APPEND-SAME)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-<)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION XEF-REPEAT))
+Time:  0.11 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  11497
+XEF-RLE-DECODE-OF-EMIT
+Goal'
+Subgoal 3
+Subgoal 2
+Subgoal 2.5
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM XEF-RLE-CANONICAL-P-OF-EMIT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICAL-P)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICAL-P))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1563
+XEF-RLE-CANONICAL-P-OF-EMIT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.7''
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.6''
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4.2
+Subgoal *1/2.4.1
+Subgoal *1/2.4.1'
+Subgoal *1/2.4.1''
+Subgoal *1/2.4.1'''
+Subgoal *1/2.4.1.2
+Subgoal *1/2.4.1.1
+Subgoal *1/2.4.1.1'
+Subgoal *1/2.4.1.1''
+Subgoal *1/2.4.1.1'''
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.1/5
+Subgoal *1.1/5'
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/2
+Subgoal *1.1/1
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-CANONICALIZE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-REPEAT)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART XEF-REPEAT)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-DECODE)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-REPEAT)
+        (:INDUCTION XEF-RLE-CANONICALIZE)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-OF-NIL)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-LESS-THAN-2)
+        (:REWRITE EQUAL-OF-APPEND-AND-APPEND-SAME-ARG2)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION XEF-REPEAT)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE)
+        (:TYPE-PRESCRIPTION XEF-RLE-DECODE))
+Time:  0.21 seconds (prove: 0.21, print: 0.00, other: 0.00)
+Prover steps counted:  25544
+XEF-RLE-DECODE-OF-CANONICALIZE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-RLE-CANONICAL-P-OF-CANONICALIZE ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICAL-P)
+        (:DEFINITION XEF-RLE-CANONICALIZE)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-CANONICAL-P)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-RLE-CANONICALIZE)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE ZP-OPEN)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICAL-P)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICALIZE))
+Time:  0.06 seconds (prove: 0.06, print: 0.00, other: 0.00)
+Prover steps counted:  6616
+XEF-RLE-CANONICAL-P-OF-CANONICALIZE
+
+Summary
+Form:  ( DEFTHM XEF-RLE-ENCODE-WHEN-ATOM ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-ENCODE)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  35
+XEF-RLE-ENCODE-WHEN-ATOM
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-WHEN-ATOM ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:EXECUTABLE-COUNTERPART EQUAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  35
+XEF-RLE-DECODE-WHEN-ATOM
+
+Summary
+Form:  ( DEFTHM XEF-REPEAT-ONE ...)
+Rules: ((:DEFINITION XEF-REPEAT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  38
+XEF-REPEAT-ONE
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-APPEND-REPEAT-ONE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE XEF-REPEAT-ONE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  38
+XEF-APPEND-REPEAT-ONE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-ENCODE-STEP ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-ENCODE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE XEF-REPEAT-ONE))
+Hint-events: ((:USE XEF-RLE-DECODE-OF-EMIT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  185
+XEF-RLE-DECODE-OF-ENCODE-STEP
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-ENCODE-BASE ...)
+Rules: ((:DEFINITION ENDP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  17
+XEF-RLE-DECODE-OF-ENCODE-BASE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-ENCODE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-DECODE)
+        (:INDUCTION XEF-RLE-ENCODE)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-OF-CONS)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE XEF-RLE-DECODE-OF-ENCODE-STEP)
+        (:REWRITE XEF-RLE-ENCODE-WHEN-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  464
+XEF-RLE-DECODE-OF-ENCODE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-ENCODE-WHEN-TRUE-LISTP ...)
+Rules: ((:DEFINITION NOT)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP))
+Hint-events: ((:USE XEF-RLE-DECODE-OF-ENCODE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  249
+XEF-RLE-DECODE-OF-ENCODE-WHEN-TRUE-LISTP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM XEF-RLE-CANONICAL-P-OF-ENCODE ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-RLE-CANONICAL-P)
+        (:DEFINITION XEF-RLE-EMIT)
+        (:DEFINITION XEF-RLE-ENCODE)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART POSP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART XEF-RLE-CANONICAL-P)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-RLE-ENCODE)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICAL-P)
+        (:TYPE-PRESCRIPTION XEF-RLE-ENCODE))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3790
+XEF-RLE-CANONICAL-P-OF-ENCODE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-RLE-DECODE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION XEF-RLE-DECODE)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE ASSOCIATIVITY-OF-APPEND)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE XEF-RLE-DECODE-WHEN-ATOM))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1132
+XEF-RLE-DECODE-OF-APPEND
+
+Summary
+Form:  ( DEFTHM XEF-RLE-DECODE-OF-JOIN ...)
+Rules: ((:DEFINITION XEF-RLE-JOIN)
+        (:REWRITE XEF-RLE-DECODE-OF-APPEND)
+        (:REWRITE XEF-RLE-DECODE-OF-CANONICALIZE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  21
+XEF-RLE-DECODE-OF-JOIN
+
+Summary
+Form:  ( DEFTHM XEF-RLE-CANONICAL-P-OF-JOIN ...)
+Rules: ((:DEFINITION XEF-RLE-JOIN)
+        (:REWRITE XEF-RLE-CANONICAL-P-OF-CANONICALIZE)
+        (:TYPE-PRESCRIPTION XEF-RLE-CANONICAL-P))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  9
+XEF-RLE-CANONICAL-P-OF-JOIN
+
+Summary
+Form:  ( DEFTHM XEF-RLE-SUMMARY-OF-CANONICALIZE ...)
+Rules: ((:REWRITE XEF-RLE-DECODE-OF-CANONICALIZE)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  18
+XEF-RLE-SUMMARY-OF-CANONICALIZE
+
+Summary
+Form:  ( DEFTHM XEF-RLE-RUN-OF-CANONICALIZE ...)
+Rules: ((:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:REWRITE XEF-RLE-DECODE-OF-CANONICALIZE)
+        (:REWRITE XEF-RLE-RUN-REFINES-DECODING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  102
+XEF-RLE-RUN-OF-CANONICALIZE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-SUMMARY-OF-ENCODE ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING))
+Hint-events: ((:USE XEF-RLE-DECODE-OF-ENCODE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1899
+XEF-RLE-SUMMARY-OF-ENCODE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-SUMMARY-OF-ENCODE-WHEN-TRUE-LISTP ...)
+Rules: ((:DEFINITION NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-RLE-DECODE-OF-ENCODE-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING))
+Hint-events: ((:USE XEF-RLE-SUMMARY-OF-ENCODE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  3043
+XEF-RLE-SUMMARY-OF-ENCODE-WHEN-TRUE-LISTP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-RUN-OF-ENCODE ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE XEF-RLE-RUN-REFINES-DECODING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Hint-events: ((:USE XEF-RLE-DECODE-OF-ENCODE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2052
+XEF-RLE-RUN-OF-ENCODE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM XEF-RLE-RUN-OF-ENCODE-WHEN-TRUE-LISTP ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-RLE-DECODE-OF-ENCODE-WHEN-TRUE-LISTP)
+        (:REWRITE XEF-RLE-RUN-REFINES-DECODING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION))
+Hint-events: ((:USE XEF-RLE-RUN-OF-ENCODE))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3453
+XEF-RLE-RUN-OF-ENCODE-WHEN-TRUE-LISTP
+Goal'
+
+Summary
+Form:  ( DEFTHM XEF-RLE-SUMMARY-OF-JOIN ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-RLE-DECODE-OF-APPEND)
+        (:REWRITE XEF-RLE-SUMMARY-OF-CANONICALIZE)
+        (:REWRITE XEF-RLE-SUMMARY-REFINES-DECODING)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND)
+        (:TYPE-PRESCRIPTION XEF-WORD-SUMMARY))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  4301
+XEF-RLE-SUMMARY-OF-JOIN
+Goal'
+Subgoal 384
+Subgoal 383
+Subgoal 382
+Subgoal 381
+Subgoal 380
+Subgoal 379
+Subgoal 378
+Subgoal 377
+Subgoal 376
+Subgoal 376.2
+Subgoal 376.1
+Subgoal 375
+Subgoal 375.2
+Subgoal 375.1
+Subgoal 374
+Subgoal 374.2
+Subgoal 374.1
+Subgoal 373
+Subgoal 373.2
+Subgoal 373.1
+Subgoal 373.1'
+Subgoal 372
+Subgoal 371
+Subgoal 370
+Subgoal 369
+Subgoal 368
+Subgoal 367
+Subgoal 366
+Subgoal 365
+Subgoal 364
+Subgoal 363
+Subgoal 362
+Subgoal 361
+Subgoal 360
+Subgoal 359
+Subgoal 358
+Subgoal 357
+Subgoal 356
+Subgoal 355
+Subgoal 354
+Subgoal 353
+Subgoal 353'
+Subgoal 352
+Subgoal 351
+Subgoal 350
+Subgoal 349
+Subgoal 348
+Subgoal 347
+Subgoal 346
+Subgoal 345
+Subgoal 344
+Subgoal 343
+Subgoal 342
+Subgoal 341
+Subgoal 340
+Subgoal 339
+Subgoal 338
+Subgoal 337
+Subgoal 336
+Subgoal 335
+Subgoal 334
+Subgoal 333
+Subgoal 332
+Subgoal 331
+Subgoal 330
+Subgoal 329
+Subgoal 328
+Subgoal 327
+Subgoal 326
+Subgoal 325
+Subgoal 324
+Subgoal 323
+Subgoal 322
+Subgoal 321
+Subgoal 320
+Subgoal 319
+Subgoal 318
+Subgoal 317
+Subgoal 316
+Subgoal 315
+Subgoal 314
+Subgoal 313
+Subgoal 312
+Subgoal 311
+Subgoal 310
+Subgoal 309
+Subgoal 308
+Subgoal 307
+Subgoal 306
+Subgoal 305
+Subgoal 304
+Subgoal 303
+Subgoal 302
+Subgoal 301
+Subgoal 300
+Subgoal 299
+Subgoal 298
+Subgoal 297
+Subgoal 296
+Subgoal 295
+Subgoal 294
+Subgoal 293
+Subgoal 292
+Subgoal 291
+Subgoal 290
+Subgoal 289
+Subgoal 288
+Subgoal 287
+Subgoal 286
+Subgoal 285
+Subgoal 284
+Subgoal 283
+Subgoal 282
+Subgoal 281
+Subgoal 280
+Subgoal 279
+Subgoal 278
+Subgoal 277
+Subgoal 276
+Subgoal 275
+Subgoal 274
+Subgoal 273
+Subgoal 272
+Subgoal 271
+Subgoal 270
+Subgoal 269
+Subgoal 268
+Subgoal 267
+Subgoal 266
+Subgoal 265
+Subgoal 264
+Subgoal 263
+Subgoal 262
+Subgoal 261
+Subgoal 260
+Subgoal 259
+Subgoal 258
+Subgoal 257
+Subgoal 256
+Subgoal 255
+Subgoal 254
+Subgoal 253
+Subgoal 252
+Subgoal 252.2
+Subgoal 252.1
+Subgoal 251
+Subgoal 251.2
+Subgoal 251.1
+Subgoal 250
+Subgoal 249
+Subgoal 249.2
+Subgoal 249.1
+Subgoal 248
+Subgoal 247
+Subgoal 247.2
+Subgoal 247.1
+Subgoal 246
+Subgoal 246.2
+Subgoal 246.1
+Subgoal 245
+Subgoal 244
+Subgoal 244.2
+Subgoal 244.1
+Subgoal 243
+Subgoal 243.2
+Subgoal 243.1
+Subgoal 242
+Subgoal 241
+Subgoal 241.2
+Subgoal 241.1
+Subgoal 240
+Subgoal 239
+Subgoal 238
+Subgoal 238.2
+Subgoal 238.1
+Subgoal 237
+Subgoal 236
+Subgoal 235
+Subgoal 234
+Subgoal 233
+Subgoal 232
+Subgoal 231
+Subgoal 230
+Subgoal 229
+Subgoal 228
+Subgoal 227
+Subgoal 227.2
+Subgoal 227.1
+Subgoal 226
+Subgoal 225
+Subgoal 224
+Subgoal 223
+Subgoal 222
+Subgoal 221
+Subgoal 220
+Subgoal 219
+Subgoal 218
+Subgoal 217
+Subgoal 216
+Subgoal 216.2
+Subgoal 216.1
+Subgoal 215
+Subgoal 214
+Subgoal 213
+Subgoal 212
+Subgoal 211
+Subgoal 210
+Subgoal 210.2
+Subgoal 210.1
+Subgoal 209
+Subgoal 208
+Subgoal 207
+Subgoal 206
+Subgoal 205
+Subgoal 204
+Subgoal 203
+Subgoal 202
+Subgoal 201
+Subgoal 200
+Subgoal 199
+Subgoal 198
+Subgoal 197
+Subgoal 196
+Subgoal 195
+Subgoal 194
+Subgoal 193
+Subgoal 192
+Subgoal 191
+Subgoal 190
+Subgoal 189
+Subgoal 188
+Subgoal 187
+Subgoal 186
+Subgoal 185
+Subgoal 184
+Subgoal 183
+Subgoal 182
+Subgoal 181
+Subgoal 180
+Subgoal 179
+Subgoal 178
+Subgoal 177
+Subgoal 176
+Subgoal 175
+Subgoal 174
+Subgoal 173
+Subgoal 172
+Subgoal 171
+Subgoal 170
+Subgoal 169
+Subgoal 168
+Subgoal 167
+Subgoal 166
+Subgoal 165
+Subgoal 164
+Subgoal 163
+Subgoal 162
+Subgoal 161
+Subgoal 160
+Subgoal 159
+Subgoal 158
+Subgoal 157
+Subgoal 156
+Subgoal 155
+Subgoal 154
+Subgoal 153
+Subgoal 152
+Subgoal 151
+Subgoal 150
+Subgoal 149
+Subgoal 148
+Subgoal 147
+Subgoal 146
+Subgoal 145
+Subgoal 144
+Subgoal 143
+Subgoal 142
+Subgoal 141
+Subgoal 140
+Subgoal 139
+Subgoal 138
+Subgoal 137
+Subgoal 136
+Subgoal 135
+Subgoal 134
+Subgoal 133
+Subgoal 132
+Subgoal 131
+Subgoal 130
+Subgoal 129
+Subgoal 128
+Subgoal 127
+Subgoal 126
+Subgoal 125
+Subgoal 124
+Subgoal 123
+Subgoal 122
+Subgoal 121
+Subgoal 120
+Subgoal 119
+Subgoal 118
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 110
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 64.2
+Subgoal 64.1
+Subgoal 63
+Subgoal 63.2
+Subgoal 63.1
+Subgoal 62
+Subgoal 62.2
+Subgoal 62.1
+Subgoal 61
+Subgoal 61.2
+Subgoal 61.1
+Subgoal 60
+Subgoal 60.2
+Subgoal 60.1
+Subgoal 59
+Subgoal 59.2
+Subgoal 59.1
+Subgoal 58
+Subgoal 58.2
+Subgoal 58.1
+Subgoal 57
+Subgoal 57.2
+Subgoal 57.1
+Subgoal 56
+Subgoal 56.4
+Subgoal 56.3
+Subgoal 56.3'
+Subgoal 56.2
+Subgoal 56.1
+Subgoal 56.1'
+Subgoal 55
+Subgoal 55.4
+Subgoal 55.3
+Subgoal 55.2
+Subgoal 55.1
+Subgoal 54
+Subgoal 54.4
+Subgoal 54.3
+Subgoal 54.2
+Subgoal 54.1
+Subgoal 53
+Subgoal 53.4
+Subgoal 53.3
+Subgoal 53.2
+Subgoal 53.1
+Subgoal 52
+Subgoal 52.2
+Subgoal 52.1
+Subgoal 51
+Subgoal 51.2
+Subgoal 51.1
+Subgoal 50
+Subgoal 50.2
+Subgoal 50.1
+Subgoal 49
+Subgoal 49.2
+Subgoal 49.1
+Subgoal 48
+Subgoal 48.2
+Subgoal 48.1
+Subgoal 47
+Subgoal 47.2
+Subgoal 47.1
+Subgoal 46
+Subgoal 46.2
+Subgoal 46.1
+Subgoal 45
+Subgoal 45.2
+Subgoal 45.1
+Subgoal 44
+Subgoal 44.2
+Subgoal 44.1
+Subgoal 43
+Subgoal 43.2
+Subgoal 43.1
+Subgoal 42
+Subgoal 42.2
+Subgoal 42.1
+Subgoal 41
+Subgoal 41.2
+Subgoal 41.1
+Subgoal 40
+Subgoal 40.2
+Subgoal 40.1
+Subgoal 39
+Subgoal 39.2
+Subgoal 39.1
+Subgoal 38
+Subgoal 38.2
+Subgoal 38.1
+Subgoal 37
+Subgoal 37.2
+Subgoal 37.1
+Subgoal 36
+Subgoal 36'
+Subgoal 36.2
+Subgoal 36.1
+Subgoal 35
+Subgoal 35.2
+Subgoal 35.1
+Subgoal 34
+Subgoal 34.2
+Subgoal 34.1
+Subgoal 33
+Subgoal 33.2
+Subgoal 33.1
+Subgoal 32
+Subgoal 32.2
+Subgoal 32.1
+Subgoal 31
+Subgoal 30
+Subgoal 30.2
+Subgoal 30.1
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 26.2
+Subgoal 26.1
+Subgoal 25
+Subgoal 25.2
+Subgoal 25.1
+Subgoal 24
+Subgoal 24.2
+Subgoal 24.1
+Subgoal 23
+Subgoal 23.2
+Subgoal 23.1
+Subgoal 22
+Subgoal 22.4
+Subgoal 22.3
+Subgoal 22.2
+Subgoal 22.1
+Subgoal 21
+Subgoal 20
+Subgoal 20.2
+Subgoal 20.1
+Subgoal 20.1'
+Subgoal 19
+Subgoal 18
+Subgoal 18.2
+Subgoal 18.1
+Subgoal 17
+Subgoal 17.4
+Subgoal 17.3
+Subgoal 17.2
+Subgoal 17.1
+Subgoal 16
+Subgoal 16.2
+Subgoal 16.1
+Subgoal 15
+Subgoal 14
+Subgoal 14.2
+Subgoal 14.1
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 10.2
+Subgoal 10.1
+Subgoal 9
+Subgoal 9.2
+Subgoal 9.1
+Subgoal 8
+Subgoal 8.2
+Subgoal 8.1
+Subgoal 7
+Subgoal 6
+Subgoal 6.2
+Subgoal 6.1
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1.2
+Subgoal 1.1
+
+Summary
+Form:  ( DEFTHM XEF-RLE-RUN-OF-JOIN ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION XEF-CHAIN-RESULTS)
+        (:DEFINITION XEF-COCYCLE)
+        (:DEFINITION XEF-COCYCLE-A)
+        (:DEFINITION XEF-COCYCLE-B)
+        (:DEFINITION XEF-COCYCLE-COMPOSE)
+        (:DEFINITION XEF-COCYCLE-EVAL)
+        (:DEFINITION XEF-COCYCLE-P)
+        (:DEFINITION XEF-COCYCLE-Q)
+        (:DEFINITION XEF-RLE-JOIN)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART XEF-CHAIN-RESULTS)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (if a b c))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE XEF-IFIX-WHEN-INTEGERP)
+        (:REWRITE XEF-RLE-DECODE-OF-APPEND)
+        (:REWRITE XEF-RLE-RUN-OF-CANONICALIZE)
+        (:REWRITE XEF-RLE-RUN-REFINES-DECODING)
+        (:REWRITE XEF-WORD-RUN-IS-SUMMARY-EVALUATION)
+        (:REWRITE XEF-WORD-SUMMARY-OF-APPEND)
+        (:TYPE-PRESCRIPTION XEF-WORD-SUMMARY))
+Time:  35.70 seconds (prove: 35.62, print: 0.08, other: 0.00)
+Prover steps counted:  5509249
+XEF-RLE-RUN-OF-JOIN
+(DEFXDOC XEF-RLE-TOOLKIT)
+:PASSED
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *XEF-DEMO-WALK-TABLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*XEF-DEMO-WALK-TABLE*
+:PASSED
+
+Summary
+Form:  ( DEFCONST *XEF-DEMO-ARITHMETIC-TABLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*XEF-DEMO-ARITHMETIC-TABLE*
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *XEF-DEMO-GEOMETRIC-TABLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*XEF-DEMO-GEOMETRIC-TABLE*
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *XEF-DEMO-POTENTIAL-TABLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*XEF-DEMO-POTENTIAL-TABLE*
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *XEF-DEMO-COMPILED-PROGRAM* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*XEF-DEMO-COMPILED-PROGRAM*
+:PASSED
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zze-exotic-fertile-kernel" ...)
+Rules: NIL
+Time:  44.13 seconds (prove: 42.48, print: 0.19, other: 1.46)
+Prover steps counted:  6308931
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 44.13 seconds realtime, 41.00 seconds runtime
+; (6,692,899,136 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 55930 Jun 29 00:41 zze-exotic-fertile-kernel.cert

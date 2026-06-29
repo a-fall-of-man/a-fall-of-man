@@ -1,0 +1,2283 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "std/lists/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic/top-with-meta.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "xdoc/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zxh-cyclic-canon-calculus" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zxh-cyclic-canon-calculus
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "../portcullis" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.14 seconds (prove: 0.00, print: 0.00, other: 0.14)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>
+The event ( INCLUDE-BOOK "cowles/portcullis" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+The event ( INCLUDE-BOOK "std/portcullis" ...) is redundant.  See :DOC
+redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ :REDUNDANT
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "std/lists/top" ...)
+Rules: NIL
+Time:  0.77 seconds (prove: 0.00, print: 0.00, other: 0.76)
+"/mnt/data/acl2-8.7-recovery/books/std/lists/top.lisp"
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic/top-with-meta" ...)
+Rules: NIL
+Time:  0.09 seconds (prove: 0.00, print: 0.00, other: 0.09)
+"/mnt/data/acl2-8.7-recovery/books/arithmetic/top-with-meta.lisp"
+
+The event ( INCLUDE-BOOK "xdoc/top" ...) is redundant.  See :DOC redundant-
+events.
+
+Summary
+Form:  ( INCLUDE-BOOK "xdoc/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+(DEFXDOC ZXH-CYCLIC-CANON-CALCULUS)
+
+Summary
+Form:  ( DEFUN ZXC-BIT-FIX ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-BIT-FIX
+
+Summary
+Form:  ( DEFUN ZXC-RHYTHM-FIX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-RHYTHM-FIX
+
+Summary
+Form:  ( DEFUN ZXC-RHYTHMP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-RHYTHMP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHMP-OF-RHYTHM-FIX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-RHYTHM-FIX)
+        (:DEFINITION ZXC-RHYTHMP)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHMP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHM-FIX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  249
+ZXC-RHYTHMP-OF-RHYTHM-FIX
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-TRUE-LISTP-WHEN-RHYTHMP ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-RHYTHMP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHMP)
+        (:TYPE-PRESCRIPTION TRUE-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  401
+ZXC-TRUE-LISTP-WHEN-RHYTHMP
+
+Summary
+Form:  ( DEFTHM ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP ...)
+Rules: ((:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:REWRITE EQUAL-OF-LIST-FIX-AND-SELF))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  13
+ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHM-FIX-WHEN-RHYTHMP ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-RHYTHM-FIX)
+        (:DEFINITION ZXC-RHYTHMP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-BIT-FIX)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHM-FIX)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHM-FIX)
+        (:INDUCTION ZXC-RHYTHMP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  417
+ZXC-RHYTHM-FIX-WHEN-RHYTHMP
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHM-FIX-IDEMPOTENT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZXC-RHYTHM-FIX-WHEN-RHYTHMP)
+        (:REWRITE ZXC-RHYTHMP-OF-RHYTHM-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  125
+ZXC-RHYTHM-FIX-IDEMPOTENT
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-RHYTHM-FIX ...)
+Rules: ((:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-RHYTHM-FIX)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION LEN)
+        (:INDUCTION ZXC-RHYTHM-FIX)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  901
+ZXC-LEN-OF-RHYTHM-FIX
+
+Summary
+Form:  ( DEFUN ZXC-WEIGHT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ZXC-BIT-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-WEIGHT
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-ZEROS ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  98
+ZXC-ZEROS
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  98
+ZXC-ONES
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ZEROS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ZEROS)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZXC-ZEROS)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ZEROS)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE MINUS-CANCELLATION-ON-LEFT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  428
+ZXC-LEN-OF-ZEROS
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ONES)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZXC-ONES)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONES)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE MINUS-CANCELLATION-ON-LEFT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  428
+ZXC-LEN-OF-ONES
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-WEIGHT-OF-ZEROS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ZXC-WEIGHT)
+        (:DEFINITION ZXC-ZEROS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-BIT-FIX)
+        (:EXECUTABLE-COUNTERPART ZXC-WEIGHT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ZEROS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ZXC-ZEROS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  187
+ZXC-WEIGHT-OF-ZEROS
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-WEIGHT-OF-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION ZXC-ONES)
+        (:DEFINITION ZXC-WEIGHT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZXC-BIT-FIX)
+        (:EXECUTABLE-COUNTERPART ZXC-ONES)
+        (:EXECUTABLE-COUNTERPART ZXC-WEIGHT)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONES)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE MINUS-CANCELLATION-ON-LEFT)
+        (:TYPE-PRESCRIPTION ZXC-ONES))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  369
+ZXC-WEIGHT-OF-ONES
+
+Summary
+Form:  ( DEFUN ZXC-ROTATE1 ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ROTATE1
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-ROTATE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  98
+ZXC-ROTATE
+
+Summary
+Form:  ( DEFUN ZXC-REFLECT ...)
+Rules: ((:TYPE-PRESCRIPTION REVERSE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-REFLECT
+Subgoal 2
+Subgoal 2'
+Subgoal 2''
+Subgoal 2'''
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ROTATE1 ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ROTATE1)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE LEN-OF-CONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  189
+ZXC-LEN-OF-ROTATE1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ROTATE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-LEN-1)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ROTATE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ROTATE)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE ZXC-LEN-OF-ROTATE1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  582
+ZXC-LEN-OF-ROTATE
+Subgoal 2
+Subgoal 2.2
+Subgoal 2.2'
+Subgoal 2.2''
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1.2/5
+Subgoal *1.2/5'
+Subgoal *1.2/4
+Subgoal *1.2/4'
+Subgoal *1.2/3
+Subgoal *1.2/3'
+Subgoal *1.2/2
+Subgoal *1.2/2'
+Subgoal *1.2/1
+Subgoal *1.2/1'
+Subgoal *1.1/5
+Subgoal *1.1/5'
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHMP-OF-ROTATE1 ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-RHYTHMP)
+        (:DEFINITION ZXC-ROTATE1)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHMP)
+        (:EXECUTABLE-COUNTERPART ZXC-ROTATE1)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHMP)
+        (:REWRITE APPEND-OF-CONS)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  6138
+ZXC-RHYTHMP-OF-ROTATE1
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHMP-OF-ROTATE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ROTATE)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:INDUCTION ZXC-ROTATE)
+        (:REWRITE ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  425
+ZXC-RHYTHMP-OF-ROTATE
+Goal'
+Goal''
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.2''
+Subgoal *1/3.2'''
+Subgoal *1/3.2'4'
+Subgoal *1/3.2'5'
+Subgoal *1/3.2'6'
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/3.1''
+Subgoal *1/3.1'''
+Subgoal *1/3.1'4'
+Subgoal *1/3.1'5'
+Subgoal *1/3.1'6'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1.2/4
+Subgoal *1.2/4'
+Subgoal *1.2/3
+Subgoal *1.2/3'
+Subgoal *1.2/2
+Subgoal *1.2/2'
+Subgoal *1.2/1
+Subgoal *1.2/1'
+Subgoal *1.1/4
+Subgoal *1.1/4'
+Subgoal *1.1/3
+Subgoal *1.1/3'
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHMP-OF-REFLECT ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-REFLECT)
+        (:DEFINITION ZXC-RHYTHMP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-APPEND)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART TRUE-LISTP)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHMP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHMP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE REV-OF-CONS)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP)
+        (:REWRITE ZXC-TRUE-LISTP-WHEN-RHYTHMP)
+        (:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION REV)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  4080
+ZXC-RHYTHMP-OF-REFLECT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-WEIGHT-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-WEIGHT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-WEIGHT)
+        (:META CANCEL_PLUS-EQUAL-CORRECT)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE CONSP-OF-APPEND)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION ZXC-WEIGHT))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  711
+ZXC-WEIGHT-OF-APPEND
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM ZXC-WEIGHT-OF-ROTATE1 ...)
+Rules: ((:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-ROTATE1)
+        (:DEFINITION ZXC-WEIGHT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-WEIGHT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE UNICITY-OF-0)
+        (:REWRITE ZXC-WEIGHT-OF-APPEND))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  252
+ZXC-WEIGHT-OF-ROTATE1
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1.1/2
+Subgoal *1.1/2'
+Subgoal *1.1/2.2
+Subgoal *1.1/2.1
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-WEIGHT-OF-ROTATE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-ROTATE)
+        (:DEFINITION ZXC-WEIGHT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-WEIGHT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ROTATE)
+        (:INDUCTION ZXC-WEIGHT)
+        (:REWRITE CAR-OF-LIST-FIX)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE ZXC-WEIGHT-OF-ROTATE1)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2046
+ZXC-WEIGHT-OF-ROTATE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1.3
+Subgoal *1/1.2
+Subgoal *1/1.2'
+Subgoal *1/1.1
+Subgoal *1.1/4
+Subgoal *1.1/4.2
+Subgoal *1.1/4.2'
+Subgoal *1.1/4.1
+Subgoal *1.1/4.1'
+Subgoal *1.1/3
+Subgoal *1.1/2
+Subgoal *1.1/1
+Subgoal *1.1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-ROTATE-OF-SUM ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:CONGRUENCE IFF-IMPLIES-EQUAL-NOT)
+        (:CONGRUENCE LIST-EQUIV-IMPLIES-EQUAL-APPEND-1)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ROTATE)
+        (:DEFINITION ZXC-ROTATE1)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART TRUE-LIST-FIX)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ROTATE)
+        (:REWRITE <-+-NEGATIVE-0-1)
+        (:REWRITE ASSOCIATIVITY-OF-+)
+        (:REWRITE CAR-OF-LIST-FIX)
+        (:REWRITE CDR-OF-LIST-FIX)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LIST-FIX-OF-APPEND)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE LIST-FIX-UNDER-LIST-EQUIV)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX)
+        (:TYPE-PRESCRIPTION ZXC-ROTATE))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  5190
+ZXC-ROTATE-OF-SUM
+Goal'
+
+Summary
+Form:  ( DEFTHM ZXC-REFLECT-INVOLUTION ...)
+Rules: ((:DEFINITION ZXC-REFLECT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LIST-FIX-WHEN-TRUE-LISTP)
+        (:REWRITE REV-OF-LIST-FIX)
+        (:REWRITE REV-OF-REV)
+        (:REWRITE REVERSE-REMOVAL)
+        (:TYPE-PRESCRIPTION REV)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  134
+ZXC-REFLECT-INVOLUTION
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-ROTATIONS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  98
+ZXC-ROTATIONS-AUX
+
+Summary
+Form:  ( DEFUN ZXC-ROTATIONS ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-ROTATIONS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ROTATIONS
+
+Summary
+Form:  ( DEFUN ZXC-DIHEDRAL-ORBIT ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION ZXC-ROTATIONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-DIHEDRAL-ORBIT
+
+Summary
+Form:  ( DEFUN ZXC-WORD-RANK ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION ZXC-BIT-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-WORD-RANK
+
+Summary
+Form:  ( DEFUN ZXC-RANK-MIN ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-RANK-MIN
+
+Summary
+Form:  ( DEFUN ZXC-MINIMUM-VIEW ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-MINIMUM-VIEW
+
+Summary
+Form:  ( DEFUN ZXC-DIHEDRAL-NORMALIZE ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-DIHEDRAL-NORMALIZE
+
+Summary
+Form:  ( DEFUN ZXC-NO-HIGHER-RANKP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-NO-HIGHER-RANKP
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4.2
+Subgoal *1/4.1
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-MINIMUM-VIEW-MEMBER ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-MINIMUM-VIEW)
+        (:DEFINITION ZXC-RANK-MIN)
+        (:INDUCTION ZXC-MINIMUM-VIEW)
+        (:REWRITE SUBSETP-CAR-MEMBER)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-OF-CDR)
+        (:REWRITE SUBSETP-REFL))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  850
+ZXC-MINIMUM-VIEW-MEMBER
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-NO-HIGHER-RANKP-WHEN-LOWER ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-NO-HIGHER-RANKP)
+        (:INDUCTION ZXC-NO-HIGHER-RANKP)
+        (:TYPE-PRESCRIPTION ZXC-NO-HIGHER-RANKP)
+        (:TYPE-PRESCRIPTION ZXC-WORD-RANK))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1442
+ZXC-NO-HIGHER-RANKP-WHEN-LOWER
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-MINIMUM-VIEW-IS-MINIMAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-MINIMUM-VIEW)
+        (:DEFINITION ZXC-NO-HIGHER-RANKP)
+        (:DEFINITION ZXC-RANK-MIN)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:INDUCTION ZXC-MINIMUM-VIEW)
+        (:REWRITE ZXC-NO-HIGHER-RANKP-WHEN-LOWER)
+        (:TYPE-PRESCRIPTION ZXC-NO-HIGHER-RANKP)
+        (:TYPE-PRESCRIPTION ZXC-WORD-RANK))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1699
+ZXC-MINIMUM-VIEW-IS-MINIMAL
+Goal'
+
+Summary
+Form:  ( DEFTHM ZXC-DIHEDRAL-NORMALIZE-IS-A-VIEW ...)
+Rules: ((:DEFINITION SYNP)
+        (:DEFINITION ZXC-DIHEDRAL-NORMALIZE)
+        (:DEFINITION ZXC-DIHEDRAL-ORBIT)
+        (:DEFINITION ZXC-REFLECT)
+        (:DEFINITION ZXC-ROTATE1)
+        (:DEFINITION ZXC-ROTATIONS)
+        (:DEFINITION ZXC-ROTATIONS-AUX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE APPEND-UNDER-IFF)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-REV)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-MINIMUM-VIEW-MEMBER)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT)
+        (:REWRITE ZXC-RHYTHMP-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-ROTATIONS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1238
+ZXC-DIHEDRAL-NORMALIZE-IS-A-VIEW
+
+Summary
+Form:  ( DEFTHM ZXC-DIHEDRAL-NORMALIZE-IS-MINIMAL ...)
+Rules: ((:DEFINITION ZXC-DIHEDRAL-NORMALIZE)
+        (:DEFINITION ZXC-DIHEDRAL-ORBIT)
+        (:DEFINITION ZXC-REFLECT)
+        (:DEFINITION ZXC-ROTATIONS)
+        (:REWRITE ZXC-MINIMUM-VIEW-IS-MINIMAL)
+        (:TYPE-PRESCRIPTION ZXC-NO-HIGHER-RANKP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  61
+ZXC-DIHEDRAL-NORMALIZE-IS-MINIMAL
+
+Summary
+Form:  ( DEFUN ZXC-RHYTHM-LISTP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-RHYTHM-LISTP
+Subgoal 2
+Subgoal 1
+Subgoal 1'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHM-LISTP-OF-APPEND ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-RHYTHM-LISTP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHM-LISTP)
+        (:REWRITE APPEND-WHEN-NOT-CONSP)
+        (:REWRITE CAR-OF-APPEND)
+        (:REWRITE CDR-OF-APPEND-WHEN-CONSP)
+        (:REWRITE CONSP-OF-APPEND)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-LISTP)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1607
+ZXC-RHYTHM-LISTP-OF-APPEND
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHM-LISTP-OF-ROTATIONS-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-RHYTHM-LISTP)
+        (:DEFINITION ZXC-ROTATIONS-AUX)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHM-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ROTATIONS-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE ZXC-RHYTHMP-OF-ROTATE1)
+        (:REWRITE ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-LISTP)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP)
+        (:TYPE-PRESCRIPTION ZXC-ROTATIONS-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  194
+ZXC-RHYTHM-LISTP-OF-ROTATIONS-AUX
+Goal'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHM-LISTP-OF-DIHEDRAL-ORBIT ...)
+Rules: ((:DEFINITION ZXC-DIHEDRAL-ORBIT)
+        (:DEFINITION ZXC-REFLECT)
+        (:DEFINITION ZXC-ROTATIONS)
+        (:REWRITE LEN-OF-REV)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT)
+        (:REWRITE ZXC-RHYTHM-LISTP-OF-APPEND)
+        (:REWRITE ZXC-RHYTHM-LISTP-OF-ROTATIONS-AUX)
+        (:REWRITE ZXC-RHYTHMP-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  512
+ZXC-RHYTHM-LISTP-OF-DIHEDRAL-ORBIT
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHMP-OF-MINIMUM-VIEW ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-MINIMUM-VIEW)
+        (:DEFINITION ZXC-RANK-MIN)
+        (:DEFINITION ZXC-RHYTHM-LISTP)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHMP)
+        (:INDUCTION ZXC-MINIMUM-VIEW)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  659
+ZXC-RHYTHMP-OF-MINIMUM-VIEW
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZXC-RHYTHMP-OF-DIHEDRAL-NORMALIZE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZXC-DIHEDRAL-NORMALIZE)
+        (:DEFINITION ZXC-DIHEDRAL-ORBIT)
+        (:DEFINITION ZXC-REFLECT)
+        (:DEFINITION ZXC-ROTATIONS)
+        (:REWRITE LEN-OF-REV)
+        (:REWRITE REVERSE-REMOVAL)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT)
+        (:REWRITE ZXC-RHYTHM-LISTP-OF-APPEND)
+        (:REWRITE ZXC-RHYTHM-LISTP-OF-ROTATIONS-AUX)
+        (:REWRITE ZXC-RHYTHMP-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-TRUE-LIST-FIX-WHEN-RHYTHMP)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHMP))
+Hint-events: ((:USE ZXC-RHYTHMP-OF-MINIMUM-VIEW))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2029
+ZXC-RHYTHMP-OF-DIHEDRAL-NORMALIZE
+
+Summary
+Form:  ( DEFUN ZXC-PERIODP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-PERIODP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-FIND-PROPER-PERIOD-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION ZXC-PERIODP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1)
+        (:TYPE-PRESCRIPTION NFIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  257
+ZXC-FIND-PROPER-PERIOD-AUX
+
+Summary
+Form:  ( DEFUN ZXC-PROPER-PERIOD-WITNESS ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-FIND-PROPER-PERIOD-AUX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ZXC-PROPER-PERIOD-WITNESS
+
+Summary
+Form:  ( DEFUN ZXC-PRIMITIVEP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-PRIMITIVEP
+Goal'
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-FIND-PROPER-PERIOD-AUX-SOUND ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-FIND-PROPER-PERIOD-AUX)
+        (:DEFINITION ZXC-PERIODP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-FIND-PROPER-PERIOD-AUX)
+        (:TYPE-PRESCRIPTION ZXC-PERIODP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  3530
+ZXC-FIND-PROPER-PERIOD-AUX-SOUND
+
+Summary
+Form:  ( DEFTHM ZXC-PROPER-PERIOD-WITNESS-SOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZXC-PROPER-PERIOD-WITNESS)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZXC-FIND-PROPER-PERIOD-AUX-SOUND)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZXC-PERIODP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  573
+ZXC-PROPER-PERIOD-WITNESS-SOUND
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-TAKE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  116
+ZXC-TAKE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-DROP ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1)
+        (:TYPE-PRESCRIPTION TRUE-LIST-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  116
+ZXC-DROP
+
+Summary
+Form:  ( DEFUN ZXC-PREFIXP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-PREFIXP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-BLOCKS-P-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  182
+ZXC-BLOCKS-P-AUX
+
+Summary
+Form:  ( DEFUN ZXC-ROOTP ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-BLOCKS-P-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ROOTP
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-PREFIXP-REFLEXIVE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-PREFIXP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-PREFIXP)
+        (:TYPE-PRESCRIPTION ZXC-PREFIXP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  176
+ZXC-PREFIXP-REFLEXIVE
+Goal'
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM ZXC-DROP-OF-LEN ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZXC-DROP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CDR-CONS)
+        (:REWRITE FOLD-CONSTS-IN-+)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-UNDER-IFF)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  540
+ZXC-DROP-OF-LEN
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM ZXC-BLOCKS-P-AUX-REFLEXIVE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZXC-BLOCKS-P-AUX)
+        (:DEFINITION ZXC-DROP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:REWRITE CDR-CONS)
+        (:REWRITE FOLD-CONSTS-IN-+)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE LIST-FIX-WHEN-LEN-ZERO)
+        (:REWRITE UNICITY-OF-0)
+        (:REWRITE ZXC-DROP-OF-LEN)
+        (:REWRITE ZXC-PREFIXP-REFLEXIVE)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZXC-BLOCKS-P-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  872
+ZXC-BLOCKS-P-AUX-REFLEXIVE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZXC-ROOTP-REFLEXIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZXC-ROOTP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT)
+        (:TYPE-PRESCRIPTION ZXC-BLOCKS-P-AUX)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-ROOTP))
+Hint-events: ((:USE ZXC-BLOCKS-P-AUX-REFLEXIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  530
+ZXC-ROOTP-REFLEXIVE
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-FIND-ROOT-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION ZXC-ROOTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-TAKE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  580
+ZXC-FIND-ROOT-AUX
+
+Summary
+Form:  ( DEFUN ZXC-PRIMITIVE-ROOT ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-FIND-ROOT-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-PRIMITIVE-ROOT
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-FIND-ROOT-AUX-SOUND ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ZXC-FIND-ROOT-AUX)
+        (:INDUCTION ZXC-FIND-ROOT-AUX)
+        (:REWRITE ZXC-ROOTP-REFLEXIVE)
+        (:TYPE-PRESCRIPTION ZXC-ROOTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  502
+ZXC-FIND-ROOT-AUX-SOUND
+
+Summary
+Form:  ( DEFTHM ZXC-ROOTP-OF-RHYTHM-FIX-RIGHT ...)
+Rules: ((:DEFINITION ZXC-ROOTP)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  54
+ZXC-ROOTP-OF-RHYTHM-FIX-RIGHT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZXC-PRIMITIVE-ROOT-AS-FIND-ROOT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION ZXC-FIND-ROOT-AUX)
+        (:DEFINITION ZXC-PRIMITIVE-ROOT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHM-FIX)
+        (:EXECUTABLE-COUNTERPART ZXC-ROOTP)
+        (:EXECUTABLE-COUNTERPART ZXC-TAKE)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE ZP-OPEN)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1114
+ZXC-PRIMITIVE-ROOT-AS-FIND-ROOT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZXC-PRIMITIVE-ROOT-SOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION ZXC-PRIMITIVE-ROOT)
+        (:DEFINITION ZXC-ROOTP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ZXC-RHYTHM-FIX)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-ROOTP-OF-RHYTHM-FIX-RIGHT)
+        (:TYPE-PRESCRIPTION ZXC-BLOCKS-P-AUX)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-ROOTP))
+Hint-events: ((:USE ZXC-FIND-ROOT-AUX-SOUND))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  2213
+ZXC-PRIMITIVE-ROOT-SOUND
+
+Summary
+Form:  ( DEFUN ZXC-ONSETS-AUX ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ONSETS-AUX
+
+Summary
+Form:  ( DEFUN ZXC-ONSETS ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-ONSETS-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ONSETS
+
+Summary
+Form:  ( DEFUN ZXC-SHIFTED-ONSETS ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-ONSETS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-SHIFTED-ONSETS
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3''
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ONSETS-AUX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-ONSETS-AUX)
+        (:DEFINITION ZXC-WEIGHT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART ZXC-BIT-FIX)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONSETS-AUX)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION ZXC-BIT-FIX)
+        (:TYPE-PRESCRIPTION ZXC-WEIGHT))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  838
+ZXC-LEN-OF-ONSETS-AUX
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-WEIGHT-OF-RHYTHM-FIX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-RHYTHM-FIX)
+        (:DEFINITION ZXC-WEIGHT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-WEIGHT)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHM-FIX)
+        (:INDUCTION ZXC-WEIGHT)
+        (:META CANCEL_PLUS-EQUAL-CORRECT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  578
+ZXC-WEIGHT-OF-RHYTHM-FIX
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ONSETS-IS-WEIGHT ...)
+Rules: ((:DEFINITION ZXC-ONSETS)
+        (:REWRITE ZXC-LEN-OF-ONSETS-AUX)
+        (:REWRITE ZXC-WEIGHT-OF-RHYTHM-FIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  14
+ZXC-LEN-OF-ONSETS-IS-WEIGHT
+
+Summary
+Form:  ( DEFUN ZXC-ADD-WORDS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ADD-WORDS
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.2
+Subgoal *1/1.2'
+Subgoal *1/1.2''
+Subgoal *1/1.1
+Subgoal *1/1.1'
+Subgoal *1/1.1''
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-ADD-WORDS ...)
+Rules: ((:DEFINITION IFIX)
+        (:DEFINITION ZXC-ADD-WORDS)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:INDUCTION ZXC-ADD-WORDS)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1194
+ZXC-LEN-OF-ADD-WORDS
+
+Summary
+Form:  ( DEFUN ZXC-INTEGER-SUM ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION IFIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-INTEGER-SUM
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/3.6
+Subgoal *1/3.6'
+Subgoal *1/3.5
+Subgoal *1/3.5'
+Subgoal *1/3.4
+Subgoal *1/3.3
+Subgoal *1/3.3'
+Subgoal *1/3.2
+Subgoal *1/3.2'
+Subgoal *1/3.1
+Subgoal *1/3.1'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4'4'
+Subgoal *1/2.4'5'
+Subgoal *1/2.4'6'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.3'6'
+Subgoal *1/2.3'7'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.2'7'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/2.1'7'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-INTEGER-SUM-OF-ADD-WORDS ...)
+Rules: ((:CONGRUENCE NUMBER-EQUIV-IMPLIES-EQUAL-FIX-1)
+        (:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-ADD-WORDS)
+        (:DEFINITION ZXC-INTEGER-SUM)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART ZXC-INTEGER-SUM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:INDUCTION ZXC-ADD-WORDS)
+        (:INDUCTION ZXC-INTEGER-SUM)
+        (:META CANCEL_PLUS-EQUAL-CORRECT)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE ASSOCIATIVITY-OF-+)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE COMMUTATIVITY-2-OF-+)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:REWRITE FIX-UNDER-NUMBER-EQUIV)
+        (:REWRITE LEFT-CANCELLATION-FOR-+)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE UNICITY-OF-0)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION ZXC-ADD-WORDS)
+        (:TYPE-PRESCRIPTION ZXC-INTEGER-SUM))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  7797
+ZXC-INTEGER-SUM-OF-ADD-WORDS
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-INTEGER-SUM-OF-RHYTHM ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION IFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-BIT-FIX)
+        (:DEFINITION ZXC-INTEGER-SUM)
+        (:DEFINITION ZXC-RHYTHM-FIX)
+        (:DEFINITION ZXC-WEIGHT)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-INTEGER-SUM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-RHYTHM-FIX)
+        (:INDUCTION ZXC-WEIGHT)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE COMMUTATIVITY-OF-+)
+        (:TYPE-PRESCRIPTION ZXC-RHYTHM-FIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  535
+ZXC-INTEGER-SUM-OF-RHYTHM
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-INTEGER-SUM-OF-ZEROS ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ZXC-INTEGER-SUM)
+        (:DEFINITION ZXC-ZEROS)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART ZXC-INTEGER-SUM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ZEROS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ZXC-ZEROS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  184
+ZXC-INTEGER-SUM-OF-ZEROS
+Subgoal 3
+Subgoal 2
+Subgoal 1
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-INTEGER-SUM-OF-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION ZXC-INTEGER-SUM)
+        (:DEFINITION ZXC-ONES)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:EXECUTABLE-COUNTERPART ZXC-INTEGER-SUM)
+        (:EXECUTABLE-COUNTERPART ZXC-ONES)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONES)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE MINUS-CANCELLATION-ON-LEFT)
+        (:TYPE-PRESCRIPTION ZXC-ONES))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  365
+ZXC-INTEGER-SUM-OF-ONES
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM ZXC-INTEGER-SUM-OF-ROTATE-RHYTHM ...)
+Rules: ((:DEFINITION NOT)
+        (:REWRITE ZXC-RHYTHM-FIX-WHEN-RHYTHMP)
+        (:REWRITE ZXC-RHYTHMP-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-RHYTHMP-OF-ROTATE)
+        (:REWRITE ZXC-WEIGHT-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-WEIGHT-OF-ROTATE))
+Hint-events: ((:USE ZXC-INTEGER-SUM-OF-RHYTHM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  224
+ZXC-INTEGER-SUM-OF-ROTATE-RHYTHM
+
+Summary
+Form:  ( DEFUN ZXC-OVERLAY ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-ADD-WORDS)
+        (:TYPE-PRESCRIPTION ZXC-ZEROS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-OVERLAY
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-OVERLAY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-OVERLAY)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-OVERLAY)
+        (:REWRITE ZXC-LEN-OF-ADD-WORDS)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-LEN-OF-ROTATE)
+        (:REWRITE ZXC-LEN-OF-ZEROS)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1794
+ZXC-LEN-OF-OVERLAY
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-INTEGER-SUM-OF-OVERLAY ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION FIX)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-OVERLAY)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-OVERLAY)
+        (:REWRITE COMMUTATIVITY-OF-*)
+        (:REWRITE DISTRIBUTIVITY)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE TIMES-ZERO)
+        (:REWRITE UNICITY-OF-1)
+        (:REWRITE ZXC-INTEGER-SUM-OF-ADD-WORDS)
+        (:REWRITE ZXC-INTEGER-SUM-OF-ROTATE-RHYTHM)
+        (:REWRITE ZXC-INTEGER-SUM-OF-ZEROS)
+        (:REWRITE ZXC-LEN-OF-OVERLAY)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-LEN-OF-ROTATE)
+        (:REWRITE ZXC-WEIGHT-OF-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION ZXC-WEIGHT))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2056
+ZXC-INTEGER-SUM-OF-OVERLAY
+
+Summary
+Form:  ( DEFUN ZXC-EXACT-COVERP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-EXACT-COVERP
+
+Summary
+Form:  ( DEFUN ZXC-CANON ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-CANON
+
+Summary
+Form:  ( DEFUN ZXC-CANON-RHYTHM ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-CANON-RHYTHM
+
+Summary
+Form:  ( DEFUN ZXC-CANON-SHIFTS ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-CANON-SHIFTS
+
+Summary
+Form:  ( DEFUN ZXC-CANONP ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-EXACT-COVERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-CANONP
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM ZXC-EXACT-COVER-DENSITY-LAW ...)
+Rules: ((:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-EXACT-COVERP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:TYPE-PRESCRIPTION LEN))
+Hint-events: ((:USE ZXC-INTEGER-SUM-OF-ONES)
+              (:USE ZXC-INTEGER-SUM-OF-OVERLAY))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  380
+ZXC-EXACT-COVER-DENSITY-LAW
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN ZXC-IOTA-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:META CANCEL_PLUS-LESSP-CORRECT)
+        (:REWRITE <-+-NEGATIVE-0-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  98
+ZXC-IOTA-AUX
+
+Summary
+Form:  ( DEFUN ZXC-IOTA ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-IOTA-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-IOTA
+
+Summary
+Form:  ( DEFUN ZXC-CONS-EACH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+ZXC-CONS-EACH
+
+Summary
+Form:  ( DEFUN ZXC-SUBSETS ...)
+Rules: ((:TYPE-PRESCRIPTION TRUE-LISTP-APPEND)
+        (:TYPE-PRESCRIPTION ZXC-CONS-EACH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-SUBSETS
+
+Summary
+Form:  ( DEFUN ZXC-FILTER-CANONS ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-FILTER-CANONS
+
+Summary
+Form:  ( DEFUN ZXC-SEARCH-CANONS ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-FILTER-CANONS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-SEARCH-CANONS
+Subgoal 4
+Subgoal 3
+Subgoal 3.3
+Subgoal 3.2
+Subgoal 3.1
+Subgoal 3.1'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-MEMBER-OF-FILTER-CANONS-IS-CANON ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-CANON)
+        (:DEFINITION ZXC-CANON-RHYTHM)
+        (:DEFINITION ZXC-CANON-SHIFTS)
+        (:DEFINITION ZXC-CANONP)
+        (:DEFINITION ZXC-EXACT-COVERP)
+        (:DEFINITION ZXC-FILTER-CANONS)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-FILTER-CANONS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT)
+        (:TYPE-PRESCRIPTION ZXC-CANONP))
+Time:  0.11 seconds (prove: 0.11, print: 0.00, other: 0.00)
+Prover steps counted:  26363
+ZXC-MEMBER-OF-FILTER-CANONS-IS-CANON
+Goal'
+
+Summary
+Form:  ( DEFTHM ZXC-SEARCH-CANONS-SOUND ...)
+Rules: ((:DEFINITION ZXC-IOTA)
+        (:DEFINITION ZXC-SEARCH-CANONS)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-MEMBER-OF-FILTER-CANONS-IS-CANON)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL)
+        (:TYPE-PRESCRIPTION ZXC-CANONP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1394
+ZXC-SEARCH-CANONS-SOUND
+Goal'
+Goal''
+Subgoal *1/5
+Subgoal *1/5'
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/4''
+Subgoal *1/4'''
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM ZXC-FILTER-CANONS-COMPLETE-FOR-CANDIDATE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-CANON)
+        (:DEFINITION ZXC-CANON-RHYTHM)
+        (:DEFINITION ZXC-CANON-SHIFTS)
+        (:DEFINITION ZXC-CANONP)
+        (:DEFINITION ZXC-EXACT-COVERP)
+        (:DEFINITION ZXC-FILTER-CANONS)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-FILTER-CANONS)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-EQUAL)
+        (:REWRITE MEMBER-OF-CONS)
+        (:REWRITE MEMBER-WHEN-ATOM)
+        (:REWRITE SUBSETP-CONS-2)
+        (:REWRITE SUBSETP-MEMBER . 1)
+        (:REWRITE SUBSETP-MEMBER . 3)
+        (:REWRITE SUBSETP-REFL)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-RHYTHM-FIX-IDEMPOTENT)
+        (:TYPE-PRESCRIPTION MEMBER-EQUAL))
+Time:  0.13 seconds (prove: 0.13, print: 0.00, other: 0.00)
+Prover steps counted:  29083
+ZXC-FILTER-CANONS-COMPLETE-FOR-CANDIDATE
+
+Summary
+Form:  ( DEFUN ZXC-SCALE-WORD ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-SCALE-WORD
+
+Summary
+Form:  ( DEFUN ZXC-OUTER-PRODUCT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-OUTER-PRODUCT
+
+Summary
+Form:  ( DEFUN ZXC-ALL-ONESP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ALL-ONESP
+
+Summary
+Form:  ( DEFUN ZXC-ALL-ONES-GRIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-ALL-ONES-GRIDP
+
+Summary
+Form:  ( DEFUN ZXC-TORUS-PROFILE ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-OUTER-PRODUCT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-TORUS-PROFILE
+
+Summary
+Form:  ( DEFUN ZXC-TORUS-EXACT-COVERP ...)
+Rules: ((:TYPE-PRESCRIPTION ZXC-ALL-ONES-GRIDP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-TORUS-EXACT-COVERP
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-ALL-ONESP-OF-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ZXC-ALL-ONESP)
+        (:DEFINITION ZXC-ONES)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART ZXC-ALL-ONESP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONES)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ZXC-ALL-ONESP)
+        (:TYPE-PRESCRIPTION ZXC-ONES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  145
+ZXC-ALL-ONESP-OF-ONES
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-SCALE-ONE-OVER-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ZXC-ONES)
+        (:DEFINITION ZXC-SCALE-WORD)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART IFIX)
+        (:EXECUTABLE-COUNTERPART ZXC-SCALE-WORD)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONES)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:TYPE-PRESCRIPTION ZXC-ONES))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  264
+ZXC-SCALE-ONE-OVER-ONES
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM ZXC-OUTER-PRODUCT-OF-ONES ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ZXC-ALL-ONES-GRIDP)
+        (:DEFINITION ZXC-ONES)
+        (:DEFINITION ZXC-OUTER-PRODUCT)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ZXC-ALL-ONES-GRIDP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION ZXC-ONES)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE ZXC-ALL-ONESP-OF-ONES)
+        (:REWRITE ZXC-SCALE-ONE-OVER-ONES)
+        (:TYPE-PRESCRIPTION ZXC-ALL-ONES-GRIDP)
+        (:TYPE-PRESCRIPTION ZXC-ONES)
+        (:TYPE-PRESCRIPTION ZXC-OUTER-PRODUCT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  487
+ZXC-OUTER-PRODUCT-OF-ONES
+Goal'
+
+Summary
+Form:  ( DEFTHM ZXC-PRODUCT-CANON-SOUND ...)
+Rules: ((:DEFINITION ZXC-EXACT-COVERP)
+        (:DEFINITION ZXC-TORUS-EXACT-COVERP)
+        (:DEFINITION ZXC-TORUS-PROFILE)
+        (:REWRITE ZXC-LEN-OF-RHYTHM-FIX)
+        (:REWRITE ZXC-OUTER-PRODUCT-OF-ONES)
+        (:TYPE-PRESCRIPTION ZXC-TORUS-EXACT-COVERP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  1130
+ZXC-PRODUCT-CANON-SOUND
+
+Summary
+Form:  ( DEFUN ZXC-PAIR-WITH-EACH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-PAIR-WITH-EACH
+
+Summary
+Form:  ( DEFUN ZXC-CARTESIAN-SHIFTS ...)
+Rules: ((:TYPE-PRESCRIPTION BINARY-APPEND)
+        (:TYPE-PRESCRIPTION TRUE-LISTP-APPEND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+ZXC-CARTESIAN-SHIFTS
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-PAIR-WITH-EACH ...)
+Rules: ((:DEFINITION ZXC-PAIR-WITH-EACH)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION LEN)
+        (:INDUCTION ZXC-PAIR-WITH-EACH)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  408
+ZXC-LEN-OF-PAIR-WITH-EACH
+Subgoal *1/2
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1''
+Subgoal *1/1'''
+
+Summary
+Form:  ( DEFTHM ZXC-LEN-OF-CARTESIAN-SHIFTS ...)
+Rules: ((:DEFINITION FIX)
+        (:DEFINITION NOT)
+        (:DEFINITION ZXC-CARTESIAN-SHIFTS)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION LEN)
+        (:INDUCTION ZXC-CARTESIAN-SHIFTS)
+        (:REWRITE COMMUTATIVITY-OF-*)
+        (:REWRITE DISTRIBUTIVITY)
+        (:REWRITE LEN-OF-APPEND)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE TIMES-ZERO)
+        (:REWRITE UNICITY-OF-1)
+        (:REWRITE ZXC-LEN-OF-PAIR-WITH-EACH)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1394
+ZXC-LEN-OF-CARTESIAN-SHIFTS
+
+Summary
+Form:  ( DEFCONST *ZXC-TRESILLO-SIX* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZXC-TRESILLO-SIX*
+
+Summary
+Form:  ( DEFCONST *ZXC-THREE-VOICES* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZXC-THREE-VOICES*
+:PASSED
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *ZXC-QUARTER-PULSE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZXC-QUARTER-PULSE*
+
+Summary
+Form:  ( DEFCONST *ZXC-FOUR-VOICES* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZXC-FOUR-VOICES*
+:PASSED
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *ZXC-PERIODIC-EXAMPLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZXC-PERIODIC-EXAMPLE*
+:PASSED
+:PASSED
+
+Summary
+Form:  ( DEFCONST *ZXC-DIHEDRAL-EXAMPLE* ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+*ZXC-DIHEDRAL-EXAMPLE*
+:PASSED
+(DEFXDOC ZXC-USER-INTERFACE)
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zxh-cyclic-canon-calculus" ...)
+Rules: NIL
+Time:  1.95 seconds (prove: 0.72, print: 0.03, other: 1.20)
+Prover steps counted:  122028
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 1.95 seconds realtime, 1.78 seconds runtime
+; (206,737,312 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 34037 Jun 29 00:42 zxh-cyclic-canon-calculus.cert

@@ -1,0 +1,908 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zaz-rational-unit-square-root" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zaz-rational-unit-square-root
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.48 seconds (prove: 0.00, print: 0.00, other: 0.47)
+"/mnt/data/acl2-8.7-recovery/books/arithmetic-5/top.lisp"
+
+Summary
+Form:  ( DEFUN RUSQRT-LO ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-LO
+
+Summary
+Form:  ( DEFUN RUSQRT-HI ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-HI
+
+Summary
+Form:  ( DEFUN RUSQRT-WIDTH ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-WIDTH
+
+Summary
+Form:  ( DEFUN RUSQRT-MIDPOINT ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-MIDPOINT
+
+Summary
+Form:  ( DEFUN RUSQRT-ENCLOSESP ...)
+Rules: NIL
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+RUSQRT-ENCLOSESP
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-IMPLIES-RATIONALP-LO ...)
+Rules: ((:DEFINITION RUSQRT-ENCLOSESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  62
+RUSQRT-ENCLOSESP-IMPLIES-RATIONALP-LO
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-IMPLIES-RATIONALP-HI ...)
+Rules: ((:DEFINITION RUSQRT-ENCLOSESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  62
+RUSQRT-ENCLOSESP-IMPLIES-RATIONALP-HI
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-IMPLIES-LO-NONNEGATIVE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-ENCLOSESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  71
+RUSQRT-ENCLOSESP-IMPLIES-LO-NONNEGATIVE
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-IMPLIES-LO-AT-MOST-HI ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-ENCLOSESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  73
+RUSQRT-ENCLOSESP-IMPLIES-LO-AT-MOST-HI
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-IMPLIES-LOWER-SQUARE-BOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-ENCLOSESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  77
+RUSQRT-ENCLOSESP-IMPLIES-LOWER-SQUARE-BOUND
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-IMPLIES-UPPER-SQUARE-BOUND ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-ENCLOSESP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  77
+RUSQRT-ENCLOSESP-IMPLIES-UPPER-SQUARE-BOUND
+
+Summary
+Form:  ( DEFUN RUSQRT-STEP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RUSQRT-MIDPOINT))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-STEP
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RUSQRT-ITERATE ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION RUSQRT-STEP))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RUSQRT-ITERATE
+
+Summary
+Form:  ( DEFUN RUSQRT-BUILD ...)
+Rules: ((:TYPE-PRESCRIPTION RUSQRT-ITERATE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-BUILD
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN RUSQRT-DYADIC-WIDTH ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION NOT-INTEGERP-1B))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  130
+RUSQRT-DYADIC-WIDTH
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RUSQRT-MIDPOINT ...)
+Rules: ((:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  122
+RATIONALP-OF-RUSQRT-MIDPOINT
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-LO-AT-MOST-MIDPOINT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  355
+RUSQRT-LO-AT-MOST-MIDPOINT
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-MIDPOINT-AT-MOST-HI ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  559
+RUSQRT-MIDPOINT-AT-MOST-HI
+Goal'
+Subgoal 2
+Subgoal 2.4
+Subgoal 2.3
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RUSQRT-WIDTH-OF-STEP ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:DEFINITION RUSQRT-STEP)
+        (:DEFINITION RUSQRT-WIDTH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-WIDTH)
+        (:EXECUTABLE-COUNTERPART TAU-SYSTEM)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (* c x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:TYPE-PRESCRIPTION RUSQRT-WIDTH))
+Time:  0.09 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  1606
+RUSQRT-WIDTH-OF-STEP
+Goal'
+Subgoal 2
+Subgoal 2.2
+Subgoal 2.1
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-OF-STEP ...)
+Rules: ((:DEFINITION RUSQRT-ENCLOSESP)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:DEFINITION RUSQRT-STEP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-ENCLOSESP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SIMPLIFY-TERMS-SUCH-AS-AX+BX-<-0-RATIONAL-COMMON)
+        (:REWRITE |arith (* x 1)|)
+        (:REWRITE |arith (expt x 0)|)
+        (:REWRITE |arith (expt x c)|)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-NONNEGATIVE-BASE)
+        (:TYPE-PRESCRIPTION RUSQRT-ENCLOSESP))
+Time:  0.15 seconds (prove: 0.15, print: 0.00, other: 0.00)
+Prover steps counted:  3077
+RUSQRT-ENCLOSESP-OF-STEP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.26
+Subgoal *1/2.26'
+Subgoal *1/2.25
+Subgoal *1/2.25'
+Subgoal *1/2.24
+Subgoal *1/2.24'
+Subgoal *1/2.23
+Subgoal *1/2.23'
+Subgoal *1/2.22
+Subgoal *1/2.22'
+Subgoal *1/2.21
+Subgoal *1/2.21.2
+Subgoal *1/2.21.1
+Subgoal *1/2.20
+Subgoal *1/2.20.2
+Subgoal *1/2.20.1
+Subgoal *1/2.19
+Subgoal *1/2.19.2
+Subgoal *1/2.19.1
+Subgoal *1/2.18
+Subgoal *1/2.18.2
+Subgoal *1/2.18.1
+Subgoal *1/2.17
+Subgoal *1/2.17.4
+Subgoal *1/2.17.3
+Subgoal *1/2.17.2
+Subgoal *1/2.17.1
+Subgoal *1/2.16
+Subgoal *1/2.16.6
+Subgoal *1/2.16.5
+Subgoal *1/2.16.4
+Subgoal *1/2.16.3
+Subgoal *1/2.16.2
+Subgoal *1/2.16.1
+Subgoal *1/2.15
+Subgoal *1/2.15'
+Subgoal *1/2.15''
+Subgoal *1/2.14
+Subgoal *1/2.14'
+Subgoal *1/2.14''
+Subgoal *1/2.13
+Subgoal *1/2.13'
+Subgoal *1/2.13''
+Subgoal *1/2.12
+Subgoal *1/2.12'
+Subgoal *1/2.12''
+Subgoal *1/2.11
+Subgoal *1/2.11'
+Subgoal *1/2.11''
+Subgoal *1/2.10
+Subgoal *1/2.10'
+Subgoal *1/2.9
+Subgoal *1/2.9'
+Subgoal *1/2.8
+Subgoal *1/2.8'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/1
+Subgoal *1/1'
+Subgoal *1/1.2
+Subgoal *1/1.1
+
+Summary
+Form:  ( DEFTHM RUSQRT-ENCLOSESP-OF-ITERATE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RUSQRT-ENCLOSESP)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-ITERATE)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:DEFINITION RUSQRT-STEP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-ENCLOSESP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-HI)
+        (:EXECUTABLE-COUNTERPART RUSQRT-LO)
+        (:EXECUTABLE-COUNTERPART ZIP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RUSQRT-ITERATE)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-EXPT-1)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-LESS-THAN-2)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-<)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:REWRITE SIMPLIFY-TERMS-SUCH-AS-AX+BX-<-0-RATIONAL-COMMON)
+        (:TYPE-PRESCRIPTION EXPT)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-NON-0-BASE)
+        (:TYPE-PRESCRIPTION EXPT-TYPE-PRESCRIPTION-NONNEGATIVE-BASE)
+        (:TYPE-PRESCRIPTION RUSQRT-ENCLOSESP)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE)
+        (:TYPE-PRESCRIPTION RUSQRT-STEP))
+Time:  1.71 seconds (prove: 1.70, print: 0.01, other: 0.00)
+Prover steps counted:  45479
+RUSQRT-ENCLOSESP-OF-ITERATE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.30
+Subgoal *1/2.29
+Subgoal *1/2.28
+Subgoal *1/2.27
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.24
+Subgoal *1/2.24.4
+Subgoal *1/2.24.3
+Subgoal *1/2.24.3'
+Subgoal *1/2.24.2
+Subgoal *1/2.24.1
+Subgoal *1/2.24.1'
+Subgoal *1/2.23
+Subgoal *1/2.23.4
+Subgoal *1/2.23.3
+Subgoal *1/2.23.3'
+Subgoal *1/2.23.2
+Subgoal *1/2.23.1
+Subgoal *1/2.23.1'
+Subgoal *1/2.22
+Subgoal *1/2.22.4
+Subgoal *1/2.22.3
+Subgoal *1/2.22.3'
+Subgoal *1/2.22.2
+Subgoal *1/2.22.1
+Subgoal *1/2.22.1'
+Subgoal *1/2.21
+Subgoal *1/2.21.4
+Subgoal *1/2.21.3
+Subgoal *1/2.21.3'
+Subgoal *1/2.21.2
+Subgoal *1/2.21.1
+Subgoal *1/2.21.1'
+Subgoal *1/2.20
+Subgoal *1/2.20.4
+Subgoal *1/2.20.4'
+Subgoal *1/2.20.3
+Subgoal *1/2.20.2
+Subgoal *1/2.20.2'
+Subgoal *1/2.20.1
+Subgoal *1/2.19
+Subgoal *1/2.19.4
+Subgoal *1/2.19.4'
+Subgoal *1/2.19.3
+Subgoal *1/2.19.2
+Subgoal *1/2.19.2'
+Subgoal *1/2.19.1
+Subgoal *1/2.18
+Subgoal *1/2.18.4
+Subgoal *1/2.18.4'
+Subgoal *1/2.18.3
+Subgoal *1/2.18.2
+Subgoal *1/2.18.2'
+Subgoal *1/2.18.1
+Subgoal *1/2.17
+Subgoal *1/2.17.4
+Subgoal *1/2.17.4'
+Subgoal *1/2.17.3
+Subgoal *1/2.17.2
+Subgoal *1/2.17.2'
+Subgoal *1/2.17.1
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RUSQRT-ITERATE-WIDTH ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NOT)
+        (:DEFINITION RUSQRT-DYADIC-WIDTH)
+        (:DEFINITION RUSQRT-HI)
+        (:DEFINITION RUSQRT-ITERATE)
+        (:DEFINITION RUSQRT-LO)
+        (:DEFINITION RUSQRT-MIDPOINT)
+        (:DEFINITION RUSQRT-STEP)
+        (:DEFINITION RUSQRT-WIDTH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ABS)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART EXPT)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-WIDTH)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION RUSQRT-ITERATE)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* (if a b c) x)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* a (/ a) b)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* c (* d x))|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* x x)|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (* c x) (* d x))|)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ (- x) (* c x))|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (* c x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (* c x))|)
+        (:REWRITE |(- (+ x y))|)
+        (:REWRITE |(- (- x))|)
+        (:REWRITE |(equal (- x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(expt (* x y) n)|)
+        (:REWRITE |(expt (+ x y) 2)|)
+        (:REWRITE BUBBLE-DOWN-*-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-BUBBLE-DOWN)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-CAR)
+        (:REWRITE DEFAULT-CDR)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-MINUS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE NORMALIZE-FACTORS-GATHER-EXPONENTS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE REDUCE-MULTIPLICATIVE-CONSTANT-EQUAL)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-EQUAL)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-ITERATE)
+        (:TYPE-PRESCRIPTION RUSQRT-STEP))
+Time:  3.42 seconds (prove: 3.42, print: 0.01, other: 0.00)
+Prover steps counted:  76216
+RUSQRT-ITERATE-WIDTH
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RUSQRT-DYADIC-WIDTH ...)
+Rules: ((:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONALP-OF-RUSQRT-DYADIC-WIDTH
+
+Summary
+Form:  ( DEFTHM RUSQRT-DYADIC-WIDTH-POSITIVE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-DYADIC-WIDTH-POSITIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-DYADIC-WIDTH-OF-SUCCESSOR ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NATP)
+        (:DEFINITION RUSQRT-DYADIC-WIDTH)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  179
+RUSQRT-DYADIC-WIDTH-OF-SUCCESSOR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RUSQRT-BUILD-ENCLOSES-UNIT-TARGET ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:DEFINITION RUSQRT-ENCLOSESP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-HI)
+        (:EXECUTABLE-COUNTERPART RUSQRT-LO)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE RUSQRT-ENCLOSESP-OF-ITERATE)
+        (:TYPE-PRESCRIPTION RUSQRT-ENCLOSESP))
+Hint-events: ((:USE RUSQRT-ENCLOSESP-OF-ITERATE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  380
+RUSQRT-BUILD-ENCLOSES-UNIT-TARGET
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RUSQRT-BUILD-WIDTH ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION RUSQRT-BUILD)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART IF)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART RUSQRT-HI)
+        (:EXECUTABLE-COUNTERPART RUSQRT-LO)
+        (:EXECUTABLE-COUNTERPART RUSQRT-WIDTH)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE RUSQRT-ITERATE-WIDTH)
+        (:TYPE-PRESCRIPTION RATIONALP-OF-RUSQRT-DYADIC-WIDTH)
+        (:TYPE-PRESCRIPTION RUSQRT-DYADIC-WIDTH))
+Hint-events: ((:USE RUSQRT-ITERATE-WIDTH))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  341
+RUSQRT-BUILD-WIDTH
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RUSQRT-BUILD-LO ...)
+Rules: NIL
+Hint-events: ((:USE RUSQRT-BUILD-ENCLOSES-UNIT-TARGET)
+              (:USE RUSQRT-ENCLOSESP-IMPLIES-RATIONALP-LO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONALP-OF-RUSQRT-BUILD-LO
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONALP-OF-RUSQRT-BUILD-HI ...)
+Rules: NIL
+Hint-events: ((:USE RUSQRT-BUILD-ENCLOSES-UNIT-TARGET)
+              (:USE RUSQRT-ENCLOSESP-IMPLIES-RATIONALP-HI))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONALP-OF-RUSQRT-BUILD-HI
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-BUILD-LO-NONNEGATIVE ...)
+Rules: NIL
+Hint-events: ((:USE RUSQRT-BUILD-ENCLOSES-UNIT-TARGET)
+              (:USE RUSQRT-ENCLOSESP-IMPLIES-LO-NONNEGATIVE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-BUILD-LO-NONNEGATIVE
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-BUILD-LO-AT-MOST-HI ...)
+Rules: NIL
+Hint-events: ((:USE RUSQRT-BUILD-ENCLOSES-UNIT-TARGET)
+              (:USE RUSQRT-ENCLOSESP-IMPLIES-LO-AT-MOST-HI))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-BUILD-LO-AT-MOST-HI
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-BUILD-LOWER-SQUARE-BOUND ...)
+Rules: NIL
+Hint-events: ((:USE RUSQRT-BUILD-ENCLOSES-UNIT-TARGET)
+              (:USE RUSQRT-ENCLOSESP-IMPLIES-LOWER-SQUARE-BOUND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-BUILD-LOWER-SQUARE-BOUND
+Goal'
+
+Summary
+Form:  ( DEFTHM RUSQRT-BUILD-UPPER-SQUARE-BOUND ...)
+Rules: NIL
+Hint-events: ((:USE RUSQRT-BUILD-ENCLOSES-UNIT-TARGET)
+              (:USE RUSQRT-ENCLOSESP-IMPLIES-UPPER-SQUARE-BOUND))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RUSQRT-BUILD-UPPER-SQUARE-BOUND
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zaz-rational-unit-square-root" ...)
+Rules: NIL
+Time:  6.00 seconds (prove: 5.42, print: 0.02, other: 0.57)
+Prover steps counted:  128996
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 6.00 seconds realtime, 5.58 seconds runtime
+; (1,126,360,944 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 13530 Jun 29 00:37 zaz-rational-unit-square-root.cert

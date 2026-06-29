@@ -1,0 +1,3699 @@
+"-*- Mode: auto-revert -*-"
+/mnt/data/new-release/cert-work
+HOST: 66027503688b
+
+Environment variables:
+ACL2_CUSTOMIZATION=NONE
+ACL2_SYSTEM_BOOKS=/mnt/data/acl2-8.7-recovery/books
+ACL2=/mnt/data/acl2-8.7-recovery/sbcl-saved_acl2
+ACL2_USELESS_RUNES=-25
+
+Temp lisp file:
+(acl2::value :q)
+(acl2::in-package "ACL2")
+; see github issue #638 (waterfall-parallelism and profiling): 
+#+(and hons (not acl2-par)) (profile-fn 'prove)
+#+(and hons (not acl2-par)) (profile-fn 'certify-book-fn)
+#+(and hons (not acl2-par)) (profile-fn 'include-book-fn)
+(acl2::lp)
+(set-debugger-enable :bt)
+(acl2::in-package "ACL2")
+
+(set-ld-error-action (quote (:exit 1)) state)
+(set-inhibit-output-lst (list (quote prove) (quote proof-tree) (quote warning) (quote observation) (quote event) (quote history)))
+
+(acl2::assign acl2::get-internal-time-as-realtime acl2::t)
+#-cmucl (acl2::gc-verbose t)
+; instructions from .acl2 file :
+
+
+; Prevent reset-prehistory while loading .port files
+(acl2::assign acl2::skip-reset-prehistory acl2::t)
+; portculli for included books:
+(acl2::ld "zam-qcx-adp-linear.port" :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+(acl2::ld "arithmetic-5/top.port" :dir :SYSTEM :ld-missing-input-ok t :ld-always-skip-top-level-locals t)
+#!ACL2 (set-ld-error-action (quote :continue) state)
+
+; certify-book command flags: ? t
+#!ACL2 (er-progn (time$ (certify-book "zao-winograd-bilinear-convolution" ? t  ))
+                                 (value (prog2$ #+hons (memsum)
+                                                 #-hons nil
+                                                 (exit 43))))
+--- End temp lisp file ---
+
+TARGET: zao-winograd-bilinear-convolution
+STEP: certify
+Start of output:
+
+This is SBCL 2.6.5-85913ede1, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ + ACL2 Version 8.7                                                     +
+ +   built June 25, 2026  23:01:19.                                     +
+ + Copyright (C) 2026, Regents of the University of Texas.              +
+ + ACL2 comes with ABSOLUTELY NO WARRANTY.  This is free software and   +
+ + you are welcome to redistribute it under certain conditions.  For    +
+ + details, see the LICENSE file distributed with ACL2.                 +
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>
+Exiting the ACL2 read-eval-print loop.  To re-enter, execute (LP).
+* #<PACKAGE "ACL2">
+* 
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !><state>
+ACL2 !> "ACL2"
+ACL2 !> (:EXIT 1)
+ACL2 !> (PROVE PROOF-TREE
+        WARNING OBSERVATION EVENT HISTORY)
+ACL2 !> T
+ACL2 !>GC-VERBOSE is not supported in this Common Lisp.
+Contact the ACL2 developers if you would like to help add such support.
+NIL
+ACL2 !> T
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "std/portcullis" ...)
+Rules: NIL
+Time:  0.10 seconds (prove: 0.00, print: 0.00, other: 0.10)
+ "/mnt/data/acl2-8.7-recovery/books/std/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "cowles/portcullis" ...)
+Rules: NIL
+Time:  0.15 seconds (prove: 0.00, print: 0.00, other: 0.15)
+ "/mnt/data/acl2-8.7-recovery/books/cowles/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "data-structures/portcullis" ...)
+Rules: NIL
+Time:  0.06 seconds (prove: 0.00, print: 0.00, other: 0.06)
+ "/mnt/data/acl2-8.7-recovery/books/data-structures/portcullis.lisp"
+ACL2 !>>
+Summary
+Form:  ( INCLUDE-BOOK "centaur/fty/portcullis" ...)
+Rules: NIL
+Time:  0.03 seconds (prove: 0.00, print: 0.00, other: 0.03)
+ "/mnt/data/acl2-8.7-recovery/books/centaur/fty/portcullis.lisp"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !>
+Project-dir-alist:
+((:SYSTEM . "/mnt/data/acl2-8.7-recovery/books/")).
+Type :help for help.
+Type (quit) to quit completely out of ACL2.
+
+ACL2 !>> "ACL2"
+ACL2 !>>Bye.
+ :EOF
+ACL2 !> :CONTINUE
+ACL2 !>Note (from clause-processors/equality): disabling DISJOIN, DISJOIN2,
+CONJOIN and CONJOIN2.
+
+
+Summary
+Form:  ( INCLUDE-BOOK "zam-qcx-adp-linear" ...)
+Rules: NIL
+Time:  1.09 seconds (prove: 0.00, print: 0.00, other: 1.09)
+"/mnt/data/new-release/cert-work/zam-qcx-adp-linear.lisp"
+
+The event ( INCLUDE-BOOK "arithmetic-5/top" ...) is redundant.  See
+:DOC redundant-events.
+
+Summary
+Form:  ( INCLUDE-BOOK "arithmetic-5/top" ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+:REDUNDANT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-LINEAR ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QCX-ADD)
+        (:TYPE-PRESCRIPTION QCX-ZERO))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-LINEAR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-ROW-EVAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QCX-ADD)
+        (:TYPE-PRESCRIPTION QCX-ZERO))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-ROW-EVAL
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-MATRIX-EVAL ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QCX-ADD)
+        (:TYPE-PRESCRIPTION QCX-ZERO))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-MATRIX-EVAL
+
+Summary
+Form:  ( DEFUN RATIONAL-ROWP ...)
+Rules: ((:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONAL-ROWP
+
+Summary
+Form:  ( DEFUN RATIONAL-MATRIXP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+RATIONAL-MATRIXP
+
+Summary
+Form:  ( DEFUN QCX-VECTORP ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-LIST-RATIONALP))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+QCX-VECTORP
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-ROW-ADD ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-ROW-ADD
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-MATRIX-ADD ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-MATRIX-ADD
+
+Summary
+Form:  ( DEFUN WBC-ROW-SCALE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-ROW-SCALE
+
+Summary
+Form:  ( DEFUN WBC-MATRIX-SCALE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-MATRIX-SCALE
+
+Summary
+Form:  ( DEFUN WBC-OUTER ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-OUTER
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-SCALE-ZERO ...)
+Rules: ((:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE DEFAULT-TIMES-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  50
+QCX-SCALE-ZERO
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-SCALE-ONE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 1 x)|)
+        (:REWRITE CONS-CAR-CDR))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  108
+QCX-SCALE-ONE
+Subgoal 49
+Subgoal 49'
+Subgoal 48
+Subgoal 47
+Subgoal 47'
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 43'
+Subgoal 42
+Subgoal 42'
+Subgoal 41
+Subgoal 40
+Subgoal 40'
+Subgoal 39
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 30'
+Subgoal 29
+Subgoal 29'
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 26'
+Subgoal 25
+Subgoal 25'
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 22'
+Subgoal 21
+Subgoal 21'
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 18'
+Subgoal 17
+Subgoal 17'
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 14'
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 11'
+Subgoal 10
+Subgoal 10'
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 7'
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 4'
+Subgoal 3
+Subgoal 3'
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QCX-SCALE-DISTRIBUTES-OVER-ADD ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE))
+Time:  0.06 seconds (prove: 0.05, print: 0.01, other: 0.00)
+Prover steps counted:  9576
+QCX-SCALE-DISTRIBUTES-OVER-ADD
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-SCALE-COMPOSE ...)
+Rules: ((:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* (* x y) z)|)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1638
+QCX-SCALE-COMPOSE
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 36'
+Subgoal 35
+Subgoal 35'
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-MUL-OF-SCALE-LEFT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  9156
+QCX-MUL-OF-SCALE-LEFT
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 38'
+Subgoal 37
+Subgoal 37'
+Subgoal 36
+Subgoal 36'
+Subgoal 35
+Subgoal 35'
+Subgoal 34
+Subgoal 34'
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 31
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 26
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-MUL-OF-SCALE-RIGHT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-*)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* y (* x z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-MUL-COMMUTATIVE))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  9126
+QCX-MUL-OF-SCALE-RIGHT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-THREE-LIST-INDUCT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  460
+WBC-THREE-LIST-INDUCT
+Subgoal 16
+Subgoal 16'
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 9'
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 5'
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-SCALE-OF-ADD-COEFFICIENTS ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONS)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2549
+QCX-SCALE-OF-ADD-COEFFICIENTS
+Goal'
+Subgoal 625
+Subgoal 624
+Subgoal 623
+Subgoal 622
+Subgoal 621
+Subgoal 620
+Subgoal 619
+Subgoal 618
+Subgoal 617
+Subgoal 616
+Subgoal 615
+Subgoal 614
+Subgoal 613
+Subgoal 612
+Subgoal 611
+Subgoal 610
+Subgoal 609
+Subgoal 608
+Subgoal 607
+Subgoal 606
+Subgoal 605
+Subgoal 604
+Subgoal 603
+Subgoal 602
+Subgoal 601
+Subgoal 600
+Subgoal 599
+Subgoal 598
+Subgoal 597
+Subgoal 596
+Subgoal 595
+Subgoal 594
+Subgoal 593
+Subgoal 592
+Subgoal 591
+Subgoal 590
+Subgoal 589
+Subgoal 588
+Subgoal 587
+Subgoal 586
+Subgoal 585
+Subgoal 584
+Subgoal 583
+Subgoal 582
+Subgoal 581
+Subgoal 580
+Subgoal 579
+Subgoal 578
+Subgoal 577
+Subgoal 576
+Subgoal 575
+Subgoal 574
+Subgoal 573
+Subgoal 572
+Subgoal 571
+Subgoal 570
+Subgoal 569
+Subgoal 568
+Subgoal 567
+Subgoal 566
+Subgoal 565
+Subgoal 564
+Subgoal 563
+Subgoal 562
+Subgoal 561
+Subgoal 560
+Subgoal 559
+Subgoal 558
+Subgoal 557
+Subgoal 556
+Subgoal 555
+Subgoal 554
+Subgoal 553
+Subgoal 552
+Subgoal 551
+Subgoal 550
+Subgoal 549
+Subgoal 548
+Subgoal 547
+Subgoal 546
+Subgoal 545
+Subgoal 544
+Subgoal 543
+Subgoal 542
+Subgoal 541
+Subgoal 540
+Subgoal 539
+Subgoal 538
+Subgoal 537
+Subgoal 536
+Subgoal 535
+Subgoal 534
+Subgoal 533
+Subgoal 532
+Subgoal 531
+Subgoal 530
+Subgoal 529
+Subgoal 528
+Subgoal 527
+Subgoal 526
+Subgoal 525
+Subgoal 524
+Subgoal 523
+Subgoal 522
+Subgoal 521
+Subgoal 520
+Subgoal 519
+Subgoal 518
+Subgoal 517
+Subgoal 516
+Subgoal 515
+Subgoal 514
+Subgoal 513
+Subgoal 512
+Subgoal 511
+Subgoal 510
+Subgoal 509
+Subgoal 508
+Subgoal 507
+Subgoal 506
+Subgoal 505
+Subgoal 504
+Subgoal 503
+Subgoal 502
+Subgoal 501
+Subgoal 500
+Subgoal 499
+Subgoal 498
+Subgoal 497
+Subgoal 496
+Subgoal 495
+Subgoal 494
+Subgoal 493
+Subgoal 492
+Subgoal 491
+Subgoal 490
+Subgoal 489
+Subgoal 488
+Subgoal 487
+Subgoal 486
+Subgoal 485
+Subgoal 484
+Subgoal 483
+Subgoal 482
+Subgoal 481
+Subgoal 480
+Subgoal 479
+Subgoal 478
+Subgoal 477
+Subgoal 476
+Subgoal 475
+Subgoal 474
+Subgoal 473
+Subgoal 472
+Subgoal 471
+Subgoal 470
+Subgoal 469
+Subgoal 468
+Subgoal 467
+Subgoal 466
+Subgoal 465
+Subgoal 464
+Subgoal 463
+Subgoal 462
+Subgoal 461
+Subgoal 460
+Subgoal 459
+Subgoal 458
+Subgoal 457
+Subgoal 456
+Subgoal 455
+Subgoal 454
+Subgoal 453
+Subgoal 452
+Subgoal 451
+Subgoal 450
+Subgoal 449
+Subgoal 448
+Subgoal 447
+Subgoal 446
+Subgoal 445
+Subgoal 444
+Subgoal 443
+Subgoal 442
+Subgoal 441
+Subgoal 440
+Subgoal 439
+Subgoal 438
+Subgoal 437
+Subgoal 436
+Subgoal 435
+Subgoal 434
+Subgoal 433
+Subgoal 432
+Subgoal 431
+Subgoal 430
+Subgoal 429
+Subgoal 428
+Subgoal 427
+Subgoal 426
+Subgoal 425
+Subgoal 424
+Subgoal 423
+Subgoal 422
+Subgoal 421
+Subgoal 420
+Subgoal 419
+Subgoal 418
+Subgoal 417
+Subgoal 416
+Subgoal 415
+Subgoal 414
+Subgoal 413
+Subgoal 412
+Subgoal 411
+Subgoal 410
+Subgoal 409
+Subgoal 408
+Subgoal 407
+Subgoal 406
+Subgoal 405
+Subgoal 404
+Subgoal 403
+Subgoal 402
+Subgoal 401
+Subgoal 400
+Subgoal 399
+Subgoal 398
+Subgoal 397
+Subgoal 396
+Subgoal 395
+Subgoal 394
+Subgoal 393
+Subgoal 392
+Subgoal 391
+Subgoal 390
+Subgoal 389
+Subgoal 388
+Subgoal 387
+Subgoal 386
+Subgoal 385
+Subgoal 384
+Subgoal 383
+Subgoal 382
+Subgoal 381
+Subgoal 380
+Subgoal 379
+Subgoal 378
+Subgoal 377
+Subgoal 376
+Subgoal 375
+Subgoal 374
+Subgoal 373
+Subgoal 372
+Subgoal 371
+Subgoal 370
+Subgoal 369
+Subgoal 368
+Subgoal 367
+Subgoal 366
+Subgoal 365
+Subgoal 364
+Subgoal 363
+Subgoal 362
+Subgoal 361
+Subgoal 360
+Subgoal 359
+Subgoal 358
+Subgoal 357
+Subgoal 356
+Subgoal 355
+Subgoal 354
+Subgoal 353
+Subgoal 352
+Subgoal 351
+Subgoal 350
+Subgoal 349
+Subgoal 348
+Subgoal 347
+Subgoal 346
+Subgoal 345
+Subgoal 344
+Subgoal 343
+Subgoal 342
+Subgoal 341
+Subgoal 340
+Subgoal 339
+Subgoal 338
+Subgoal 337
+Subgoal 336
+Subgoal 335
+Subgoal 334
+Subgoal 333
+Subgoal 332
+Subgoal 331
+Subgoal 330
+Subgoal 329
+Subgoal 328
+Subgoal 327
+Subgoal 326
+Subgoal 325
+Subgoal 324
+Subgoal 323
+Subgoal 322
+Subgoal 321
+Subgoal 320
+Subgoal 319
+Subgoal 318
+Subgoal 317
+Subgoal 316
+Subgoal 315
+Subgoal 314
+Subgoal 313
+Subgoal 312
+Subgoal 311
+Subgoal 310
+Subgoal 309
+Subgoal 308
+Subgoal 307
+Subgoal 306
+Subgoal 305
+Subgoal 304
+Subgoal 303
+Subgoal 302
+Subgoal 301
+Subgoal 300
+Subgoal 299
+Subgoal 298
+Subgoal 297
+Subgoal 296
+Subgoal 295
+Subgoal 294
+Subgoal 293
+Subgoal 292
+Subgoal 291
+Subgoal 290
+Subgoal 289
+Subgoal 288
+Subgoal 287
+Subgoal 286
+Subgoal 285
+Subgoal 284
+Subgoal 283
+Subgoal 282
+Subgoal 281
+Subgoal 280
+Subgoal 279
+Subgoal 278
+Subgoal 277
+Subgoal 276
+Subgoal 275
+Subgoal 274
+Subgoal 273
+Subgoal 272
+Subgoal 271
+Subgoal 270
+Subgoal 269
+Subgoal 268
+Subgoal 267
+Subgoal 266
+Subgoal 265
+Subgoal 264
+Subgoal 263
+Subgoal 262
+Subgoal 261
+Subgoal 260
+Subgoal 259
+Subgoal 258
+Subgoal 257
+Subgoal 256
+Subgoal 255
+Subgoal 254
+Subgoal 253
+Subgoal 252
+Subgoal 251
+Subgoal 250
+Subgoal 249
+Subgoal 248
+Subgoal 247
+Subgoal 246
+Subgoal 245
+Subgoal 244
+Subgoal 243
+Subgoal 242
+Subgoal 241
+Subgoal 240
+Subgoal 239
+Subgoal 238
+Subgoal 237
+Subgoal 236
+Subgoal 235
+Subgoal 234
+Subgoal 233
+Subgoal 232
+Subgoal 231
+Subgoal 230
+Subgoal 229
+Subgoal 228
+Subgoal 227
+Subgoal 226
+Subgoal 225
+Subgoal 224
+Subgoal 223
+Subgoal 222
+Subgoal 221
+Subgoal 220
+Subgoal 219
+Subgoal 218
+Subgoal 217
+Subgoal 216
+Subgoal 215
+Subgoal 214
+Subgoal 213
+Subgoal 212
+Subgoal 211
+Subgoal 210
+Subgoal 209
+Subgoal 208
+Subgoal 207
+Subgoal 206
+Subgoal 205
+Subgoal 204
+Subgoal 203
+Subgoal 202
+Subgoal 201
+Subgoal 200
+Subgoal 199
+Subgoal 198
+Subgoal 197
+Subgoal 196
+Subgoal 195
+Subgoal 194
+Subgoal 193
+Subgoal 192
+Subgoal 191
+Subgoal 190
+Subgoal 189
+Subgoal 188
+Subgoal 187
+Subgoal 186
+Subgoal 185
+Subgoal 184
+Subgoal 183
+Subgoal 183'
+Subgoal 182
+Subgoal 181
+Subgoal 181'
+Subgoal 180
+Subgoal 179
+Subgoal 178
+Subgoal 177
+Subgoal 177'
+Subgoal 176
+Subgoal 176'
+Subgoal 175
+Subgoal 174
+Subgoal 173
+Subgoal 172
+Subgoal 171
+Subgoal 170
+Subgoal 169
+Subgoal 168
+Subgoal 167
+Subgoal 166
+Subgoal 165
+Subgoal 164
+Subgoal 163
+Subgoal 162
+Subgoal 161
+Subgoal 160
+Subgoal 159
+Subgoal 158
+Subgoal 157
+Subgoal 156
+Subgoal 155
+Subgoal 154
+Subgoal 153
+Subgoal 152
+Subgoal 151
+Subgoal 150
+Subgoal 149
+Subgoal 148
+Subgoal 147
+Subgoal 146
+Subgoal 145
+Subgoal 144
+Subgoal 143
+Subgoal 142
+Subgoal 141
+Subgoal 140
+Subgoal 139
+Subgoal 138
+Subgoal 137
+Subgoal 136
+Subgoal 135
+Subgoal 134
+Subgoal 133
+Subgoal 133'
+Subgoal 132
+Subgoal 131
+Subgoal 131'
+Subgoal 130
+Subgoal 129
+Subgoal 128
+Subgoal 127
+Subgoal 127'
+Subgoal 126
+Subgoal 126'
+Subgoal 125
+Subgoal 124
+Subgoal 123
+Subgoal 122
+Subgoal 121
+Subgoal 120
+Subgoal 119
+Subgoal 118
+Subgoal 117
+Subgoal 116
+Subgoal 115
+Subgoal 114
+Subgoal 113
+Subgoal 112
+Subgoal 111
+Subgoal 110
+Subgoal 109
+Subgoal 108
+Subgoal 107
+Subgoal 106
+Subgoal 105
+Subgoal 104
+Subgoal 103
+Subgoal 102
+Subgoal 101
+Subgoal 100
+Subgoal 99
+Subgoal 98
+Subgoal 97
+Subgoal 96
+Subgoal 95
+Subgoal 94
+Subgoal 93
+Subgoal 92
+Subgoal 91
+Subgoal 90
+Subgoal 89
+Subgoal 88
+Subgoal 87
+Subgoal 86
+Subgoal 85
+Subgoal 84
+Subgoal 83
+Subgoal 82
+Subgoal 81
+Subgoal 80
+Subgoal 79
+Subgoal 78
+Subgoal 77
+Subgoal 76
+Subgoal 75
+Subgoal 74
+Subgoal 73
+Subgoal 72
+Subgoal 71
+Subgoal 70
+Subgoal 69
+Subgoal 68
+Subgoal 67
+Subgoal 66
+Subgoal 65
+Subgoal 64
+Subgoal 63
+Subgoal 62
+Subgoal 61
+Subgoal 60
+Subgoal 59
+Subgoal 58
+Subgoal 57
+Subgoal 56
+Subgoal 55
+Subgoal 54
+Subgoal 53
+Subgoal 52
+Subgoal 51
+Subgoal 50
+Subgoal 49
+Subgoal 48
+Subgoal 47
+Subgoal 46
+Subgoal 45
+Subgoal 44
+Subgoal 43
+Subgoal 42
+Subgoal 41
+Subgoal 40
+Subgoal 39
+Subgoal 38
+Subgoal 37
+Subgoal 36
+Subgoal 35
+Subgoal 34
+Subgoal 33
+Subgoal 33'
+Subgoal 32
+Subgoal 31
+Subgoal 31'
+Subgoal 30
+Subgoal 29
+Subgoal 28
+Subgoal 27
+Subgoal 27'
+Subgoal 26
+Subgoal 26'
+Subgoal 25
+Subgoal 24
+Subgoal 23
+Subgoal 22
+Subgoal 21
+Subgoal 20
+Subgoal 19
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 8'
+Subgoal 7
+Subgoal 6
+Subgoal 6'
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 2'
+Subgoal 1
+Subgoal 1'
+
+Summary
+Form:  ( DEFTHM QCX-ADD-INTERCHANGE ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ (+ x y) z)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2))
+Hint-events: ((:USE QCX-ADD-ASSOCIATIVE)
+              (:USE QCX-ADD-COMMUTATIVE))
+Time:  2.57 seconds (prove: 2.52, print: 0.04, other: 0.00)
+Prover steps counted:  780450
+QCX-ADD-INTERCHANGE
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-ADD-SCALED-INTERCHANGE ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QCX-ADD-INTERCHANGE)
+              (:USE QCX-SCALE-OF-ADD-COEFFICIENTS))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  99
+QCX-ADD-SCALED-INTERCHANGE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.3'6'
+Subgoal *1/2.3'7'
+Subgoal *1/2.3'8'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.2'7'
+Subgoal *1/2.2'8'
+Subgoal *1/2.2'9'
+Subgoal *1/2.2'10'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/2.1'7'
+Subgoal *1/2.1'8'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-LINEAR-OF-ROW-ADD ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-LINEAR)
+        (:DEFINITION WBC-ROW-ADD)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-ROW-ADD)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-THREE-LIST-INDUCT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-SCALED-INTERCHANGE)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-ROW-ADD))
+Time:  0.11 seconds (prove: 0.11, print: 0.00, other: 0.00)
+Prover steps counted:  16800
+WBC-LINEAR-OF-ROW-ADD
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-TWO-LIST-INDUCT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-TWO-LIST-INDUCT
+Goal'
+
+Summary
+Form:  ( DEFTHM QCX-LINEAR-SCALE-STEP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QCX-ADD-COMMUTATIVE)
+              (:USE QCX-SCALE-COMPOSE)
+              (:USE QCX-SCALE-DISTRIBUTES-OVER-ADD))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  137
+QCX-LINEAR-SCALE-STEP
+
+Summary
+Form:  ( DEFTHM QCX-SCALE-OF-QUOTED-ZERO ...)
+Rules: ((:DEFINITION QCX-SCALE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE DEFAULT-TIMES-1))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  45
+QCX-SCALE-OF-QUOTED-ZERO
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/2'6'
+Subgoal *1/2'7'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-LINEAR-OF-ROW-SCALE ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-LINEAR)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-TWO-LIST-INDUCT)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-LINEAR-SCALE-STEP)
+        (:REWRITE QCX-SCALE-OF-QUOTED-ZERO)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-ROW-SCALE))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  3349
+WBC-LINEAR-OF-ROW-SCALE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.3'6'
+Subgoal *1/2.3'7'
+Subgoal *1/2.3'8'
+Subgoal *1/2.3'9'
+Subgoal *1/2.3'10'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.2'7'
+Subgoal *1/2.2'8'
+Subgoal *1/2.2'9'
+Subgoal *1/2.2'10'
+Subgoal *1/2.2'11'
+Subgoal *1/2.2'12'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/2.1'7'
+Subgoal *1/2.1'8'
+Subgoal *1/2.1'9'
+Subgoal *1/2.1'10'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-ROW-EVAL-OF-ROW-ADD ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-ROW-ADD)
+        (:DEFINITION WBC-ROW-EVAL)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-ROW-ADD)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-THREE-LIST-INDUCT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-SCALED-INTERCHANGE)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-ROW-ADD))
+Time:  0.15 seconds (prove: 0.15, print: 0.00, other: 0.00)
+Prover steps counted:  23451
+WBC-ROW-EVAL-OF-ROW-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/2'6'
+Subgoal *1/2'7'
+Subgoal *1/2'8'
+Subgoal *1/2'9'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-ROW-EVAL-OF-ROW-SCALE ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-ROW-EVAL)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-TWO-LIST-INDUCT)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-LINEAR-SCALE-STEP)
+        (:REWRITE QCX-SCALE-OF-QUOTED-ZERO)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-ROW-SCALE))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  4844
+WBC-ROW-EVAL-OF-ROW-SCALE
+
+Summary
+Form:  ( DEFUN WBC-RATIONAL-MATRIX-LISTP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-RATIONAL-MATRIX-LISTP
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RATIONAL-MATRIXP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-RATIONAL-MATRIX-LISTP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  1197
+RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP
+Subgoal *1/4
+Subgoal *1/4'
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-IMPLIES-LENGTH ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RATIONAL-MATRIXP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3374
+RATIONAL-MATRIXP-IMPLIES-LENGTH
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.7
+Subgoal *1/2.7'
+Subgoal *1/2.7''
+Subgoal *1/2.7'''
+Subgoal *1/2.7'4'
+Subgoal *1/2.7'5'
+Subgoal *1/2.7'6'
+Subgoal *1/2.7'7'
+Subgoal *1/2.7'8'
+Subgoal *1/2.7'9'
+Subgoal *1/2.6
+Subgoal *1/2.6'
+Subgoal *1/2.6''
+Subgoal *1/2.6'''
+Subgoal *1/2.6'4'
+Subgoal *1/2.6'5'
+Subgoal *1/2.6'6'
+Subgoal *1/2.6'7'
+Subgoal *1/2.6'8'
+Subgoal *1/2.6'9'
+Subgoal *1/2.5
+Subgoal *1/2.5'
+Subgoal *1/2.5''
+Subgoal *1/2.5'''
+Subgoal *1/2.5'4'
+Subgoal *1/2.5'5'
+Subgoal *1/2.5'6'
+Subgoal *1/2.5'7'
+Subgoal *1/2.5'8'
+Subgoal *1/2.5'9'
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4'4'
+Subgoal *1/2.4'5'
+Subgoal *1/2.4'6'
+Subgoal *1/2.4'7'
+Subgoal *1/2.4'8'
+Subgoal *1/2.4'9'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.3'6'
+Subgoal *1/2.3'7'
+Subgoal *1/2.3'8'
+Subgoal *1/2.3'9'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.2'7'
+Subgoal *1/2.2'8'
+Subgoal *1/2.2'9'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/2.1'7'
+Subgoal *1/2.1'8'
+Subgoal *1/2.1'9'
+Subgoal *1/2.1'10'
+Subgoal *1/2.1'11'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-MATRIX-ADD-LIST ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-ADD)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:DEFINITION WBC-ROW-ADD)
+        (:DEFINITION WBC-ROW-EVAL)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-ROW-ADD)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-THREE-LIST-INDUCT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-INTERCHANGE)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE WBC-ROW-EVAL-OF-ROW-ADD)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-ADD))
+Time:  0.39 seconds (prove: 0.39, print: 0.01, other: 0.00)
+Prover steps counted:  57775
+WBC-MATRIX-EVAL-OF-MATRIX-ADD-LIST
+Goal'
+Goal''
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-MATRIX-ADD ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-ADD)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-LENGTH)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-ADD)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-EVAL))
+Hint-events: ((:USE WBC-MATRIX-EVAL-OF-MATRIX-ADD-LIST))
+Time:  1.34 seconds (prove: 1.34, print: 0.00, other: 0.00)
+Prover steps counted:  108075
+WBC-MATRIX-EVAL-OF-MATRIX-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.3'6'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-MATRIX-SCALE-LIST ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:DEFINITION WBC-ROW-EVAL)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-TWO-LIST-INDUCT)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-SCALE-DISTRIBUTES-OVER-ADD)
+        (:REWRITE QCX-SCALE-OF-QUOTED-ZERO)
+        (:REWRITE WBC-ROW-EVAL-OF-ROW-SCALE)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-SCALE))
+Time:  0.12 seconds (prove: 0.12, print: 0.00, other: 0.00)
+Prover steps counted:  14522
+WBC-MATRIX-EVAL-OF-MATRIX-SCALE-LIST
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-MATRIX-SCALE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-SCALE-OF-QUOTED-ZERO)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-LENGTH)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-EVAL)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-SCALE))
+Hint-events: ((:USE WBC-MATRIX-EVAL-OF-MATRIX-SCALE-LIST))
+Time:  0.22 seconds (prove: 0.22, print: 0.00, other: 0.00)
+Prover steps counted:  17088
+WBC-MATRIX-EVAL-OF-MATRIX-SCALE
+
+Summary
+Form:  ( DEFTHM QCX-MUL-OF-QUOTED-ZERO-LEFT ...)
+Rules: ((:DEFINITION QCX-IM)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE DEFAULT-TIMES-2))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  98
+QCX-MUL-OF-QUOTED-ZERO-LEFT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/2'6'
+Subgoal *1/2'7'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-ROW-EVAL-IS-MUL-LINEAR ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-LINEAR)
+        (:DEFINITION WBC-ROW-EVAL)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-TWO-LIST-INDUCT)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-MUL-COMMUTATIVE)
+        (:REWRITE QCX-MUL-DISTRIBUTES-OVER-ADD)
+        (:REWRITE QCX-MUL-OF-QUOTED-ZERO-LEFT)
+        (:REWRITE QCX-MUL-OF-SCALE-RIGHT)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3590
+WBC-ROW-EVAL-IS-MUL-LINEAR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM WBC-ROW-EVAL-OF-OUTER-ROW ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Hint-events: ((:USE QCX-MUL-OF-SCALE-LEFT)
+              (:USE WBC-ROW-EVAL-IS-MUL-LINEAR)
+              (:USE WBC-ROW-EVAL-OF-ROW-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  327
+WBC-ROW-EVAL-OF-OUTER-ROW
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/2'6'
+Subgoal *1/2'7'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-OUTER ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION WBC-LINEAR)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:DEFINITION WBC-OUTER)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-TWO-LIST-INDUCT)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-ADD-DISTRIBUTES-OVER-MUL-RIGHT)
+        (:REWRITE QCX-MUL-COMMUTATIVE)
+        (:REWRITE QCX-MUL-OF-QUOTED-ZERO-LEFT)
+        (:REWRITE QCX-MUL-OF-SCALE-LEFT)
+        (:REWRITE WBC-ROW-EVAL-OF-OUTER-ROW)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-OUTER))
+Time:  0.05 seconds (prove: 0.05, print: 0.00, other: 0.00)
+Prover steps counted:  5689
+WBC-MATRIX-EVAL-OF-OUTER
+
+Summary
+Form:  ( DEFUN WBC-TERM-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION QCX-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-TERM-OUTPUT
+
+Summary
+Form:  ( DEFUN WBC-TERM-MATRIX ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-MATRIX-SCALE))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-TERM-MATRIX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-PLAN-OUTPUT ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION QCX-ADD)
+        (:TYPE-PRESCRIPTION QCX-ZERO))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-PLAN-OUTPUT
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFUN WBC-PLAN-MATRIX ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O<)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:LINEAR ACL2-COUNT-CAR-CDR-LINEAR)
+        (:TYPE-PRESCRIPTION ACL2-COUNT)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-ADD)
+        (:TYPE-PRESCRIPTION WBC-TERM-MATRIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  426
+WBC-PLAN-MATRIX
+
+Summary
+Form:  ( DEFUN WBC-TERMS-VALIDP ...)
+Rules: NIL
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-TERMS-VALIDP
+
+Summary
+Form:  ( DEFUN WBC-PLAN-VALIDP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+WBC-PLAN-VALIDP
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-WBC-ROW-SCALE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION WBC-ROW-SCALE)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  562
+LEN-OF-WBC-ROW-SCALE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-WBC-ROW-SCALE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-ROW-SCALE)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-ROW-SCALE))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  340
+RATIONAL-LISTP-OF-WBC-ROW-SCALE
+Goal'
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-ROW-SCALE ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-WBC-ROW-SCALE)
+        (:REWRITE RATIONAL-LISTP-OF-WBC-ROW-SCALE)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  246
+RATIONAL-ROWP-OF-ROW-SCALE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-WBC-OUTER ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION WBC-OUTER)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION WBC-OUTER)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  671
+LEN-OF-WBC-OUTER
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM MATRIX-LISTP-OF-WBC-OUTER ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-OUTER)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-OUTER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-OUTER)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE RATIONAL-ROWP-OF-ROW-SCALE)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-OUTER)
+        (:TYPE-PRESCRIPTION WBC-RATIONAL-MATRIX-LISTP))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1193
+MATRIX-LISTP-OF-WBC-OUTER
+Subgoal *1/3
+Subgoal *1/3'
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM MATRIX-LISTP-IMPLIES-RATIONAL-MATRIXP-OF-LEN ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-RATIONAL-MATRIX-LISTP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-LENGTH)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3962
+MATRIX-LISTP-IMPLIES-RATIONAL-MATRIXP-OF-LEN
+Subgoal *1/4
+Subgoal *1/3
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-NFIX-FIRST ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART ZP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION RATIONAL-MATRIXP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  1403
+RATIONAL-MATRIXP-OF-NFIX-FIRST
+Goal'
+Goal''
+Goal'''
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-OUTER ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-OUTER)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-WBC-OUTER)
+        (:REWRITE MATRIX-LISTP-OF-WBC-OUTER)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Hint-events: ((:USE MATRIX-LISTP-IMPLIES-RATIONAL-MATRIXP-OF-LEN))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  1498
+RATIONAL-MATRIXP-OF-OUTER
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-WBC-MATRIX-SCALE ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:INDUCTION WBC-MATRIX-SCALE)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM))
+Time:  0.02 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  653
+LEN-OF-WBC-MATRIX-SCALE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM MATRIX-LISTP-OF-WBC-MATRIX-SCALE ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:DEFINITION WBC-ROW-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-MATRIX-SCALE)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RATIONAL-ROWP-OF-ROW-SCALE)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-SCALE)
+        (:TYPE-PRESCRIPTION WBC-RATIONAL-MATRIX-LISTP))
+Time:  0.02 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  891
+MATRIX-LISTP-OF-WBC-MATRIX-SCALE
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-MATRIX-SCALE ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:REWRITE LEN-OF-WBC-MATRIX-SCALE)
+        (:REWRITE MATRIX-LISTP-OF-WBC-MATRIX-SCALE)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-LENGTH)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Hint-events: ((:USE MATRIX-LISTP-IMPLIES-RATIONAL-MATRIXP-OF-LEN))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  418
+RATIONAL-MATRIXP-OF-MATRIX-SCALE
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-WBC-ROW-ADD ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-ROW-ADD)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-ROW-ADD)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2575
+LEN-OF-WBC-ROW-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2''
+Subgoal *1/2'''
+Subgoal *1/2'4'
+Subgoal *1/2'5'
+Subgoal *1/2'6'
+Subgoal *1/2'7'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-LISTP-OF-WBC-ROW-ADD ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-ROW-ADD)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-ROW-ADD)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-ROW-ADD)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-ROW-ADD))
+Time:  0.03 seconds (prove: 0.02, print: 0.00, other: 0.00)
+Prover steps counted:  2211
+RATIONAL-LISTP-OF-WBC-ROW-ADD
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-ROW-ADD ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-ROW-ADD)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-WBC-ROW-ADD)
+        (:REWRITE RATIONAL-LISTP-OF-WBC-ROW-ADD)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  440
+RATIONAL-ROWP-OF-ROW-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM LEN-OF-WBC-MATRIX-ADD ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION WBC-MATRIX-ADD)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-MATRIX-ADD)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:TYPE-PRESCRIPTION LEN))
+Time:  0.04 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  2974
+LEN-OF-WBC-MATRIX-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.3
+Subgoal *1/2.3'
+Subgoal *1/2.3''
+Subgoal *1/2.3'''
+Subgoal *1/2.3'4'
+Subgoal *1/2.3'5'
+Subgoal *1/2.3'6'
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/2.1'6'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM MATRIX-LISTP-OF-WBC-MATRIX-ADD ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-ADD)
+        (:DEFINITION WBC-RATIONAL-MATRIX-LISTP)
+        (:DEFINITION WBC-ROW-ADD)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-MATRIX-ADD)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE LEN-WHEN-ATOM)
+        (:REWRITE RATIONAL-ROWP-OF-ROW-ADD)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-ADD)
+        (:TYPE-PRESCRIPTION WBC-RATIONAL-MATRIX-LISTP))
+Time:  0.11 seconds (prove: 0.10, print: 0.00, other: 0.00)
+Prover steps counted:  10001
+MATRIX-LISTP-OF-WBC-MATRIX-ADD
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-MATRIX-ADD ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION WBC-MATRIX-ADD)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE LEN-OF-WBC-MATRIX-ADD)
+        (:REWRITE MATRIX-LISTP-OF-WBC-MATRIX-ADD)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-LENGTH)
+        (:REWRITE RATIONAL-MATRIXP-IMPLIES-MATRIX-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Hint-events: ((:USE MATRIX-LISTP-IMPLIES-RATIONAL-MATRIXP-OF-LEN))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  649
+RATIONAL-MATRIXP-OF-MATRIX-ADD
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-WBC-LINEAR ...)
+Rules: ((:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION WBC-LINEAR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART ENDP)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-LINEAR)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-LINEAR))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  710
+QCX-RATIONALP-OF-WBC-LINEAR
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-WBC-TERM-OUTPUT ...)
+Rules: ((:DEFINITION NOT)
+        (:DEFINITION WBC-TERM-OUTPUT)
+        (:REWRITE QCX-RATIONALP-OF-MUL)
+        (:REWRITE QCX-RATIONALP-OF-SCALE)
+        (:REWRITE QCX-RATIONALP-OF-WBC-LINEAR)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP))
+Hint-events: ((:USE QCX-RATIONALP-OF-WBC-LINEAR))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  804
+QCX-RATIONALP-OF-WBC-TERM-OUTPUT
+Goal'
+Goal''
+Goal'''
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM WBC-TERM-OUTPUT-IS-MATRIX-EVAL ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:DEFINITION WBC-TERM-OUTPUT)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-OUTER)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE RATIONAL-MATRIXP-OF-OUTER)
+        (:REWRITE WBC-MATRIX-EVAL-OF-MATRIX-SCALE)
+        (:REWRITE WBC-MATRIX-EVAL-OF-OUTER)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-OUTER))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-OUTER)
+              (:USE WBC-MATRIX-EVAL-OF-MATRIX-SCALE)
+              (:USE WBC-MATRIX-EVAL-OF-OUTER))
+Time:  0.05 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  5257
+WBC-TERM-OUTPUT-IS-MATRIX-EVAL
+Goal'
+Goal''
+Goal'''
+Subgoal 18
+Subgoal 17
+Subgoal 16
+Subgoal 15
+Subgoal 14
+Subgoal 13
+Subgoal 12
+Subgoal 11
+Subgoal 10
+Subgoal 9
+Subgoal 8
+Subgoal 7
+Subgoal 6
+Subgoal 5
+Subgoal 4
+Subgoal 3
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFTHM QCX-RATIONALP-OF-WBC-TERM-MATRIX-EVAL ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-MUL)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-SCALE)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:DEFINITION WBC-TERM-OUTPUT)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:EXECUTABLE-COUNTERPART QCX-RATIONALP)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART WBC-OUTER)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* x (+ y z))|)
+        (:REWRITE |(* x (- y))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(- (if a b c))|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE |(rationalp (- x))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-TIMES-1)
+        (:REWRITE DEFAULT-TIMES-2)
+        (:REWRITE QCX-RATIONALP-OF-SCALE)
+        (:REWRITE QCX-SCALE-OF-QUOTED-ZERO)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION QCX-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-LINEAR)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-EVAL))
+Hint-events: ((:USE QCX-RATIONALP-OF-WBC-TERM-OUTPUT)
+              (:USE WBC-TERM-OUTPUT-IS-MATRIX-EVAL))
+Time:  1.14 seconds (prove: 1.13, print: 0.00, other: 0.00)
+Prover steps counted:  92369
+QCX-RATIONALP-OF-WBC-TERM-MATRIX-EVAL
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-WBC-TERM-MATRIX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-OUTER)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE RATIONAL-MATRIXP-OF-MATRIX-SCALE)
+        (:REWRITE RATIONAL-MATRIXP-OF-OUTER)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-SCALE)
+        (:TYPE-PRESCRIPTION WBC-OUTER))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-MATRIX-SCALE)
+              (:USE RATIONAL-MATRIXP-OF-OUTER))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3778
+RATIONAL-MATRIXP-OF-WBC-TERM-MATRIX
+Goal'
+Goal''
+Goal'''
+Goal'4'
+Goal'5'
+Goal'6'
+Goal'7'
+Goal'8'
+
+Summary
+Form:  ( DEFTHM WBC-PLAN-VALIDP-OF-TAIL ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-PLAN-VALIDP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.03 seconds (prove: 0.03, print: 0.00, other: 0.00)
+Prover steps counted:  3040
+WBC-PLAN-VALIDP-OF-TAIL
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.2'6'
+Subgoal *1/2.1
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-PLAN-MATRIX ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-PLAN-OUTPUT)
+        (:REWRITE |(< 0 (len x))|)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE RATIONAL-MATRIXP-OF-MATRIX-ADD)
+        (:REWRITE RATIONAL-MATRIXP-OF-MATRIX-SCALE)
+        (:REWRITE RATIONAL-MATRIXP-OF-OUTER)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-PLAN-MATRIX))
+Time:  0.11 seconds (prove: 0.11, print: 0.00, other: 0.00)
+Prover steps counted:  14286
+RATIONAL-MATRIXP-OF-PLAN-MATRIX
+
+Summary
+Form:  ( DEFTHM WBC-PLAN-MATRIX-NONEMPTY-IMPLIES-CONSP-TERMS ...)
+Rules: ((:DEFINITION WBC-PLAN-MATRIX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  31
+WBC-PLAN-MATRIX-NONEMPTY-IMPLIES-CONSP-TERMS
+
+Summary
+Form:  ( DEFTHM WBC-PLAN-MATRIX-NONEMPTY-IMPLIES-CONSP-POST ...)
+Rules: ((:DEFINITION WBC-PLAN-MATRIX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  35
+WBC-PLAN-MATRIX-NONEMPTY-IMPLIES-CONSP-POST
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM QCX-ADD-ZERO-LEFT-OF-TERM-MATRIX-EVAL ...)
+Rules: ((:DEFINITION ATOM)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-LIST-RATIONALP)
+        (:DEFINITION QCX-RATIONALP)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-MATRIX-EVAL)
+        (:DEFINITION WBC-MATRIX-SCALE)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART ACL2-NUMBERP)
+        (:EXECUTABLE-COUNTERPART CAR)
+        (:EXECUTABLE-COUNTERPART CDR)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ADD)
+        (:EXECUTABLE-COUNTERPART QCX-IM)
+        (:EXECUTABLE-COUNTERPART QCX-RE)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART WBC-OUTER)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(equal 0 (len x))|)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-EVAL))
+Hint-events: ((:USE QCX-ADD-LEFT-IDENTITY)
+              (:USE QCX-RATIONALP-OF-WBC-TERM-MATRIX-EVAL))
+Time:  0.40 seconds (prove: 0.40, print: 0.00, other: 0.00)
+Prover steps counted:  27871
+QCX-ADD-ZERO-LEFT-OF-TERM-MATRIX-EVAL
+Goal'
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-NIL ...)
+Rules: ((:DEFINITION WBC-MATRIX-EVAL)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  22
+WBC-MATRIX-EVAL-OF-NIL
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM WBC-MATRIX-EVAL-OF-TERM-PLUS-PLAN ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION QCX)
+        (:DEFINITION QCX-ADD)
+        (:DEFINITION QCX-IM)
+        (:DEFINITION QCX-RE)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERM-MATRIX)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART QCX)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE CONS-CAR-CDR)
+        (:REWRITE DEFAULT-PLUS-1)
+        (:REWRITE DEFAULT-PLUS-2)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE RATIONAL-MATRIXP-OF-PLAN-MATRIX)
+        (:REWRITE WBC-MATRIX-EVAL-OF-MATRIX-ADD)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-MATRIX-EVAL)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-PLAN-MATRIX)
+              (:USE RATIONAL-MATRIXP-OF-WBC-TERM-MATRIX)
+              (:USE WBC-MATRIX-EVAL-OF-MATRIX-ADD))
+Time:  1.43 seconds (prove: 1.43, print: 0.00, other: 0.00)
+Prover steps counted:  96136
+WBC-MATRIX-EVAL-OF-TERM-PLUS-PLAN
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.4'
+Subgoal *1/2.4''
+Subgoal *1/2.4'''
+Subgoal *1/2.4'4'
+Subgoal *1/2.4'5'
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.2'
+Subgoal *1/2.2''
+Subgoal *1/2.2'''
+Subgoal *1/2.2'4'
+Subgoal *1/2.2'5'
+Subgoal *1/2.1
+Subgoal *1/2.1'
+Subgoal *1/2.1''
+Subgoal *1/2.1'''
+Subgoal *1/2.1'4'
+Subgoal *1/2.1'5'
+Subgoal *1/1
+Subgoal *1/1'
+
+Summary
+Form:  ( DEFTHM WBC-PLAN-OUTPUT-IS-MATRIX-EVAL ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION ENDP)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-PLAN-MATRIX)
+        (:DEFINITION WBC-PLAN-OUTPUT)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:DEFINITION WBC-TERMS-VALIDP)
+        (:ELIM CAR-CDR-ELIM)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART QCX-ZERO)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:FORWARD-CHAINING ACL2-NUMBER-LISTP-FORWARD-TO-TRUE-LISTP)
+        (:FORWARD-CHAINING RATIONAL-LISTP-FORWARD-TO-ACL2-NUMBER-LISTP)
+        (:INDUCTION WBC-PLAN-OUTPUT)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE CONSP-BY-LEN)
+        (:REWRITE CONSP-UNDER-IFF-WHEN-TRUE-LISTP)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE QCX-ADD-COMMUTATIVE)
+        (:REWRITE QCX-ADD-ZERO-LEFT-OF-TERM-MATRIX-EVAL)
+        (:REWRITE REDUCE-ADDITIVE-CONSTANT-EQUAL)
+        (:REWRITE WBC-MATRIX-EVAL-OF-NIL)
+        (:REWRITE WBC-MATRIX-EVAL-OF-TERM-PLUS-PLAN)
+        (:REWRITE WBC-PLAN-MATRIX-NONEMPTY-IMPLIES-CONSP-TERMS)
+        (:REWRITE WBC-TERM-OUTPUT-IS-MATRIX-EVAL)
+        (:TYPE-PRESCRIPTION ACL2-NUMBER-LISTP)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION QCX-VECTORP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP)
+        (:TYPE-PRESCRIPTION WBC-PLAN-MATRIX)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Time:  0.10 seconds (prove: 0.09, print: 0.00, other: 0.00)
+Prover steps counted:  11118
+WBC-PLAN-OUTPUT-IS-MATRIX-EVAL
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN WBC-DELTA-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+WBC-DELTA-ROW-AUX
+Subgoal 2
+Subgoal 1
+
+Summary
+Form:  ( DEFUN WBC-DELTA-MATRIX-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER NATP-COMPOUND-RECOGNIZER)
+        (:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION O-FINP)
+        (:DEFINITION O-P)
+        (:DEFINITION O<)
+        (:DEFINITION SYNP)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE SIMPLIFY-SUMS-<))
+Time:  0.01 seconds (prove: 0.00, print: 0.00, other: 0.01)
+Prover steps counted:  130
+WBC-DELTA-MATRIX-AUX
+
+Summary
+Form:  ( DEFUN WBC-CYCLIC-MATRIX ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-DELTA-MATRIX-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-CYCLIC-MATRIX
+
+Summary
+Form:  ( DEFUN WBC-CYCLIC-OUTPUT ...)
+Rules: ((:TYPE-PRESCRIPTION WBC-MATRIX-EVAL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-CYCLIC-OUTPUT
+Subgoal *1/2
+Subgoal *1/2'
+Subgoal *1/2.112
+Subgoal *1/2.111
+Subgoal *1/2.110
+Subgoal *1/2.109
+Subgoal *1/2.108
+Subgoal *1/2.107
+Subgoal *1/2.107'
+Subgoal *1/2.106
+Subgoal *1/2.106'
+Subgoal *1/2.105
+Subgoal *1/2.105'
+Subgoal *1/2.104
+Subgoal *1/2.103
+Subgoal *1/2.102
+Subgoal *1/2.101
+Subgoal *1/2.100
+Subgoal *1/2.100'
+Subgoal *1/2.99
+Subgoal *1/2.98
+Subgoal *1/2.97
+Subgoal *1/2.96
+Subgoal *1/2.95
+Subgoal *1/2.94
+Subgoal *1/2.93
+Subgoal *1/2.92
+Subgoal *1/2.91
+Subgoal *1/2.90
+Subgoal *1/2.89
+Subgoal *1/2.88
+Subgoal *1/2.87
+Subgoal *1/2.86
+Subgoal *1/2.85
+Subgoal *1/2.84
+Subgoal *1/2.83
+Subgoal *1/2.82
+Subgoal *1/2.81
+Subgoal *1/2.80
+Subgoal *1/2.79
+Subgoal *1/2.78
+Subgoal *1/2.77
+Subgoal *1/2.76
+Subgoal *1/2.75
+Subgoal *1/2.75'
+Subgoal *1/2.74
+Subgoal *1/2.74'
+Subgoal *1/2.73
+Subgoal *1/2.73'
+Subgoal *1/2.72
+Subgoal *1/2.72'
+Subgoal *1/2.71
+Subgoal *1/2.70
+Subgoal *1/2.69
+Subgoal *1/2.68
+Subgoal *1/2.67
+Subgoal *1/2.66
+Subgoal *1/2.65
+Subgoal *1/2.64
+Subgoal *1/2.63
+Subgoal *1/2.62
+Subgoal *1/2.61
+Subgoal *1/2.60
+Subgoal *1/2.59
+Subgoal *1/2.58
+Subgoal *1/2.57
+Subgoal *1/2.56
+Subgoal *1/2.55
+Subgoal *1/2.54
+Subgoal *1/2.53
+Subgoal *1/2.52
+Subgoal *1/2.51
+Subgoal *1/2.50
+Subgoal *1/2.49
+Subgoal *1/2.48
+Subgoal *1/2.47
+Subgoal *1/2.46
+Subgoal *1/2.45
+Subgoal *1/2.44
+Subgoal *1/2.43
+Subgoal *1/2.42
+Subgoal *1/2.41
+Subgoal *1/2.40
+Subgoal *1/2.39
+Subgoal *1/2.38
+Subgoal *1/2.37
+Subgoal *1/2.36
+Subgoal *1/2.35
+Subgoal *1/2.34
+Subgoal *1/2.33
+Subgoal *1/2.32
+Subgoal *1/2.31
+Subgoal *1/2.30
+Subgoal *1/2.29
+Subgoal *1/2.28
+Subgoal *1/2.27
+Subgoal *1/2.26
+Subgoal *1/2.25
+Subgoal *1/2.24
+Subgoal *1/2.23
+Subgoal *1/2.22
+Subgoal *1/2.21
+Subgoal *1/2.20
+Subgoal *1/2.19
+Subgoal *1/2.18
+Subgoal *1/2.17
+Subgoal *1/2.16
+Subgoal *1/2.15
+Subgoal *1/2.14
+Subgoal *1/2.13
+Subgoal *1/2.12
+Subgoal *1/2.11
+Subgoal *1/2.10
+Subgoal *1/2.9
+Subgoal *1/2.8
+Subgoal *1/2.7
+Subgoal *1/2.6
+Subgoal *1/2.5
+Subgoal *1/2.4
+Subgoal *1/2.3
+Subgoal *1/2.2
+Subgoal *1/2.1
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-ROWP-OF-DELTA-ROW-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION RATIONAL-LISTP)
+        (:DEFINITION RATIONAL-ROWP)
+        (:DEFINITION SYNP)
+        (:DEFINITION WBC-DELTA-ROW-AUX)
+        (:EXECUTABLE-COUNTERPART <)
+        (:EXECUTABLE-COUNTERPART BINARY-+)
+        (:EXECUTABLE-COUNTERPART EQUAL)
+        (:EXECUTABLE-COUNTERPART FORCE)
+        (:EXECUTABLE-COUNTERPART INTEGERP)
+        (:EXECUTABLE-COUNTERPART LEN)
+        (:EXECUTABLE-COUNTERPART MOD)
+        (:EXECUTABLE-COUNTERPART NFIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:EXECUTABLE-COUNTERPART RATIONAL-LISTP)
+        (:EXECUTABLE-COUNTERPART RATIONALP)
+        (:EXECUTABLE-COUNTERPART UNARY--)
+        (:EXECUTABLE-COUNTERPART UNARY-/)
+        (:FAKE-RUNE-FOR-LINEAR NIL)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-DELTA-ROW-AUX)
+        (:REWRITE |(* 0 x)|)
+        (:REWRITE |(* a (/ a))|)
+        (:REWRITE |(* y x)|)
+        (:REWRITE |(+ (if a b c) x)|)
+        (:REWRITE |(+ 0 x)|)
+        (:REWRITE |(+ c (+ d x))|)
+        (:REWRITE |(+ x (- x))|)
+        (:REWRITE |(+ x (if a b c))|)
+        (:REWRITE |(+ y (+ x z))|)
+        (:REWRITE |(+ y x)|)
+        (:REWRITE |(/ (/ x))|)
+        (:REWRITE |(< (if a b c) x)|)
+        (:REWRITE |(< x (if a b c))|)
+        (:REWRITE |(equal (+ (- c) x) y)|)
+        (:REWRITE |(equal (/ x) c)|)
+        (:REWRITE |(equal (if a b c) x)|)
+        (:REWRITE |(mod (+ x y) z) where (<= 0 z)| . 1)
+        (:REWRITE |(mod (if a b c) x)|)
+        (:REWRITE |(mod 0 y)|)
+        (:REWRITE |(mod x 0)|)
+        (:REWRITE |(mod y (if a b c))|)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-1)
+        (:REWRITE BUBBLE-DOWN-+-MATCH-3)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE DEFAULT-LESS-THAN-1)
+        (:REWRITE DEFAULT-MOD-1)
+        (:REWRITE DEFAULT-MOD-RATIO)
+        (:REWRITE LEN-OF-CONS)
+        (:REWRITE MOD-NEGATIVE . 1)
+        (:REWRITE NORMALIZE-ADDENDS)
+        (:REWRITE PREFER-POSITIVE-ADDENDS-EQUAL)
+        (:REWRITE REMOVE-STRICT-INEQUALITIES)
+        (:REWRITE REMOVE-WEAK-INEQUALITIES)
+        (:REWRITE SIMPLIFY-PRODUCTS-GATHER-EXPONENTS-<)
+        (:REWRITE SIMPLIFY-SUMS-<)
+        (:TYPE-PRESCRIPTION INTEGERP-MOD-1)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION MOD-NONNEGATIVE)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION RATIONAL-ROWP)
+        (:TYPE-PRESCRIPTION RATIONALP-MOD)
+        (:TYPE-PRESCRIPTION WBC-DELTA-ROW-AUX))
+Time:  6.67 seconds (prove: 6.65, print: 0.01, other: 0.00)
+Prover steps counted:  192192
+RATIONAL-ROWP-OF-DELTA-ROW-AUX
+Subgoal *1/2
+Subgoal *1/1
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-DELTA-MATRIX-AUX ...)
+Rules: ((:COMPOUND-RECOGNIZER ZP-COMPOUND-RECOGNIZER)
+        (:DEFINITION RATIONAL-MATRIXP)
+        (:DEFINITION WBC-DELTA-MATRIX-AUX)
+        (:EXECUTABLE-COUNTERPART CONSP)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:INDUCTION WBC-DELTA-MATRIX-AUX)
+        (:REWRITE CAR-CONS)
+        (:REWRITE CDR-CONS)
+        (:REWRITE RATIONAL-ROWP-OF-DELTA-ROW-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP)
+        (:TYPE-PRESCRIPTION WBC-DELTA-MATRIX-AUX))
+Time:  0.01 seconds (prove: 0.01, print: 0.00, other: 0.00)
+Prover steps counted:  757
+RATIONAL-MATRIXP-OF-DELTA-MATRIX-AUX
+Goal'
+Goal''
+
+Summary
+Form:  ( DEFTHM RATIONAL-MATRIXP-OF-CYCLIC-MATRIX ...)
+Rules: ((:DEFINITION WBC-CYCLIC-MATRIX)
+        (:EXECUTABLE-COUNTERPART NOT)
+        (:REWRITE RATIONAL-MATRIXP-OF-DELTA-MATRIX-AUX)
+        (:TYPE-PRESCRIPTION RATIONAL-MATRIXP))
+Hint-events: ((:USE RATIONAL-MATRIXP-OF-DELTA-MATRIX-AUX))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+Prover steps counted:  133
+RATIONAL-MATRIXP-OF-CYCLIC-MATRIX
+
+Summary
+Form:  ( DEFUN WBC-PLAN-CERTIFIES-OUTPUTP ...)
+Rules: ((:FAKE-RUNE-FOR-TYPE-SET NIL))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-PLAN-CERTIFIES-OUTPUTP
+Goal'
+Goal''
+Goal'''
+
+Summary
+Form:  ( DEFTHM WBC-CERTIFIED-PLAN-CORRECT ...)
+Rules: ((:COMPOUND-RECOGNIZER POSP-COMPOUND-RECOGNIZER)
+        (:DEFINITION NFIX)
+        (:DEFINITION NOT)
+        (:DEFINITION POSP)
+        (:DEFINITION QCX-VECTORP)
+        (:DEFINITION WBC-CYCLIC-MATRIX)
+        (:DEFINITION WBC-CYCLIC-OUTPUT)
+        (:DEFINITION WBC-PLAN-CERTIFIES-OUTPUTP)
+        (:DEFINITION WBC-PLAN-VALIDP)
+        (:FAKE-RUNE-FOR-LINEAR-EQUALITIES NIL)
+        (:FAKE-RUNE-FOR-TYPE-SET NIL)
+        (:TYPE-PRESCRIPTION LEN)
+        (:TYPE-PRESCRIPTION NFIX)
+        (:TYPE-PRESCRIPTION QCX-LIST-RATIONALP)
+        (:TYPE-PRESCRIPTION RATIONAL-LISTP)
+        (:TYPE-PRESCRIPTION WBC-TERMS-VALIDP))
+Hint-events: ((:USE WBC-PLAN-OUTPUT-IS-MATRIX-EVAL))
+Time:  0.04 seconds (prove: 0.04, print: 0.00, other: 0.00)
+Prover steps counted:  3746
+WBC-CERTIFIED-PLAN-CORRECT
+
+Summary
+Form:  ( DEFUN WBC-PLAN-RANK ...)
+Rules: ((:TYPE-PRESCRIPTION LEN))
+Time:  0.00 seconds (prove: 0.00, print: 0.00, other: 0.00)
+WBC-PLAN-RANK
+
+
+
+Summary
+Form:  (CERTIFY-BOOK "zao-winograd-bilinear-convolution" ...)
+Rules: NIL
+Time:  17.17 seconds (prove: 15.67, print: 0.12, other: 1.38)
+Prover steps counted:  1560213
+; (EV-REC *RETURN-LAST-ARG3* ...) took 
+; 17.17 seconds realtime, 15.96 seconds runtime
+; (2,595,258,016 bytes allocated).
+Exit code from ACL2 is 43
+-rw-r--r-- 1 root root 37858 Jun 29 00:36 zao-winograd-bilinear-convolution.cert

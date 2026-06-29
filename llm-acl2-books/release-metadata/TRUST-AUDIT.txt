@@ -1,0 +1,6 @@
+Potential trust/admission forms (expected none):
+
+Program-mode declarations:
+/mnt/data/new-release/llm-acl2-books/zby-text-file-census.lisp:115:  (declare (xargs :stobjs state :mode :program))
+/mnt/data/new-release/llm-acl2-books/zez-self-checking-object-manifest.lisp:70:  (declare (xargs :stobjs state :mode :program))
+/mnt/data/new-release/llm-acl2-books/zez-self-checking-object-manifest.lisp:81:  (declare (xargs :stobjs state :mode :program))
