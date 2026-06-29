@@ -1,0 +1,25 @@
+New books relative to the previous 62-book source archive:
+
+zbn-rational-polynomial-root-bound.lisp
+zbo-rational-lagrange-interpolation.lisp
+zbp-rational-lagrange-reconstruction.lisp
+zbq-universal-toom-cook-certificate.lisp
+zbr-universal-toom-cook-moments.lisp
+zbs-universal-toom-cook-certificate.lisp
+zbt-universal-generated-compact.lisp
+zbu-rader-power-orbit.lisp
+zbv-rader-power-permutation.lisp
+zbw-rader-orbit-permutation.lisp
+zbx-rader-inverse-orbit.lisp
+zby-rader-index-relation.lisp
+zbz-rader-relation.lisp
+zca-universal-rader-relation.lisp
+zcb-universal-rader-certificate.lisp
+zcc-universal-generated-rader-certificate.lisp
+
+Modified existing books:
+
+zbe-generated-cyclic66.lisp
+zbl-generated-rader67.lisp
+
+Removed books: none

@@ -1,0 +1,22 @@
+llm-acl2-books final release audit
+==================================
+
+Source books:                  78
+Fresh certificates produced:  78
+Cold certification exit:      0
+Idempotence pass exit:         0
+Missing certificates:         none
+WIP zcd included in release:   no
+
+Logical trust audit:
+- skip-proofs events: none
+- defaxiom events: none
+- trust-tag events: none
+- raw-Lisp admission events: none
+
+Executable program-mode declarations:
+- zby-text-file-census.lisp: one file-audit I/O utility
+- zez-self-checking-object-manifest.lisp: two manifest save/load I/O utilities
+
+These program-mode functions are older executable report/file-I/O utilities.
+They are not used to admit logical theorems.

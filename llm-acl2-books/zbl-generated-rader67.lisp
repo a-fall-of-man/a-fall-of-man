@@ -1,6 +1,7 @@
 ; A generated rank-133 Rader/Winograd transform of prime length 67.
 (in-package "ACL2")
 (include-book "zbk-rader-bank-certificate")
+(include-book "zcc-universal-generated-rader-certificate")
 (include-book "workshops/2022/gamboa-primitive-roots/order-constructions" :dir :system)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -166,6 +167,32 @@
           (:instance gr67-prime))
     :in-theory (enable gr67-generator))))
 
+(defthm gr67-generator-fep
+  (pfield::fep (gr67-generator) 67)
+  :hints
+  (("Goal"
+    :use
+    ((:instance pfield::fep-primitive-root-aux
+                (k 66)
+                (p 67)))
+    :in-theory
+    (enable gr67-generator
+            pfield::primitive-root))))
+
+(defthm gr67-generator-nonzero
+  (not (equal (gr67-generator) 0))
+  :hints
+  (("Goal"
+    :use
+    ((:instance pfield::fep-primite-root-non-zero
+                (k 66)
+                (p 67))
+     (:instance gr67-prime))
+    :in-theory
+    (enable gr67-generator
+            pfield::primitive-root
+            dm::divides))))
+
 (defthm gr67-generated-index-certificate
   (rgi-index-certificatep
    67
@@ -174,13 +201,24 @@
    (gr67-output-indices))
   :hints
   (("Goal"
+    :use
+    ((:instance rgi-generated-index-certificatep-universal
+                (p 67)
+                (generator (gr67-generator)))
+     (:instance gr67-prime)
+     (:instance gr67-generator-fep)
+     (:instance gr67-generator-nonzero)
+     (:instance gr67-generator-has-order-66))
     :in-theory
-    (enable gr67-input-indices
-            gr67-kernel-indices
-            gr67-output-indices
-            gr67-generator
-            pfield::primitive-root
-            rgi-generated-index-certificatep))))
+    (union-theories
+     (theory 'minimal-theory)
+     '(gr67-input-indices
+       gr67-kernel-indices
+       gr67-output-indices
+       rgi-generated-index-certificatep
+       rgi-generated-inputs
+       rgi-generated-kernels
+       rgi-generated-outputs)))))
 
 (defthm gr67-generated-rader-compact-certificate
   (rgi-compact-bankp

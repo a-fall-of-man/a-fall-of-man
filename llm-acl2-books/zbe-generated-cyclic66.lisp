@@ -1,9 +1,16 @@
 ; A generated rank-131 bilinear plan for length-66 cyclic convolution.
 (in-package "ACL2")
 (include-book "zbd-toom-cook-moment-certificate")
+(local (include-book "zbt-universal-generated-compact"))
 
 (defthm tc66-generated-compact-certificate
-  (tc-generated-compact-certifiesp 66))
+  (tc-generated-compact-certifiesp 66)
+  :hints
+  (("Goal"
+    :use
+    ((:instance tc-generated-compact-certifiesp-universal
+                (n 66)))
+    :in-theory (enable posp))))
 
 (defthm tc66-generated-plan-certificate
   (tc-generated-plan-certifiesp 66)
